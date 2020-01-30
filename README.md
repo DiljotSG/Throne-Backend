@@ -1,5 +1,5 @@
 # Throne-Backend
-An application that lets you find, rate, and review washrooms in your vicinity.
+Throne is a web and mobile application which allows users to find nearby washrooms tailored to their preferences and requirements. Throne presents up-to-date information by enabling users to provide feedback and information on the washrooms they visit.
 
 # MVP User Stories
 [View Here](https://github.com/DiljotSG/Throne-Backend/labels/High%20Priority)
