@@ -37,7 +37,7 @@ npm install
 serverless deploy
 ```
 
-7. Destroy and existing CloudFormation stack (requires AWS credentials to be set).
+7. Destroy an existing CloudFormation stack (requires AWS credentials to be set).
 ```shell
 serverless remove
 ```
