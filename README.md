@@ -54,7 +54,7 @@ virtualenv -p python3 venv
 pip3 install -r requirements.txt
 ```
 
-3. Running the Flask application locally.
+3. Run the Flask application locally.
 ```shell
 python3 handler.py
 ```
