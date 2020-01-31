@@ -1,0 +1,25 @@
+{
+  "name": "Backend",
+  "version": "1.0.0",
+  "description": "This repository contains the backend for the Throne application.",
+  "main": "index.js",
+  "dependencies": {
+    "serverless-python-requirements": "^5.0.1",
+    "serverless-wsgi": "^1.7.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DiljotSG/Throne-Backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DiljotSG/Throne-Backend/issues"
+  },
+  "homepage": "https://github.com/DiljotSG/Throne-Backend#readme"
+}
