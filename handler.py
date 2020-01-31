@@ -1,10 +1,12 @@
+import json
+
 from flask import Flask
 app = Flask(__name__)
 
 
 @app.route("/")
 def washrooms():
-    return {
+    return json.dumps({
         "washrooms": [
             "Tache Hall",
             "6th Floor E2",
@@ -12,4 +14,4 @@ def washrooms():
             "151 Research",
             "University Center"
             ]
-        }
+        })
