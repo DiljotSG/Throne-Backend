@@ -1,5 +1,5 @@
 {
-  "name": "Backend",
+  "name": "Throne-Backend",
   "version": "1.0.0",
   "description": "This repository contains the backend for the Throne application.",
   "main": "index.js",
@@ -16,10 +16,10 @@
     "url": "git+https://github.com/DiljotSG/Throne-Backend.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Aviato",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/DiljotSG/Throne-Backend/issues"
   },
-  "homepage": "https://github.com/DiljotSG/Throne-Backend#readme"
+  "homepage": "https://github.com/DiljotSG/Throne-Backend/README.md"
 }
