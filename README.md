@@ -3,6 +3,57 @@ This repository contains the backend for the Throne application.
 
 Throne is a web and mobile application which allows users to find nearby washrooms tailored to their preferences and requirements. Throne presents up-to-date information by enabling users to provide feedback and information on the washrooms they visit.
 
+# Setup
+
+## Installing Python3
+`brew install python`
+
+## Installing Dependencies Required for Deploying to AWS
+1. `brew install docker`
+2. Run `docker.app` and complete the installation instructions.
+
+3. Install Node.
+```shell
+brew install node
+```
+
+4. Install the serverless framework.
+```shell
+sudo npm install -g serverless
+```
+
+5. Install serverless plugins.
+```shell
+npm install
+```
+
+6. Deploy the new version of the app to AWS Lambda (requires AWS credentials to be set).
+```shell
+serverless deploy
+```
+
+7. Destroy and existing CloudFormation stack (requires AWS credentials to be set).
+```shell
+serverless remove
+```
+
+## Environment Setup for Backend Development
+1. Create a Python virtual environment and activate the environment.
+```shell
+virtualenv -p python3 venv
+. venv/bin/activate
+```
+
+2. Install Python dependencies.
+```shell
+pip3 install -r requirements.txt
+```
+
+3. Running the Flask application locally.
+```shell
+python3 handler.py
+```
+
 ## Other Repos
 * [Throne-iOS](https://github.com/NickJosephson/Throne-iOS)
 * [Throne-Android](https://github.com/NickJosephson/Throne-Android)
