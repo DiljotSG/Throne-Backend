@@ -6,10 +6,15 @@ Throne is a web and mobile application which allows users to find nearby washroo
 # Setup
 
 ## Installing Python3
-`brew install python`
+```shell
+brew install python
+```
 
 ## Installing Dependencies Required for Deploying to AWS
-1. `brew install docker`
+1. Install Docker.
+```shell
+brew cask install docker
+```
 2. Run `docker.app` and complete the installation instructions.
 
 3. Install Node.
