@@ -33,8 +33,15 @@ npm install
 ```
 
 6. Deploy the new version of the app to AWS Lambda (requires AWS credentials to be set).
+
+To update the dev backend instance.
 ```shell
 serverless deploy
+```
+
+To update the prod backend instance.
+```shell
+serverless deploy --stage prod
 ```
 
 7. Destroy an existing CloudFormation stack (requires AWS credentials to be set).
@@ -57,6 +64,11 @@ pip3 install -r requirements.txt
 3. Run the Flask application locally.
 ```shell
 python3 handler.py
+```
+
+4. Run the application Tests locally.
+```shell
+python3 -m tests.test_api
 ```
 
 ## Other Repos
