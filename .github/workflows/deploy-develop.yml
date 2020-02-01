@@ -22,6 +22,8 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         npm install
+        which python3
+        which python
     - name: serverless deploy
       uses: serverless/github-action@master
       with:
