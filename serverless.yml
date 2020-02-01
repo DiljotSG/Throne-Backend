@@ -23,7 +23,6 @@ custom:
     packRequirements: false
   pythonRequirements:
     dockerizePip: non-linux
-    pythonBin: /opt/hostedtoolcache/Python/3.8.1/x64/bin/python3
 
 provider:
   name: aws
