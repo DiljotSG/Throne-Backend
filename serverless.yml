@@ -38,12 +38,10 @@ functions:
           method: ANY 
           path: /
           cors: true
-          private: true
       - http: 
           method: ANY
           path: '{proxy+}'
           cors: true
-          private: true
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
