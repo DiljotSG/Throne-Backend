@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - develop
+      - auto-deploy
 name: Deploy develop branch
 jobs:
   deploy:
