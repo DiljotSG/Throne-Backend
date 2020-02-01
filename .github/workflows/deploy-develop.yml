@@ -8,6 +8,7 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
     - name: serverless deploy
       uses: DiljotSG/serverless-github-action-python@master
       with:
