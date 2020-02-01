@@ -31,11 +31,19 @@ provider:
   region: us-east-1
 
 functions:
-  hello:
+  api:
     handler: wsgi_handler.handler
     events:
-      - http: ANY /
-      - http: 'ANY {proxy+}'
+      - http: 
+          method: ANY 
+          path: /
+          cors: true
+          private: true
+      - http: 
+          method: ANY
+          path: '{proxy+}'
+          cors: true
+          private: true
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
