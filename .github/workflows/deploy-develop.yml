@@ -23,7 +23,7 @@ jobs:
         pip install -r requirements.txt
         npm install
     - name: serverless deploy
-      uses: mirrorhanyu/serverless-github-action-python@master
+      uses: DiljotSG/serverless-github-action-python@master
       with:
         args: deploy --stage dev
       env:
