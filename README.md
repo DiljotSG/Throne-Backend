@@ -1,3 +1,11 @@
+Master
+
+![Python application](https://github.com/DiljotSG/Throne-Backend/workflows/Python%20application/badge.svg?branch=master)
+
+Develop
+
+![Python application](https://github.com/DiljotSG/Throne-Backend/workflows/Python%20application/badge.svg?branch=develop)
+
 # Throne Backend
 This repository contains the backend for the Throne application.
 
