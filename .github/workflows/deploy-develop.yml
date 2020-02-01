@@ -22,10 +22,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         npm install
-    - name: Setup venv
-      run: |
-        virtualenv -p python3 venv
-        . venv/bin/activate
     - name: serverless deploy
       uses: serverless/github-action@master
       with:
