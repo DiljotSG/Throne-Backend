@@ -8,11 +8,15 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v2
     - name: npm install
       uses: actions/npm@master
       with:
         args: install
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
     - run: |
         virtualenv -p python3 venv
         . venv/bin/activate
