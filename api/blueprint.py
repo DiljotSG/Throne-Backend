@@ -1,7 +1,7 @@
 from flask import jsonify
 from flask import Blueprint
 from flask_cors import CORS
-from flask import cross_origin
+from flask_cors import cross_origin
 
 from .objects.washrooms import Washroom
 
