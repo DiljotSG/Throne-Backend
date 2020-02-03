@@ -42,6 +42,16 @@ functions:
           method: ANY
           path: '{proxy+}'
           cors: true
+exclude:
+- tests/**
+- ".git/**"
+- ".env"
+- LICENSE
+- README.md
+- ".gitignore"
+- requirements.txt
+- CODEOWNERS
+- ".github/**"  
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
