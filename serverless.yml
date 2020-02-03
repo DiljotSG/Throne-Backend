@@ -52,7 +52,8 @@ exclude:
 - ".gitignore"
 - requirements.txt
 - CODEOWNERS
-- ".github/**"  
+- ".github/**"
+- venv/**
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
