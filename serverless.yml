@@ -42,6 +42,7 @@ functions:
           method: ANY
           path: '{proxy+}'
           cors: true
+
 exclude:
 - tests/**
 - ".git/**"
