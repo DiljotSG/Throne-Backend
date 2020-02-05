@@ -1,8 +1,9 @@
 from flask import jsonify
 from flask import Blueprint
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
+from flask_cors import cross_origin
 
-from .washrooms import Washroom
+from .objects.washrooms import Washroom
 
 main_api = Blueprint('admin', __name__)
 cors = CORS(main_api)
