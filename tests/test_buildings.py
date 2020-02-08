@@ -1,11 +1,10 @@
 import json
 import unittest
-import api
+from handler import app
 
 
 class TestBuildingsAPI(unittest.TestCase):
     def setUp(self):
-        app = api.create()
         app.config['TESTING'] = True
         app.config['WTF_CSRF_ENABLED'] = False
         app.config['DEBUG'] = False
