@@ -1,6 +1,6 @@
 {
   "name": "Throne-Backend",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "This repository contains the backend for the Throne application.",
   "main": "handler.py",
   "dependencies": {
