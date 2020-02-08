@@ -13,7 +13,7 @@ washroom = Washroom()
 @api.route("/washrooms")
 @cross_origin()
 def washrooms():
-    return "washrooms"
+    return jsonify(washroom.get_list())
 
 @api.route("/washrooms/<int:washroom_id>")
 @cross_origin()
@@ -55,8 +55,3 @@ def users_reviews(user_id):
 @cross_origin()
 def users_favorites(user_id):
     return "favorites of user: " + str(user_id)
-
-@api.route("/")
-@cross_origin()
-def get_washroom_list():
-    return jsonify(washroom.get_list())
