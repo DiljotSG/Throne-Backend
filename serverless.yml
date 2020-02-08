@@ -54,6 +54,7 @@ exclude:
 - CODEOWNERS
 - ".github/**"
 - venv/**
+- DEVOPS.md
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
