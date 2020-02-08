@@ -3,13 +3,13 @@ from flask import Blueprint
 from flask_cors import CORS
 from flask_cors import cross_origin
 
-main_api = Blueprint('admin', __name__)
-cors = CORS(main_api)
+mod = Blueprint('washrooms', __name__)
+cors = CORS(mod)
 
 
-@main_api.route("/")
+@mod.route("/")
 @cross_origin()
-def get_washroom_list():
+def washrooms():
     my_list = [
         "Tache Hall",
         "6th Floor E2",
@@ -26,3 +26,15 @@ def get_washroom_list():
     ]
 
     return jsonify(my_list)
+
+
+@mod.route("/<int:washroom_id>")
+@cross_origin()
+def washrooms_id(washroom_id):
+    return jsonify({"msg": "washroom: " + str(washroom_id)})
+
+
+@mod.route("/<int:washroom_id>/reviews")
+@cross_origin()
+def washrooms_reviews(washroom_id):
+    return jsonify({"msg": "reviews for washroom: " + str(washroom_id)})
