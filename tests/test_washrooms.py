@@ -1,10 +1,11 @@
 import json
 import unittest
-from handler import app
+import api
 
 
 class TestWashroomAPI(unittest.TestCase):
     def setUp(self):
+        app = api.create()
         app.config['TESTING'] = True
         app.config['WTF_CSRF_ENABLED'] = False
         app.config['DEBUG'] = False
@@ -12,7 +13,9 @@ class TestWashroomAPI(unittest.TestCase):
         self.assertEqual(app.debug, False)
 
     def test_root(self):
-        response = self.app.get("/washrooms")
+        response = self.app.get(
+            "/washrooms",
+            follow_redirects=True)
         data = json.loads(response.data.decode())
         self.assertEqual(response.status_code, 200)
         self.assertTrue(isinstance(data, list))

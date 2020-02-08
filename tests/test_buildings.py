@@ -1,10 +1,11 @@
 import json
 import unittest
-from handler import app
+import api
 
 
 class TestBuildingsAPI(unittest.TestCase):
     def setUp(self):
+        app = api.create()
         app.config['TESTING'] = True
         app.config['WTF_CSRF_ENABLED'] = False
         app.config['DEBUG'] = False
@@ -12,7 +13,9 @@ class TestBuildingsAPI(unittest.TestCase):
         self.assertEqual(app.debug, False)
 
     def test_root(self):
-        response = self.app.get("/buildings?location=12")
+        response = self.app.get(
+            "/buildings?location=12",
+            follow_redirects=True)
         data = json.loads(response.data.decode())
         self.assertEqual(response.status_code, 200)
         self.assertEqual(str(data["msg"]), "building at location = 12")
