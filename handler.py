@@ -1,8 +1,9 @@
 import api
 
+app = api.create()
+
 
 def main():
-    app = api.create()
     app.run()
 
 
