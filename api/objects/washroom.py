@@ -10,6 +10,7 @@ class Washroom:
                  overall_rating):
         self.id = id
         self.title = title
+        self.location = location
         self.timestamp = timestamp
         self.gender = gender
         self.floor = floor

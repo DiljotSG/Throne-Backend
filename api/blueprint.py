@@ -13,4 +13,4 @@ washroom = Washroom(0, "washroom", "EITC 2", "0", "male", 1, 1, 5)
 @main_api.route("/")
 @cross_origin()
 def get_washroom_list():
-    return jsonify(washroom.title)
+    return jsonify(washroom.title, washroom.location, washroom.gender)
