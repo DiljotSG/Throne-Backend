@@ -12,7 +12,7 @@ cors = CORS(mod)
 @cross_origin()
 def buildings():
     location = request.args.get("location")
-    return jsonify({"msg": "building at location = " + str(location)}) 
+    return jsonify({"msg": "building at location = " + str(location)})
 
 
 @mod.route("/<int:building_id>")
