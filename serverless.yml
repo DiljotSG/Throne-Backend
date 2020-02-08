@@ -55,6 +55,7 @@ exclude:
 - ".github/**"
 - venv/**
 - DEVOPS.md
+- node_modules/**
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
