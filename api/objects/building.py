@@ -10,5 +10,5 @@ class Building:
         self.maps_service_ID = maps_service_ID
         self.timestamp = timestamp
         self.overall_rating = overall_rating
-        
+
         self.best_ratings = []
