@@ -47,8 +47,8 @@ virtualenv -p python3 venv
 If you encounter an error at this stage, that says something like `command not found: virtualenv`. You will need to re-install `virtualenv`. The easiest way to do so is as follows.
 
 ```shell
-pip uninstall virtualenv
-sudo pip install virtualenv
+pip3 uninstall virtualenv
+sudo pip3 install virtualenv
 ```
 
 2. Install Python dependencies.
@@ -71,7 +71,7 @@ python3 handler.py
 
 4. Run the application Unit Tests locally.
 ```shell
-python -m unittest discover tests
+python3 -m unittest discover tests
 ```
 
 ## Installing Dependencies Required for Deploying to AWS
