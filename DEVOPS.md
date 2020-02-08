@@ -42,7 +42,7 @@ The web application is auto deployed to AWS S3 when a change is merged to either
   - The react app is built differently depending on the branch being built.
     -  `develop`  builds using the environment variables in the `.env.development` file
     -  `master`  builds using the environment variables in the `.env.production` file
-  - These separate environment variable files allow us to specifiy different values for different build environments. For example, `master` and `develop` use production and development API endpoints respectively. Having separate `.env` files allows each build to use a different endpoint.
+  - These separate environment variable files allow us to specifiy different values for different build environments. For example, `master` and `develop` use the production and development API endpoints respectively. Having separate `.env` files allows each build to use a different endpoint.
 -  Sync the built application with the appropriate S3 bucket using a custom GitHub Action
   - There are two S3 buckets: one for the Prod Web App and another for the Dev Web App.
 
