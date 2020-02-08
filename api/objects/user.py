@@ -3,10 +3,10 @@ class User:
                  id,
                  timestamp,
                  profile_picture,
-                 settings,
-                 washroom_preferences):
+                 settings):
         self.id = id
         self.timestamp = timestamp
         self.profile_picture = profile_picture
         self.settings = settings
-        self.washroom_preferences = washroom_preferences
+
+        washroom_preferences = []

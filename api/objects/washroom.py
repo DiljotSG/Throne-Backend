@@ -7,9 +7,7 @@ class Washroom:
                  gender,
                  floor,
                  building_ID,
-                 overall_rating,
-                 average_rating,
-                 amenities):
+                 overall_rating):
         self.id = id
         self.title = title
         self.timestamp = timestamp
@@ -17,5 +15,6 @@ class Washroom:
         self.floor = floor
         self.bulding_ID = building_ID
         self.overall_rating = overall_rating
-        self.average_ratings = average_rating
-        self.amenities = amenities
+
+        average_ratings = []
+        amenities = []
