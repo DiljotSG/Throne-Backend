@@ -62,6 +62,13 @@ pip3 install -r requirements.txt
 python3 handler.py
 ```
 
+Running the Flask application in development mode (Auto reloads on code changes)
+```shell
+export FLASK_ENV=development
+
+python3 handler.py
+```
+
 4. Run the application Unit Tests locally.
 ```shell
 python -m unittest discover tests
