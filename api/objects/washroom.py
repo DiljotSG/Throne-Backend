@@ -1,5 +1,15 @@
 class Washroom:
-    def __init__(self, id, title, location, timestamp, gender, floor, building_ID, overall_rating, average_rating, amenities):
+    def __init__(self,
+                 id,
+                 title,
+                 location,
+                 timestamp,
+                 gender,
+                 floor,
+                 building_ID,
+                 overall_rating,
+                 average_rating,
+                 amenities):
         self.id = id
         self.title = title
         self.timestamp = timestamp

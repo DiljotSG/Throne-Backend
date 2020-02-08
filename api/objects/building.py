@@ -1,5 +1,11 @@
 class Building:
-    def __init__(self, id, location, maps_service_ID, timestamp, overall_rating, best_ratings):
+    def __init__(self,
+                 id,
+                 location,
+                 maps_service_ID,
+                 timestamp,
+                 overall_rating,
+                 best_ratings):
         self.id = id
         self.location = location
         self.maps_service_ID = maps_service_ID

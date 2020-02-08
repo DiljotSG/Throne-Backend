@@ -1,5 +1,10 @@
 class User:
-    def __init__(self, id, timestamp, profile_picture, settings, washroom_preferences):
+    def __init__(self,
+                 id,
+                 timestamp,
+                 profile_picture,
+                 settings,
+                 washroom_preferences):
         self.id = id
         self.timestamp = timestamp
         self.profile_picture = profile_picture
