@@ -11,4 +11,4 @@ class Building:
         self.timestamp = timestamp
         self.overall_rating = overall_rating
         
-        best_ratings = []
+        self.best_ratings = []

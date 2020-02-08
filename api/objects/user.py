@@ -9,4 +9,4 @@ class User:
         self.profile_picture = profile_picture
         self.settings = settings
 
-        washroom_preferences = []
+        self.washroom_preferences = []

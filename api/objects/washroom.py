@@ -17,5 +17,5 @@ class Washroom:
         self.bulding_ID = building_ID
         self.overall_rating = overall_rating
 
-        average_ratings = []
-        amenities = []
+        self.average_ratings = []
+        self.amenities = []

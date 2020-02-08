@@ -11,4 +11,4 @@ class Review:
         self.comment = comment
         self.upvote_count = upvote_count
 
-        ratings = []
+        self.ratings = []
