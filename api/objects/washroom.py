@@ -14,7 +14,7 @@ class Washroom:
         self.timestamp = timestamp
         self.gender = gender
         self.floor = floor
-        self.bulding_ID = building_ID
+        self.building_ID = building_ID
         self.overall_rating = overall_rating
 
         self.average_ratings = []
