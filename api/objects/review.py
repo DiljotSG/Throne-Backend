@@ -2,12 +2,12 @@ class Review:
     def __init__(self,
                  id,
                  washroom_ID,
-                 timestamp,
+                 created_at,
                  comment,
                  upvote_count):
         self.id = id
         self.washroom_ID = washroom_ID
-        self.timestamp = timestamp
+        self.created_at = created_at
         self.comment = comment
         self.upvote_count = upvote_count
 
