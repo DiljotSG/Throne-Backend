@@ -3,7 +3,7 @@ class Washroom:
                  id,
                  title,
                  location,
-                 timestamp,
+                 created_at,
                  gender,
                  floor,
                  building_ID,
@@ -11,10 +11,10 @@ class Washroom:
         self.id = id
         self.title = title
         self.location = location
-        self.timestamp = timestamp
+        self.created_at = created_at
         self.gender = gender
         self.floor = floor
-        self.bulding_ID = building_ID
+        self.building_ID = building_ID
         self.overall_rating = overall_rating
 
         self.average_ratings = []
