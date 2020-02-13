@@ -1,3 +1,5 @@
+# Please review our MASTER BRANCH when taking a snapshot!
+
 Master
 
 ![Python application](https://github.com/DiljotSG/Throne-Backend/workflows/Python%20application/badge.svg?branch=master)
