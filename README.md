@@ -1,10 +1,8 @@
-# Please review our MASTER BRANCH when taking a snapshot!
-
-Master
+Master - **Stable release branch for snapshot review.**
 
 ![Python application](https://github.com/DiljotSG/Throne-Backend/workflows/Python%20application/badge.svg?branch=master)
 
-Develop
+Develop - **Unstable development branch for convergence of new features.**
 
 ![Python application](https://github.com/DiljotSG/Throne-Backend/workflows/Python%20application/badge.svg?branch=develop)
 
