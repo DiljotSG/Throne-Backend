@@ -46,6 +46,8 @@ def washrooms_reviews(washroom_id):
 def debug():
     my_list = [
         str(request.headers),
-        str(request.url)
+        str(request.url),
+        str(request.environ.get("serverless.context", "no context")),
+        str(request.environ.get("serverless.event", "no event")),
     ]
     return jsonify(my_list)
