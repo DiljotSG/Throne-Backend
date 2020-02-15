@@ -1,8 +1,14 @@
 from abc import ABC
+from abc import abstractmethod
 
 
 class IWashrooms(ABC):
-    pass
+
+    @abstractmethod
+    def add_washroom(
+        
+    ):
+        pass
 
 
 class IBuildings(ABC):
