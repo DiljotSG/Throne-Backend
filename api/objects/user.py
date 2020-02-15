@@ -4,7 +4,7 @@ class User:
                  created_at,
                  profile_picture,
                  settings):
-        self.user_ID = user_ID
+        self.id = user_ID
         self.created_at = created_at
         self.profile_picture = profile_picture
         self.settings = settings

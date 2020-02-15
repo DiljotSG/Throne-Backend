@@ -5,7 +5,7 @@ class Building:
                  maps_service_ID,
                  created_at,
                  overall_rating):
-        self.building_id = building_id
+        self.id = building_id
         self.location = location
         self.maps_service_ID = maps_service_ID
         self.created_at = created_at

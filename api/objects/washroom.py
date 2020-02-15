@@ -8,7 +8,7 @@ class Washroom:
                  floor,
                  building_ID,
                  overall_rating):
-        self.washroom_id = washroom_id
+        self.id = washroom_id
         self.title = title
         self.location = location
         self.created_at = created_at
