@@ -1,6 +1,6 @@
 class Washroom:
     def __init__(self,
-                 id,
+                 washroom_id,
                  title,
                  location,
                  created_at,
@@ -8,7 +8,7 @@ class Washroom:
                  floor,
                  building_ID,
                  overall_rating):
-        self.id = id
+        self.washroom_id = washroom_id
         self.title = title
         self.location = location
         self.created_at = created_at

@@ -1,11 +1,11 @@
 class Review:
     def __init__(self,
-                 id,
+                 review_ID,
                  washroom_ID,
                  created_at,
                  comment,
                  upvote_count):
-        self.id = id
+        self.review_ID = review_ID
         self.washroom_ID = washroom_ID
         self.created_at = created_at
         self.comment = comment
