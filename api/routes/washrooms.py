@@ -1,6 +1,5 @@
 from flask import jsonify
 from flask import Blueprint
-from flask import request
 from flask_cors import CORS
 from flask_cors import cross_origin
 
@@ -39,15 +38,3 @@ def washrooms_id(washroom_id):
 @cross_origin()
 def washrooms_reviews(washroom_id):
     return jsonify({"msg": "reviews for washroom: " + str(washroom_id)})
-
-
-@mod.route("/debug")
-@cross_origin()
-def debug():
-    my_list = [
-        str(request.headers),
-        str(request.url),
-        str(request.environ.get("serverless.context", "no context")),
-        str(request.environ.get("serverless.event", "no event")),
-    ]
-    return jsonify(my_list)
