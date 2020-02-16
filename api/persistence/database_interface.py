@@ -2,7 +2,7 @@ from abc import ABC
 from abc import abstractmethod
 
 
-class IWashrooms(ABC):
+class IWashroomsPersistence(ABC):
 
     @abstractmethod
     def add_washroom(
@@ -29,7 +29,7 @@ class IWashrooms(ABC):
         pass
 
 
-class IBuildings(ABC):
+class IBuildingsPersistence(ABC):
     @abstractmethod
     def add_building(
         self,
@@ -49,7 +49,7 @@ class IBuildings(ABC):
         pass
 
 
-class IReviews(ABC):
+class IReviewsPersistence(ABC):
     @abstractmethod
     def add_review(
         self,
@@ -70,7 +70,7 @@ class IReviews(ABC):
         pass
 
 
-class IRatings(ABC):
+class IRatingsPersistence(ABC):
     @abstractmethod
     def add_rating(
         self,
@@ -90,24 +90,11 @@ class IRatings(ABC):
         pass
 
 
-class IAmenities(ABC):
+class IAmenitiesPersistence(ABC):
     @abstractmethod
     def add_amenity(
         self,
-        paper_towel=False,
-        air_dryer=False,
-        soap=False,
-        wheelchair_accessible=False,
-        automatic_equipment=False,
-        shower=False,
-        urinal=False,
-        paper_seat_covers=False,
-        hygiene_products=False,
-        needle_disposal=False,
-        contraception=False,
-        bathroom_attendent=False,
-        perfume_colonge=False,
-        lotion=False
+        *amenities
     ):
         # Return Amenity ID
         pass
@@ -120,7 +107,7 @@ class IAmenities(ABC):
         pass
 
 
-class IFavorites(ABC):
+class IFavoritesPersistence(ABC):
     @abstractmethod
     def add_favorite(
         self,
@@ -138,7 +125,7 @@ class IFavorites(ABC):
         pass
 
 
-class IPreferences(ABC):
+class IPreferencesPersistence(ABC):
     @abstractmethod
     def add_preference(
         self,
