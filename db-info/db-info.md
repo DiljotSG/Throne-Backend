@@ -3,10 +3,10 @@
 ## DB Hostnames
 We have 2 MySQL servers running: Dev and prod.
 
-|   Type    | Hostname                                          |
-|-----------|---------------------------------------------------|
-|Developer  |`dev-db.cwybmrilj7cz.us-east-1.rds.amazonaws.com`  |
-|Production |`prod-db.cgsyhdidac9y.us-east-1.rds.amazonaws.com` |
+|   Type    | Hostname                                                                        |
+|-----------|---------------------------------------------------------------------------------|
+|Developer  |`dev-db.findmythrone.com` or `dev-db.cwybmrilj7cz.us-east-1.rds.amazonaws.com`   |
+|Production |`prod-db.findmythrone.com` or `prod-db.cgsyhdidac9y.us-east-1.rds.amazonaws.com` |
 
 ## DB Schema
 The tables and columns for both databases (dev and prod) are in the files
