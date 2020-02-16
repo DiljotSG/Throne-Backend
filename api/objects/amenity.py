@@ -17,6 +17,6 @@ class Amenity(Enum):
     HYGIENE_PRODUCTS = auto()
     NEEDLE_DISPOSAL = auto()
     CONTRACEPTION = auto()
-    BATHROOM_ATTENDENT = auto()
+    BATHROOM_ATTENDANT = auto()
     PERFUME_COLOGNE = auto()
     LOTION = auto()
