@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
+from api.routes.root import mod as root_mod
 from api.routes.washrooms import mod as washrooms_mod
 from api.routes.buildings import mod as buildings_mod
 from api.routes.reviews import mod as reviews_mod
@@ -12,6 +13,7 @@ def create():
     CORS(app)
 
     # Register blueprint routes
+    app.register_blueprint(root_mod, url_prefix="/")
     app.register_blueprint(washrooms_mod, url_prefix="/washrooms")
     app.register_blueprint(buildings_mod, url_prefix="/buildings")
     app.register_blueprint(reviews_mod, url_prefix="/reviews")
