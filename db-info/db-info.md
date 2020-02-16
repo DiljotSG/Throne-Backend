@@ -25,6 +25,6 @@ If using the CLI, use the following command:
 
 and enter the password.
 
-If using the MySQL Workbench, enter in the username and hostname. Keep the
-port default, and set SSL to `off`. Then click on the entry in the main
-menu and enter the password to connect.
+If using the MySQL Workbench, create a new db connection and enter in the
+username `admin` and hostname. Keep the port default, and set SSL to `off`.
+Then click on the entry in the main menu and enter the password to connect.
