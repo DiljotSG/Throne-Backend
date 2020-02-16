@@ -7,22 +7,22 @@ class IWashroomsPersistence(ABC):
     @abstractmethod
     def add_washroom(
         self,
-        building_ID,  # Foreign Key
+        building_id,  # Foreign Key
         location,
         title,
         floor,
         gender,
-        amenities_ID,  # Foreign Key
+        amenities_id,  # Foreign Key
         overall_rating,
-        average_ratings_ID  # Foreign Key
+        average_ratings_id  # Foreign Key
     ):
-        # Return Washroom ID
+        # Return Washroom id
         pass
 
     @abstractmethod
     def remove_washroom(
         self,
-        washroom_ID
+        washroom_id
     ):
         # Cascase delete amenities table entry
         # Cascase delete average ratings table entry
@@ -35,16 +35,16 @@ class IBuildingsPersistence(ABC):
         self,
         location,
         title,
-        map_service_ID,
+        map_service_id,
         overall_rating,
     ):
-        # Return Building ID
+        # Return Building id
         pass
 
     @abstractmethod
     def remove_building(
         self,
-        building_ID
+        building_id
     ):
         pass
 
@@ -53,19 +53,19 @@ class IReviewsPersistence(ABC):
     @abstractmethod
     def add_review(
         self,
-        washroom_ID,  # Foreign Key
-        user_ID,  # Foreign Key
-        rating_ID,  # Foreign Key
+        washroom_id,  # Foreign Key
+        user_id,  # Foreign Key
+        rating_id,  # Foreign Key
         comment,
         upvote_count
     ):
-        # Return Review ID
+        # Return Review id
         pass
 
     @abstractmethod
     def remove_review(
         self,
-        review_ID
+        review_id
     ):
         pass
 
@@ -79,13 +79,13 @@ class IRatingsPersistence(ABC):
         smell,
         toilet_paper_ply,
     ):
-        # Return Rating ID
+        # Return Rating id
         pass
 
     @abstractmethod
     def remove_rating(
         self,
-        rating_ID
+        rating_id
     ):
         pass
 
@@ -96,13 +96,13 @@ class IAmenitiesPersistence(ABC):
         self,
         *amenities
     ):
-        # Return Amenity ID
+        # Return Amenity id
         pass
 
     @abstractmethod
     def remove_amenity(
         self,
-        amenity_ID
+        amenity_id
     ):
         pass
 
@@ -111,16 +111,16 @@ class IFavoritesPersistence(ABC):
     @abstractmethod
     def add_favorite(
         self,
-        user_ID,
-        washroom_ID
+        user_id,
+        washroom_id
     ):
-        # Return Favorite ID
+        # Return Favorite id
         pass
 
     @abstractmethod
     def remove_favorite(
         self,
-        favorite_ID
+        favorite_id
     ):
         pass
 
@@ -133,12 +133,12 @@ class IPreferencesPersistence(ABC):
         wheelchair_accessible,
         main_floor_access
     ):
-        # Return Preference ID
+        # Return Preference id
         pass
 
     @abstractmethod
     def remove_preference(
         self,
-        preference_ID
+        preference_id
     ):
         pass

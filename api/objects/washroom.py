@@ -6,7 +6,7 @@ class Washroom:
                  created_at,
                  gender,
                  floor,
-                 building_ID,
+                 building_id,
                  overall_rating):
         self.id = washroom_id
         self.title = title
@@ -14,7 +14,7 @@ class Washroom:
         self.created_at = created_at
         self.gender = gender
         self.floor = floor
-        self.building_ID = building_ID
+        self.building_id = building_id
         self.overall_rating = overall_rating
 
         self.average_ratings = []
