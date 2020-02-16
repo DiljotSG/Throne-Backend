@@ -1,10 +1,12 @@
 class Building:
-    def __init__(self,
-                 building_id,
-                 location,
-                 maps_service_id,
-                 created_at,
-                 overall_rating):
+    def __init__(
+        self,
+        building_id,
+        location,
+        maps_service_id,
+        created_at,
+        overall_rating
+    ):
         self.id = building_id
         self.location = location
         self.maps_service_id = maps_service_id

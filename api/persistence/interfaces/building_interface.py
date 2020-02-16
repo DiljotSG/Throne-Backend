@@ -15,7 +15,7 @@ class IBuildingsPersistence(ABC):
         pass
 
     @abstractmethod
-    def query_building(
+    def query_buildings(
         self,
         location,
         radius,
