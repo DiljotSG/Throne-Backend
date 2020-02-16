@@ -1,5 +1,9 @@
+from flask import jsonify
 from flask import Flask
 from flask_cors import CORS
+from flask_cors import cross_origin
+
+from api.routes.root import root_data
 from api.routes.root import mod as root_mod
 from api.routes.washrooms import mod as washrooms_mod
 from api.routes.buildings import mod as buildings_mod
@@ -18,5 +22,17 @@ def create():
     app.register_blueprint(buildings_mod, url_prefix="/buildings")
     app.register_blueprint(reviews_mod, url_prefix="/reviews")
     app.register_blueprint(users_mod, url_prefix="/users")
+
+    # Get a map of all the endpoints for the root endpoint
+    data = root_data()
+    data["endpoints"] = []
+    for rule in app.url_map.iter_rules():
+        data["endpoints"].append(str(rule))
+
+    # Establish the root endpoint
+    @app.route("/")
+    @cross_origin()
+    def root():
+        return jsonify(data)
 
     return app
