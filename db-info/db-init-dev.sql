@@ -5,7 +5,7 @@ create table ratings(
 	clenliness FLOAT NOT NULL,
 	privacy FLOAT NOT NULL,
 	smell FLOAT NOT NULL,
-	toiletPaperPly FLOAT NOT NULL,
+	toiletPaperQuality FLOAT NOT NULL,
 	PRIMARY KEY (id)
 );
 
@@ -85,6 +85,9 @@ create table washrooms(
 
 	FOREIGN KEY (buildingID)
 	  REFERENCES buildings(id),
+
+    FOREIGN KEY (amenities)
+      REFERENCES amenities(id),
 
 	FOREIGN KEY (avgRatingsID)
 	  REFERENCES ratings(id)
