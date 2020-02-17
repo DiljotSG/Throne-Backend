@@ -7,11 +7,12 @@ Develop - **Unstable development branch for convergence of new features.**
 ![Python application](https://github.com/DiljotSG/Throne-Backend/workflows/Python%20application/badge.svg?branch=develop)
 
 # Throne Backend
+
 This repository contains the backend for the Throne application.
 
 Throne is a web and mobile application which allows users to find nearby washrooms tailored to their preferences and requirements. Throne presents up-to-date information by enabling users to provide feedback and information on the washrooms they visit.
 
-Throne Component | Reposistory | Project Board
+Throne Component | Repository | Project Board
 ------------ | ------------- | ------------
 All Components | - | [User Stories](https://github.com/DiljotSG/Throne-Backend/projects/1)
 **Backend** | [Throne-Backend](https://github.com/DiljotSG/Throne-Backend) | [Backend Tasks](https://github.com/DiljotSG/Throne-Backend/projects/2)
@@ -21,103 +22,18 @@ Android | [Throne-Android](https://github.com/NickJosephson/Throne-Android) | [A
 
 # API Endpoints
 
-### Production API Endpoint - `master` branch: https://api-prod.findmythrone.com
+**Production API Endpoint** - `master` branch: https://api-prod.findmythrone.com
 
-### Development API Endpoint - `develop` branch: https://api-dev.findmythrone.com
+**Development API Endpoint** - `develop` branch: https://api-dev.findmythrone.com
 
 # Setup
 
-This codebase uses Python3.X, particularly Python3.7.X and Python3.8.X (in the Lambda).
+Project setup instructions can be found [here](SETUP.md).
 
-## Installing Python3
+# Testing
 
-You'll first need to install Python3. Here is the easiest way to do it for macOS (requires Brew).
+Run the application Unit Tests locally.
 
-```shell
-brew install python
-```
-
-## Environment Setup for Backend Development
-1. Create a Python virtual environment and activate the environment.
-```shell
-virtualenv -p python3 venv
-. venv/bin/activate
-```
-
-If you encounter an error at this stage, that says something like `command not found: virtualenv`. You will need to re-install `virtualenv`. The easiest way to do so is as follows.
-
-```shell
-pip3 uninstall virtualenv
-sudo pip3 install virtualenv
-```
-
-2. Install Python dependencies.
-
-```shell
-pip3 install -r requirements.txt
-```
-
-3. Run the Flask application locally.
-```shell
-python3 handler.py
-```
-
-Running the Flask application in development mode (Auto reloads on code changes)
-```shell
-export FLASK_ENV=development
-
-python3 handler.py
-```
-
-4. Run the application Unit Tests locally.
 ```shell
 python3 -m unittest discover tests
-```
-
-## Installing Dependencies Required for Deploying to AWS
-
-1. Install Docker.
-
-```shell
-brew cask install docker
-```
-
-2. Run `docker.app` and complete the installation instructions.
-
-3. Install Node.
-
-```shell
-brew install node
-```
-
-4. Install the serverless framework.
-
-```shell
-sudo npm install -g serverless
-```
-
-5. Install serverless plugins.
-
-```shell
-npm install
-```
-
-6. Deploy the new version of the app to AWS Lambda (requires AWS credentials to be set).
-
-To update the dev backend instance.
-
-```shell
-serverless deploy
-```
-
-To update the prod backend instance.
-
-```shell
-serverless deploy --stage prod
-```
-
-7. Destroy an existing CloudFormation stack (requires AWS credentials to be set).
-
-```shell
-serverless remove
 ```
