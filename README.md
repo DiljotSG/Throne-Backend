@@ -20,20 +20,13 @@ Web | [Throne-Web](https://github.com/DiljotSG/Throne-Web) | [Web Tasks](https:/
 iOS | [Throne-iOS](https://github.com/NickJosephson/Throne-iOS) | [iOS Tasks](https://github.com/NickJosephson/Throne-iOS/projects/1)
 Android | [Throne-Android](https://github.com/NickJosephson/Throne-Android) | [Android Tasks](https://github.com/NickJosephson/Throne-Android/projects/1)
 
-# API Endpoints
+## API Endpoints
 
-**Production API Endpoint** - `master` branch: <https://api-prod.findmythrone.com>
+**Production API Endpoint (Master Branch):** <https://api-prod.findmythrone.com>
 
-**Development API Endpoint** - `develop` branch: <https://api-dev.findmythrone.com>
+**Development API Endpoint (Develop Branch):** <https://api-dev.findmythrone.com>
 
-# Setup
+## Documentation
 
-Project setup instructions can be found [here](SETUP.md).
-
-# Testing
-
-Run the application Unit Tests locally.
-
-```shell
-python3 -m unittest discover tests
-```
+* [Setup](SETUP.md)
+* [Testing](TESTING.md)
