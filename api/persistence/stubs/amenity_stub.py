@@ -2,21 +2,23 @@ from interfaces.amenity_interface import IAmenitiesPersistence
 
 
 class AmenitiesPersistence(IAmenitiesPersistence):
-    def add_amenity(
+    def __init__(self):
+        self.amenities = []
+
+    def add_amenities(
         self,
         *amenities
     ):
-        # Return Amenity id
-        pass
+        self.amenities.append(amenities)
 
-    def get_amenity(
+    def get_amenities(
         self,
         amenity_id
     ):
-        pass
+        return self.amenities[amenity_id]
 
-    def remove_amenity(
+    def remove_amenities(
         self,
         amenity_id
     ):
-        pass
+        self.amenities.pop(amenity_id)
