@@ -1,5 +1,6 @@
 from interfaces.user_interface import IUsersPersistence
 from ... objects.user import User
+from datetime import datetime
 
 
 class UsersPersistence(IUsersPersistence):
@@ -13,7 +14,11 @@ class UsersPersistence(IUsersPersistence):
         preference_id  # Foreign key
     ):
         user_id = len(self.users)
-        new_user = User(user_id, username, profile_pic, preference_id)
+        new_user = User(user_id,
+                        username,
+                        datetime.now(),
+                        profile_pic,
+                        preference_id)
         self.users.append(new_user)
         # Return User id
         return user_id
