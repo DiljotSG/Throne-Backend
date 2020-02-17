@@ -1,10 +1,10 @@
 Master - **Stable release branch for snapshot review.**
 
-![Python application](https://github.com/DiljotSG/Throne-Backend/workflows/Python%20application/badge.svg?branch=master)
+![Python CI](https://github.com/DiljotSG/Throne-Backend/workflows/Python%20application/badge.svg?branch=master)
 
 Develop - **Unstable development branch for convergence of new features.**
 
-![Python application](https://github.com/DiljotSG/Throne-Backend/workflows/Python%20application/badge.svg?branch=develop)
+![Python CI](https://github.com/DiljotSG/Throne-Backend/workflows/Python%20application/badge.svg?branch=develop)
 
 # Throne Backend
 
