@@ -22,9 +22,9 @@ Android | [Throne-Android](https://github.com/NickJosephson/Throne-Android) | [A
 
 # API Endpoints
 
-**Production API Endpoint** - `master` branch: https://api-prod.findmythrone.com
+**Production API Endpoint** - `master` branch: <https://api-prod.findmythrone.com>
 
-**Development API Endpoint** - `develop` branch: https://api-dev.findmythrone.com
+**Development API Endpoint** - `develop` branch: <https://api-dev.findmythrone.com>
 
 # Setup
 
