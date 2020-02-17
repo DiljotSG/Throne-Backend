@@ -4,7 +4,7 @@ from abc import abstractmethod
 
 class IAmenitiesPersistence(ABC):
     @abstractmethod
-    def add_amenity(
+    def add_amenities(
         self,
         *amenities
     ):
@@ -12,14 +12,14 @@ class IAmenitiesPersistence(ABC):
         pass
 
     @abstractmethod
-    def get_amenity(
+    def get_amenities(
         self,
         amenity_id
     ):
         pass
 
     @abstractmethod
-    def remove_amenity(
+    def remove_amenities(
         self,
         amenity_id
     ):
