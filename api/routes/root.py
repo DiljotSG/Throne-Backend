@@ -22,9 +22,10 @@ def root_data():
 @mod.route("/user")
 @cross_origin()
 def current_user():
-    data = {}
     # This is temporary, in the future we will return the user object
-    data["username"] = get_cognito_user()
+    data = {
+        "username": get_cognito_user()
+    }
     return jsonify(data)
 
 
