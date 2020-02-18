@@ -30,3 +30,4 @@ Android | [Throne-Android](https://github.com/NickJosephson/Throne-Android) | [A
 
 * [Setup](SETUP.md)
 * [Testing](TESTING.md)
+* [Database](db-info/DATABASE_INFO.md)
