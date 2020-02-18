@@ -1,9 +1,10 @@
 from flask import jsonify
-from flask import Blueprint
 from flask import request
+from flask import Blueprint
 from flask_cors import CORS
 from flask_cors import cross_origin
-from jsonschema import validate
+
+from api.common import get_cognito_user
 
 mod = Blueprint('root', __name__)
 cors = CORS(mod)
@@ -21,38 +22,10 @@ def root_data():
 @mod.route("/user")
 @cross_origin()
 def current_user():
-    event = request.environ.get("serverless.event", "no event")
-    # Get the name of the currently authenticated Cognito
-    # This is temporary, in the future we will return the user obj
-
-    # Make sure our event has the proper data - validate the schema
-    schema = {
-        "type": "object",
-        "requestContext": {
-            "type": "object",
-            "authorizer": {
-                "type": "object",
-                "claims": {
-                    "type": "object",
-                    "username": {
-                        "type": "string"
-                    }
-                }
-            }
-        }
-    }
-
-    if isinstance(event, dict):
-        validate(instance=event, schema=schema)
-        data = {
-            "username": event.requestContext.authorizer.claims.username
-        }
-        return jsonify(data)
-    else:
-        # If they aren't logged in, we can't do this.
-        return jsonify({
-            "message": "Unauthorized"
-        }), 401
+    data = {}
+    # This is temporary, in the future we will return the user object
+    data["username"] = get_cognito_user()
+    return jsonify(data)
 
 
 @mod.route("/debug")
