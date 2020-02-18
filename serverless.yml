@@ -44,19 +44,23 @@ functions:
           cors: true
 
 exclude:
-- tests/**
-- ".git/**"
-- ".env"
-- LICENSE
-- README.md
-- ".gitignore"
-- requirements.txt
-- CODEOWNERS
+- "__pycache__/**"
+- ".vscode/**"
 - ".github/**"
-- venv/**
+- ".git/**"
+- "venv/**"
+- "node_modules/**"
+- "db-info/**"
+- "tests/**"
+- ".gitignore"
+- ".env"
+- requirements.txt
+- LICENSE
+- CODEOWNERS
+- README.md
 - DEVOPS.md
-- node_modules/**
-- db-info/**
+- SETUP.md
+- TESTING.md
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
