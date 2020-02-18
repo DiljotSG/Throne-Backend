@@ -2,7 +2,7 @@ from interfaces.preference_interface import IPreferencesPersistence
 from ... stub_objects.preference import Preference
 
 
-class PreferencesPersistence(IPreferencesPersistence):
+class PreferencesStubPersistence(IPreferencesPersistence):
     def __init__(self):
         self.preferences = []
 

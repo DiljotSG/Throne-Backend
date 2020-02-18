@@ -3,7 +3,7 @@ from ... objects.user import User
 from datetime import datetime
 
 
-class UsersPersistence(IUsersPersistence):
+class UsersStubPersistence(IUsersPersistence):
     def __init__(self):
         self.users = []
 

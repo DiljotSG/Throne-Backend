@@ -2,7 +2,7 @@ from interfaces.rating_interface import IRatingsPersistence
 from ... stub_objects.rating import Rating
 
 
-class RatingsPersistence(IRatingsPersistence):
+class RatingsStubPersistence(IRatingsPersistence):
     def __init__(self):
         self.ratings = []
 

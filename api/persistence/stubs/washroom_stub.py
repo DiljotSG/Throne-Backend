@@ -3,7 +3,7 @@ from ... objects.washroom import Washroom
 from datetime import datetime
 
 
-class WashroomsPersistence(IWashroomsPersistence):
+class WashroomsStubPersistence(IWashroomsPersistence):
     def __init__(self):
         self.washrooms = []
 

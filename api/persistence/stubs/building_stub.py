@@ -3,7 +3,7 @@ from ... objects.building import Building
 from datetime import datetime
 
 
-class BuildingsPersistence(IBuildingsPersistence):
+class BuildingsStubPersistence(IBuildingsPersistence):
     def __init__(self):
         self.buildings = []
 

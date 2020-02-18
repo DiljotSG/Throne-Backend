@@ -2,7 +2,7 @@ from interfaces.favorite_interface import IFavoritesPersistence
 from ... stub_objects.favorite import Favorite
 
 
-class FavoritesPersistence(IFavoritesPersistence):
+class FavoritesStubPersistence(IFavoritesPersistence):
     def __init__(self):
         self.favorites = []
 

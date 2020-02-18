@@ -1,7 +1,7 @@
 from interfaces.amenity_interface import IAmenitiesPersistence
 
 
-class AmenitiesPersistence(IAmenitiesPersistence):
+class AmenitiesStubPersistence(IAmenitiesPersistence):
     def __init__(self):
         self.amenities = []
 
@@ -13,12 +13,12 @@ class AmenitiesPersistence(IAmenitiesPersistence):
 
     def get_amenities(
         self,
-        amenity_id
+        amenities_id
     ):
-        return self.amenities[amenity_id]
+        return self.amenities[amenities_id]
 
     def remove_amenities(
         self,
-        amenity_id
+        amenities_id
     ):
-        self.amenities.pop(amenity_id)
+        self.amenities.pop(amenities_id)

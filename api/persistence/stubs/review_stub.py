@@ -3,7 +3,7 @@ from ... objects.review import Review
 from datetime import datetime
 
 
-class ReviewsPersistence(IReviewsPersistence):
+class ReviewsStubPersistence(IReviewsPersistence):
     def __init__(self):
         self.reviews = []
 
