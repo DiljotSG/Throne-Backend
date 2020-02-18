@@ -4,11 +4,11 @@ class User:
         user_id,
         created_at,
         profile_picture,
-        settings
+        settings,
+        preference_id
     ):
         self.id = user_id
         self.created_at = created_at
         self.profile_picture = profile_picture
         self.settings = settings
-
-        self.washroom_preferences = []
+        self.preference_id = preference_id
