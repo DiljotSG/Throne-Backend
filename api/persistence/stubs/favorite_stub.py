@@ -1,5 +1,5 @@
 from interfaces.favorite_interface import IFavoritesPersistence
-from ... stub_objects.favorite import Favorite
+from ... db_objects.favorite import Favorite
 
 
 class FavoritesStubPersistence(IFavoritesPersistence):
@@ -12,7 +12,11 @@ class FavoritesStubPersistence(IFavoritesPersistence):
         washroom_id  # Foreign Key
     ):
         favorite_id = len(self.favorites)
-        new_favorite = Favorite(favorite_id, user_id, washroom_id)
+        new_favorite = Favorite(
+            favorite_id,
+            user_id,
+            washroom_id
+        )
         self.favorites.append(new_favorite)
         # Return Favorite id
         return favorite_id
@@ -21,7 +25,9 @@ class FavoritesStubPersistence(IFavoritesPersistence):
         self,
         favorite_id
     ):
-        return self.favorites[favorite_id]
+        if favorite_id >= 0 and favorite_id < len(self.favorites):
+            return self.favorites[favorite_id]
+        return None
 
     def get_favorites_for_user(
         self,
@@ -38,4 +44,5 @@ class FavoritesStubPersistence(IFavoritesPersistence):
         self,
         favorite_id
     ):
-        self.favorites.pop(favorite_id)
+        if favorite_id >= 0 and favorite_id < len(self.favorites):
+            self.favorites.pop(favorite_id)

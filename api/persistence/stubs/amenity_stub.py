@@ -10,15 +10,19 @@ class AmenitiesStubPersistence(IAmenitiesPersistence):
         *amenities
     ):
         self.amenities.append(amenities)
+        return len(self.amenities) - 1
 
     def get_amenities(
         self,
         amenities_id
     ):
-        return self.amenities[amenities_id]
+        if amenities_id >= 0 and amenities_id < len(self.amenities):
+            return self.amenities[amenities_id]
+        return None
 
     def remove_amenities(
         self,
         amenities_id
     ):
-        self.amenities.pop(amenities_id)
+        if amenities_id >= 0 and amenities_id < len(self.amenities):
+            self.amenities.pop(amenities_id)

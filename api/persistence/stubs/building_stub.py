@@ -15,12 +15,14 @@ class BuildingsStubPersistence(IBuildingsPersistence):
         overall_rating,
     ):
         building_id = len(self.buildings)
-        new_building = Building(building_id,
-                                location,
-                                title,
-                                map_service_id,
-                                datetime.now(),
-                                overall_rating)
+        new_building = Building(
+            building_id,
+            location,
+            title,
+            map_service_id,
+            datetime.now(),
+            overall_rating
+        )
         # Return Building id
         self.buildings.append(new_building)
         return building_id
@@ -46,10 +48,13 @@ class BuildingsStubPersistence(IBuildingsPersistence):
         self,
         building_id
     ):
-        return self.buildings[building_id]
+        if building_id >= 0 and building_id < len(self.buildings):
+            return self.buildings[building_id]
+        return None
 
     def remove_building(
         self,
         building_id
     ):
-        self.buildings.pop(building_id)
+        if building_id >= 0 and building_id < len(self.buildings):
+            self.buildings.pop(building_id)

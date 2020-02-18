@@ -14,11 +14,13 @@ class UsersStubPersistence(IUsersPersistence):
         preference_id  # Foreign key
     ):
         user_id = len(self.users)
-        new_user = User(user_id,
-                        username,
-                        datetime.now(),
-                        profile_pic,
-                        preference_id)
+        new_user = User(
+            user_id,
+            username,
+            datetime.now(),
+            profile_pic,
+            preference_id
+        )
         self.users.append(new_user)
         # Return User id
         return user_id
@@ -27,10 +29,13 @@ class UsersStubPersistence(IUsersPersistence):
         self,
         user_id
     ):
-        return self.users[user_id]
+        if user_id >= 0 and user_id < len(self.users):
+            return self.users[user_id]
+        return None
 
     def remove_user(
         self,
         user_id
     ):
-        self.users.pop(user_id)
+        if user_id >= 0 and user_id < len(self.users):
+            self.users.pop(user_id)

@@ -1,5 +1,5 @@
 from interfaces.rating_interface import IRatingsPersistence
-from ... stub_objects.rating import Rating
+from ... db_objects.rating import Rating
 
 
 class RatingsStubPersistence(IRatingsPersistence):
@@ -14,11 +14,13 @@ class RatingsStubPersistence(IRatingsPersistence):
         toilet_paper_ply,
     ):
         rating_id = len(self.ratings)
-        new_rating = Rating(rating_id,
-                            cleanliness,
-                            privacy,
-                            smell,
-                            toilet_paper_ply)
+        new_rating = Rating(
+            rating_id,
+            cleanliness,
+            privacy,
+            smell,
+            toilet_paper_ply
+        )
         self.ratings.append(new_rating)
         # Return Rating id
         return rating_id
@@ -27,10 +29,13 @@ class RatingsStubPersistence(IRatingsPersistence):
         self,
         rating_id
     ):
-        return self.ratings[rating_id]
+        if rating_id >= 0 and rating_id < len(self.ratings):
+            return self.ratings[rating_id]
+        return None
 
     def remove_rating(
         self,
         rating_id
     ):
-        self.ratings.pop(rating_id)
+        if rating_id >= 0 and rating_id < len(self.ratings):
+            self.ratings.pop(rating_id)

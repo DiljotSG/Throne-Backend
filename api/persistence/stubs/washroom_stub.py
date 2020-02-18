@@ -19,15 +19,17 @@ class WashroomsStubPersistence(IWashroomsPersistence):
         average_ratings_id  # Foreign Key
     ):
         washroom_id = len(self.washrooms)
-        new_washroom = Washroom(washroom_id,
-                                title,
-                                location,
-                                datetime.now(),
-                                gender,
-                                floor,
-                                building_id,
-                                overall_rating,
-                                average_ratings_id)
+        new_washroom = Washroom(
+            washroom_id,
+            title,
+            location,
+            datetime.now(),
+            gender,
+            floor,
+            building_id,
+            overall_rating,
+            average_ratings_id
+        )
         self.washrooms.append(new_washroom)
         # Return Washroom id
         return washroom_id
@@ -53,10 +55,13 @@ class WashroomsStubPersistence(IWashroomsPersistence):
         self,
         washroom_id
     ):
-        return self.washrooms[washroom_id]
+        if washroom_id >= 0 and washroom_id < len(self.washrooms):
+            return self.washrooms[washroom_id]
+        return None
 
     def remove_washroom(
         self,
         washroom_id
     ):
-        self.washrooms.pop(washroom_id)
+        if washroom_id >= 0 and washroom_id < len(self.washrooms):
+            self.washrooms.pop(washroom_id)

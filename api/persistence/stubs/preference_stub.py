@@ -1,5 +1,5 @@
 from interfaces.preference_interface import IPreferencesPersistence
-from ... stub_objects.preference import Preference
+from ... db_objects.preference import Preference
 
 
 class PreferencesStubPersistence(IPreferencesPersistence):
@@ -13,10 +13,12 @@ class PreferencesStubPersistence(IPreferencesPersistence):
         main_floor_access
     ):
         preference_id = len(self.preferences)
-        new_preference = Preference(preference_id,
-                                    gender,
-                                    wheelchair_accessible,
-                                    main_floor_access)
+        new_preference = Preference(
+            preference_id,
+            gender,
+            wheelchair_accessible,
+            main_floor_access
+        )
         # Return Preference id
         self.preferences.append(new_preference)
         return preference_id
@@ -25,10 +27,13 @@ class PreferencesStubPersistence(IPreferencesPersistence):
         self,
         preference_id
     ):
-        return self.preferences[preference_id]
+        if preference_id >= 0 and preference_id < len(self.preferences):
+            return self.preferences[preference_id]
+        return None
 
     def remove_preference(
         self,
         preference_id
     ):
-        self.preferences.pop(preference_id)
+        if preference_id >= 0 and preference_id < len(self.preferences):
+            self.preferences.pop(preference_id)
