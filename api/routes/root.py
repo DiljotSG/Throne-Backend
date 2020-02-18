@@ -20,10 +20,16 @@ def root_data():
 @mod.route("/debug")
 @cross_origin()
 def debug():
-    my_list = [
-        str(request.headers),
-        str(request.url),
-        str(request.environ.get("serverless.context", "no context")),
-        str(request.environ.get("serverless.event", "no event")),
-    ]
-    return jsonify(my_list)
+    data = {
+        "Request-Header": str(request.headers),
+        "Request-URL": request.url,
+        "Serverless-Context": request.environ.get(
+            "serverless.context",
+            "no context"
+        ),
+        "Serverless-Event": request.environ.get(
+            "serverless.event",
+            "no event"
+        ),
+    }
+    return jsonify(data)
