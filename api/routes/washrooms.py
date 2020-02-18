@@ -7,7 +7,7 @@ mod = Blueprint('washrooms', __name__)
 cors = CORS(mod)
 
 
-@mod.route("/")
+@mod.route("")
 @cross_origin()
 def washrooms():
     my_list = [

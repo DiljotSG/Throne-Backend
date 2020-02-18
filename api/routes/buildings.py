@@ -8,7 +8,7 @@ mod = Blueprint('buildings', __name__)
 cors = CORS(mod)
 
 
-@mod.route("/")
+@mod.route("")
 @cross_origin()
 def buildings():
     location = request.args.get("location")
