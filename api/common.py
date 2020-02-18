@@ -36,6 +36,6 @@ def get_cognito_user():
 
     # Make sure our event has the proper data - validate the schema
     if is_valid_schema(event, schema):
-        username = event.requestContext.authorizer.claims.username
+        username = event["requestContext"]["authorizer"]["claims"]["username"]
 
     return username
