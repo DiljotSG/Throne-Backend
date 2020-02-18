@@ -11,7 +11,7 @@ class RatingsStubPersistence(IRatingsPersistence):
         cleanliness,
         privacy,
         smell,
-        toilet_paper_ply,
+        toilet_paper_quality,
     ):
         rating_id = len(self.ratings)
         new_rating = Rating(
@@ -19,7 +19,7 @@ class RatingsStubPersistence(IRatingsPersistence):
             cleanliness,
             privacy,
             smell,
-            toilet_paper_ply
+            toilet_paper_quality
         )
         self.ratings.append(new_rating)
         # Return Rating id

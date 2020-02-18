@@ -9,7 +9,7 @@ class IRatingsPersistence(ABC):
         cleanliness,
         privacy,
         smell,
-        toilet_paper_ply,
+        toilet_paper_quality,
     ):
         # Return Rating id
         pass
