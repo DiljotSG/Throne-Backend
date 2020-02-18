@@ -1,10 +1,10 @@
 # Setup
 
-This codebase uses Python3.7.X and Python3.8.X (in the Lambda).
+This codebase uses Python3.7.X and Python3.8.X (in the Lambda). These setup instructions are for macOS using [Homebrew](https://brew.sh). Installing these dependencies should be similar for other platforms with the appropriate package managers for that platform.
 
 ## Python3 Installation
 
-1. Use [Homebrew](https://brew.sh) (or another method) to install python on MacOS.
+1. Install python.
 
     ```shell
     brew install python
