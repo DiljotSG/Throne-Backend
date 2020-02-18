@@ -1,6 +1,6 @@
 from flask import jsonify
-from flask import Blueprint
 from flask import request
+from flask import Blueprint
 from flask_cors import CORS
 from flask_cors import cross_origin
 

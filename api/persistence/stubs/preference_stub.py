@@ -1,5 +1,5 @@
-from interfaces.preference_interface import IPreferencesPersistence
-from ... db_objects.preference import Preference
+from ...db_objects.preference import Preference
+from ..interfaces.preference_interface import IPreferencesPersistence
 
 
 class PreferencesStubPersistence(IPreferencesPersistence):
