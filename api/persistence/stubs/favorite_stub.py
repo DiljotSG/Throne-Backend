@@ -1,5 +1,5 @@
-from interfaces.favorite_interface import IFavoritesPersistence
-from ... db_objects.favorite import Favorite
+from ...db_objects.favorite import Favorite
+from ..interfaces.favorite_interface import IFavoritesPersistence
 
 
 class FavoritesStubPersistence(IFavoritesPersistence):

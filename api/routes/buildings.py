@@ -1,6 +1,6 @@
 from flask import jsonify
-from flask import Blueprint
 from flask import request
+from flask import Blueprint
 from flask_cors import CORS
 from flask_cors import cross_origin
 
@@ -8,7 +8,7 @@ mod = Blueprint('buildings', __name__)
 cors = CORS(mod)
 
 
-@mod.route("/")
+@mod.route("")
 @cross_origin()
 def buildings():
     location = request.args.get("location")

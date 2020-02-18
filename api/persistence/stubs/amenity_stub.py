@@ -1,4 +1,4 @@
-from interfaces.amenity_interface import IAmenitiesPersistence
+from ..interfaces.amenity_interface import IAmenitiesPersistence
 
 
 class AmenitiesStubPersistence(IAmenitiesPersistence):

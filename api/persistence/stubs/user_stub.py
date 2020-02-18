@@ -1,6 +1,7 @@
-from interfaces.user_interface import IUsersPersistence
-from ... objects.user import User
 from datetime import datetime
+
+from ...objects.user import User
+from ..interfaces.user_interface import IUsersPersistence
 
 
 class UsersStubPersistence(IUsersPersistence):
