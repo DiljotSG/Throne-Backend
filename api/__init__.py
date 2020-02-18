@@ -11,6 +11,7 @@ from api.routes.reviews import mod as reviews_mod
 from api.routes.users import mod as users_mod
 
 
+# We do this so that the Flask application isn't strict about trailing slashes
 class RelaxedFlask(Flask):
     def add_url_rule(self, *args, **kwargs):
         if 'strict_slashes' not in kwargs:
