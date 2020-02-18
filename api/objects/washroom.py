@@ -9,7 +9,8 @@ class Washroom:
         floor,
         building_id,
         overall_rating,
-        average_rating_id
+        average_rating_id,
+        amenities_id
     ):
         self.id = washroom_id
         self.title = title
@@ -20,4 +21,4 @@ class Washroom:
         self.building_id = building_id
         self.overall_rating = overall_rating
         self.average_rating_id = average_rating_id
-        self.amenities = []
+        self.amenities_id = amenities_id

@@ -28,7 +28,8 @@ class WashroomsStubPersistence(IWashroomsPersistence):
             floor,
             building_id,
             overall_rating,
-            average_ratings_id
+            average_ratings_id,
+            amenities_id
         )
         self.washrooms.append(new_washroom)
         # Return Washroom id
