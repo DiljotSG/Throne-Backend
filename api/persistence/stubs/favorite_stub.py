@@ -1,4 +1,4 @@
-from interfaces.favorite_interface import IFavoritesPersistence
+from .. interfaces.favorite_interface import IFavoritesPersistence
 from ... db_objects.favorite import Favorite
 
 

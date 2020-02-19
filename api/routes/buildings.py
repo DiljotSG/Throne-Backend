@@ -22,8 +22,6 @@ def buildings():
 @mod.route("/<int:building_id>")
 @cross_origin()
 def buildings_id(building_id):
-    building = building_store.get_building(id)
-    print(building)
     return jsonify({"msg": "building: " + str(building_id)})
 
 

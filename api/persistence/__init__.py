@@ -1,13 +1,13 @@
-from stubs.amenity_stub import AmenitiesStubPersistence
-from stubs.building_stub import BuildingsStubPersistence
-from stubs.favorite_stub import FavoritesStubPersistence
-from stubs.preference_stub import PreferencesStubPersistence
-from stubs.rating_stub import RatingsStubPersistence
-from stubs.review_stub import ReviewsStubPersistence
-from stubs.user_stub import UsersStubPersistence
-from stubs.washroom_stub import WashroomsStubPersistence
+from .stubs.amenity_stub import AmenitiesStubPersistence
+from .stubs.building_stub import BuildingsStubPersistence
+from .stubs.favorite_stub import FavoritesStubPersistence
+from .stubs.preference_stub import PreferencesStubPersistence
+from .stubs.rating_stub import RatingsStubPersistence
+from .stubs.review_stub import ReviewsStubPersistence
+from .stubs.user_stub import UsersStubPersistence
+from .stubs.washroom_stub import WashroomsStubPersistence
 
-from stores.building_store import BuildingStore
+from .stores.building_store import BuildingStore
 
 # If Debug
 amenity_persistence = AmenitiesStubPersistence()
@@ -24,7 +24,11 @@ washroom_persistence = WashroomsStubPersistence()
 
 
 def create_building_store():
-    return BuildingStore(building_persistence, review_persistence)
+    return BuildingStore(
+        building_persistence,
+        washroom_persistence,
+        review_persistence
+    )
 
 
 def create_washroom_store():

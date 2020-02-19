@@ -1,4 +1,4 @@
-from interfaces.building_interface import IBuildingsPersistence
+from .. interfaces.building_interface import IBuildingsPersistence
 from ... objects.building import Building
 from datetime import datetime
 

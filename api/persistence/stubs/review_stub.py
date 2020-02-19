@@ -1,4 +1,4 @@
-from interfaces.review_interface import IReviewsPersistence
+from .. interfaces.review_interface import IReviewsPersistence
 from ... objects.review import Review
 from datetime import datetime
 

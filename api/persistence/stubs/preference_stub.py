@@ -1,4 +1,4 @@
-from interfaces.preference_interface import IPreferencesPersistence
+from .. interfaces.preference_interface import IPreferencesPersistence
 from ... db_objects.preference import Preference
 
 

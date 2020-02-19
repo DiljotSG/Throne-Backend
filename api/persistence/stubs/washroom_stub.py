@@ -1,4 +1,4 @@
-from interfaces.washroom_interface import IWashroomsPersistence
+from .. interfaces.washroom_interface import IWashroomsPersistence
 from ... objects.washroom import Washroom
 from datetime import datetime
 

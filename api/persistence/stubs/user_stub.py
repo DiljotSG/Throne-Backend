@@ -1,4 +1,4 @@
-from interfaces.user_interface import IUsersPersistence
+from .. interfaces.user_interface import IUsersPersistence
 from ... objects.user import User
 from datetime import datetime
 
