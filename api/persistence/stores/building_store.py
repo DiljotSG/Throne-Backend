@@ -5,12 +5,12 @@ class BuildingStore:
         washroom_persistence,
         review_persistence
     ):
-        self.building_persistence = building_persistence
-        self.washroom_persistence = washroom_persistence
-        self.review_persistence = review_persistence
+        self.__building_persistence = building_persistence
+        self.__washroom_persistence = washroom_persistence
+        self.__review_persistence = review_persistence
 
     def get_building(self, id):
-        return self.building_persistence.get_building(id)
+        return self.__building_persistence.get_building(id)
 
     def get_buildings(
         self,
@@ -19,7 +19,7 @@ class BuildingStore:
         max_buildings,
         desired_amenities
     ):
-        return self.building_persistence.query_buildings(
+        return self.__building_persistence.query_buildings(
             location,
             radius,
             max_buildings,
@@ -27,7 +27,7 @@ class BuildingStore:
         )
 
     def get_building_reviews(self, id):
-        washrooms = self.washroom_persistence.get_washrooms_by_buiding(id)
+        washrooms = self.__washroom_persistence.get_washrooms_by_buiding(id)
 
         reviews = []
         for washroom in washrooms:

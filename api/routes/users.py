@@ -2,6 +2,10 @@ from flask import jsonify
 from flask import Blueprint
 from flask_cors import CORS
 from flask_cors import cross_origin
+from ..persistence import create_user_store
+
+user_store = create_user_store
+
 
 mod = Blueprint('users', __name__)
 cors = CORS(mod)

@@ -8,16 +8,18 @@ from .stubs.user_stub import UsersStubPersistence
 from .stubs.washroom_stub import WashroomsStubPersistence
 
 from .stores.building_store import BuildingStore
+from .stores.review_store import ReviewStore
+from .stores.user_store import UserStore
 
 # If Debug
-amenity_persistence = AmenitiesStubPersistence()
-building_persistence = BuildingsStubPersistence()
-favourite_persistence = FavoritesStubPersistence()
-preference_persistence = PreferencesStubPersistence()
-rating_persistence = RatingsStubPersistence()
-review_persistence = ReviewsStubPersistence()
-user_persistence = UsersStubPersistence()
-washroom_persistence = WashroomsStubPersistence()
+__amenity_persistence = AmenitiesStubPersistence()
+__building_persistence = BuildingsStubPersistence()
+__favourite_persistence = FavoritesStubPersistence()
+__preference_persistence = PreferencesStubPersistence()
+__rating_persistence = RatingsStubPersistence()
+__review_persistence = ReviewsStubPersistence()
+__user_persistence = UsersStubPersistence()
+__washroom_persistence = WashroomsStubPersistence()
 # else
 # amenity_persistence = AmenitiesDBPersistence()
 # ....
@@ -25,9 +27,9 @@ washroom_persistence = WashroomsStubPersistence()
 
 def create_building_store():
     return BuildingStore(
-        building_persistence,
-        washroom_persistence,
-        review_persistence
+        __building_persistence,
+        __washroom_persistence,
+        __review_persistence
     )
 
 
@@ -37,10 +39,14 @@ def create_washroom_store():
 
 
 def create_review_store():
-    # return ReviewStore(reivew_persistence, building_persistence, ..., )
-    pass
+    return ReviewStore(
+        __review_persistence
+    )
 
 
 def create_user_store():
-    # return UserStore(user_persistence, ...)
-    pass
+    return UserStore(
+        __user_persistence,
+        __favourite_persistence,
+        __review_persistence
+    )
