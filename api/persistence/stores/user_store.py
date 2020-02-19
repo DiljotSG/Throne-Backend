@@ -15,5 +15,5 @@ class UserStore:
     def get_reviews_by_user(self, id):
         return self.__review_persistence.get_reviews_by_user(id)
 
-    def get_user_favourites(self, id):
-        return self.__favorite_preference.get_user_favourites(id)
+    def get_user_favorites(self, id):
+        return self.__favorite_preference.get_user_favorites(id)
