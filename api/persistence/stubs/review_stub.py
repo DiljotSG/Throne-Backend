@@ -44,7 +44,7 @@ class ReviewsStubPersistence(IReviewsPersistence):
         user_reviews = []
 
         for review in self.reviews:
-            if user_id == review.user_id and review is not None:
+            if user_id == review.id and review is not None:
                 user_reviews.append(review.__dict__)
 
         return user_reviews

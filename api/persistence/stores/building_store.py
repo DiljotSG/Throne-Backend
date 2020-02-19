@@ -31,8 +31,8 @@ class BuildingStore:
 
         reviews = []
         for washroom in washrooms:
-            review = self.review_persistence.get_reviews_for_washroom(
-                washroom.id
+            review = self.__review_persistence.get_reviews_for_washroom(
+                washroom["id"]
             )
             reviews.append(review)
 

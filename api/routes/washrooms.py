@@ -1,6 +1,7 @@
 from flask import jsonify
 from flask import Blueprint
 from flask_cors import CORS
+from flask import request
 from flask_cors import cross_origin
 from ..persistence import create_washroom_store
 
@@ -14,31 +15,17 @@ cors = CORS(mod)
 @mod.route("")
 @cross_origin()
 def washrooms():
-    my_list = [
-        "Tache Hall",
-        "6th Floor E2",
-        "Aaron's House",
-        "151 Research",
-        "University Center",
-        "McDonald's Kenaston",
-        "3rd Floor Science and Technology Library",
-        "Wendy's Kenaston",
-        "Armes Tunnel Level",
-        "Eric's House",
-        "Tyler's House",
-        "University College Tunnel Level"
-    ]
-
-    return jsonify(my_list)
+    location = request.args.get("location")
+    return jsonify(washroom_store.get_washrooms(location))
 
 
 @mod.route("/<int:washroom_id>")
 @cross_origin()
 def washrooms_id(washroom_id):
-    return jsonify({"msg": "washroom: " + str(washroom_id)})
+    return jsonify(washroom_store.get_washroom(washroom_id))
 
 
 @mod.route("/<int:washroom_id>/reviews")
 @cross_origin()
 def washrooms_reviews(washroom_id):
-    return jsonify({"msg": "reviews for washroom: " + str(washroom_id)})
+    return jsonify(washroom_store.get_washroom_reviews(washroom_id))

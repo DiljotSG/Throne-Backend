@@ -14,4 +14,4 @@ cors = CORS(mod)
 @mod.route("/<int:review_id>")
 @cross_origin()
 def reviews_id(review_id):
-    return jsonify({"msg": "review: " + str(review_id)})
+    return jsonify(review_store.get_review(review_id))

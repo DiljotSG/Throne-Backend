@@ -10,9 +10,9 @@ class WashroomStore:
     def get_washrooms(
         self,
         location,
-        radius,
-        max_washrooms,
-        desired_amenities
+        radius=5,
+        max_washrooms=5,
+        desired_amenities=None
     ):
         return self.__washroom_persistence.query_washrooms(
             location,
