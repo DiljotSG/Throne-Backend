@@ -1,8 +1,8 @@
 from flask import request
 from jsonschema import validate
 from jsonschema import ValidationError
-from objects.location import Location
-from db_objects.amenity import Amenity
+from .objects.location import Location
+from .db_objects.amenity import Amenity
 
 
 def is_valid_schema(obj, schema):
@@ -103,8 +103,8 @@ def create_ratings(rating_persistence):
 
 
 def create_washrooms(washroom_persistence, buildings, amenities, ratings):
-    location1 = Location(12.2, 17.9)
-    location2 = Location(114, 200.5)
+    location1 = Location(12.2, 17.9).__dict__
+    location2 = Location(114, 200.5).__dict__
 
     washroom1_id = washroom_persistence.add_washroom(
         buildings[0],
@@ -132,11 +132,11 @@ def create_washrooms(washroom_persistence, buildings, amenities, ratings):
 
 
 def create_amenities(amenity_persistence):
-    amenity1_id = amenity_persistence.add_amenity(
+    amenity1_id = amenity_persistence.add_amenities(
         Amenity.AIR_DRYER,
         Amenity.AUTOMATIC_TOILET
     )
-    amenity2_id = amenity_persistence.add_amenity(
+    amenity2_id = amenity_persistence.add_amenities(
         Amenity.CONTRACEPTION,
         Amenity.LOTION
     )
@@ -145,8 +145,8 @@ def create_amenities(amenity_persistence):
 
 
 def create_buildings(building_persistence):
-    location1 = Location(10.2, 15.9)
-    location2 = Location(104, 230.5)
+    location1 = Location(10.2, 15.9).__dict__
+    location2 = Location(104, 230.5).__dict__
 
     building1_id = building_persistence.add_building(
         location1,
