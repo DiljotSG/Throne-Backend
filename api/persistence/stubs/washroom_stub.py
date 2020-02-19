@@ -48,8 +48,8 @@ class WashroomsStubPersistence(IWashroomsPersistence):
         for washroom in self.washrooms:
             if len(filtered_washrooms) >= max_washrooms:
                 break
-
-            filtered_washrooms.append(washroom)
+            if washroom is not None:
+                filtered_washrooms.append(washroom.__dict__)
 
         return filtered_washrooms
 
@@ -59,16 +59,17 @@ class WashroomsStubPersistence(IWashroomsPersistence):
     ):
         washrooms = []
         for washroom in self.washrooms:
-            if washroom.building_id == building_id:
-                washrooms.append(washroom)
+            if washroom.building_id == building_id and washroom is not None:
+                washrooms.append(washroom.__dict__)
         return washrooms
 
     def get_washroom(
         self,
         washroom_id
     ):
-        if washroom_id >= 0 and washroom_id < len(self.washrooms):
-            return self.washrooms[washroom_id]
+        if washroom_id >= 0 and washroom_id < len(self.washrooms) and \
+           self.washrooms[washroom_id] is not None:
+            return self.washrooms[washroom_id].__dict__
         return None
 
     def remove_washroom(

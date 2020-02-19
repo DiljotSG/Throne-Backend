@@ -30,7 +30,8 @@ class UsersStubPersistence(IUsersPersistence):
         self,
         user_id
     ):
-        if user_id >= 0 and user_id < len(self.users):
+        if user_id >= 0 and user_id < len(self.users) and \
+           self.users is not None:
             return self.users[user_id]
         return None
 

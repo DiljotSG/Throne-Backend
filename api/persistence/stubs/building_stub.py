@@ -31,17 +31,17 @@ class BuildingsStubPersistence(IBuildingsPersistence):
     def query_buildings(
         self,
         location,
-        radius,
-        max_buildings,
-        desired_amenities
+        radius=5,
+        max_buildings=5,
+        desired_amenities=None
     ):
         filtered_buildings = []
 
         for building in self.buildings:
             if len(filtered_buildings) >= max_buildings:
                 break
-
-            filtered_buildings.append(building)
+            if building is not None:
+                filtered_buildings.append(building.__dict__)
 
         return filtered_buildings
 
@@ -50,7 +50,8 @@ class BuildingsStubPersistence(IBuildingsPersistence):
         building_id
     ):
         if building_id >= 0 and building_id < len(self.buildings):
-            return self.buildings[building_id]
+            if self.buildings[building_id] is not None:
+                return self.buildings[building_id].__dict__
         return None
 
     def remove_building(

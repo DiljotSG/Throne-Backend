@@ -25,8 +25,9 @@ class FavoritesStubPersistence(IFavoritesPersistence):
         self,
         favorite_id
     ):
-        if favorite_id >= 0 and favorite_id < len(self.favorites):
-            return self.favorites[favorite_id]
+        if favorite_id >= 0 and favorite_id < len(self.favorites) and \
+           self.favorites[favorite_id]:
+            return self.favorites[favorite_id].__dict__
         return None
 
     def get_favorites_for_user(
@@ -35,8 +36,8 @@ class FavoritesStubPersistence(IFavoritesPersistence):
     ):
         user_favorites = []
         for favorite in self.favorites:
-            if user_id == favorite.user_id:
-                user_favorites.append(favorite)
+            if favorite is not None and user_id == favorite.user_id:
+                user_favorites.append(favorite.__dict__)
 
         return user_favorites
 

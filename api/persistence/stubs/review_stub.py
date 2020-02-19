@@ -32,8 +32,9 @@ class ReviewsStubPersistence(IReviewsPersistence):
         self,
         review_id
     ):
-        if review_id >= 0 and review_id < len(self.reviews):
-            return self.reviews[review_id]
+        if review_id >= 0 and review_id < len(self.reviews) and\
+           self.reviews[review_id] is not None:
+            return self.reviews[review_id].__dict__
         return None
 
     def get_reviews_from_user(
@@ -43,8 +44,8 @@ class ReviewsStubPersistence(IReviewsPersistence):
         user_reviews = []
 
         for review in self.reviews:
-            if user_id == review.user_id:
-                user_reviews.append(review)
+            if user_id == review.user_id and review is not None:
+                user_reviews.append(review.__dict__)
 
         return user_reviews
 
@@ -55,8 +56,8 @@ class ReviewsStubPersistence(IReviewsPersistence):
         washroom_reviews = []
 
         for review in self.reviews:
-            if washroom_id == review.washroom_id:
-                washroom_reviews.append(review)
+            if washroom_id == review.washroom_id and review is not None:
+                washroom_reviews.append(review.__dict__)
 
         return washroom_reviews
 
