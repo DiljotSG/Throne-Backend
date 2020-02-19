@@ -53,7 +53,7 @@ class WashroomsStubPersistence(IWashroomsPersistence):
 
         return filtered_washrooms
 
-    def get_washrooms_by_buiding(
+    def get_washrooms_by_building(
         self,
         building_id
     ):
