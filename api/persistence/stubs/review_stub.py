@@ -44,7 +44,7 @@ class ReviewsStubPersistence(IReviewsPersistence):
         user_reviews = []
 
         for review in self.reviews:
-            if user_id == review.id and review is not None:
+            if review is not None and user_id == review.id:
                 user_reviews.append(review.__dict__)
 
         return user_reviews
@@ -56,7 +56,7 @@ class ReviewsStubPersistence(IReviewsPersistence):
         washroom_reviews = []
 
         for review in self.reviews:
-            if washroom_id == review.washroom_id and review is not None:
+            if review is not None and washroom_id == review.washroom_id:
                 washroom_reviews.append(review.__dict__)
 
         return washroom_reviews

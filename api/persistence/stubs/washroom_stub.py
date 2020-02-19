@@ -39,9 +39,9 @@ class WashroomsStubPersistence(IWashroomsPersistence):
     def query_washrooms(
         self,
         location,
-        radius,
-        max_washrooms,
-        desired_amenities
+        radius=5,
+        max_washrooms=5,
+        desired_amenities=None
     ):
         filtered_washrooms = []
 
@@ -59,7 +59,7 @@ class WashroomsStubPersistence(IWashroomsPersistence):
     ):
         washrooms = []
         for washroom in self.washrooms:
-            if washroom.building_id == building_id and washroom is not None:
+            if washroom is not None and washroom.building_id == building_id:
                 washrooms.append(washroom.__dict__)
         return washrooms
 
