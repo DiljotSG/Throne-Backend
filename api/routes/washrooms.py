@@ -2,6 +2,10 @@ from flask import jsonify
 from flask import Blueprint
 from flask_cors import CORS
 from flask_cors import cross_origin
+import persistence
+
+washroom_store = persistence.create_washroom_store()
+
 
 mod = Blueprint('washrooms', __name__)
 cors = CORS(mod)

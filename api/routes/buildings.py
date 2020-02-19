@@ -3,6 +3,10 @@ from flask import Blueprint
 from flask import request
 from flask_cors import CORS
 from flask_cors import cross_origin
+import persistence
+
+building_store = persistence.create_building_store()
+
 
 mod = Blueprint('buildings', __name__)
 cors = CORS(mod)
