@@ -10,6 +10,7 @@ from .stubs.washroom_stub import WashroomsStubPersistence
 from .stores.building_store import BuildingStore
 from .stores.review_store import ReviewStore
 from .stores.user_store import UserStore
+from .stores.washroom_store import WashroomStore
 
 # If Debug
 __amenity_persistence = AmenitiesStubPersistence()
@@ -34,8 +35,10 @@ def create_building_store():
 
 
 def create_washroom_store():
-    # return WashroomStore(washroom_persistence, building_persistence, ...)
-    pass
+    return WashroomStore(
+        __washroom_persistence,
+        __review_persistence
+    )
 
 
 def create_review_store():
