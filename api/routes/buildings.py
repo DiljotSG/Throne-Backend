@@ -3,9 +3,9 @@ from flask import Blueprint
 from flask import request
 from flask_cors import CORS
 from flask_cors import cross_origin
-import persistence
+from ..persistence import create_building_store
 
-building_store = persistence.create_building_store()
+building_store = create_building_store()
 
 
 mod = Blueprint('buildings', __name__)
@@ -22,6 +22,8 @@ def buildings():
 @mod.route("/<int:building_id>")
 @cross_origin()
 def buildings_id(building_id):
+    building = building_store.get_building(id)
+    print(building)
     return jsonify({"msg": "building: " + str(building_id)})
 
 

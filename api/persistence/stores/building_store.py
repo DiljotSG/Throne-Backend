@@ -1,6 +1,12 @@
 class BuildingStore:
-    def __init__(self, building_persistence, review_persistence):
+    def __init__(
+        self,
+        building_persistence,
+        washroom_persistence,
+        review_persistence
+    ):
         self.building_persistence = building_persistence
+        self.washroom_persistence = washroom_persistence
         self.review_persistence = review_persistence
 
     def get_building(self, id):
@@ -21,4 +27,13 @@ class BuildingStore:
         )
 
     def get_building_reviews(self, id):
-        pass
+        washrooms = self.washroom_persistence.get_washrooms_by_buiding(id)
+
+        reviews = []
+        for washroom in washrooms:
+            review = self.review_persistence.get_reviews_for_washroom(
+                washroom.id
+            )
+            reviews.append(review)
+
+        return reviews
