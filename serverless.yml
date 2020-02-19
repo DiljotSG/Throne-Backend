@@ -65,6 +65,7 @@ exclude:
 - TESTING.md
 - ARCHITECTURE.md
 - architecture.svg
+- docs/
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
