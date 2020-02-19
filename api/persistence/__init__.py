@@ -15,8 +15,15 @@ from .stores.washroom_store import WashroomStore
 import os
 
 if os.environ.get("IS_LAMBDA"):
-    # DB implelentation here
-    pass
+    # TODO: Change these to DB implementations
+    __amenity_persistence = AmenitiesStubPersistence()
+    __building_persistence = BuildingsStubPersistence()
+    __favourite_persistence = FavoritesStubPersistence()
+    __preference_persistence = PreferencesStubPersistence()
+    __rating_persistence = RatingsStubPersistence()
+    __review_persistence = ReviewsStubPersistence()
+    __user_persistence = UsersStubPersistence()
+    __washroom_persistence = WashroomsStubPersistence()
 else:
     __amenity_persistence = AmenitiesStubPersistence()
     __building_persistence = BuildingsStubPersistence()
