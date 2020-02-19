@@ -53,6 +53,16 @@ class WashroomsStubPersistence(IWashroomsPersistence):
 
         return filtered_washrooms
 
+    def get_washrooms_by_buiding(
+        self,
+        building_id
+    ):
+        washrooms = []
+        for washroom in self.washrooms:
+            if washroom.building_id == building_id:
+                washrooms.append(washroom)
+        return washrooms
+
     def get_washroom(
         self,
         washroom_id
