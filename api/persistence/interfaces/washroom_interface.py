@@ -30,7 +30,7 @@ class IWashroomsPersistence(ABC):
         pass
 
     @abstractmethod
-    def get_washrooms_by_buiding(
+    def get_washrooms_by_building(
         self,
         building_id
     ):

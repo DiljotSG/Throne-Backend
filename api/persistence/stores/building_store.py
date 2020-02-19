@@ -27,7 +27,7 @@ class BuildingStore:
         )
 
     def get_building_reviews(self, id):
-        washrooms = self.__washroom_persistence.get_washrooms_by_buiding(id)
+        washrooms = self.__washroom_persistence.get_washrooms_by_building(id)
 
         reviews = []
         for washroom in washrooms:
