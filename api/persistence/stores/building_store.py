@@ -15,9 +15,9 @@ class BuildingStore:
     def get_buildings(
         self,
         location,
-        radius,
-        max_buildings,
-        desired_amenities
+        radius=5,
+        max_buildings=5,
+        desired_amenities=None
     ):
         return self.__building_persistence.query_buildings(
             location,

@@ -3,6 +3,7 @@ class Building:
         self,
         building_id,
         location,
+        title,
         maps_service_id,
         created_at,
         overall_rating
@@ -10,6 +11,7 @@ class Building:
         self.id = building_id
         self.location = location
         self.maps_service_id = maps_service_id
+        self.title = title
         self.created_at = created_at
         self.overall_rating = overall_rating
 
