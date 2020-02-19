@@ -18,7 +18,7 @@ if os.environ.get("IS_LAMBDA"):
     # TODO: Change these to DB implementations
     __amenity_persistence = AmenitiesStubPersistence()
     __building_persistence = BuildingsStubPersistence()
-    __favourite_persistence = FavoritesStubPersistence()
+    __favorite_persistence = FavoritesStubPersistence()
     __preference_persistence = PreferencesStubPersistence()
     __rating_persistence = RatingsStubPersistence()
     __review_persistence = ReviewsStubPersistence()
@@ -27,7 +27,7 @@ if os.environ.get("IS_LAMBDA"):
 else:
     __amenity_persistence = AmenitiesStubPersistence()
     __building_persistence = BuildingsStubPersistence()
-    __favourite_persistence = FavoritesStubPersistence()
+    __favorite_persistence = FavoritesStubPersistence()
     __preference_persistence = PreferencesStubPersistence()
     __rating_persistence = RatingsStubPersistence()
     __review_persistence = ReviewsStubPersistence()
@@ -59,6 +59,6 @@ def create_review_store():
 def create_user_store():
     return UserStore(
         __user_persistence,
-        __favourite_persistence,
+        __favorite_persistence,
         __review_persistence
     )
