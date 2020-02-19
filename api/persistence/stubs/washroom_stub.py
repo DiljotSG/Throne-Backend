@@ -1,6 +1,7 @@
-from .. interfaces.washroom_interface import IWashroomsPersistence
-from ... objects.washroom import Washroom
 from datetime import datetime
+
+from ...objects.washroom import Washroom
+from ..interfaces.washroom_interface import IWashroomsPersistence
 
 
 class WashroomsStubPersistence(IWashroomsPersistence):

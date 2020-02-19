@@ -1,5 +1,5 @@
-from .. interfaces.rating_interface import IRatingsPersistence
-from ... db_objects.rating import Rating
+from ...db_objects.rating import Rating
+from ..interfaces.rating_interface import IRatingsPersistence
 
 
 class RatingsStubPersistence(IRatingsPersistence):

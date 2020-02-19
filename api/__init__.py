@@ -1,5 +1,5 @@
-from flask import jsonify
 from flask import Flask
+from flask import jsonify
 from flask_cors import CORS
 from flask_cors import cross_origin
 
@@ -11,8 +11,16 @@ from api.routes.reviews import mod as reviews_mod
 from api.routes.users import mod as users_mod
 
 
+# We do this so that the Flask application isn't strict about trailing slashes
+class RelaxedFlask(Flask):
+    def add_url_rule(self, *args, **kwargs):
+        if 'strict_slashes' not in kwargs:
+            kwargs['strict_slashes'] = False
+        super(RelaxedFlask, self).add_url_rule(*args, **kwargs)
+
+
 def create():
-    app = Flask(__name__)
+    app = RelaxedFlask(__name__)
     app.config['CORS_HEADERS'] = 'Content-Type'
     CORS(app)
 

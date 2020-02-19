@@ -1,8 +1,10 @@
 from flask import jsonify
-from flask import Blueprint
 from flask import request
+from flask import Blueprint
 from flask_cors import CORS
 from flask_cors import cross_origin
+
+from api.common import get_cognito_user
 
 mod = Blueprint('root', __name__)
 cors = CORS(mod)
@@ -17,13 +19,29 @@ def root_data():
     return data
 
 
+@mod.route("/user")
+@cross_origin()
+def current_user():
+    # This is temporary, in the future we will return the user object
+    data = {
+        "username": get_cognito_user()
+    }
+    return jsonify(data)
+
+
 @mod.route("/debug")
 @cross_origin()
 def debug():
-    my_list = [
-        str(request.headers),
-        str(request.url),
-        str(request.environ.get("serverless.context", "no context")),
-        str(request.environ.get("serverless.event", "no event")),
-    ]
-    return jsonify(my_list)
+    data = {
+        "Request-Header": str(request.headers),
+        "Request-URL": request.url,
+        "Serverless-Context": str(request.environ.get(
+            "serverless.context",
+            "no context"
+        )),
+        "Serverless-Event": request.environ.get(
+            "serverless.event",
+            "no event"
+        ),
+    }
+    return jsonify(data)
