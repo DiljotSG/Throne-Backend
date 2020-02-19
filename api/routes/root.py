@@ -35,10 +35,10 @@ def debug():
     data = {
         "Request-Header": str(request.headers),
         "Request-URL": request.url,
-        "Serverless-Context": request.environ.get(
+        "Serverless-Context": str(request.environ.get(
             "serverless.context",
             "no context"
-        ),
+        )),
         "Serverless-Event": request.environ.get(
             "serverless.event",
             "no event"
