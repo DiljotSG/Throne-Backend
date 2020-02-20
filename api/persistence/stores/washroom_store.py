@@ -29,14 +29,14 @@ class WashroomStore:
 
         for washroom in query_result:
             item = washroom.__dict__
-            self.__transform_washroom(item)
+            self.__transform_washroom(item.copy())
             result.append(item)
 
         return result
 
     def get_washroom(self, washroom_id):
         result = self.__washroom_persistence.get_washroom(washroom_id).__dict__
-        self.__transform_washroom(result)
+        self.__transform_washroom(result.copy())
         return result
 
     def get_washroom_reviews(self, washroom_id):
@@ -58,7 +58,7 @@ class WashroomStore:
 
         for washroom in query_result:
             item = washroom.__dict__
-            self.__transform_washroom(item)
+            self.__transform_washroom(item.copy())
             result.append(item)
 
         return result
@@ -72,7 +72,9 @@ class WashroomStore:
 
         # Expand average ratings
         average_rating_id = washroom.pop("average_rating_id", None)
-        washroom["average_ratings"] = self.__ratings_persistence.get_rating(
+        item = self.__ratings_persistence.get_rating(
             average_rating_id
         ).__dict__
+        item.pop("id", None)
+        washroom["average_ratings"] = item
         return washroom

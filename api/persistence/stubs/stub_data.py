@@ -15,6 +15,7 @@ def populate_stub_data(
     users = create_users(preference_persistence, user_persistence)
     ratings = create_ratings(rating_persistence)
     building_best_ratings = create_building_best_ratings(rating_persistence)
+    review_ratings = create_review_ratings(rating_persistence)
     buildings = create_buildings(building_persistence, building_best_ratings)
     amenities = create_amenities(amenity_persistence)
     washrooms = create_washrooms(
@@ -111,6 +112,29 @@ def create_ratings(rating_persistence):
     # smell
     # toilet_paper_quality
 def create_building_best_ratings(rating_persistence):
+    # Average ratings
+    rating1 = rating_persistence.add_rating(
+        3.2,
+        1.2,
+        2.7,
+        4.5
+    )
+
+    rating2 = rating_persistence.add_rating(
+        2.2,
+        4.2,
+        2.8,
+        4.2
+    )
+
+    return [rating1, rating2]
+
+# Ratings parameters:
+    # cleanliness
+    # privacy
+    # smell
+    # toilet_paper_quality
+def create_review_ratings(rating_persistence):
     # Average ratings
     rating1 = rating_persistence.add_rating(
         3.2,
