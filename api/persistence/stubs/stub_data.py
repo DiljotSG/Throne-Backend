@@ -1,8 +1,8 @@
 from flask import request
 from jsonschema import validate
 from jsonschema import ValidationError
-from .objects.location import Location
-from .db_objects.amenity import Amenity
+from ...objects.location import Location
+from ...db_objects.amenity import Amenity
 
 
 def is_valid_schema(obj, schema):
@@ -14,7 +14,7 @@ def is_valid_schema(obj, schema):
     return result
 
 
-def populate_fake_data(
+def populate_stub_data(
     amenity_persistence,
     building_persistence,
     favorite_persistence,

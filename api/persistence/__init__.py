@@ -11,7 +11,7 @@ from .stores.building_store import BuildingStore
 from .stores.review_store import ReviewStore
 from .stores.user_store import UserStore
 from .stores.washroom_store import WashroomStore
-from ..common import populate_fake_data
+from .stubs.stub_data import populate_stub_data
 
 import os
 
@@ -26,7 +26,7 @@ if os.environ.get("IS_LAMBDA"):
     __user_persistence = UsersStubPersistence()
     __washroom_persistence = WashroomsStubPersistence()
 
-    populate_fake_data(
+    populate_stub_data(
         __amenity_persistence,
         __building_persistence,
         __favorite_persistence,
@@ -46,7 +46,7 @@ else:
     __user_persistence = UsersStubPersistence()
     __washroom_persistence = WashroomsStubPersistence()
 
-    populate_fake_data(
+    populate_stub_data(
         __amenity_persistence,
         __building_persistence,
         __favorite_persistence,
