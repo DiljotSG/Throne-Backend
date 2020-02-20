@@ -29,7 +29,7 @@ class TestWashroomAPI(unittest.TestCase):
             "building_id": 1,
             "created_at": data["created_at"],
             "floor": 1,
-            "gender": "male",
+            "gender": "men",
             "id": 1,
             "location": {"latitude": 114, "longitude": 200.5},
             "overall_rating": 3,
