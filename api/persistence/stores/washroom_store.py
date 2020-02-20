@@ -1,15 +1,16 @@
-import json
-
 class WashroomStore:
     def __init__(
         self,
         washroom_persistence,
         review_persistence,
-        amenity_persistence
+        amenity_persistence,
+        ratings_persistence
     ):
         self.__washroom_persistence = washroom_persistence
         self.__review_persistence = review_persistence
-        self.amenity_persistence = amenity_persistence
+        self.__amenity_persistence = amenity_persistence
+        self.__amenity_persistence = amenity_persistence
+        self.__ratings_persistence = ratings_persistence
 
     def get_washrooms(
         self,
@@ -27,18 +28,15 @@ class WashroomStore:
         )
 
         for washroom in query_result:
-            result.append(washroom.__dict__)
+            item = washroom.__dict__
+            self.__transform_washroom(item)
+            result.append(item)
 
         return result
 
     def get_washroom(self, washroom_id):
         result = self.__washroom_persistence.get_washroom(washroom_id).__dict__
-        amenities_id = result.pop("amenities_id", None)
-
-        result["amenities"] = self.amenity_persistence.get_amenities(
-            amenities_id
-        )
-
+        self.__transform_washroom(result)
         return result
 
     def get_washroom_reviews(self, washroom_id):
@@ -59,6 +57,22 @@ class WashroomStore:
         )
 
         for washroom in query_result:
-            result.append(washroom.__dict__)
+            item = washroom.__dict__
+            self.__transform_washroom(item)
+            result.append(item)
 
         return result
+
+    def __transform_washroom(self, washroom):
+        # Expand amenities
+        amenities_id = washroom.pop("amenities_id", None)
+        washroom["amenities"] = self.__amenity_persistence.get_amenities(
+            amenities_id
+        )
+
+        # Expand average ratings
+        average_rating_id = washroom.pop("average_rating_id", None)
+        washroom["average_ratings"] = self.__ratings_persistence.get_rating(
+            average_rating_id
+        ).__dict__
+        return washroom
