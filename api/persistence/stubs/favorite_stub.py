@@ -26,7 +26,7 @@ class FavoritesStubPersistence(IFavoritesPersistence):
         favorite_id
     ):
         if favorite_id >= 0 and favorite_id < len(self.favorites) and \
-           self.favorites[favorite_id]:
+           self.favorites[favorite_id] is not None:
             return self.favorites[favorite_id].__dict__
         return None
 

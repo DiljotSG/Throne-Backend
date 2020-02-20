@@ -49,9 +49,9 @@ class BuildingsStubPersistence(IBuildingsPersistence):
         self,
         building_id
     ):
-        if building_id >= 0 and building_id < len(self.buildings):
-            if self.buildings[building_id] is not None:
-                return self.buildings[building_id].__dict__
+        if building_id >= 0 and building_id < len(self.buildings) and \
+           self.buildings[building_id] is not None:
+            return self.buildings[building_id].__dict__
         return None
 
     def remove_building(
