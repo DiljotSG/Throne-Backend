@@ -38,6 +38,9 @@ def populate_stub_data(
     create_favorites(favorite_persistence, users, washrooms)
 
 
+# Favorite parameters:
+    # user_id
+    # washroom_id
 def create_favorites(favorite_persistence, users, washrooms):
     favorite_persistence.add_favorite(
         users[0],
@@ -50,6 +53,12 @@ def create_favorites(favorite_persistence, users, washrooms):
     )
 
 
+# Review parameters:
+    # washroom_id
+    # user_id
+    # rating_id
+    # comment
+    # upvote_count
 def create_reviews(review_persistence, users, washrooms, ratings):
     review_persistence.add_review(
         washrooms[0],
@@ -68,6 +77,11 @@ def create_reviews(review_persistence, users, washrooms, ratings):
     )
 
 
+# Ratings parameters:
+    # cleanliness
+    # privacy
+    # smell
+    # toilet_paper_quality
 def create_ratings(rating_persistence):
     # Average ratings
     rating1 = rating_persistence.add_rating(
@@ -102,6 +116,15 @@ def create_ratings(rating_persistence):
     return [rating1, rating2, rating3, rating4]
 
 
+# Washroom Parameters:
+    # building_id
+    # location
+    # title
+    # floor
+    # gender
+    # amenities_id
+    # overall_rating
+    # average_ratings_id
 def create_washrooms(washroom_persistence, buildings, amenities, ratings):
     location1 = Location(12.2, 17.9).__dict__
     location2 = Location(114, 200.5).__dict__
@@ -144,6 +167,11 @@ def create_amenities(amenity_persistence):
     return [amenity1_id, amenity2_id]
 
 
+# Building parameters:
+    # location
+    # title
+    # map_service_id
+    # overall_rating
 def create_buildings(building_persistence):
     location1 = Location(10.2, 15.9).__dict__
     location2 = Location(104, 230.5).__dict__
@@ -165,7 +193,33 @@ def create_buildings(building_persistence):
     return [building1_id, building2_id]
 
 
+# User parameters:
+    # username
+    # profile_pic
+    # preference_id
 def create_users(preference_persistence, user_persistence):
+    user_preferences_ids = create_preferences(preference_persistence)
+
+    user1_id = user_persistence.add_user(
+        "janesmith",
+        "picture",
+        user_preferences_ids[0]
+    )
+
+    user2_id = user_persistence.add_user(
+        "johnsmith",
+        "picture",
+        user_preferences_ids[1]
+    )
+
+    return [user1_id, user2_id]
+
+
+# Preferences paramaters:
+    # gender
+    # wheelchair_accessible
+    # main_floor_access
+def create_preferences(preference_persistence):
     user_pref1_id = preference_persistence.add_preference(
         "female",
         True,
@@ -178,19 +232,7 @@ def create_users(preference_persistence, user_persistence):
         True
     )
 
-    user1_id = user_persistence.add_user(
-        "janesmith",
-        "picture",
-        user_pref1_id
-    )
-
-    user2_id = user_persistence.add_user(
-        "johnsmith",
-        "picture",
-        user_pref2_id
-    )
-
-    return [user1_id, user2_id]
+    return [user_pref1_id, user_pref2_id]
 
 
 def get_cognito_user():
