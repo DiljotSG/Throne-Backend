@@ -132,9 +132,9 @@ def create_washrooms(washroom_persistence, buildings, amenities, ratings):
     washroom1_id = washroom_persistence.add_washroom(
         buildings[0],
         location1,
-        "Engineering1",
+        "Engineering 1",
         1,
-        "female",
+        "women",
         amenities[0],
         4,
         ratings[0]
@@ -143,9 +143,9 @@ def create_washrooms(washroom_persistence, buildings, amenities, ratings):
     washroom2_id = washroom_persistence.add_washroom(
         buildings[1],
         location2,
-        "Science1",
+        "Science 1",
         1,
-        "male",
+        "men",
         amenities[1],
         3,
         ratings[1]
