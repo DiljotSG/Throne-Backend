@@ -52,19 +52,15 @@ exclude:
 - ".git/**"
 - "venv/**"
 - "node_modules/**"
-- "db-info/**"
+- "db-scripts/**"
 - "tests/**"
 - ".gitignore"
 - ".env"
+- "docs/**"
 - requirements.txt
 - LICENSE
 - CODEOWNERS
 - README.md
-- DEVOPS.md
-- SETUP.md
-- TESTING.md
-- ARCHITECTURE.md
-- architecture.svg
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
