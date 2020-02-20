@@ -26,7 +26,7 @@ def current_user():
     data = {
         "username": get_cognito_user()
     }
-    return data
+    return return_as_json(data)
 
 
 @mod.route("/debug")

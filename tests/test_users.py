@@ -1,6 +1,6 @@
+import api
 import json
 import unittest
-import api
 
 
 class TestUsersAPI(unittest.TestCase):
@@ -15,16 +15,19 @@ class TestUsersAPI(unittest.TestCase):
     def test_by_id(self):
         response = self.app.get("/users/1")
         data = json.loads(response.data.decode())
-        expected = {
-            "username": "johnsmith",
-            "created_at": data["created_at"],
+        expected_data = {
             "id": 1,
-            "preference_id": 1,
+            "preferences": {
+                "gender": "men",
+                "main_floor_access": True,
+                "wheelchair_accessible": False
+            },
             "profile_picture": "picture",
-            "settings": None
+            "username": "johnsmith"
         }
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(data, expected)
+        data.pop("created_at", None)
+        self.assertEqual(data, expected_data)
 
     def test_reviews(self):
         response = self.app.get("/users/1/reviews")
@@ -32,14 +35,19 @@ class TestUsersAPI(unittest.TestCase):
         expected = [
             {
                 "comment": "boo",
-                "created_at": data[0]["created_at"],
                 "id": 1,
-                "ratings": [],
+                "rating": {
+                    "cleanliness": 2.2,
+                    "privacy": 4.2,
+                    "smell": 2.8,
+                    "toilet_paper_quality": 4.2
+                },
                 "upvote_count": 10,
                 "washroom_id": 1
             }
         ]
         self.assertEqual(response.status_code, 200)
+        data[0].pop("created_at", None)
         self.assertEqual(data, expected)
 
     def test_favorites(self):
