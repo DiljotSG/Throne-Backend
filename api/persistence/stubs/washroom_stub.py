@@ -69,7 +69,7 @@ class WashroomsStubPersistence(IWashroomsPersistence):
     ):
         if washroom_id >= 0 and washroom_id < len(self.washrooms) and \
            self.washrooms[washroom_id] is not None:
-            return self.washrooms[washroom_id
+            return self.washrooms[washroom_id]
         return None
 
     def remove_washroom(
