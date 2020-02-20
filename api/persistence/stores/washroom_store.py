@@ -34,4 +34,5 @@ class WashroomStore:
         return self.__review_persistence.get_reviews_for_washroom(id).__dict__
 
     def get_washrooms_by_building(self, id):
-        return self.__washroom_persistence.get_washrooms_by_building(id).__dict__
+        return self.__washroom_persistence. \
+            get_washrooms_by_building(id).__dict__
