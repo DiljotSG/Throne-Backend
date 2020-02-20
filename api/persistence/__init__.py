@@ -69,7 +69,8 @@ def create_building_store():
 def create_washroom_store():
     return WashroomStore(
         __washroom_persistence,
-        __review_persistence
+        __review_persistence,
+        __amenity_persistence
     )
 
 

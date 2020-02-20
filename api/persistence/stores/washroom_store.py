@@ -1,11 +1,15 @@
+import json
+
 class WashroomStore:
     def __init__(
         self,
         washroom_persistence,
-        review_persistence
+        review_persistence,
+        amenity_persistence
     ):
         self.__washroom_persistence = washroom_persistence
         self.__review_persistence = review_persistence
+        self.amenity_persistence = amenity_persistence
 
     def get_washrooms(
         self,
@@ -28,7 +32,14 @@ class WashroomStore:
         return result
 
     def get_washroom(self, washroom_id):
-        return self.__washroom_persistence.get_washroom(washroom_id).__dict__
+        result = self.__washroom_persistence.get_washroom(washroom_id).__dict__
+        amenities_id = result.pop("amenities_id", None)
+
+        result["amenities"] = self.amenity_persistence.get_amenities(
+            amenities_id
+        )
+
+        return result
 
     def get_washroom_reviews(self, washroom_id):
         result = []
