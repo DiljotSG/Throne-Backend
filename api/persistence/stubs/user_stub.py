@@ -33,7 +33,7 @@ class UsersStubPersistence(IUsersPersistence):
     ):
         if user_id >= 0 and user_id < len(self.users) and \
            self.users is not None:
-            return self.users[user_id].__dict__
+            return self.users[user_id
         return None
 
     def remove_user(

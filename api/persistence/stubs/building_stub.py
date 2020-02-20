@@ -41,7 +41,7 @@ class BuildingsStubPersistence(IBuildingsPersistence):
             if len(filtered_buildings) >= max_buildings:
                 break
             if building is not None:
-                filtered_buildings.append(building.__dict__)
+                filtered_buildings.append(building)
 
         return filtered_buildings
 
@@ -51,7 +51,7 @@ class BuildingsStubPersistence(IBuildingsPersistence):
     ):
         if building_id >= 0 and building_id < len(self.buildings) and \
            self.buildings[building_id] is not None:
-            return self.buildings[building_id].__dict__
+            return self.buildings[building_id]
         return None
 
     def remove_building(

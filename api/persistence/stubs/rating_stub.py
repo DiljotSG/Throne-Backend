@@ -31,7 +31,7 @@ class RatingsStubPersistence(IRatingsPersistence):
     ):
         if rating_id >= 0 and rating_id < len(self.ratings) and \
            self.ratings[rating_id] is not None:
-            return self.ratings[rating_id].__dict__
+            return self.ratings[rating_id]
         return None
 
     def remove_rating(

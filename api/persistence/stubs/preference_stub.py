@@ -29,7 +29,7 @@ class PreferencesStubPersistence(IPreferencesPersistence):
     ):
         if preference_id >= 0 and preference_id < len(self.preferences) and \
            self.preferences[preference_id] is not None:
-            return self.preferences[preference_id].__dict__
+            return self.preferences[preference_id]
         return None
 
     def remove_preference(
