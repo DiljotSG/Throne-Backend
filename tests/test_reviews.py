@@ -13,10 +13,18 @@ class TestReviewAPI(unittest.TestCase):
         self.assertEqual(app.debug, False)
 
     def test_by_id(self):
-        response = self.app.get("/reviews/123")
+        response = self.app.get("/reviews/1")
         data = json.loads(response.data.decode())
+        expected = {
+            "comment": "boo",
+            "created_at": data["created_at"],
+            "id": 1,
+            "ratings": [],
+            "upvote_count": 10,
+            "washroom_id": 1
+        }
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(str(data["msg"]), "review: 123")
+        self.assertEqual(data, expected)
 
     def tearDown(self):
         pass

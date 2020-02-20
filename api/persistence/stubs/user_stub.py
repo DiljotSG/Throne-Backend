@@ -20,6 +20,7 @@ class UsersStubPersistence(IUsersPersistence):
             username,
             datetime.now(),
             profile_pic,
+            None,
             preference_id
         )
         self.users.append(new_user)

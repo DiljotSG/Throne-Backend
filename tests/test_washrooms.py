@@ -21,16 +21,38 @@ class TestWashroomAPI(unittest.TestCase):
         self.assertTrue(isinstance(data, list))
 
     def test_by_id(self):
-        response = self.app.get("/washrooms/123")
+        response = self.app.get("/washrooms/1")
         data = json.loads(response.data.decode())
+        expected = {
+            "amenities_id": 1,
+            "average_rating_id": 1,
+            "building_id": 1,
+            "created_at": data["created_at"],
+            "floor": 1,
+            "gender": "male",
+            "id": 1,
+            "location": {"latitude": 114, "longitude": 200.5},
+            "overall_rating": 3,
+            "title": "Science1"
+        }
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(str(data["msg"]), "washroom: 123")
+        self.assertEqual(data, expected)
 
     def test_reviews(self):
-        response = self.app.get("/washrooms/123/reviews")
+        response = self.app.get("/washrooms/0/reviews")
         data = json.loads(response.data.decode())
+        expected = [
+            {
+                "comment": "yay",
+                "created_at": data[0]["created_at"],
+                "id": 0,
+                "ratings": [],
+                "upvote_count": 5,
+                "washroom_id": 0
+            }
+        ]
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(str(data["msg"]), "reviews for washroom: 123")
+        self.assertEqual(data, expected)
 
     def tearDown(self):
         pass
