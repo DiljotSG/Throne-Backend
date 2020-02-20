@@ -10,7 +10,7 @@ class BuildingStore:
         self.__review_persistence = review_persistence
 
     def get_building(self, id):
-        return self.__building_persistence.get_building(id)
+        return self.__building_persistence.get_building(id).__dict__
 
     def get_buildings(
         self,
@@ -19,21 +19,15 @@ class BuildingStore:
         max_buildings=5,
         desired_amenities=None
     ):
-        return self.__building_persistence.query_buildings(
+        result = []
+        query_result = self.__building_persistence.query_buildings(
             location,
             radius,
             max_buildings,
             desired_amenities
         )
 
-    def get_reviews_by_building(self, id):
-        washrooms = self.__washroom_persistence.get_washrooms_by_building(id)
+        for building in query_result:
+            result.append(building.__dict__)
 
-        reviews = []
-        for washroom in washrooms:
-            review = self.__review_persistence.get_reviews_for_washroom(
-                washroom["id"]
-            )
-            reviews.append(review)
-
-        return reviews
+        return result

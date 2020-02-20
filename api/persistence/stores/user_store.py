@@ -10,10 +10,10 @@ class UserStore:
         self.__review_persistence = review_persistence
 
     def get_user(self, id):
-        return self.__user_persistence.get_user(id)
+        return self.__user_persistence.get_user(id).__dict__
 
     def get_reviews_by_user(self, id):
-        return self.__review_persistence.get_reviews_from_user(id)
+        return self.__review_persistence.get_reviews_from_user(id).__dict__
 
     def get_user_favorites(self, id):
-        return self.__favorite_preference.get_favorites_for_user(id)
+        return self.__favorite_preference.get_favorites_for_user(id).__dict__
