@@ -31,9 +31,9 @@ class BuildingsStubPersistence(IBuildingsPersistence):
     def query_buildings(
         self,
         location,
-        radius=5,
-        max_buildings=5,
-        desired_amenities=None
+        radius,
+        max_buildings,
+        desired_amenities
     ):
         filtered_buildings = []
 

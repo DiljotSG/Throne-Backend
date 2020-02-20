@@ -39,9 +39,9 @@ class WashroomsStubPersistence(IWashroomsPersistence):
     def query_washrooms(
         self,
         location,
-        radius=5,
-        max_washrooms=5,
-        desired_amenities=None
+        radius,
+        max_washrooms,
+        desired_amenities
     ):
         filtered_washrooms = []
 
