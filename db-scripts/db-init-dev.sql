@@ -16,16 +16,19 @@ create table amenities(
 	airDryer BOOL NOT NULL,
 	soap BOOL NOT NULL,
 	wheelChairAccess BOOL NOT NULL,
+	autoSink BOOL NOT NULL,
+	autoToilet BOOL NOT NULL,
+	autoPaperTowel BOOL NOT NULL,
+	autoDryer BOOL NOT NULL,
 	shower BOOL NOT NULL,
 	urinal BOOL NOT NULL,
 	paperSeatCovers BOOL NOT NULL,
+	hygieneProducts BOOL NOT NULL,
 	needleDisposal BOOL NOT NULL,
 	contraceptives BOOL NOT NULL,
-	lotion BOOL NOT NULL,
-	automaticEquipment BOOL NOT NULL,
-	hygieneProducts BOOL NOT NULL,
 	bathroomAttendant BOOL NOT NULL,
-	perfume_lotion BOOL NOT NULL,
+	perfume BOOL NOT NULL,
+	lotion BOOL NOT NULL,
 	PRIMARY KEY (id)
 );
 
