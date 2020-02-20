@@ -4,12 +4,14 @@ class UserStore:
         user_persistence,
         favorite_preference,
         review_persistence,
-        preference_persistence
+        preference_persistence,
+        ratings_persistence
     ):
         self.__user_persistence = user_persistence
         self.__favorite_persistence = favorite_preference
         self.__review_persistence = review_persistence
         self.__preference_persistence = preference_persistence
+        self.__ratings_persistence = ratings_persistence
 
     def get_user(self, user_id):
         result = self.__user_persistence.get_user(
@@ -23,7 +25,9 @@ class UserStore:
         query_result = self.__review_persistence.get_reviews_from_user(user_id)
 
         for review in query_result:
-            result.append(review.__dict__.copy())
+            item = review.__dict__.copy()
+            self.__transform_review(item)
+            result.append(item)
 
         return result
 
@@ -47,3 +51,13 @@ class UserStore:
 
         item.pop("id", None)
         user["preferences"] = item
+
+    def __transform_review(self, review):
+        # Expand ratings
+        rating_id = review.pop("rating_id", None)
+        item = self.__ratings_persistence.get_rating(
+            rating_id
+        ).__dict__.copy()
+
+        item.pop("id", None)
+        review["rating"] = item

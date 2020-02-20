@@ -48,7 +48,9 @@ class WashroomStore:
         )
 
         for review in query_result:
-            result.append(review.__dict__.copy())
+            item = review.__dict__.copy()
+            self.__transform_review(item)
+            result.append(item)
 
         return result
 
@@ -80,3 +82,13 @@ class WashroomStore:
 
         item.pop("id", None)
         washroom["average_ratings"] = item
+
+    def __transform_review(self, review):
+        # Expand ratings
+        rating_id = review.pop("rating_id", None)
+        item = self.__ratings_persistence.get_rating(
+            rating_id
+        ).__dict__.copy()
+
+        item.pop("id", None)
+        review["rating"] = item
