@@ -4,7 +4,7 @@ from flask import Blueprint
 from flask_cors import CORS
 from flask_cors import cross_origin
 
-from api.persistence.stubs.stub_data import get_cognito_user
+from api.common import get_cognito_user
 
 mod = Blueprint('root', __name__)
 cors = CORS(mod)
