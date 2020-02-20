@@ -6,6 +6,7 @@ from flask.json import JSONEncoder
 
 from datetime import datetime, date, timezone
 
+from api.common import return_as_json
 from api.routes.root import root_data
 from api.routes.root import mod as root_mod
 from api.routes.washrooms import mod as washrooms_mod
@@ -59,6 +60,6 @@ def create():
     @app.route("/")
     @cross_origin()
     def root():
-        return jsonify(data)
+        return return_as_json(data)
 
     return app

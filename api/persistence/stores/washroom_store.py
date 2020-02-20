@@ -37,8 +37,10 @@ class WashroomStore:
     def get_washroom(self, washroom_id):
         result = self.__washroom_persistence.get_washroom(
             washroom_id
-        ).__dict__.copy()
-        self.__transform_washroom(result)
+        )
+        if result:
+            result = result.__dict__.copy()
+            self.__transform_washroom(result)
         return result
 
     def get_washroom_reviews(self, washroom_id):
@@ -54,10 +56,10 @@ class WashroomStore:
 
         return result
 
-    def get_washrooms_by_building(self, washroom_id):
+    def get_washrooms_by_building(self, building_id):
         result = []
         query_result = self.__washroom_persistence.get_washrooms_by_building(
-            washroom_id
+            building_id
         )
 
         for washroom in query_result:

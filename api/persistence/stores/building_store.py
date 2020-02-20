@@ -14,8 +14,10 @@ class BuildingStore:
     def get_building(self, building_id):
         result = self.__building_persistence.get_building(
             building_id
-        ).__dict__.copy()
-        self.__transform_building(result)
+        )
+        if result:
+            result = result.__dict__.copy()
+            self.__transform_building(result)
         return result
 
     def get_buildings(

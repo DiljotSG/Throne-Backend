@@ -10,8 +10,10 @@ class ReviewStore:
     def get_review(self, review_id):
         result = self.__review_persistence.get_review(
             review_id
-        ).__dict__.copy()
-        self.__transform_review(result)
+        )
+        if result:
+            result = result.__dict__.copy()
+            self.__transform_review(result)
         return result
 
     def __transform_review(self, review):

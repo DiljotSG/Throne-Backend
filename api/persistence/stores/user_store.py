@@ -16,8 +16,10 @@ class UserStore:
     def get_user(self, user_id):
         result = self.__user_persistence.get_user(
             user_id
-        ).__dict__.copy()
-        self.__transform_user(result)
+        )
+        if result:
+            result = result.__dict__.copy()
+            self.__transform_user(result)
         return result
 
     def get_reviews_by_user(self, user_id):
