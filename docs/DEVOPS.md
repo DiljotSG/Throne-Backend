@@ -35,7 +35,7 @@ This results in the Backend application being deployed to the following URLs: [P
 
 The web application is auto deployed to AWS S3 when a change is merged to either `master` and `develop` branches. When there is a new push to `master`/`develop`, a custom workflow similar to the backend deployment workflow is run.
 
-#### Weg Deployment Workflow
+#### Web Deployment Workflow
 
 - Install the dependencies for the react app
 - Build react app (details depend on branch being built).

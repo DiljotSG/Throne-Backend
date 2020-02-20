@@ -52,7 +52,7 @@ exclude:
 - ".git/**"
 - "venv/**"
 - "node_modules/**"
-- "db-info/**"
+- "db-scripts/**"
 - "tests/**"
 - ".gitignore"
 - ".env"
