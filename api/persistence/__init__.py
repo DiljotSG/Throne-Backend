@@ -62,7 +62,8 @@ def create_building_store():
     return BuildingStore(
         __building_persistence,
         __washroom_persistence,
-        __review_persistence
+        __review_persistence,
+        __rating_persistence
     )
 
 

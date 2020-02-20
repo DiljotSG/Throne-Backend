@@ -13,9 +13,10 @@ def populate_stub_data(
     washroom_persistence
 ):
     users = create_users(preference_persistence, user_persistence)
-    buildings = create_buildings(building_persistence)
-    amenities = create_amenities(amenity_persistence)
     ratings = create_ratings(rating_persistence)
+    building_best_ratings = create_building_best_ratings(rating_persistence)
+    buildings = create_buildings(building_persistence, building_best_ratings)
+    amenities = create_amenities(amenity_persistence)
     washrooms = create_washrooms(
         washroom_persistence,
         buildings,
@@ -104,6 +105,30 @@ def create_ratings(rating_persistence):
     return [rating1, rating2, rating3, rating4]
 
 
+# Ratings parameters:
+    # cleanliness
+    # privacy
+    # smell
+    # toilet_paper_quality
+def create_building_best_ratings(rating_persistence):
+    # Average ratings
+    rating1 = rating_persistence.add_rating(
+        3.2,
+        1.2,
+        2.7,
+        4.5
+    )
+
+    rating2 = rating_persistence.add_rating(
+        2.2,
+        4.2,
+        2.8,
+        4.2
+    )
+
+    return [rating1, rating2]
+
+
 # Washroom Parameters:
     # building_id
     # location
@@ -171,7 +196,7 @@ def create_amenities(amenity_persistence):
     # title
     # map_service_id
     # overall_rating
-def create_buildings(building_persistence):
+def create_buildings(building_persistence, building_best_ratings):
     location1 = Location(10.2, 15.9).__dict__
     location2 = Location(104, 230.5).__dict__
 
@@ -179,7 +204,8 @@ def create_buildings(building_persistence):
         location1,
         "Engineering",
         0,
-        4
+        4,
+        building_best_ratings[0]
     )
 
     building2_id = building_persistence.add_building(
@@ -187,6 +213,7 @@ def create_buildings(building_persistence):
         "Science",
         1,
         3,
+        building_best_ratings[1]
     )
 
     return [building1_id, building2_id]

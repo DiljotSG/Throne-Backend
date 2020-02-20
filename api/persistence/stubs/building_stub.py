@@ -14,6 +14,7 @@ class BuildingsStubPersistence(IBuildingsPersistence):
         title,
         map_service_id,
         overall_rating,
+        best_ratings_id,
     ):
         building_id = len(self.buildings)
         new_building = Building(
@@ -22,7 +23,8 @@ class BuildingsStubPersistence(IBuildingsPersistence):
             title,
             map_service_id,
             datetime.now(),
-            overall_rating
+            overall_rating,
+            best_ratings_id
         )
         # Return Building id
         self.buildings.append(new_building)
