@@ -59,16 +59,18 @@ class TestBuildingsAPI(unittest.TestCase):
         response = self.app.get("/buildings/1/washrooms")
         data = json.loads(response.data.decode())
         expected = [
-            [
-                {
-                    "comment": "boo",
-                    "created_at": data[0][0]["created_at"],
-                    "id": 1,
-                    "ratings": [],
-                    "upvote_count": 10,
-                    "washroom_id": 1
-                }
-            ]
+            {
+                "amenities_id": 1,
+                "average_rating_id": 1,
+                "building_id": 1,
+                "created_at": data[0]["created_at"],
+                "floor": 1,
+                "gender": "men",
+                "id": 2,
+                "location": {"latitude": 114, "longitude": 200.5},
+                "overall_rating": 3,
+                "title": "Science 1"
+            }
         ]
         self.assertEqual(response.status_code, 200)
         self.assertEqual(data, expected)

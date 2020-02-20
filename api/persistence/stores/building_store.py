@@ -26,7 +26,7 @@ class BuildingStore:
             desired_amenities
         )
 
-    def get_building_reviews(self, id):
+    def get_reviews_by_building(self, id):
         washrooms = self.__washroom_persistence.get_washrooms_by_building(id)
 
         reviews = []

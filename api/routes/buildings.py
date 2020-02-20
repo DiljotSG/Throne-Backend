@@ -29,5 +29,5 @@ def buildings_id(building_id):
 
 @mod.route("/<int:building_id>/washrooms")
 @cross_origin()
-def building_reviews(building_id):
+def building_washrooms(building_id):
     return jsonify(washroom_store.get_washrooms_by_building(building_id))

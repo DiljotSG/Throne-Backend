@@ -21,7 +21,7 @@ class TestWashroomAPI(unittest.TestCase):
         self.assertTrue(isinstance(data, list))
 
     def test_by_id(self):
-        response = self.app.get("/washrooms/1")
+        response = self.app.get("/washrooms/2")
         data = json.loads(response.data.decode())
         expected = {
             "amenities_id": 1,
@@ -30,7 +30,7 @@ class TestWashroomAPI(unittest.TestCase):
             "created_at": data["created_at"],
             "floor": 1,
             "gender": "men",
-            "id": 1,
+            "id": 2,
             "location": {"latitude": 114, "longitude": 200.5},
             "overall_rating": 3,
             "title": "Science 1"
