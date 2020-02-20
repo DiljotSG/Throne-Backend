@@ -28,17 +28,17 @@ class ThroneJSONEncoder(JSONEncoder):
 
 
 # We do this so that the Flask application isn't strict about trailing slashes
-class RelaxedFlask(Flask):
+class ThroneFlask(Flask):
     json_encoder = ThroneJSONEncoder
 
     def add_url_rule(self, *args, **kwargs):
         if 'strict_slashes' not in kwargs:
             kwargs['strict_slashes'] = False
-        super(RelaxedFlask, self).add_url_rule(*args, **kwargs)
+        super(ThroneFlask, self).add_url_rule(*args, **kwargs)
 
 
 def create():
-    app = RelaxedFlask(__name__)
+    app = ThroneFlask(__name__)
     app.config['CORS_HEADERS'] = 'Content-Type'
     CORS(app)
 
