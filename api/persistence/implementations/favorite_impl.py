@@ -3,9 +3,9 @@ from api.db_objects.favorite import Favorite
 from ..interfaces.favorite_interface import IFavoritesPersistence
 
 
-class FavoritesStubPersistence(IFavoritesPersistence):
+class FavoritesPersistence(IFavoritesPersistence):
     def __init__(self):
-        self.favorites = []
+        pass
 
     def add_favorite(
         self,
