@@ -15,7 +15,6 @@ def populate_stub_data(
     users = create_users(preference_persistence, user_persistence)
     ratings = create_ratings(rating_persistence)
     building_best_ratings = create_building_best_ratings(rating_persistence)
-    review_ratings = create_review_ratings(rating_persistence)
     buildings = create_buildings(building_persistence, building_best_ratings)
     amenities = create_amenities(amenity_persistence)
     washrooms = create_washrooms(
@@ -24,7 +23,13 @@ def populate_stub_data(
         amenities,
         ratings
     )
-    create_reviews(review_persistence, users, washrooms, ratings)
+    create_reviews(
+        review_persistence,
+        users,
+        washrooms,
+        ratings,
+        ratings
+    )
     create_favorites(favorite_persistence, users, washrooms)
 
 
@@ -49,7 +54,15 @@ def create_favorites(favorite_persistence, users, washrooms):
     # rating_id
     # comment
     # upvote_count
-def create_reviews(review_persistence, users, washrooms, ratings):
+    # ratings
+    # ratings for each review
+def create_reviews(
+    review_persistence,
+    users,
+    washrooms,
+    ratings,
+    review_ratings
+):
     review_persistence.add_review(
         washrooms[0],
         users[0],
@@ -129,29 +142,6 @@ def create_building_best_ratings(rating_persistence):
 
     return [rating1, rating2]
 
-# Ratings parameters:
-    # cleanliness
-    # privacy
-    # smell
-    # toilet_paper_quality
-def create_review_ratings(rating_persistence):
-    # Average ratings
-    rating1 = rating_persistence.add_rating(
-        3.2,
-        1.2,
-        2.7,
-        4.5
-    )
-
-    rating2 = rating_persistence.add_rating(
-        2.2,
-        4.2,
-        2.8,
-        4.2
-    )
-
-    return [rating1, rating2]
-
 
 # Washroom Parameters:
     # building_id
@@ -163,8 +153,8 @@ def create_review_ratings(rating_persistence):
     # overall_rating
     # average_ratings_id
 def create_washrooms(washroom_persistence, buildings, amenities, ratings):
-    location1 = Location(12.2, 17.9).__dict__
-    location2 = Location(114, 200.5).__dict__
+    location1 = Location(12.2, 17.9).__dict__.copy()
+    location2 = Location(114, 200.5).__dict__.copy()
 
     washroom1_id = washroom_persistence.add_washroom(
         buildings[0],
@@ -220,9 +210,11 @@ def create_amenities(amenity_persistence):
     # title
     # map_service_id
     # overall_rating
+    # ratings
+    # best ratings for each building
 def create_buildings(building_persistence, building_best_ratings):
-    location1 = Location(10.2, 15.9).__dict__
-    location2 = Location(104, 230.5).__dict__
+    location1 = Location(10.2, 15.9).__dict__.copy()
+    location2 = Location(104, 230.5).__dict__.copy()
 
     building1_id = building_persistence.add_building(
         location1,

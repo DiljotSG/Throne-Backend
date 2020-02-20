@@ -22,7 +22,8 @@ class ReviewsStubPersistence(IReviewsPersistence):
             washroom_id,
             datetime.now(),
             comment,
-            upvote_count
+            upvote_count,
+            rating_id
         )
         self.reviews.append(new_review)
         # Return Review id

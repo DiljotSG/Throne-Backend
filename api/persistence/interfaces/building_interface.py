@@ -10,7 +10,7 @@ class IBuildingsPersistence(ABC):
         title,
         map_service_id,
         overall_rating,
-        best_ratings_id
+        best_rating_id
     ):
         # Return Building id
         pass

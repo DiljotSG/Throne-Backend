@@ -10,14 +10,14 @@ class UserStore:
         self.__review_persistence = review_persistence
 
     def get_user(self, user_id):
-        return self.__user_persistence.get_user(user_id).__dict__
+        return self.__user_persistence.get_user(user_id).__dict__.copy()
 
     def get_reviews_by_user(self, user_id):
         result = []
         query_result = self.__review_persistence.get_reviews_from_user(user_id)
 
         for review in query_result:
-            result.append(review.__dict__)
+            result.append(review.__dict__.copy())
 
         return result
 
@@ -28,6 +28,6 @@ class UserStore:
         )
 
         for favorite in query_result:
-            result.append(favorite.__dict__)
+            result.append(favorite.__dict__.copy())
 
         return result

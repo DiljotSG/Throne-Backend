@@ -6,4 +6,4 @@ class ReviewStore:
         self.__review_persistence = review_persistence
 
     def get_review(self, review_id):
-        return self.__review_persistence.get_review(review_id).__dict__
+        return self.__review_persistence.get_review(review_id).__dict__.copy()

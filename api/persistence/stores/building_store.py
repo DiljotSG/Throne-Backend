@@ -14,8 +14,8 @@ class BuildingStore:
     def get_building(self, building_id):
         result = self.__building_persistence.get_building(
             building_id
-        ).__dict__
-        self.__transform_building(result.copy())
+        ).__dict__.copy()
+        self.__transform_building(result)
         return result
 
     def get_buildings(
@@ -34,18 +34,18 @@ class BuildingStore:
         )
 
         for building in query_result:
-            item = building.__dict__
-            self.__transform_building(item.copy())
+            item = building.__dict__.copy()
+            self.__transform_building(item)
             result.append(item)
 
         return result
 
     def __transform_building(self, building):
         # Expand best ratings
-        best_ratings_id = building.pop("best_ratings_id", None)
+        best_rating_id = building.pop("best_rating_id", None)
         item = self.__rating_persistence.get_rating(
-            best_ratings_id
-        ).__dict__
+            best_rating_id
+        ).__dict__.copy()
         item.pop("id", None)
-        building["average_ratings"] = item
+        building["best_rating"] = item
         return building
