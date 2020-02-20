@@ -9,8 +9,8 @@ class BuildingStore:
         self.__washroom_persistence = washroom_persistence
         self.__review_persistence = review_persistence
 
-    def get_building(self, id):
-        return self.__building_persistence.get_building(id).__dict__
+    def get_building(self, building_id):
+        return self.__building_persistence.get_building(building_id).__dict__
 
     def get_buildings(
         self,

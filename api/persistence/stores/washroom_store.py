@@ -27,12 +27,27 @@ class WashroomStore:
 
         return result
 
-    def get_washroom(self, id):
-        return self.__washroom_persistence.get_washroom(id).__dict__
+    def get_washroom(self, washroom_id):
+        return self.__washroom_persistence.get_washroom(washroom_id).__dict__
 
-    def get_washroom_reviews(self, id):
-        return self.__review_persistence.get_reviews_for_washroom(id).__dict__
+    def get_washroom_reviews(self, washroom_id):
+        result = []
+        query_result = self.__review_persistence.get_reviews_for_washroom(
+            washroom_id
+        )
 
-    def get_washrooms_by_building(self, id):
-        return self.__washroom_persistence. \
-            get_washrooms_by_building(id).__dict__
+        for review in query_result:
+            result.append(review.__dict__)
+
+        return result
+
+    def get_washrooms_by_building(self, washroom_id):
+        result = []
+        query_result = self.__washroom_persistence.get_washrooms_by_building(
+            washroom_id
+        )
+
+        for washroom in query_result:
+            result.append(washroom.__dict__)
+
+        return result
