@@ -23,7 +23,9 @@ class UserStore:
 
     def get_user_favorites(self, user_id):
         result = []
-        query_result = self.__favorite_preference.get_favorites_for_user(user_id)
+        query_result = self.__favorite_preference.get_favorites_for_user(
+            user_id
+        )
 
         for favorite in query_result:
             result.append(favorite.__dict__)
