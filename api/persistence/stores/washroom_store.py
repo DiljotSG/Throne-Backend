@@ -26,3 +26,6 @@ class WashroomStore:
 
     def get_washroom_reviews(self, id):
         return self.__review_persistence.get_reviews_for_washroom(id)
+
+    def get_washrooms_by_building(self, id):
+        return self.__washroom_persistence.get_washrooms_by_building(id)
