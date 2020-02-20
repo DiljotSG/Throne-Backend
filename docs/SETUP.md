@@ -111,3 +111,14 @@ These steps install the dependencies required for deploying to AWS.
     ```shell
     serverless remove
     ```
+## System variables
+
+To define a system variable use the following snippet:
+
+```
+$ export <variable name>=<variable value>
+```
+
+Below is a list of system variables utilized by the Throne backend service.
+
+- `THRONE_USE_DB` - When defined will use the DB persistence layer rather than the stubs. Used for testing DB implementation locally.

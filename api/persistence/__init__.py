@@ -14,7 +14,7 @@ from .stores.washroom_store import WashroomStore
 
 import os
 
-if os.environ.get("IS_LAMBDA"):
+if os.environ.get("IS_LAMBDA") or os.environ.get("THRONE_USE_DB"):
     # TODO: Change these to DB implementations
     __amenity_persistence = AmenitiesStubPersistence()
     __building_persistence = BuildingsStubPersistence()
