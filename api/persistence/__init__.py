@@ -78,7 +78,8 @@ def create_washroom_store():
 
 def create_review_store():
     return ReviewStore(
-        __review_persistence
+        __review_persistence,
+        __rating_persistence
     )
 
 
