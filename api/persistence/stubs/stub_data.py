@@ -221,13 +221,13 @@ def create_users(preference_persistence, user_persistence):
     # main_floor_access
 def create_preferences(preference_persistence):
     user_pref1_id = preference_persistence.add_preference(
-        "female",
+        "women",
         True,
         False
     )
 
     user_pref2_id = preference_persistence.add_preference(
-        "male",
+        "men",
         False,
         True
     )

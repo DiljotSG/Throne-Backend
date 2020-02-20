@@ -33,7 +33,7 @@ class TestWashroomAPI(unittest.TestCase):
             "id": 1,
             "location": {"latitude": 114, "longitude": 200.5},
             "overall_rating": 3,
-            "title": "Science1"
+            "title": "Science 1"
         }
         self.assertEqual(response.status_code, 200)
         self.assertEqual(data, expected)
