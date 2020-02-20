@@ -46,6 +46,6 @@ class BuildingStore:
         item = self.__rating_persistence.get_rating(
             best_rating_id
         ).__dict__.copy()
+
         item.pop("id", None)
         building["best_rating"] = item
-        return building

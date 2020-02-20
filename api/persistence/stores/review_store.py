@@ -20,6 +20,6 @@ class ReviewStore:
         item = self.__rating_persistence.get_rating(
             rating_id
         ).__dict__.copy()
+
         item.pop("id", None)
         review["rating"] = item
-        return review

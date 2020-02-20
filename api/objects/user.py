@@ -12,5 +12,4 @@ class User:
         self.username = username
         self.created_at = created_at
         self.profile_picture = profile_picture
-        self.settings = settings
         self.preference_id = preference_id

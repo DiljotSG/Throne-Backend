@@ -35,7 +35,9 @@ class WashroomStore:
         return result
 
     def get_washroom(self, washroom_id):
-        result = self.__washroom_persistence.get_washroom(washroom_id).__dict__.copy()
+        result = self.__washroom_persistence.get_washroom(
+            washroom_id
+        ).__dict__.copy()
         self.__transform_washroom(result)
         return result
 
@@ -75,6 +77,6 @@ class WashroomStore:
         item = self.__ratings_persistence.get_rating(
             average_rating_id
         ).__dict__.copy()
+
         item.pop("id", None)
         washroom["average_ratings"] = item
-        return washroom

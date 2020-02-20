@@ -87,5 +87,6 @@ def create_user_store():
     return UserStore(
         __user_persistence,
         __favorite_persistence,
-        __review_persistence
+        __review_persistence,
+        __preference_persistence
     )
