@@ -31,6 +31,8 @@ provider:
   region: us-east-1
   environment:
     IS_LAMBDA: true
+    DB_HOSTNAME: "${opt:stage}-db.findmythrone.com"
+    DB_PASSWORD: "${env:DB_PASSWORD}"
 
 functions:
   api:
