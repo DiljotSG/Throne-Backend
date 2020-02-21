@@ -33,7 +33,7 @@ class UserStore:
 
         return result
 
-    def get_user_favorites(self, user_id):
+    def get_favorites_by_user(self, user_id):
         result = []
         query_result = self.__favorite_persistence.get_favorites_by_user(
             user_id

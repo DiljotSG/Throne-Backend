@@ -26,4 +26,4 @@ def users_reviews(user_id):
 @mod.route("/<int:user_id>/favorites")
 @cross_origin()
 def users_favorites(user_id):
-    return return_as_json(user_store.get_user_favorites(user_id))
+    return return_as_json(user_store.get_favorites_by_user(user_id))

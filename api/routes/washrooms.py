@@ -28,4 +28,4 @@ def washrooms_id(washroom_id):
 @mod.route("/<int:washroom_id>/reviews")
 @cross_origin()
 def washrooms_reviews(washroom_id):
-    return return_as_json(washroom_store.get_washroom_reviews(washroom_id))
+    return return_as_json(washroom_store.get_reviews_by_washrooms(washroom_id))

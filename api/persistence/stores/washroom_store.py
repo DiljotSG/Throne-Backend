@@ -43,7 +43,7 @@ class WashroomStore:
             self.__transform_washroom(result)
         return result
 
-    def get_washroom_reviews(self, washroom_id):
+    def get_reviews_by_washrooms(self, washroom_id):
         result = []
         query_result = self.__review_persistence.get_reviews_by_washroom(
             washroom_id
