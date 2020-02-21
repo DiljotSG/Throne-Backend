@@ -72,7 +72,7 @@ def create_reviews(
     )
 
     review_persistence.add_review(
-        washrooms[1],
+        washrooms[2],
         users[1],
         ratings[3],
         "boo",

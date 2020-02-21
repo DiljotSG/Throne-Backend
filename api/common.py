@@ -50,7 +50,7 @@ def return_as_json(data):
     code = OK
 
     # If our data is non-existant, this is a bad request.
-    if not data:
+    if data is None:
         result = {
             "Error": "Invalid Request"
         }
