@@ -31,4 +31,5 @@ Android | [Throne-Android](https://github.com/NickJosephson/Throne-Android) | [A
 * [Setup](docs/SETUP.md)
 * [Testing](docs/TESTING.md)
 * [Architecture](docs/ARCHITECTURE.md)
+* [API Definition](docs/API\ Definition.pdf)
 * [Database](docs/DATABASE_INFO.md)
