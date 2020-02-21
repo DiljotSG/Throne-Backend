@@ -1,6 +1,6 @@
+import api
 import json
 import unittest
-import api
 
 
 class TestWashroomAPI(unittest.TestCase):
@@ -17,20 +17,81 @@ class TestWashroomAPI(unittest.TestCase):
             "/washrooms",
             follow_redirects=True)
         data = json.loads(response.data.decode())
+        expected_data = {
+            "amenities": [
+                "Air Dryer",
+                "Automatic Toilet"
+            ],
+            "average_ratings": {
+                "cleanliness": 3.2,
+                "privacy": 1.2,
+                "smell": 2.7,
+                "toilet_paper_quality": 4.5
+            },
+            "building_id": 0,
+            "floor": 1,
+            "gender": "women",
+            "id": 0,
+            "location": {
+                "latitude": 12.2,
+                "longitude": 17.9
+            },
+            "overall_rating": 4,
+            "title": "Engineering 1"
+        }
+
         self.assertEqual(response.status_code, 200)
         self.assertTrue(isinstance(data, list))
+        data[0].pop("created_at", None)
+        self.assertEqual(data[0], expected_data)
 
     def test_by_id(self):
-        response = self.app.get("/washrooms/123")
+        response = self.app.get("/washrooms/0")
         data = json.loads(response.data.decode())
+        expected_data = {
+            "amenities": [
+                "Air Dryer",
+                "Automatic Toilet"
+            ],
+            "average_ratings": {
+                "cleanliness": 3.2,
+                "privacy": 1.2,
+                "smell": 2.7,
+                "toilet_paper_quality": 4.5
+            },
+            "building_id": 0,
+            "floor": 1,
+            "gender": "women",
+            "id": 0,
+            "location": {
+                "latitude": 12.2,
+                "longitude": 17.9
+            },
+            "overall_rating": 4,
+            "title": "Engineering 1"
+        }
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(str(data["msg"]), "washroom: 123")
+        data.pop("created_at", None)
+        self.assertEqual(data, expected_data)
 
     def test_reviews(self):
-        response = self.app.get("/washrooms/123/reviews")
+        response = self.app.get("/washrooms/0/reviews")
         data = json.loads(response.data.decode())
+        expected_data = [
+            {
+                "comment": "yay",
+                "id": 0,
+                "ratings": {
+                    "cleanliness": 3.2,
+                    "privacy": 1.2,
+                    "smell": 2.7,
+                    "toilet_paper_quality": 4.5
+                },
+                "upvote_count": 5,
+                "user_id": 0,
+                "washroom_id": 0
+            }
+        ]
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(str(data["msg"]), "reviews for washroom: 123")
-
-    def tearDown(self):
-        pass
+        data[0].pop("created_at", None)
+        self.assertEqual(data, expected_data)

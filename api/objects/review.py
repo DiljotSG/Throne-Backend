@@ -3,6 +3,7 @@ class Review:
         self,
         review_id,
         washroom_id,
+        user_id,
         created_at,
         user_id,
         comment,
@@ -11,6 +12,7 @@ class Review:
     ):
         self.id = review_id
         self.washroom_id = washroom_id
+        self.user_id = user_id
         self.created_at = created_at
         self.user_id = user_id
         self.comment = comment

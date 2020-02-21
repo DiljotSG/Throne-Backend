@@ -20,7 +20,7 @@ class IFavoritesPersistence(ABC):
         pass
 
     @abstractmethod
-    def get_favorites_for_user(
+    def get_favorites_by_user(
         self,
         user_id  # Foreign Key
     ):

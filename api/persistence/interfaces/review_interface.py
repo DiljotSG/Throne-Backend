@@ -23,14 +23,14 @@ class IReviewsPersistence(ABC):
         pass
 
     @abstractmethod
-    def get_reviews_from_user(
+    def get_reviews_by_user(
         self,
         user_id  # Foreign Key
     ):
         pass
 
     @abstractmethod
-    def get_reviews_for_washroom(
+    def get_reviews_by_washroom(
         self,
         washroom_id  # Foreign Key
     ):
