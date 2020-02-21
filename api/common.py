@@ -64,7 +64,3 @@ def return_as_json(data):
 
 def convert_to_mysql_timestamp(timestamp: datetime):
     return timestamp.strftime(timestamp_format)
-
-
-def convert_to_python_datetime(timestamp: str):
-    return datetime.datetime.strptime(timestamp, timestamp_format)

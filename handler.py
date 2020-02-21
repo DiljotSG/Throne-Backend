@@ -24,7 +24,7 @@ def get_sql_connection():
 
     if sql_cnx.is_connected():
         # Return current open connection
-        if "cachedCursor" not in sql_cnx:
+        if "cachedCursor" not in dir(sql_cnx):
             sql_cnx.cachedCursor = sql_cnx.cursor(prepared=True)
         return sql_cnx
 

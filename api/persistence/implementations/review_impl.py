@@ -4,7 +4,7 @@ from datetime import datetime
 from .rating_impl import RatingsPersistence
 from ...objects.review import Review
 from ..interfaces.review_interface import IReviewsPersistence
-from api.common import convert_to_mysql_timestamp, convert_to_python_datetime
+from api.common import convert_to_mysql_timestamp
 
 
 class ReviewsPersistence(IReviewsPersistence):
@@ -55,7 +55,7 @@ class ReviewsPersistence(IReviewsPersistence):
             return None
         result = result[0]
         return Review(
-            result[0], result[2], convert_to_python_datetime(result[1]),
+            result[0], result[2], result[1],
             result[3], result[5], result[6], result[4]
         )
 
@@ -71,7 +71,7 @@ class ReviewsPersistence(IReviewsPersistence):
         cursor.execute(find_query, find_tuple)
 
         reviews = list(cursor)
-        return [Review(result[0], result[2], convert_to_python_datetime(result[1]),
+        return [Review(result[0], result[2], result[1],
                        result[3], result[5], result[6], result[4]) for result in reviews]
 
 
@@ -87,7 +87,7 @@ class ReviewsPersistence(IReviewsPersistence):
         cursor.execute(find_query, find_tuple)
 
         reviews = list(cursor)
-        return [Review(result[0], result[2], convert_to_python_datetime(result[1]),
+        return [Review(result[0], result[2], result[1],
                        result[3], result[5], result[6], result[4]) for result in reviews]
 
 

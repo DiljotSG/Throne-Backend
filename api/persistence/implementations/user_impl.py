@@ -1,7 +1,7 @@
 from handler import get_sql_connection
 from datetime import datetime
 
-from api.common import convert_to_python_datetime, convert_to_mysql_timestamp
+from api.common import convert_to_mysql_timestamp
 from .favorite_impl import FavoritesPersistence
 from .review_impl import ReviewsPersistence
 from ...objects.user import User
@@ -54,8 +54,9 @@ class UsersPersistence(IUsersPersistence):
         if len(result) != 1:
             return None
         result = result[0]
+        print(result[1])
         return User(
-            user_id, result[0], convert_to_python_datetime(result[1]), result[2], result[3]
+            user_id, result[0], result[1], result[2], result[3]
         )
 
 
