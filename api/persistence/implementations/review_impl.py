@@ -99,12 +99,14 @@ class ReviewsPersistence(IReviewsPersistence):
         cursor = cnx.cachedCursor
 
         reviews = self.get_reviews_by_washroom(washroom_id)
-        delete_query = "DELETE FROM ratings WHERE id = %s"
+        delete_query1 = "DELETE FROM ratings WHERE id = %s"
+        delete_query2 = "DELETE FROM reviews WHERE washroomID = %s"
 
         try:
             for review in reviews:
-                cursor.execute(delete_query, (review.rating_id,))
+                cursor.execute(delete_query1, (review.rating_id,))
 
+            cursor.execute(delete_query2, (washroom_id,))
             cnx.commit()
         except mysql.connector.Error:
             cnx.rollback()
