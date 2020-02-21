@@ -20,6 +20,7 @@ class ReviewsStubPersistence(IReviewsPersistence):
         new_review = Review(
             review_id,
             washroom_id,
+            user_id,
             datetime.now(),
             comment,
             upvote_count,
