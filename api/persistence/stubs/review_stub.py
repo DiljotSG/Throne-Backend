@@ -38,7 +38,7 @@ class ReviewsStubPersistence(IReviewsPersistence):
             return self.reviews[review_id]
         return None
 
-    def get_reviews_from_user(
+    def get_reviews_by_user(
         self,
         user_id  # Foreign Key
     ):
@@ -50,7 +50,7 @@ class ReviewsStubPersistence(IReviewsPersistence):
 
         return user_reviews
 
-    def get_reviews_for_washroom(
+    def get_reviews_by_washroom(
         self,
         washroom_id  # Foreign Key
     ):

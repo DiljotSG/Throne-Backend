@@ -24,7 +24,7 @@ class UserStore:
 
     def get_reviews_by_user(self, user_id):
         result = []
-        query_result = self.__review_persistence.get_reviews_from_user(user_id)
+        query_result = self.__review_persistence.get_reviews_by_user(user_id)
 
         for review in query_result:
             item = review.__dict__.copy()
@@ -35,7 +35,7 @@ class UserStore:
 
     def get_user_favorites(self, user_id):
         result = []
-        query_result = self.__favorite_persistence.get_favorites_for_user(
+        query_result = self.__favorite_persistence.get_favorites_by_user(
             user_id
         )
 
