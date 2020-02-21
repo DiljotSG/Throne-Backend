@@ -17,7 +17,7 @@ class PreferencesPersistence(IPreferencesPersistence):
             return -1
 
         cnx = get_sql_connection()
-        cursor = cnx.cursor(prepared=True)
+        cursor = cnx.cachedCursor
 
         insert_query = """
             INSERT INTO preferences (gender, wheelchairAccess, mainFloorAccess)
@@ -40,7 +40,7 @@ class PreferencesPersistence(IPreferencesPersistence):
         preference_id
     ):
         cnx = get_sql_connection()
-        cursor = cnx.cursor(prepared=True)
+        cursor = cnx.cachedCursor
 
         find_query = "SELECT gender, wheelchairAccess, mainFloorAccess FROM preferences WHERE id = %s"
         find_tuple = (preference_id,)
@@ -59,7 +59,7 @@ class PreferencesPersistence(IPreferencesPersistence):
         preference_id
     ):
         cnx = get_sql_connection()
-        cursor = cnx.cursor(prepared=True)
+        cursor = cnx.cachedCursor
 
         remove_query = "DELETE FROM preferences WHERE id = %s"
         remove_tuple = (preference_id,)

@@ -32,7 +32,7 @@ class AmenitiesPersistence(IAmenitiesPersistence):
         *amenities
     ):
         cnx = get_sql_connection()
-        cursor = cnx.cursor(prepared=True)
+        cursor = cnx.cachedCursor
         insert_query = """
             INSERT INTO amenities
             (paperTowel, airDryer, soap, wheelChairAccess, autoSink, autoToilet,
@@ -58,7 +58,7 @@ class AmenitiesPersistence(IAmenitiesPersistence):
         amenities_id
     ):
         cnx = get_sql_connection()
-        cursor = cnx.cursor(prepared=True)
+        cursor = cnx.cachedCursor
         find_query = "SELECT * FROM amenities WHERE id = %s"
         find_tuple = (amenities_id,)
 
@@ -79,7 +79,7 @@ class AmenitiesPersistence(IAmenitiesPersistence):
         amenities_id
     ):
         cnx = get_sql_connection()
-        cursor = cnx.cursor(prepared=True)
+        cursor = cnx.cachedCursor
         delete_query = "DELETE FROM amenities WHERE id = %s"
         delete_tuple = (amenities_id,)
 

@@ -13,7 +13,7 @@ class FavoritesPersistence(IFavoritesPersistence):
         washroom_id  # Foreign Key
     ):
         cnx = get_sql_connection()
-        cursor = cnx.cursor(prepared=True)
+        cursor = cnx.cachedCursor
 
         insert_query = """
         INSERT INTO favorites (userID, washroomID)
@@ -36,7 +36,7 @@ class FavoritesPersistence(IFavoritesPersistence):
         favorite_id
     ):
         cnx = get_sql_connection()
-        cursor = cnx.cursor(prepared=True)
+        cursor = cnx.cachedCursor
 
         find_query = "SELECT userID, washroomID FROM favorites WHERE id = %s"
         find_tuple = (favorite_id,)
@@ -55,7 +55,7 @@ class FavoritesPersistence(IFavoritesPersistence):
         user_id  # Foreign Key
     ):
         cnx = get_sql_connection()
-        cursor = cnx.cursor(prepared=True)
+        cursor = cnx.cachedCursor
 
         find_query = "SELECT * FROM favorites WHERE userID = %s"
         find_tuple = (user_id,)
@@ -71,7 +71,7 @@ class FavoritesPersistence(IFavoritesPersistence):
         favorite_id
     ):
         cnx = get_sql_connection()
-        cursor = cnx.cursor(prepared=True)
+        cursor = cnx.cachedCursor
 
         remove_query = "DELETE FROM favorites WHERE id = %s"
         remove_tuple = (favorite_id,)

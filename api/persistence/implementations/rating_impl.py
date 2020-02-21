@@ -15,7 +15,7 @@ class RatingsPersistence(IRatingsPersistence):
         toilet_paper_quality,
     ):
         cnx = get_sql_connection()
-        cursor = cnx.cursor(prepared=True)
+        cursor = cnx.cachedCursor
 
         insert_query = """
             INSERT INTO ratings (clenliness, privacy, smell, toiletPaperQuality)
@@ -38,7 +38,7 @@ class RatingsPersistence(IRatingsPersistence):
         rating_id
     ):
         cnx = get_sql_connection()
-        cursor = cnx.cursor(prepared=True)
+        cursor = cnx.cachedCursor
 
         find_query = "SELECT clenliness, privacy, smell, toiletPaperQuality FROM ratings WHERE id = %s"
         find_tuple = (rating_id,)
@@ -57,7 +57,7 @@ class RatingsPersistence(IRatingsPersistence):
         rating_id
     ):
         cnx = get_sql_connection()
-        cursor = cnx.cursor(prepared=True)
+        cursor = cnx.cachedCursor
 
         remove_query = "DELETE FROM ratings WHERE id = %s"
         remove_tuple = (rating_id,)
