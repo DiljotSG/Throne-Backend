@@ -1,3 +1,4 @@
+import mysql.connector
 from handler import get_sql_connection
 from api.db_objects import amenity
 from ..interfaces.amenity_interface import IAmenitiesPersistence
@@ -83,5 +84,8 @@ class AmenitiesPersistence(IAmenitiesPersistence):
         delete_query = "DELETE FROM amenities WHERE id = %s"
         delete_tuple = (amenities_id,)
 
-        cursor.execute(delete_query, delete_tuple)
-        cnx.commit()
+        try:
+            cursor.execute(delete_query, delete_tuple)
+            cnx.commit()
+        except mysql.connector.Error:
+            cnx.rollback()

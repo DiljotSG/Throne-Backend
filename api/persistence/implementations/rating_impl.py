@@ -1,3 +1,4 @@
+import mysql.connector
 from handler import get_sql_connection
 from ...db_objects.rating import Rating
 from ..interfaces.rating_interface import IRatingsPersistence
@@ -62,5 +63,8 @@ class RatingsPersistence(IRatingsPersistence):
         remove_query = "DELETE FROM ratings WHERE id = %s"
         remove_tuple = (rating_id,)
 
-        cursor.execute(remove_query, remove_tuple)
-        cnx.commit()
+        try:
+            cursor.execute(remove_query, remove_tuple)
+            cnx.commit()
+        except mysql.connector.Error:
+            cnx.rollback()

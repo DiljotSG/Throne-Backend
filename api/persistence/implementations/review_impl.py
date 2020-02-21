@@ -90,6 +90,25 @@ class ReviewsPersistence(IReviewsPersistence):
         return [Review(result[0], result[2], convert_to_python_datetime(result[1]),
                        result[3], result[5], result[6], result[4]) for result in reviews]
 
+
+    def remove_reviews_by_washroom(
+        self,
+        washroom_id  # Foreign key
+    ):
+        cnx = get_sql_connection()
+        cursor = cnx.cachedCursor
+
+        reviews = self.get_reviews_by_washroom(washroom_id)
+        delete_query = "DELETE FROM ratings WHERE id = %s"
+
+        try:
+            for review in reviews:
+                cursor.execute(delete_query, (review.rating_id,))
+
+            cnx.commit()
+        except mysql.connector.Error:
+            cnx.rollback()
+
     # TODO: Check that foreign keys are removed properly
     def remove_review(
         self,

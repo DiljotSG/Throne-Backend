@@ -1,3 +1,4 @@
+import mysql.connector
 from handler import get_sql_connection
 from ...db_objects.preference import Preference
 from ..interfaces.preference_interface import IPreferencesPersistence
@@ -64,5 +65,8 @@ class PreferencesPersistence(IPreferencesPersistence):
         remove_query = "DELETE FROM preferences WHERE id = %s"
         remove_tuple = (preference_id,)
 
-        cursor.execute(remove_query, remove_tuple)
-        cnx.commit()
+        try:
+            cursor.execute(remove_query, remove_tuple)
+            cnx.commit()
+        except mysql.connector.Error:
+            cnx.rollback()

@@ -1,3 +1,4 @@
+import mysql.connector
 from handler import get_sql_connection
 from api.db_objects.favorite import Favorite
 from ..interfaces.favorite_interface import IFavoritesPersistence
@@ -76,5 +77,8 @@ class FavoritesPersistence(IFavoritesPersistence):
         remove_query = "DELETE FROM favorites WHERE id = %s"
         remove_tuple = (favorite_id,)
 
-        cursor.execute(remove_query, remove_tuple)
-        cnx.commit()
+        try:
+            cursor.execute(remove_query, remove_tuple)
+            cnx.commit()
+        except mysql.connector.Error:
+            cnx.rollback()
