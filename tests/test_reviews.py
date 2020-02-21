@@ -29,5 +29,6 @@ class TestReviewAPI(unittest.TestCase):
             "washroom_id": 1
         }
         self.assertEqual(response.status_code, 200)
-        data.pop("created_at", None)
+        created_at = data.pop("created_at", None)
+        self.assertNotEqual(created_at, None)
         self.assertEqual(data, expected_data)

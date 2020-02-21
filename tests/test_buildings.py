@@ -52,8 +52,10 @@ class TestBuildingsAPI(unittest.TestCase):
             }
         ]
         self.assertEqual(response.status_code, 200)
-        data[0].pop("created_at", None)
-        data[1].pop("created_at", None)
+        created_at = data[0].pop("created_at", None)
+        self.assertNotEqual(created_at, None)
+        created_at = data[1].pop("created_at", None)
+        self.assertNotEqual(created_at, None)
         self.assertEqual(data, expected_data)
 
     def test_by_id(self):
@@ -76,7 +78,8 @@ class TestBuildingsAPI(unittest.TestCase):
             "title": "Science"
         }
         self.assertEqual(response.status_code, 200)
-        data.pop("created_at", None)
+        created_at = data.pop("created_at", None)
+        self.assertNotEqual(created_at, None)
         self.assertEqual(data, expected_data)
 
     def test_washrooms(self):
@@ -107,5 +110,6 @@ class TestBuildingsAPI(unittest.TestCase):
                 }
             ]
         self.assertEqual(response.status_code, 200)
-        data[0].pop("created_at", None)
+        created_at = data[0].pop("created_at", None)
+        self.assertNotEqual(created_at, None)
         self.assertEqual(data, expected_data)
