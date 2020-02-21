@@ -43,6 +43,7 @@ class TestUsersAPI(unittest.TestCase):
                     "toilet_paper_quality": 4.2
                 },
                 "upvote_count": 10,
+                "user_id": 1,
                 "washroom_id": 1
             }
         ]
