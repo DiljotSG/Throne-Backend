@@ -26,7 +26,7 @@ class TestReviewAPI(unittest.TestCase):
             },
             "upvote_count": 10,
             "user_id": 1,
-            "washroom_id": 1
+            "washroom_id": 2
         }
         self.assertEqual(response.status_code, 200)
         created_at = data.pop("created_at", None)
