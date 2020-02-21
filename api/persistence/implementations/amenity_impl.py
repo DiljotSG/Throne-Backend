@@ -34,7 +34,7 @@ class AmenitiesPersistence(IAmenitiesPersistence):
         cnx = get_sql_connection()
         cursor = cnx.cursor(prepared=True)
         insert_query = """
-            INSERT INTO amenities 
+            INSERT INTO amenities
             (paperTowel, airDryer, soap, wheelChairAccess, autoSink, autoToilet,
              autoPaperTowel, autoDryer, shower, urinal, paperSeatCovers, hygieneProducts,
               needleDisposal, contraceptives, bathroomAttendant, perfume, lotion)
@@ -72,7 +72,6 @@ class AmenitiesPersistence(IAmenitiesPersistence):
 
         # Create an amenities list from that
         return [self.amenitylist[i] for (i, boolean) in enumerate(result) if bool == 1]
-
 
     # Remove amenity list by ID
     def remove_amenities(
