@@ -4,6 +4,7 @@ from datetime import datetime
 from .rating_impl import RatingsPersistence
 from ...objects.review import Review
 from ..interfaces.review_interface import IReviewsPersistence
+from api.common import convert_to_mysql_timestamp, convert_to_python_datetime
 
 
 class ReviewsPersistence(IReviewsPersistence):
@@ -27,7 +28,7 @@ class ReviewsPersistence(IReviewsPersistence):
                 """
 
         find_query = "SELECT LAST_INSERT_ID()"
-        insert_tuple = (datetime.now().strftime('%Y-%m-%d %H:%M:%S'), washroom_id, user_id,
+        insert_tuple = (convert_to_mysql_timestamp(datetime.now()), washroom_id, user_id,
                         rating_id, comment, upvote_count)
 
         # Insert and commit
@@ -54,10 +55,11 @@ class ReviewsPersistence(IReviewsPersistence):
             return None
         result = result[0]
         return Review(
-            review_id, result[1], result[0], result[2], result[3], result[4], result[5]
+            result[0], result[2], convert_to_python_datetime(result[1]),
+            result[3], result[5], result[6], result[4]
         )
 
-    def get_reviews_from_user(
+    def get_reviews_by_user(
         self,
         user_id  # Foreign Key
     ):
@@ -69,11 +71,11 @@ class ReviewsPersistence(IReviewsPersistence):
         cursor.execute(find_query, find_tuple)
 
         reviews = list(cursor)
-        return [Review(result[0], result[2], result[1], result[3],
-                       result[5], result[6], result[4]) for result in reviews]
+        return [Review(result[0], result[2], convert_to_python_datetime(result[1]),
+                       result[3], result[5], result[6], result[4]) for result in reviews]
 
 
-    def get_reviews_for_washroom(
+    def get_reviews_by_washroom(
         self,
         washroom_id  # Foreign Key
     ):
@@ -85,8 +87,8 @@ class ReviewsPersistence(IReviewsPersistence):
         cursor.execute(find_query, find_tuple)
 
         reviews = list(cursor)
-        return [Review(result[0], result[2], result[1], result[3],
-                       result[5], result[6], result[4]) for result in reviews]
+        return [Review(result[0], result[2], convert_to_python_datetime(result[1]),
+                       result[3], result[5], result[6], result[4]) for result in reviews]
 
     # TODO: Check that foreign keys are removed properly
     def remove_review(

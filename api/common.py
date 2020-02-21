@@ -1,3 +1,5 @@
+import datetime
+
 from flask import request
 from flask import jsonify
 from jsonschema import validate
@@ -5,6 +7,7 @@ from jsonschema import ValidationError
 
 OK = 200
 BAD_REQUEST = 400
+timestamp_format = '%Y-%m-%d %H:%M:%S'
 
 
 def is_valid_schema(obj, schema):
@@ -57,3 +60,11 @@ def return_as_json(data):
         code = BAD_REQUEST
 
     return jsonify(result), code
+
+
+def convert_to_mysql_timestamp(timestamp: datetime):
+    return timestamp.strftime(timestamp_format)
+
+
+def convert_to_python_datetime(timestamp: str):
+    return datetime.datetime.strptime(timestamp, timestamp_format)
