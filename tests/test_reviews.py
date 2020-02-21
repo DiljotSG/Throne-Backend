@@ -1,6 +1,6 @@
+import api
 import json
 import unittest
-import api
 
 
 class TestReviewAPI(unittest.TestCase):
@@ -13,10 +13,22 @@ class TestReviewAPI(unittest.TestCase):
         self.assertEqual(app.debug, False)
 
     def test_by_id(self):
-        response = self.app.get("/reviews/123")
+        response = self.app.get("/reviews/1")
         data = json.loads(response.data.decode())
+        expected_data = {
+            "comment": "boo",
+            "id": 1,
+            "rating": {
+                "cleanliness": 2.2,
+                "privacy": 4.2,
+                "smell": 2.8,
+                "toilet_paper_quality": 4.2
+            },
+            "upvote_count": 10,
+            "user_id": 1,
+            "washroom_id": 2
+        }
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(str(data["msg"]), "review: 123")
-
-    def tearDown(self):
-        pass
+        created_at = data.pop("created_at", None)
+        self.assertNotEqual(created_at, None)
+        self.assertEqual(data, expected_data)

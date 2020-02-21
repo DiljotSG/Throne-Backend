@@ -1,8 +1,8 @@
-from flask import jsonify
 from flask import request
 from flask import Blueprint
 from flask_cors import CORS
 from flask_cors import cross_origin
+from api.common import return_as_json
 
 from api.common import get_cognito_user
 
@@ -26,7 +26,7 @@ def current_user():
     data = {
         "username": get_cognito_user()
     }
-    return jsonify(data)
+    return return_as_json(data)
 
 
 @mod.route("/debug")
@@ -44,4 +44,4 @@ def debug():
             "no event"
         ),
     }
-    return jsonify(data)
+    return return_as_json(data)

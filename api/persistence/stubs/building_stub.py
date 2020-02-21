@@ -14,6 +14,7 @@ class BuildingsStubPersistence(IBuildingsPersistence):
         title,
         map_service_id,
         overall_rating,
+        best_rating_id,
     ):
         building_id = len(self.buildings)
         new_building = Building(
@@ -22,7 +23,8 @@ class BuildingsStubPersistence(IBuildingsPersistence):
             title,
             map_service_id,
             datetime.now(),
-            overall_rating
+            overall_rating,
+            best_rating_id
         )
         # Return Building id
         self.buildings.append(new_building)
@@ -40,8 +42,8 @@ class BuildingsStubPersistence(IBuildingsPersistence):
         for building in self.buildings:
             if len(filtered_buildings) >= max_buildings:
                 break
-
-            filtered_buildings.append(building)
+            if building is not None:
+                filtered_buildings.append(building)
 
         return filtered_buildings
 
@@ -49,7 +51,8 @@ class BuildingsStubPersistence(IBuildingsPersistence):
         self,
         building_id
     ):
-        if building_id >= 0 and building_id < len(self.buildings):
+        if building_id >= 0 and building_id < len(self.buildings) and \
+           self.buildings[building_id] is not None:
             return self.buildings[building_id]
         return None
 

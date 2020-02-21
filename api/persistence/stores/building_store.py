@@ -3,37 +3,51 @@ class BuildingStore:
         self,
         building_persistence,
         washroom_persistence,
-        review_persistence
+        review_persistence,
+        rating_persistence
     ):
         self.__building_persistence = building_persistence
         self.__washroom_persistence = washroom_persistence
         self.__review_persistence = review_persistence
+        self.__rating_persistence = rating_persistence
 
-    def get_building(self, id):
-        return self.__building_persistence.get_building(id)
+    def get_building(self, building_id):
+        result = self.__building_persistence.get_building(
+            building_id
+        )
+        if result:
+            result = result.__dict__.copy()
+            self.__transform_building(result)
+        return result
 
     def get_buildings(
         self,
         location,
-        radius,
-        max_buildings,
-        desired_amenities
+        radius=5,
+        max_buildings=5,
+        desired_amenities=None
     ):
-        return self.__building_persistence.query_buildings(
+        result = []
+        query_result = self.__building_persistence.query_buildings(
             location,
             radius,
             max_buildings,
             desired_amenities
         )
 
-    def get_building_reviews(self, id):
-        washrooms = self.__washroom_persistence.get_washrooms_by_building(id)
+        for building in query_result:
+            item = building.__dict__.copy()
+            self.__transform_building(item)
+            result.append(item)
 
-        reviews = []
-        for washroom in washrooms:
-            review = self.review_persistence.get_reviews_for_washroom(
-                washroom.id
-            )
-            reviews.append(review)
+        return result
 
-        return reviews
+    def __transform_building(self, building):
+        # Expand best ratings
+        best_rating_id = building.pop("best_rating_id", None)
+        item = self.__rating_persistence.get_rating(
+            best_rating_id
+        ).__dict__.copy()
+
+        item.pop("id", None)
+        building["best_rating"] = item

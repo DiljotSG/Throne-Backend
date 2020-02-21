@@ -27,7 +27,8 @@ class PreferencesStubPersistence(IPreferencesPersistence):
         self,
         preference_id
     ):
-        if preference_id >= 0 and preference_id < len(self.preferences):
+        if preference_id >= 0 and preference_id < len(self.preferences) and \
+           self.preferences[preference_id] is not None:
             return self.preferences[preference_id]
         return None
 
