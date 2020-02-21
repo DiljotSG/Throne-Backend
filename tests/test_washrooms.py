@@ -81,7 +81,7 @@ class TestWashroomAPI(unittest.TestCase):
             {
                 "comment": "yay",
                 "id": 0,
-                "rating": {
+                "ratings": {
                     "cleanliness": 3.2,
                     "privacy": 1.2,
                     "smell": 2.7,

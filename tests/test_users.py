@@ -37,7 +37,7 @@ class TestUsersAPI(unittest.TestCase):
             {
                 "comment": "boo",
                 "id": 1,
-                "rating": {
+                "ratings": {
                     "cleanliness": 2.2,
                     "privacy": 4.2,
                     "smell": 2.8,
