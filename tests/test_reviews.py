@@ -18,7 +18,7 @@ class TestReviewAPI(unittest.TestCase):
         expected_data = {
             "comment": "boo",
             "id": 1,
-            "rating": {
+            "ratings": {
                 "cleanliness": 2.2,
                 "privacy": 4.2,
                 "smell": 2.8,

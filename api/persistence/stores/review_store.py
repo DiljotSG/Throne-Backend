@@ -17,11 +17,11 @@ class ReviewStore:
         return result
 
     def __transform_review(self, review):
-        # Expand rating
+        # Expand ratings
         rating_id = review.pop("rating_id", None)
         item = self.__rating_persistence.get_rating(
             rating_id
         ).__dict__.copy()
 
         item.pop("id", None)
-        review["rating"] = item
+        review["ratings"] = item

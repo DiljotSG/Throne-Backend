@@ -93,4 +93,4 @@ class WashroomStore:
         ).__dict__.copy()
 
         item.pop("id", None)
-        review["rating"] = item
+        review["ratings"] = item
