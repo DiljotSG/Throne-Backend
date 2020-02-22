@@ -1,4 +1,3 @@
-import mysql.connector
 from handler import get_sql_connection
 from api.db_objects.amenity import Amenity
 from ..interfaces.amenity_interface import IAmenitiesPersistence

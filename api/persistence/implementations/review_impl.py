@@ -1,4 +1,3 @@
-import mysql.connector
 from handler import get_sql_connection
 from datetime import datetime
 from ...objects.review import Review
@@ -107,14 +106,11 @@ class ReviewsPersistence(IReviewsPersistence):
         delete_query1 = "DELETE FROM ratings WHERE id = %s"
         delete_query2 = "DELETE FROM reviews WHERE washroomID = %s"
 
-        try:
-            for review in reviews:
-                cursor.execute(delete_query1, (review.rating_id,))
+        for review in reviews:
+            cursor.execute(delete_query1, (review.rating_id,))
 
-            cursor.execute(delete_query2, (washroom_id,))
-            cnx.commit()
-        except mysql.connector.Error:
-            cnx.rollback()
+        cursor.execute(delete_query2, (washroom_id,))
+        cnx.commit()
 
     # TODO: Check that foreign keys are removed properly
     def remove_review(

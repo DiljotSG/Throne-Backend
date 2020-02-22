@@ -1,5 +1,3 @@
-import mysql.connector
-
 from handler import get_sql_connection
 from datetime import datetime
 

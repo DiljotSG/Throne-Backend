@@ -1,4 +1,3 @@
-import mysql.connector
 from handler import get_sql_connection
 from ...db_objects.rating import Rating
 from ..interfaces.rating_interface import IRatingsPersistence
