@@ -12,8 +12,9 @@ from ..interfaces.washroom_interface import IWashroomsPersistence
 
 def result_to_washroom(result):
     return Washroom(
-        result[0], result[5], Location(result[3], result[4]), result[1], result[7],
-        result[6], result[2], result[9], result[10], result[8]
+        result[0], result[5], Location(result[3], result[4]),
+        result[1], result[7], result[6], result[2], result[9],
+        result[10], result[8]
     )
 
 
@@ -37,14 +38,16 @@ class WashroomsPersistence(IWashroomsPersistence):
 
         insert_query = """
         INSERT INTO washrooms
-        (created, buildingID, latitude, longitude, title, floor, gender, amenities, overallRating, avgRatingsID)
+        (created, buildingID, latitude, longitude, title,
+         floor, gender, amenities, overallRating, avgRatingsID)
         VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
         """
 
         find_query = "SELECT LAST_INSERT_ID()"
         insert_tuple = (
-            convert_to_mysql_timestamp(datetime.now()), building_id, location.latitude,
-            location.longitude, title, floor, gender, amenities_id, overall_rating, average_ratings_id
+            convert_to_mysql_timestamp(datetime.now()), building_id,
+            location.latitude, location.longitude, title, floor, gender,
+            amenities_id, overall_rating, average_ratings_id
         )
 
         # Insert and commit
@@ -63,8 +66,9 @@ class WashroomsPersistence(IWashroomsPersistence):
         desired_amenities
     ):
         # I don't know of any way to do this complex formula in SQL, so
-        # instead we're just grabbing ALL WASHROOMS AT ONCE and calculating distance.
-        # It might seem inefficient but it's really not - we'd have to do it either way.
+        # instead we're just grabbing ALL WASHROOMS AT ONCE and calculating
+        # distance. It might seem inefficient but it's really not - we'd
+        # have to do it either way.
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -77,7 +81,8 @@ class WashroomsPersistence(IWashroomsPersistence):
         # Restrict by radius
         results = [
             washroom for washroom in results
-            if distance_between_locations(location, washroom.location) <= radius
+            if distance_between_locations(
+                location, washroom.location) <= radius
         ]
 
         # Restrict by amenities
@@ -85,13 +90,13 @@ class WashroomsPersistence(IWashroomsPersistence):
         results = [
             washroom for washroom in results
             if desired.issubset(
-                set(self.amenitiesPersistence.get_amenities(washroom.amenities_id))
+                set(self.amenitiesPersistence.get_amenities(
+                    washroom.amenities_id))
             )
         ]
 
         # Restrict by max results
         return results[:max_washrooms]
-
 
     def get_washrooms_by_building(
         self,

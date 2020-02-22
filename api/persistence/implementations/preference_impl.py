@@ -43,7 +43,10 @@ class PreferencesPersistence(IPreferencesPersistence):
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
-        find_query = "SELECT gender, wheelchairAccess, mainFloorAccess FROM preferences WHERE id = %s"
+        find_query = """
+        SELECT gender, wheelchairAccess, mainFloorAccess
+        FROM preferences WHERE id = %s
+        """
         find_tuple = (preference_id,)
         cursor.execute(find_query, find_tuple)
 

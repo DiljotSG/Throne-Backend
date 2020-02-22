@@ -1,7 +1,6 @@
 import mysql.connector
 from handler import get_sql_connection
 from datetime import datetime
-from .rating_impl import RatingsPersistence
 from ...objects.review import Review
 from ..interfaces.review_interface import IReviewsPersistence
 from api.common import convert_to_mysql_timestamp
@@ -23,13 +22,16 @@ class ReviewsPersistence(IReviewsPersistence):
         cursor = cnx.cachedCursor
 
         insert_query = """
-                INSERT INTO reviews (created, washroomID, user, ratingID, comment, upvoteCount)
-                VALUES (%s,%s,%s,%s,%s,%s)
-                """
+        INSERT INTO reviews
+        (created, washroomID, user, ratingID, comment, upvoteCount)
+        VALUES (%s,%s,%s,%s,%s,%s)
+        """
 
         find_query = "SELECT LAST_INSERT_ID()"
-        insert_tuple = (convert_to_mysql_timestamp(datetime.now()), washroom_id, user_id,
-                        rating_id, comment, upvote_count)
+        insert_tuple = (
+            convert_to_mysql_timestamp(datetime.now()),
+            washroom_id, user_id, rating_id, comment, upvote_count
+        )
 
         # Insert and commit
         cursor.execute(insert_query, insert_tuple)
@@ -46,7 +48,10 @@ class ReviewsPersistence(IReviewsPersistence):
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
-        find_query = "SELECT created, washroomID, user, ratingID, comment, upvoteCount FROM reviews WHERE id = %s"
+        find_query = """
+        SELECT created, washroomID, user, ratingID, comment, upvoteCount
+        FROM reviews WHERE id = %s
+        """
         find_tuple = (review_id,)
         cursor.execute(find_query, find_tuple)
 
@@ -72,8 +77,8 @@ class ReviewsPersistence(IReviewsPersistence):
 
         reviews = list(cursor)
         return [Review(result[0], result[2], result[1],
-                       result[3], result[5], result[6], result[4]) for result in reviews]
-
+                       result[3], result[5], result[6],
+                       result[4]) for result in reviews]
 
     def get_reviews_by_washroom(
         self,
@@ -88,8 +93,8 @@ class ReviewsPersistence(IReviewsPersistence):
 
         reviews = list(cursor)
         return [Review(result[0], result[2], result[1],
-                       result[3], result[5], result[6], result[4]) for result in reviews]
-
+                       result[3], result[5], result[6],
+                       result[4]) for result in reviews]
 
     def remove_reviews_by_washroom(
         self,

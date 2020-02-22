@@ -36,14 +36,16 @@ class AmenitiesPersistence(IAmenitiesPersistence):
         cursor = cnx.cachedCursor
         insert_query = """
             INSERT INTO amenities
-            (paperTowel, airDryer, soap, wheelChairAccess, autoSink, autoToilet,
-             autoPaperTowel, autoDryer, shower, urinal, paperSeatCovers, hygieneProducts,
-              needleDisposal, contraceptives, bathroomAttendant, perfume, lotion)
+            (paperTowel, airDryer, soap, wheelChairAccess, autoSink,
+            autoToilet, autoPaperTowel, autoDryer, shower, urinal,
+            paperSeatCovers, hygieneProducts, needleDisposal,
+            contraceptives, bathroomAttendant, perfume, lotion)
             VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
         """
         find_query = "SELECT LAST_INSERT_ID()"
 
-        # Strategy: create a list of bools, each of which is true if anything in the list matches it
+        # Strategy: create a list of bools, each of which
+        # is true if anything in the list matches it
         amenities = set(amenities)
         insert_tuple = tuple([a in amenities for a in self.amenitylist])
         cursor.execute(insert_query, insert_tuple)
@@ -72,7 +74,8 @@ class AmenitiesPersistence(IAmenitiesPersistence):
         result = result[0][1:]
 
         # Create an amenities list from that
-        return [self.amenitylist[i] for (i, boolean) in enumerate(result) if bool == 1]
+        return [self.amenitylist[i] for (i, boolean)
+                in enumerate(result) if bool == 1]
 
     # Remove amenity list by ID
     def remove_amenities(

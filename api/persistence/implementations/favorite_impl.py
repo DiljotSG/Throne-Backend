@@ -65,7 +65,8 @@ class FavoritesPersistence(IFavoritesPersistence):
 
         results = list(cursor)
 
-        return [Favorite(result[0], result[1], result[2]) for result in results]
+        return [Favorite(result[0], result[1], result[2])
+                for result in results]
 
     def remove_favorite(
         self,

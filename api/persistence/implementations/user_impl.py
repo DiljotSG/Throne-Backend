@@ -46,7 +46,10 @@ class UsersPersistence(IUsersPersistence):
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
-        find_query = "SELECT username, created, profilePic, preferences FROM users WHERE id = %s"
+        find_query = """
+        SELECT username, created, profilePic, preferences
+        FROM users WHERE id = %s
+        """
         find_tuple = (user_id,)
         cursor.execute(find_query, find_tuple)
 
@@ -58,7 +61,6 @@ class UsersPersistence(IUsersPersistence):
         return User(
             user_id, result[0], result[1], result[2], result[3]
         )
-
 
     def remove_user(
         self,

@@ -13,6 +13,7 @@ app = api.create()
 sql_cnx = mysql.connector.connect(**config)
 cursor = sql_cnx.cursor(prepared=True)
 
+
 def get_sql_connection():
     global sql_cnx
 

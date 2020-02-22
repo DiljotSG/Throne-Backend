@@ -3,7 +3,7 @@ from flask import request
 from flask import jsonify
 from jsonschema import validate
 from jsonschema import ValidationError
-from math import sin, cos, sqrt, atan2, degrees, radians
+from math import sin, cos, sqrt, atan2, radians
 
 OK = 200
 BAD_REQUEST = 400

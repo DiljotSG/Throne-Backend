@@ -15,6 +15,7 @@ def result_to_building(result):
         result[1], result[6], result[7]
     )
 
+
 class BuildingsPersistence(IBuildingsPersistence):
     def __init__(self):
         self.washroomPersistence = WashroomsPersistence()
@@ -32,14 +33,16 @@ class BuildingsPersistence(IBuildingsPersistence):
 
         insert_query = """
         INSERT INTO buildings
-        (created, latitude, longitude, title, mapServiceID, overallRating, bestRatingID)
+        (created, latitude, longitude, title,
+         mapServiceID, overallRating, bestRatingID)
         VALUES (%s,%s,%s,%s,%s,%s,%s)
         """
 
         find_query = "SELECT LAST_INSERT_ID()"
         insert_tuple = (
             convert_to_mysql_timestamp(datetime.now()), location.latitude,
-            location.longitude, title, map_service_id, overall_rating, best_rating_id
+            location.longitude, title, map_service_id,
+            overall_rating, best_rating_id
         )
 
         # Insert and commit
@@ -57,7 +60,7 @@ class BuildingsPersistence(IBuildingsPersistence):
         max_buildings,
         desired_amenities
     ):
-        #TODO: Take into account amenities
+        # TODO: Take into account amenities
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -70,7 +73,8 @@ class BuildingsPersistence(IBuildingsPersistence):
         # Restrict by radius
         results = [
             budiling for budiling in results
-            if distance_between_locations(location, budiling.location) <= radius
+            if distance_between_locations(
+                location, budiling.location) <= radius
         ]
 
         return results[:max_buildings]

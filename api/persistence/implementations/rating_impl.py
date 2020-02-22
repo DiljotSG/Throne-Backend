@@ -19,7 +19,8 @@ class RatingsPersistence(IRatingsPersistence):
         cursor = cnx.cachedCursor
 
         insert_query = """
-            INSERT INTO ratings (clenliness, privacy, smell, toiletPaperQuality)
+            INSERT INTO ratings
+            (clenliness, privacy, smell, toiletPaperQuality)
             VALUES (%s,%s,%s,%s)
             """
 
@@ -41,7 +42,11 @@ class RatingsPersistence(IRatingsPersistence):
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
-        find_query = "SELECT clenliness, privacy, smell, toiletPaperQuality FROM ratings WHERE id = %s"
+        find_query = """
+        SELECT clenliness, privacy, smell, toiletPaperQuality
+        FROM ratings WHERE id = %s
+        """
+
         find_tuple = (rating_id,)
         cursor.execute(find_query, find_tuple)
 
@@ -52,7 +57,6 @@ class RatingsPersistence(IRatingsPersistence):
         return Rating(
             rating_id, result[0], result[1], result[2], result[3]
         )
-
 
     def update_rating(
         self,
@@ -74,7 +78,9 @@ class RatingsPersistence(IRatingsPersistence):
         WHERE id = %s
         """
 
-        update_tuple = (clenliness, privacy, smell, toilet_paper_quality, rating_id)
+        update_tuple = (
+            clenliness, privacy, smell, toilet_paper_quality, rating_id
+        )
         cursor.execute(update_query, update_tuple)
         cnx.commit()
 
