@@ -5,6 +5,16 @@ from ..interfaces.review_interface import IReviewsPersistence
 from api.common import convert_to_mysql_timestamp
 
 
+# The ordering of these indicies are determined by the order of properties
+# returned by the queries. Look at the query or the database code and you
+# can verify this for yourself.
+def _result_to_review(result):
+    return Review(
+        result[0], result[2], result[1],
+        result[3], result[5], result[6], result[4]
+    )
+
+
 class ReviewsPersistence(IReviewsPersistence):
     def __init__(self):
         pass
@@ -47,21 +57,16 @@ class ReviewsPersistence(IReviewsPersistence):
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
-        find_query = """
-        SELECT created, washroomID, user, ratingID, comment, upvoteCount
-        FROM reviews WHERE id = %s
-        """
+        find_query = "SELECT * FROM reviews WHERE id = %s"
         find_tuple = (review_id,)
         cursor.execute(find_query, find_tuple)
 
         result = list(cursor)
         if len(result) != 1:
             return None
+
         result = result[0]
-        return Review(
-            result[0], result[2], result[1],
-            result[3], result[5], result[6], result[4]
-        )
+        return _result_to_review(result)
 
     def get_reviews_by_user(
         self,
@@ -75,9 +80,7 @@ class ReviewsPersistence(IReviewsPersistence):
         cursor.execute(find_query, find_tuple)
 
         reviews = list(cursor)
-        return [Review(result[0], result[2], result[1],
-                       result[3], result[5], result[6],
-                       result[4]) for result in reviews]
+        return [_result_to_review(result) for result in reviews]
 
     def get_reviews_by_washroom(
         self,
@@ -91,9 +94,7 @@ class ReviewsPersistence(IReviewsPersistence):
         cursor.execute(find_query, find_tuple)
 
         reviews = list(cursor)
-        return [Review(result[0], result[2], result[1],
-                       result[3], result[5], result[6],
-                       result[4]) for result in reviews]
+        return [_result_to_review(result) for result in reviews]
 
     def remove_reviews_by_washroom(
         self,

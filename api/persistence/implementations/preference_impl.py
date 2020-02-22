@@ -3,6 +3,15 @@ from ...db_objects.preference import Preference
 from ..interfaces.preference_interface import IPreferencesPersistence
 
 
+# The ordering of these indicies are determined by the order of properties
+# returned by the queries. Look at the query or the database code and you
+# can verify this for yourself.
+def _result_to_preference(result):
+    return Preference(
+        result[0], result[1], result[2], result[3]
+    )
+
+
 class PreferencesPersistence(IPreferencesPersistence):
     def __init__(self):
         pass
@@ -42,10 +51,7 @@ class PreferencesPersistence(IPreferencesPersistence):
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
-        find_query = """
-        SELECT gender, wheelchairAccess, mainFloorAccess
-        FROM preferences WHERE id = %s
-        """
+        find_query = "SELECT * FROM preferences WHERE id = %s"
 
         find_tuple = (preference_id,)
         cursor.execute(find_query, find_tuple)
@@ -53,10 +59,9 @@ class PreferencesPersistence(IPreferencesPersistence):
         result = list(cursor)
         if len(result) != 1:
             return None
+
         result = result[0]
-        return Preference(
-            preference_id, result[0], result[1], result[2]
-        )
+        return _result_to_preference(result)
 
     def remove_preference(
         self,

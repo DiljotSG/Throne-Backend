@@ -3,6 +3,15 @@ from ...db_objects.rating import Rating
 from ..interfaces.rating_interface import IRatingsPersistence
 
 
+# The ordering of these indicies are determined by the order of properties
+# returned by the queries. Look at the query or the database code and you
+# can verify this for yourself.
+def _result_to_rating(result):
+    return Rating(
+        result[0], result[1], result[2], result[3], result[4]
+    )
+
+
 class RatingsPersistence(IRatingsPersistence):
     def __init__(self):
         pass
@@ -41,10 +50,7 @@ class RatingsPersistence(IRatingsPersistence):
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
-        find_query = """
-        SELECT cleanliness, privacy, smell, toiletPaperQuality
-        FROM ratings WHERE id = %s
-        """
+        find_query = "SELECT * FROM ratings WHERE id = %s"
 
         find_tuple = (rating_id,)
         cursor.execute(find_query, find_tuple)
@@ -53,9 +59,7 @@ class RatingsPersistence(IRatingsPersistence):
         if len(result) != 1:
             return None
         result = result[0]
-        return Rating(
-            rating_id, result[0], result[1], result[2], result[3]
-        )
+        return _result_to_rating(result)
 
     def update_rating(
         self,

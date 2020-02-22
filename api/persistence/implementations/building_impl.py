@@ -8,7 +8,10 @@ from ..interfaces.building_interface import IBuildingsPersistence
 from ...objects.location import Location
 
 
-def result_to_building(result):
+# The ordering of these indicies are determined by the order of properties
+# returned by the queries. Look at the query or the database code and you
+# can verify this for yourself.
+def _result_to_building(result):
     return Building(
         result[0], Location(result[2], result[3]), result[4], result[5],
         result[1], result[6], result[7]
@@ -67,7 +70,7 @@ class BuildingsPersistence(IBuildingsPersistence):
         cursor.execute(find_query)
 
         results = list(cursor)
-        results = [result_to_building(result) for result in results]
+        results = [_result_to_building(result) for result in results]
 
         # Restrict by radius
         results = [
@@ -93,7 +96,7 @@ class BuildingsPersistence(IBuildingsPersistence):
         if len(result) != 1:
             return None
         result = result[0]
-        return result_to_building(result)
+        return _result_to_building(result)
 
     def remove_building(
         self,
@@ -109,7 +112,7 @@ class BuildingsPersistence(IBuildingsPersistence):
         query2 = "DELETE FROM ratings WHERE id = %s"
 
         cursor.execute(find_query, (building_id,))
-        result = result_to_building(list(cursor)[0])
+        result = _result_to_building(list(cursor)[0])
 
         cursor.execute(query0, (building_id,))
         washroomIDs = list(cursor)

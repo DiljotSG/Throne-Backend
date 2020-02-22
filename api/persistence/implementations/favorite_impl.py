@@ -3,6 +3,15 @@ from api.db_objects.favorite import Favorite
 from ..interfaces.favorite_interface import IFavoritesPersistence
 
 
+# The ordering of these indicies are determined by the order of properties
+# returned by the queries. Look at the query or the database code and you
+# can verify this for yourself.
+def _result_to_favorite(result):
+    return Favorite(
+            result[0], result[1], result[2]
+    )
+
+
 class FavoritesPersistence(IFavoritesPersistence):
     def __init__(self):
         pass
@@ -38,7 +47,7 @@ class FavoritesPersistence(IFavoritesPersistence):
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
-        find_query = "SELECT userID, washroomID FROM favorites WHERE id = %s"
+        find_query = "SELECT * FROM favorites WHERE id = %s"
         find_tuple = (favorite_id,)
         cursor.execute(find_query, find_tuple)
 
@@ -46,9 +55,7 @@ class FavoritesPersistence(IFavoritesPersistence):
         if len(result) != 1:
             return None
         result = result[0]
-        return Favorite(
-            favorite_id, result[0], result[1]
-        )
+        return _result_to_favorite(result)
 
     def get_favorites_by_user(
         self,
@@ -64,8 +71,7 @@ class FavoritesPersistence(IFavoritesPersistence):
 
         results = list(cursor)
 
-        return [Favorite(result[0], result[1], result[2])
-                for result in results]
+        return [_result_to_favorite(result) for result in results]
 
     def remove_favorite(
         self,

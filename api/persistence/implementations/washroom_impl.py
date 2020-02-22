@@ -9,6 +9,9 @@ from ...objects.washroom import Washroom
 from ..interfaces.washroom_interface import IWashroomsPersistence
 
 
+# The ordering of these indicies are determined by the order of properties
+# returned by the queries. Look at the query or the database code and you
+# can verify this for yourself.
 def result_to_washroom(result):
     return Washroom(
         result[0], result[5], Location(result[3], result[4]),
