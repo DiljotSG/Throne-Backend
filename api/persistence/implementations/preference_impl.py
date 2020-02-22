@@ -20,9 +20,9 @@ class PreferencesPersistence(IPreferencesPersistence):
         cursor = cnx.cachedCursor
 
         insert_query = """
-            INSERT INTO preferences (gender, wheelchairAccess, mainFloorAccess)
-            VALUES (%s,%s,%s)
-            """
+        INSERT INTO preferences (gender, wheelchairAccess, mainFloorAccess)
+        VALUES (%s,%s,%s)
+        """
 
         find_query = "SELECT LAST_INSERT_ID()"
         insert_tuple = (gender, wheelchair_accessible, main_floor_access)
@@ -46,6 +46,7 @@ class PreferencesPersistence(IPreferencesPersistence):
         SELECT gender, wheelchairAccess, mainFloorAccess
         FROM preferences WHERE id = %s
         """
+
         find_tuple = (preference_id,)
         cursor.execute(find_query, find_tuple)
 

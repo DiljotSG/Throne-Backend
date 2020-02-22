@@ -23,9 +23,9 @@ class UsersPersistence(IUsersPersistence):
         cursor = cnx.cachedCursor
 
         insert_query = """
-                INSERT INTO users (username, created, profilePic, preferences)
-                VALUES (%s,%s,%s,%s)
-                """
+        INSERT INTO users (username, created, profilePic, preferences)
+        VALUES (%s,%s,%s,%s)
+        """
 
         find_query = "SELECT LAST_INSERT_ID()"
         insert_tuple = (username, convert_to_mysql_timestamp(datetime.now()),

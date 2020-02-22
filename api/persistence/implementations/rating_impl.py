@@ -18,10 +18,10 @@ class RatingsPersistence(IRatingsPersistence):
         cursor = cnx.cachedCursor
 
         insert_query = """
-            INSERT INTO ratings
-            (cleanliness, privacy, smell, toiletPaperQuality)
-            VALUES (%s,%s,%s,%s)
-            """
+        INSERT INTO ratings
+        (cleanliness, privacy, smell, toiletPaperQuality)
+        VALUES (%s,%s,%s,%s)
+        """
 
         find_query = "SELECT LAST_INSERT_ID()"
         insert_tuple = (cleanliness, privacy, smell, toilet_paper_quality)
