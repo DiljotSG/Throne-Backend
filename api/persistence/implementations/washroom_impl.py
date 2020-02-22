@@ -139,9 +139,9 @@ class WashroomsPersistence(IWashroomsPersistence):
         find_query = "SELECT * FROM washrooms WHERE id = %s"
         query0 = "DELETE FROM reviews WHERE washroomID = %s"
         query1 = "DELETE FROM favorites WHERE washroomID = %s"
+        query4 = "DELETE FROM washrooms WHERE id = %s"
         query2 = "DELETE FROM amenities WHERE id = %s"
         query3 = "DELETE FROM ratings WHERE id = %s"
-        query4 = "DELETE FROM washrooms WHERE id = %s"
 
         cursor.execute(find_query, (washroom_id,))
         result = result_to_washroom(list(cursor)[0])
