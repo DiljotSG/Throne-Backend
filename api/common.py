@@ -7,7 +7,7 @@ from math import sin, cos, sqrt, atan2, radians
 
 OK = 200
 BAD_REQUEST = 400
-timestamp_format = '%Y-%m-%d %H:%M:%S'
+TIMESTAMP_FORMAT = '%Y-%m-%d %H:%M:%S'
 
 
 def is_valid_schema(obj, schema):
@@ -78,4 +78,4 @@ def distance_between_locations(loc1, loc2):
 
 
 def convert_to_mysql_timestamp(timestamp: datetime):
-    return timestamp.strftime(timestamp_format)
+    return timestamp.strftime(TIMESTAMP_FORMAT)
