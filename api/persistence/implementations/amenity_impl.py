@@ -5,25 +5,7 @@ from ..interfaces.amenity_interface import IAmenitiesPersistence
 
 class AmenitiesPersistence(IAmenitiesPersistence):
     def __init__(self):
-        self.amenitylist = [
-            Amenity.PAPER_TOWEL,
-            Amenity.AIR_DRYER,
-            Amenity.SOAP,
-            Amenity.WHEELCHAIR_ACCESSIBLE,
-            Amenity.AUTOMATIC_SINK,
-            Amenity.AUTOMATIC_TOILET,
-            Amenity.AUTOMATIC_PAPER_TOWEL,
-            Amenity.AUTOMATIC_DRYER,
-            Amenity.SHOWER,
-            Amenity.URINAL,
-            Amenity.PAPER_SEAT_COVERS,
-            Amenity.HYGIENE_PRODUCTS,
-            Amenity.NEEDLE_DISPOSAL,
-            Amenity.CONTRACEPTION,
-            Amenity.BATHROOM_ATTENDANT,
-            Amenity.PERFUME_COLOGNE,
-            Amenity.LOTION,
-        ]
+        self.amenitylist = [e.value for e in Amenity]
 
     # Add a new amenity list
     def add_amenities(
