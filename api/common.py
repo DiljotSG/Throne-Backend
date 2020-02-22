@@ -1,9 +1,9 @@
 import datetime
-
 from flask import request
 from flask import jsonify
 from jsonschema import validate
 from jsonschema import ValidationError
+from math import sin, cos, sqrt, atan2, degrees, radians
 
 OK = 200
 BAD_REQUEST = 400
@@ -60,6 +60,20 @@ def return_as_json(data):
         code = BAD_REQUEST
 
     return jsonify(result), code
+
+
+def distance_between_locations(loc1, loc2):
+    radius = 6371
+    lat1 = radians(loc1.latitude)
+    lat2 = radians(loc2.latitude)
+
+    diffLat = radians(loc2.latitude - loc1.latitude)
+    diffLon = radians(loc2.longitude - loc1.longitude)
+
+    a = (sin(diffLat/2)**2) + cos(lat1) * cos(lat2) * (sin(diffLon/2)**2)
+    c = 2 * atan2(sqrt(a), sqrt(1-a))
+
+    return radius * c
 
 
 def convert_to_mysql_timestamp(timestamp: datetime):

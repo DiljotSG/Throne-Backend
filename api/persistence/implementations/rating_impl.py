@@ -53,6 +53,31 @@ class RatingsPersistence(IRatingsPersistence):
             rating_id, result[0], result[1], result[2], result[3]
         )
 
+
+    def update_rating(
+        self,
+        rating_id,
+        clenliness,
+        privacy,
+        smell,
+        toilet_paper_quality
+    ):
+        cnx = get_sql_connection()
+        cursor = cnx.cachedCursor
+
+        update_query = """
+        UPDATE ratings
+        SET clenliness = %s,
+        privacy = %s,
+        smell = %s,
+        toiletPaperQuality = %s
+        WHERE id = %s
+        """
+
+        update_tuple = (clenliness, privacy, smell, toilet_paper_quality, rating_id)
+        cursor.execute(update_query, update_tuple)
+        cnx.commit()
+
     def remove_rating(
         self,
         rating_id
