@@ -9,7 +9,7 @@ class RatingsPersistence(IRatingsPersistence):
 
     def add_rating(
         self,
-        clenliness,
+        cleanliness,
         privacy,
         smell,
         toilet_paper_quality,
@@ -19,12 +19,12 @@ class RatingsPersistence(IRatingsPersistence):
 
         insert_query = """
             INSERT INTO ratings
-            (clenliness, privacy, smell, toiletPaperQuality)
+            (cleanliness, privacy, smell, toiletPaperQuality)
             VALUES (%s,%s,%s,%s)
             """
 
         find_query = "SELECT LAST_INSERT_ID()"
-        insert_tuple = (clenliness, privacy, smell, toilet_paper_quality)
+        insert_tuple = (cleanliness, privacy, smell, toilet_paper_quality)
 
         # Insert and commit
         cursor.execute(insert_query, insert_tuple)
@@ -42,7 +42,7 @@ class RatingsPersistence(IRatingsPersistence):
         cursor = cnx.cachedCursor
 
         find_query = """
-        SELECT clenliness, privacy, smell, toiletPaperQuality
+        SELECT cleanliness, privacy, smell, toiletPaperQuality
         FROM ratings WHERE id = %s
         """
 
@@ -60,7 +60,7 @@ class RatingsPersistence(IRatingsPersistence):
     def update_rating(
         self,
         rating_id,
-        clenliness,
+        cleanliness,
         privacy,
         smell,
         toilet_paper_quality
@@ -70,7 +70,7 @@ class RatingsPersistence(IRatingsPersistence):
 
         update_query = """
         UPDATE ratings
-        SET clenliness = %s,
+        SET cleanliness = %s,
         privacy = %s,
         smell = %s,
         toiletPaperQuality = %s
@@ -78,7 +78,7 @@ class RatingsPersistence(IRatingsPersistence):
         """
 
         update_tuple = (
-            clenliness, privacy, smell, toilet_paper_quality, rating_id
+            cleanliness, privacy, smell, toilet_paper_quality, rating_id
         )
         cursor.execute(update_query, update_tuple)
         cnx.commit()

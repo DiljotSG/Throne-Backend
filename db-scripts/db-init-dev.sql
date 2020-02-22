@@ -2,7 +2,7 @@
 
 create table ratings(
 	id INT NOT NULL AUTO_INCREMENT,
-	clenliness FLOAT NOT NULL,
+	cleanliness FLOAT NOT NULL,
 	privacy FLOAT NOT NULL,
 	smell FLOAT NOT NULL,
 	toiletPaperQuality FLOAT NOT NULL,

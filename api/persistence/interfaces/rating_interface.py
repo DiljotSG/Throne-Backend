@@ -25,7 +25,7 @@ class IRatingsPersistence(ABC):
     def update_rating(
         self,
         rating_id,
-        clenliness,
+        cleanliness,
         privacy,
         smell,
         toilet_paper_quality

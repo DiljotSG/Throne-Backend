@@ -37,7 +37,7 @@ class RatingsStubPersistence(IRatingsPersistence):
     def update_rating(
         self,
         rating_id,
-        clenliness,
+        cleanliness,
         privacy,
         smell,
         toilet_paper_quality
@@ -46,7 +46,7 @@ class RatingsStubPersistence(IRatingsPersistence):
            self.ratings[rating_id] is not None:
             self.ratings[rating_id] = Rating(
                 rating_id,
-                clenliness,
+                cleanliness,
                 privacy,
                 smell,
                 toilet_paper_quality
