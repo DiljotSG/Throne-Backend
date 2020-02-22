@@ -133,9 +133,6 @@ class ReviewsPersistence(IReviewsPersistence):
         ratingID = list(cursor)[0][0]
         remove_rating_tuple = (ratingID,)
 
-        try:
-            cursor.execute(remove_review_query, query_tuple)
-            cursor.execute(remove_rating_query, remove_rating_tuple)
-            cnx.commit()
-        except mysql.connector.Error:
-            cnx.rollback()
+        cursor.execute(remove_review_query, query_tuple)
+        cursor.execute(remove_rating_query, remove_rating_tuple)
+        cnx.commit()

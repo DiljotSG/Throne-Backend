@@ -5,6 +5,7 @@ from datetime import datetime
 
 from api.common import convert_to_mysql_timestamp, distance_between_locations
 from .amenity_impl import AmenitiesPersistence
+from .review_impl import ReviewsPersistence
 from ...objects.location import Location
 from ...objects.washroom import Washroom
 from ..interfaces.washroom_interface import IWashroomsPersistence
@@ -21,6 +22,7 @@ def result_to_washroom(result):
 class WashroomsPersistence(IWashroomsPersistence):
     def __init__(self):
         self.amenitiesPersistence = AmenitiesPersistence()
+        self.reviewsPersistence = ReviewsPersistence()
 
     def add_washroom(
         self,
@@ -142,21 +144,23 @@ class WashroomsPersistence(IWashroomsPersistence):
         cursor = cnx.cachedCursor
 
         find_query = "SELECT * FROM washrooms WHERE id = %s"
-        query0 = "DELETE FROM reviews WHERE washroomID = %s"
+
+        query0 = "SELECT id FROM reviews WHERE washroomID = %s"
         query1 = "DELETE FROM favorites WHERE washroomID = %s"
-        query4 = "DELETE FROM washrooms WHERE id = %s"
-        query2 = "DELETE FROM amenities WHERE id = %s"
-        query3 = "DELETE FROM ratings WHERE id = %s"
+        query2 = "DELETE FROM washrooms WHERE id = %s"
+        query3 = "DELETE FROM amenities WHERE id = %s"
+        query4 = "DELETE FROM ratings WHERE id = %s"
 
         cursor.execute(find_query, (washroom_id,))
         result = result_to_washroom(list(cursor)[0])
 
-        try:
-            cursor.execute(query0, (washroom_id,))
-            cursor.execute(query1, (washroom_id,))
-            cursor.execute(query2, (result.amenities_id,))
-            cursor.execute(query3, (result.average_rating_id,))
-            cursor.execute(query4, (washroom_id,))
-            cnx.commit()
-        except mysql.connector.Error:
-            cnx.rollback()
+        cursor.execute(query0, (washroom_id,))
+        reviewList = list(cursor)
+        for review in reviewList:
+            self.reviewsPersistence.remove_review(review[0])
+
+        cursor.execute(query1, (washroom_id,))
+        cursor.execute(query2, (washroom_id,))
+        cursor.execute(query3, (result.amenities_id,))
+        cursor.execute(query4, (result.average_rating_id,))
+        cnx.commit()

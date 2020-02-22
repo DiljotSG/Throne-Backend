@@ -118,9 +118,6 @@ class BuildingsPersistence(IBuildingsPersistence):
         for id in washroomIDs:
             self.washroomPersistence.remove_washroom(id[0])
 
-        try:
-            cursor.execute(query1, (building_id,))
-            cursor.execute(query2, (result.best_rating_id,))
-            cnx.commit()
-        except mysql.connector.Error:
-            cnx.rollback()
+        cursor.execute(query1, (building_id,))
+        cursor.execute(query2, (result.best_rating_id,))
+        cnx.commit()

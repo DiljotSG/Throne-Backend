@@ -94,8 +94,5 @@ class RatingsPersistence(IRatingsPersistence):
         remove_query = "DELETE FROM ratings WHERE id = %s"
         remove_tuple = (rating_id,)
 
-        try:
-            cursor.execute(remove_query, remove_tuple)
-            cnx.commit()
-        except mysql.connector.Error:
-            cnx.rollback()
+        cursor.execute(remove_query, remove_tuple)
+        cnx.commit()

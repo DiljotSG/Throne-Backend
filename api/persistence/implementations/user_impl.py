@@ -57,7 +57,7 @@ class UsersPersistence(IUsersPersistence):
         if len(result) != 1:
             return None
         result = result[0]
-        print(result[1])
+
         return User(
             user_id, result[0], result[1], result[2], result[3]
         )
