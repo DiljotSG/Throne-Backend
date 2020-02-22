@@ -1,29 +1,29 @@
 import mysql.connector
 from handler import get_sql_connection
-from api.db_objects import amenity
+from api.db_objects.amenity import Amenity
 from ..interfaces.amenity_interface import IAmenitiesPersistence
 
 
 class AmenitiesPersistence(IAmenitiesPersistence):
     def __init__(self):
         self.amenitylist = [
-            amenity.PAPER_TOWEL,
-            amenity.AIR_DRYER,
-            amenity.SOAP,
-            amenity.WHEELCHAIR_ACCESSIBLE,
-            amenity.AUTOMATIC_SINK,
-            amenity.AUTOMATIC_TOILET,
-            amenity.AUTOMATIC_PAPER_TOWEL,
-            amenity.AUTOMATIC_DRYER,
-            amenity.SHOWER,
-            amenity.URINAL,
-            amenity.PAPER_SEAT_COVERS,
-            amenity.HYGIENE_PRODUCTS,
-            amenity.NEEDLE_DISPOSAL,
-            amenity.CONTRACEPTION,
-            amenity.BATHROOM_ATTENDANT,
-            amenity.PERFUME_COLOGNE,
-            amenity.LOTION,
+            Amenity.PAPER_TOWEL,
+            Amenity.AIR_DRYER,
+            Amenity.SOAP,
+            Amenity.WHEELCHAIR_ACCESSIBLE,
+            Amenity.AUTOMATIC_SINK,
+            Amenity.AUTOMATIC_TOILET,
+            Amenity.AUTOMATIC_PAPER_TOWEL,
+            Amenity.AUTOMATIC_DRYER,
+            Amenity.SHOWER,
+            Amenity.URINAL,
+            Amenity.PAPER_SEAT_COVERS,
+            Amenity.HYGIENE_PRODUCTS,
+            Amenity.NEEDLE_DISPOSAL,
+            Amenity.CONTRACEPTION,
+            Amenity.BATHROOM_ATTENDANT,
+            Amenity.PERFUME_COLOGNE,
+            Amenity.LOTION,
         ]
         pass
 
