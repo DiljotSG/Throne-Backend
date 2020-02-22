@@ -24,7 +24,6 @@ class AmenitiesPersistence(IAmenitiesPersistence):
             Amenity.PERFUME_COLOGNE,
             Amenity.LOTION,
         ]
-        pass
 
     # Add a new amenity list
     def add_amenities(
