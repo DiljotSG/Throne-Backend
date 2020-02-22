@@ -1,4 +1,4 @@
-from handler import get_sql_connection
+from . import get_sql_connection
 from api.db_objects.favorite import Favorite
 from ..interfaces.favorite_interface import IFavoritesPersistence
 

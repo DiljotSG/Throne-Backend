@@ -1,4 +1,4 @@
-from handler import get_sql_connection
+from . import get_sql_connection
 from ...db_objects.preference import Preference
 from ..interfaces.preference_interface import IPreferencesPersistence
 

@@ -1,4 +1,4 @@
-from handler import get_sql_connection
+from . import get_sql_connection
 from datetime import datetime
 from ...objects.review import Review
 from ..interfaces.review_interface import IReviewsPersistence

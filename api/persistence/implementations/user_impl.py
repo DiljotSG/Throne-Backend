@@ -1,4 +1,4 @@
-from handler import get_sql_connection
+from . import get_sql_connection
 from datetime import datetime
 
 from api.common import convert_to_mysql_timestamp
