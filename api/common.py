@@ -62,6 +62,7 @@ def return_as_json(data):
     return jsonify(result), code
 
 
+# Returns distance in kilometers
 def distance_between_locations(loc1, loc2):
     radius = 6371
     lat1 = radians(loc1.latitude)
