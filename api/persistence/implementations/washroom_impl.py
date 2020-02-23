@@ -81,12 +81,13 @@ class WashroomsPersistence(IWashroomsPersistence):
         results = list(cursor)
         results = [result_to_washroom(result) for result in results]
 
-        # Restrict by radius
-        results = [
-            washroom for washroom in results
-            if distance_between_locations(
-                location, washroom.location) <= radius
-        ]
+        if location is not None:
+            # Restrict by radius
+            results = [
+                washroom for washroom in results
+                if distance_between_locations(
+                    location, washroom.location) <= radius
+            ]
 
         # Restrict by amenities
         desired = set(desired_amenities)

@@ -22,10 +22,10 @@ class BuildingStore:
 
     def get_buildings(
         self,
-        location,
+        location=None,
         radius=5,
         max_buildings=5,
-        desired_amenities=None
+        desired_amenities=[]
     ):
         result = []
         query_result = self.__building_persistence.query_buildings(
@@ -48,6 +48,9 @@ class BuildingStore:
         item = self.__rating_persistence.get_rating(
             best_rating_id
         ).__dict__.copy()
+
+        # Expand location
+        building["location"] = building["location"].__dict__.copy()
 
         item.pop("id", None)
         building["best_rating"] = item

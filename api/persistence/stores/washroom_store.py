@@ -14,10 +14,10 @@ class WashroomStore:
 
     def get_washrooms(
         self,
-        location,
+        location=None,
         radius=5,
         max_washrooms=5,
-        desired_amenities=None
+        desired_amenities=[]
     ):
         result = []
         query_result = self.__washroom_persistence.query_washrooms(
@@ -75,6 +75,9 @@ class WashroomStore:
         washroom["amenities"] = self.__amenity_persistence.get_amenities(
             amenities_id
         )
+
+        # Expand location
+        washroom["location"] = washroom["location"].__dict__.copy()
 
         # Expand average ratings
         average_rating_id = washroom.pop("average_rating_id", None)
