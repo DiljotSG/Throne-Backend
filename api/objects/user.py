@@ -5,7 +5,6 @@ class User:
         username,
         created_at,
         profile_picture,
-        settings,
         preference_id
     ):
         self.id = user_id

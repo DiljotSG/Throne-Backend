@@ -22,6 +22,17 @@ class IRatingsPersistence(ABC):
         pass
 
     @abstractmethod
+    def update_rating(
+        self,
+        rating_id,
+        cleanliness,
+        privacy,
+        smell,
+        toilet_paper_quality
+    ):
+        pass
+
+    @abstractmethod
     def remove_rating(
         self,
         rating_id
