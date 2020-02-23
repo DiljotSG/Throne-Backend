@@ -122,3 +122,5 @@ $ export <variable name>=<variable value>
 Below is a list of system variables utilized by the Throne backend service.
 
 - `THRONE_USE_DB` - When defined will use the DB persistence layer rather than the stubs. Used for testing DB implementation locally.
+The use of this flag requres that the environment variables `DB_HOSTNAME` and `DB_PASSWORD` to be set.
+Otherwise we will fallback to the stub implementation. NOTE: Do not run unit tests with this flag turned on.
