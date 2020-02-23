@@ -34,7 +34,6 @@ if (os.environ.get("IS_LAMBDA") or os.environ.get("THRONE_USE_DB")) and \
     __review_persistence = ReviewsPersistence()
     __user_persistence = UsersPersistence()
     __washroom_persistence = WashroomsPersistence()
-
 else:
     __amenity_persistence = AmenitiesStubPersistence()
     __building_persistence = BuildingsStubPersistence()
