@@ -1,6 +1,6 @@
-import mysql.connector
-import logging
 import os
+import logging
+import mysql.connector
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -18,8 +18,10 @@ cursor = None
 
 if config['password'] == '' or config['host'] == '':
     use_db = False
-    logger.warning('Database password/hostname not defined! ' +
-                   'Database will NOT be used for API queries.')
+    os.environ["THRONE_NO_DB_CREDS"] = "true"
+    if os.environ.get("IS_LAMBDA") or os.environ.get("THRONE_USE_DB"):
+        logger.warning('Database password/hostname not defined! ' +
+                       'Database will NOT be used for API queries.')
 
 
 def get_sql_connection():

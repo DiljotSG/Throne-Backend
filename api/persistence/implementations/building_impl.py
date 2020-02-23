@@ -66,18 +66,19 @@ class BuildingsPersistence(IBuildingsPersistence):
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
-        find_query = "SELECT * FROM washrooms"
+        find_query = "SELECT * FROM buildings"
         cursor.execute(find_query)
 
         results = list(cursor)
         results = [_result_to_building(result) for result in results]
 
-        # Restrict by radius
-        results = [
-            budiling for budiling in results
-            if distance_between_locations(
-                location, budiling.location) <= radius
-        ]
+        if location is not None:
+            # Restrict by radius
+            results = [
+                budiling for budiling in results
+                if distance_between_locations(
+                    location, budiling.location) <= radius
+            ]
 
         return results[:max_buildings]
 

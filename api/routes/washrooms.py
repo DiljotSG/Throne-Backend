@@ -1,8 +1,9 @@
+from flask import request
 from flask import Blueprint
 from flask_cors import CORS
-from flask import request
 from flask_cors import cross_origin
 from api.common import return_as_json
+from ..objects.location import Location
 from ..persistence import create_washroom_store
 
 washroom_store = create_washroom_store()
@@ -15,8 +16,24 @@ cors = CORS(mod)
 @mod.route("")
 @cross_origin()
 def washrooms():
-    location = request.args.get("location")
-    return return_as_json(washroom_store.get_washrooms(location))
+    result = None
+
+    # Try to get the URL parameters as ints
+    # TODO: Provide a way for the client to pass in desired amenities
+    try:
+        lat = request.args.get("latitude")
+        long = request.args.get("longitude")
+
+        if lat is None or long is None:
+            result = washroom_store.get_washrooms()
+        else:
+            result = washroom_store.get_washrooms(
+                Location(int(lat), int(long))
+            )
+    except ValueError:
+        pass
+
+    return return_as_json(result)
 
 
 @mod.route("/<int:washroom_id>")

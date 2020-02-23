@@ -153,8 +153,8 @@ def create_building_best_ratings(rating_persistence):
     # overall_rating
     # average_ratings_id
 def create_washrooms(washroom_persistence, buildings, amenities, ratings):
-    location1 = Location(12.2, 17.9).__dict__.copy()
-    location2 = Location(114, 200.5).__dict__.copy()
+    location1 = Location(12.2, 17.9)
+    location2 = Location(114, 200.5)
 
     washroom1_id = washroom_persistence.add_washroom(
         buildings[0],
@@ -213,8 +213,8 @@ def create_amenities(amenity_persistence):
     # ratings
     # best ratings for each building
 def create_buildings(building_persistence, building_best_ratings):
-    location1 = Location(10.2, 15.9).__dict__.copy()
-    location2 = Location(104, 230.5).__dict__.copy()
+    location1 = Location(10.2, 15.9)
+    location2 = Location(104, 230.5)
 
     building1_id = building_persistence.add_building(
         location1,
