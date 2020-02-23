@@ -20,6 +20,7 @@ def washrooms():
 
     # Try to get the URL parameters as ints
     # TODO: Provide a way for the client to pass in desired amenities
+    # TODO: Provide a way for the client to pass in radius
     try:
         lat = request.args.get("latitude")
         long = request.args.get("longitude")
@@ -28,7 +29,7 @@ def washrooms():
             result = washroom_store.get_washrooms()
         else:
             result = washroom_store.get_washrooms(
-                Location(int(lat), int(long))
+                Location(float(lat), float(long))
             )
     except ValueError:
         pass
