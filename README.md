@@ -33,3 +33,4 @@ Android | [Throne-Android](https://github.com/NickJosephson/Throne-Android) | [A
 * [Architecture](docs/ARCHITECTURE.md)
 * [API Definition](docs/API_Definition.pdf)
 * [Database](docs/DATABASE_INFO.md)
+* [Authentication](docs/AUTHENTICATION.md)
