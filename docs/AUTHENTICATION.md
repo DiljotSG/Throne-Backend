@@ -6,17 +6,19 @@ To provide user accounts and authentication, Throne integrates with Amazon Cogni
 
 ## Setup
 
-Below is a **high level** description of the authentication setup for various components of Throne. 
+Below is a **high level** description of the authentication setup that has been done for various components of Throne. 
 
 ### User Pools
 
 1. Created a new Cognito User Pool with storage of minimal user attributes. We store as little personal user information as possible and other user information like washroom preferences are stored in our [database](DATABASE_INFO.md).
 2. Configured app clients which define the identity providers and OAuth 2.0 settings to use when interacting with clients. For OAuth flow we use authorization code grant over implicit grant because it is more secure, although it does introduce more work for clients as described below.
-3. Configured the the hosted UI which provides an OAuth 2.0 authorization server with built-in webpages that can be used to sign up and sign in users.
+3. Configured the hosted UI which provides an OAuth 2.0 authorization server with built-in webpages that can be used to sign up and sign in users.
 4. Configured a custom domain to be used with for the hosted UI and OAuth 2.0 API endpoints.
 
 ### API Gateway
 
-
+1. Created a new API Gateway Authorizer which provides controlled access to APIs using Amazon Cognito User Pools. The Authorizer is configured to look for a specific header attribute of requests for an authentication token.
+2. Added the Authorizer to all Gateway Resources (routes/paths).
+3. Programmed the Lambda Functions triggered by API Gateway to lookup the currently authenticated user in the event information passed to the Lambda.
 
 ### Throne Clients
