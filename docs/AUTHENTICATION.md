@@ -27,6 +27,6 @@ The web and iOS clients have been programmed around the following authentication
 
 1. Display the Cognito hosted login webpage which returns an “authentication code” in the callback URL.
 2. Perform a request to the OAuth token endpoint with the authentication code which returns an access token and refresh token.
-3. Inject the access token in the header of every call to the Throne API
+3. Inject the access token in the header of every call to the Throne API.
 4. When the access token expires (~60 minutes), perform a request to the OAuth token endpoint with the refresh token which returns a new access token.
 5. When the refresh token expires (~90 days), the user is logged out.
