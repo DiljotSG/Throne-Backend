@@ -2,11 +2,11 @@
 
 ## Overview
 
-To provide user accounts and authentication, Throne integrates with Amazon Cognito. Cognito provides a "User Pools" service which maintains a store of users and their credentials. Cognito also provides hosted web UI and OAuth 2.0 APIs for handling user sign up, sign in, and other account management functionality. The Throne web and iOS clients, use these APIs to generate authentication tokens for secure interaction with the Throne backend API. The Throne backend uses Amazon API Gateway to manage  API REST endpoints. The API Gateway for Throne is configured with Cognito to ensure all API calls are authenticated with valid tokens. Throne also extends the functionality of Congino through Amazon Lambda Functions that are triggered by certain actions such as user sign up.
+To provide user accounts and authentication, Throne integrates with Amazon Cognito. Cognito provides a "User Pools" service which maintains a store of users and their credentials. Cognito also provides hosted web UI and OAuth 2.0 APIs for handling user sign up, sign in, and other account management functionality. The Throne web and iOS clients, use these APIs to generate authentication tokens for secure interaction with the Throne backend API. The Throne backend uses Amazon API Gateway to manage  API REST endpoints. The API Gateway for Throne is configured with Cognito to ensure all API calls are authenticated with valid tokens. Throne also extends the functionality of Cognito through Amazon Lambda Functions that are triggered by certain actions such as user sign up.
 
 ## Setup
 
-Below is a **high level** description of the authentication setup that has been done for various components of Throne. 
+Below is a **high level** description of the authentication setup that has been done for various components of Throne.
 
 ### User Pools
 
@@ -19,7 +19,7 @@ Below is a **high level** description of the authentication setup that has been 
 
 1. Created a new API Gateway Authorizer which provides controlled access to APIs using Amazon Cognito User Pools. The Authorizer is configured to look for a specific header attribute of requests for an authentication token.
 2. Added the Authorizer to all Gateway Resources (routes/paths).
-3. Programmed the Lambda Functions triggered by API Gateway to lookup the currently authenticated user in the event information passed to the Lambda.
+3. Updated the Lambda Functions triggered by API Gateway to lookup the currently authenticated user in the event information passed to the Lambda.
 
 ### Throne Clients
 
