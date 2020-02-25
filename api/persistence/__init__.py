@@ -70,14 +70,16 @@ def create_washroom_store():
         __washroom_persistence,
         __review_persistence,
         __amenity_persistence,
-        __rating_persistence
+        __rating_persistence,
+        __user_persistence
     )
 
 
 def create_review_store():
     return ReviewStore(
         __review_persistence,
-        __rating_persistence
+        __rating_persistence,
+        __user_persistence
     )
 
 

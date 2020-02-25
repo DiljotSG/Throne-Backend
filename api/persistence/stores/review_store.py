@@ -2,10 +2,12 @@ class ReviewStore:
     def __init__(
         self,
         review_persistence,
-        rating_persistence
+        rating_persistence,
+        user_persistence
     ):
         self.__review_persistence = review_persistence
         self.__rating_persistence = rating_persistence
+        self.__user_persistence = user_persistence
 
     def get_review(self, review_id):
         result = self.__review_persistence.get_review(
@@ -19,9 +21,17 @@ class ReviewStore:
     def __expand_review(self, review):
         # Expand ratings
         rating_id = review.pop("rating_id", None)
-        item = self.__rating_persistence.get_rating(
+        rating_item = self.__rating_persistence.get_rating(
             rating_id
         ).__dict__.copy()
 
-        item.pop("id", None)
-        review["ratings"] = item
+        rating_item.pop("id", None)
+        review["ratings"] = rating_item
+
+        user_id = review.pop("user_id", None)
+        user_item = self.__user_persistence.get_user(
+            user_id
+        ).__dict__.copy()
+        user_item.pop("id", None)
+        user_item.pop("preference_id", None)
+        review["user"] = user_item
