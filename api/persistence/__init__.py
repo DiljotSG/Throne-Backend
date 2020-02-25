@@ -6,6 +6,7 @@ from .stubs.rating_stub import RatingsStubPersistence
 from .stubs.review_stub import ReviewsStubPersistence
 from .stubs.user_stub import UsersStubPersistence
 from .stubs.washroom_stub import WashroomsStubPersistence
+from .stubs import populate_stub_data
 
 from .implementations.amenity_impl import AmenitiesPersistence
 from .implementations.building_impl import BuildingsPersistence
@@ -20,7 +21,6 @@ from .stores.building_store import BuildingStore
 from .stores.review_store import ReviewStore
 from .stores.user_store import UserStore
 from .stores.washroom_store import WashroomStore
-from .stubs.stub_data import populate_stub_data
 
 import os
 
