@@ -68,7 +68,6 @@ class BuildingsPersistence(IBuildingsPersistence):
 
         find_query = "SELECT * FROM buildings"
         cursor.execute(find_query)
-        cnx.commit()
 
         results = list(cursor)
         results = [_result_to_building(result) for result in results]
@@ -93,7 +92,6 @@ class BuildingsPersistence(IBuildingsPersistence):
         find_query = "SELECT * FROM buildings WHERE id = %s"
         find_tuple = (building_id,)
         cursor.execute(find_query, find_tuple)
-        cnx.commit()
 
         result = list(cursor)
         if len(result) != 1:
