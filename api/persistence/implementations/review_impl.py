@@ -60,7 +60,6 @@ class ReviewsPersistence(IReviewsPersistence):
         find_query = "SELECT * FROM reviews WHERE id = %s"
         find_tuple = (review_id,)
         cursor.execute(find_query, find_tuple)
-        cnx.commit()
 
         result = list(cursor)
         if len(result) != 1:
@@ -79,7 +78,6 @@ class ReviewsPersistence(IReviewsPersistence):
         find_query = "SELECT * FROM reviews WHERE user = %s"
         find_tuple = (user_id,)
         cursor.execute(find_query, find_tuple)
-        cnx.commit()
 
         reviews = list(cursor)
         return [_result_to_review(result) for result in reviews]
@@ -94,7 +92,6 @@ class ReviewsPersistence(IReviewsPersistence):
         find_query = "SELECT * FROM reviews WHERE washroomID = %s"
         find_tuple = (washroom_id,)
         cursor.execute(find_query, find_tuple)
-        cnx.commit()
 
         reviews = list(cursor)
         return [_result_to_review(result) for result in reviews]

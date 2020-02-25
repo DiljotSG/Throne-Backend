@@ -55,7 +55,6 @@ class PreferencesPersistence(IPreferencesPersistence):
 
         find_tuple = (preference_id,)
         cursor.execute(find_query, find_tuple)
-        cnx.commit()
 
         result = list(cursor)
         if len(result) != 1:

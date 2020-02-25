@@ -58,7 +58,6 @@ class UsersPersistence(IUsersPersistence):
         find_query = "SELECT * FROM users WHERE id = %s"
         find_tuple = (user_id,)
         cursor.execute(find_query, find_tuple)
-        cnx.commit()
 
         result = list(cursor)
         if len(result) != 1:

@@ -50,7 +50,6 @@ class FavoritesPersistence(IFavoritesPersistence):
         find_query = "SELECT * FROM favorites WHERE id = %s"
         find_tuple = (favorite_id,)
         cursor.execute(find_query, find_tuple)
-        cnx.commit()
 
         result = list(cursor)
         if len(result) != 1:
@@ -69,7 +68,6 @@ class FavoritesPersistence(IFavoritesPersistence):
         find_tuple = (user_id,)
 
         cursor.execute(find_query, find_tuple)
-        cnx.commit()
 
         results = list(cursor)
 
