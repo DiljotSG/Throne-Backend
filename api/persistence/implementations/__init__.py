@@ -34,7 +34,6 @@ def get_sql_connection():
         if not sql_cnx:
             # Create a new connection
             sql_cnx = mysql.connector.connect(**config)
-            sql_cnx.autocommit(True)
             sql_cnx.cachedCursor = sql_cnx.cursor(prepared=True)
             logger.info('Successfully connected to database.')
             return sql_cnx
@@ -49,7 +48,6 @@ def get_sql_connection():
 
         # Refresh old connection
         sql_cnx = mysql.connector.connect(**config)
-        sql_cnx.autocommit(True)
         sql_cnx.cachedCursor = sql_cnx.cursor(prepared=True)
         logger.info('Successfully re-connected to database.')
 
