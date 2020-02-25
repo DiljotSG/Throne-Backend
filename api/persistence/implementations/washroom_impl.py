@@ -77,6 +77,7 @@ class WashroomsPersistence(IWashroomsPersistence):
 
         find_query = "SELECT * FROM washrooms"
         cursor.execute(find_query)
+        cnx.commit()
 
         results = list(cursor)
         results = [result_to_washroom(result) for result in results]
@@ -113,6 +114,7 @@ class WashroomsPersistence(IWashroomsPersistence):
         find_tuple = (building_id,)
 
         cursor.execute(find_query, find_tuple)
+        cnx.commit()
 
         results = list(cursor)
         results = [result_to_washroom(result) for result in results]
@@ -129,6 +131,7 @@ class WashroomsPersistence(IWashroomsPersistence):
         find_query = "SELECT * FROM washrooms WHERE id = %s"
         find_tuple = (washroom_id,)
         cursor.execute(find_query, find_tuple)
+        cnx.commit()
 
         result = list(cursor)
         if len(result) != 1:

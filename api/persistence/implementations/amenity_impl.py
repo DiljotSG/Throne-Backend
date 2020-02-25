@@ -46,6 +46,7 @@ class AmenitiesPersistence(IAmenitiesPersistence):
         find_tuple = (amenities_id,)
 
         cursor.execute(find_query, find_tuple)
+        cnx.commit()
         result = list(cursor)
         if len(result) != 1:
             return None
