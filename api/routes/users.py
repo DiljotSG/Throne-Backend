@@ -4,11 +4,23 @@ from flask_cors import cross_origin
 from api.common import return_as_json
 from ..persistence import create_user_store
 
+from api.common import get_cognito_user
+
 user_store = create_user_store()
 
 
 mod = Blueprint('users', __name__)
 cors = CORS(mod)
+
+
+@mod.route("")
+@cross_origin()
+def current_user():
+    # This is temporary, in the future we will return the user object
+    data = {
+        "username": get_cognito_user()
+    }
+    return return_as_json(data)
 
 
 @mod.route("/<int:user_id>")
