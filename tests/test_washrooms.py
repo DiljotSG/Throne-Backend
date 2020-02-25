@@ -88,7 +88,10 @@ class TestWashroomAPI(unittest.TestCase):
                     "toilet_paper_quality": 4.5
                 },
                 "upvote_count": 5,
-                "user_id": 0,
+                "user": {
+                    "profile_picture": "picture",
+                    "username": "janesmith"
+                },
                 "washroom_id": 0
             }
         ]
