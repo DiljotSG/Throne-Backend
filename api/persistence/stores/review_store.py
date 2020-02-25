@@ -13,10 +13,10 @@ class ReviewStore:
         )
         if result:
             result = result.__dict__.copy()
-            self.__transform_review(result)
+            self.__expand_review(result)
         return result
 
-    def __transform_review(self, review):
+    def __expand_review(self, review):
         # Expand ratings
         rating_id = review.pop("rating_id", None)
         item = self.__rating_persistence.get_rating(
