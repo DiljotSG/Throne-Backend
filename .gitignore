@@ -154,3 +154,6 @@ var/
 .vscode/
 
 node_modules/*
+
+# IDEs
+.idea/
