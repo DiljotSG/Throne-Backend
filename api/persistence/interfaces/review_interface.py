@@ -16,6 +16,16 @@ class IReviewsPersistence(ABC):
         pass
 
     @abstractmethod
+    def update_review(
+        self,
+        review_id,
+        comment,
+        upvote_count
+    ):
+        # this assumes ratings would be updated directly
+        pass
+
+    @abstractmethod
     def get_review(
         self,
         review_id
