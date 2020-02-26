@@ -104,7 +104,6 @@ class WashroomStore:
         user_item = self.__user_persistence.get_user(
             user_id
         ).__dict__.copy()
-        user_item.pop("id", None)
         user_item.pop("preference_id", None)
         user_item.pop("created_at", None)
         review["user"] = user_item

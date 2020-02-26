@@ -89,6 +89,7 @@ class TestWashroomAPI(unittest.TestCase):
                 },
                 "upvote_count": 5,
                 "user": {
+                    "id": 0,
                     "profile_picture": "picture",
                     "username": "janesmith"
                 },
