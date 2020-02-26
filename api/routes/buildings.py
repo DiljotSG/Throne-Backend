@@ -28,9 +28,9 @@ def buildings():
         radius = request.args.get("radius")
 
         if lat is None or long is None:
-            result = washroom_store.get_washrooms()
+            result = building_store.get_buildings()
         else:
-            result = washroom_store.get_washrooms(
+            result = building_store.get_buildings(
                 Location(
                     float(lat),
                     float(long)
