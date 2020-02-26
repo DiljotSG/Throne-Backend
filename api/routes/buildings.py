@@ -20,25 +20,21 @@ cors = CORS(mod)
 def buildings():
     result = None
 
-    # Try to get the URL parameters as floats
-    # TODO: Provide a way for the client to pass in desired amenities
-    try:
-        lat = request.args.get("latitude")
-        long = request.args.get("longitude")
-        radius = request.args.get("radius")
+    # Try to get the URL parameters
+    lat = request.args.get("latitude", type=float)
+    long = request.args.get("longitude", type=float)
+    radius = request.args.get("radius", type=float)
 
-        if lat is None or long is None:
-            result = building_store.get_buildings()
-        else:
-            result = building_store.get_buildings(
-                Location(
-                    float(lat),
-                    float(long)
-                ),
-                float(radius),
-            )
-    except ValueError:
-        pass
+    if lat is None or long is None:
+        result = building_store.get_buildings()
+    else:
+        result = building_store.get_buildings(
+            Location(
+                lat,
+                long
+            ),
+            radius,
+        )
 
     return return_as_json(result)
 
