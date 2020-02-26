@@ -18,18 +18,22 @@ cors = CORS(mod)
 def washrooms():
     result = None
 
-    # Try to get the URL parameters as ints
+    # Try to get the URL parameters as floats
     # TODO: Provide a way for the client to pass in desired amenities
-    # TODO: Provide a way for the client to pass in radius
     try:
         lat = request.args.get("latitude")
         long = request.args.get("longitude")
+        radius = request.args.get("radius")
 
         if lat is None or long is None:
             result = washroom_store.get_washrooms()
         else:
             result = washroom_store.get_washrooms(
-                Location(float(lat), float(long))
+                Location(
+                    float(lat),
+                    float(long)
+                ),
+                float(radius),
             )
     except ValueError:
         pass
