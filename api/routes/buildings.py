@@ -20,12 +20,11 @@ cors = CORS(mod)
 def buildings():
     result = None
 
-    # Try to get the URL parameters as floats
+    # Try to get the URL parameters as ints
     # TODO: Provide a way for the client to pass in desired amenities
     try:
         lat = request.args.get("latitude")
         long = request.args.get("longitude")
-        radius = request.args.get("radius")
 
         if lat is None or long is None:
             result = building_store.get_buildings()
