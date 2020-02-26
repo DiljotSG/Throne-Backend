@@ -54,8 +54,8 @@ class AmenitiesPersistence(IAmenitiesPersistence):
         result = result[0][1:]
 
         # Create an amenities list from that
-        return [self.amenitylist[i] for (i, boolean)
-                in enumerate(result) if bool == 1]
+        return [self.amenitylist[i] for (i, hasAmenity)
+                in enumerate(result) if hasAmenity == 1]
 
     # Remove amenity list by ID
     def remove_amenities(
