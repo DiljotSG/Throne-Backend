@@ -17,7 +17,7 @@ class BuildingStore:
         )
         if result:
             result = result.__dict__.copy()
-            self.__transform_building(result)
+            self.__expand_building(result)
         return result
 
     def get_buildings(
@@ -37,12 +37,12 @@ class BuildingStore:
 
         for building in query_result:
             item = building.__dict__.copy()
-            self.__transform_building(item)
+            self.__expand_building(item)
             result.append(item)
 
         return result
 
-    def __transform_building(self, building):
+    def __expand_building(self, building):
         # Expand best ratings
         best_rating_id = building.pop("best_rating_id", None)
         item = self.__rating_persistence.get_rating(

@@ -19,7 +19,7 @@ class UserStore:
         )
         if result:
             result = result.__dict__.copy()
-            self.__transform_user(result)
+            self.__expand_user(result)
         return result
 
     def get_reviews_by_user(self, user_id):
@@ -28,7 +28,7 @@ class UserStore:
 
         for review in query_result:
             item = review.__dict__.copy()
-            self.__transform_review(item)
+            self.__expand_review(item)
             result.append(item)
 
         return result
@@ -44,7 +44,7 @@ class UserStore:
 
         return result
 
-    def __transform_user(self, user):
+    def __expand_user(self, user):
         # Expand preferences
         preference_id = user.pop("preference_id", None)
         item = self.__preference_persistence.get_preference(
@@ -54,7 +54,7 @@ class UserStore:
         item.pop("id", None)
         user["preferences"] = item
 
-    def __transform_review(self, review):
+    def __expand_review(self, review):
         # Expand ratings
         rating_id = review.pop("rating_id", None)
         item = self.__ratings_persistence.get_rating(

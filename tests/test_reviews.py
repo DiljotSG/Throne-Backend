@@ -25,7 +25,10 @@ class TestReviewAPI(unittest.TestCase):
                 "toilet_paper_quality": 4.2
             },
             "upvote_count": 10,
-            "user_id": 1,
+            "user": {
+                "profile_picture": "picture",
+                "username": "johnsmith"
+            },
             "washroom_id": 2
         }
         self.assertEqual(response.status_code, 200)
