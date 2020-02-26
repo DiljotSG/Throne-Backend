@@ -26,6 +26,7 @@ class TestReviewAPI(unittest.TestCase):
             },
             "upvote_count": 10,
             "user": {
+                "id": 1,
                 "profile_picture": "picture",
                 "username": "johnsmith"
             },
