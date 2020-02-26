@@ -9,7 +9,7 @@ class Amenity(str, Enum):
     AUTOMATIC_SINK: str = "Automatic Sink"
     AUTOMATIC_TOILET: str = "Automatic Toilet"
     AUTOMATIC_PAPER_TOWEL: str = "Automatic Paper Towel"
-    AUTOMATIC_DRYER: str = "Autmatic Dryer"
+    AUTOMATIC_DRYER: str = "Automatic Dryer"
     SHOWER: str = "Shower"
     URINAL: str = "Urinal"
     PAPER_SEAT_COVERS: str = "Paper Seat Covers"
