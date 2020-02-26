@@ -30,6 +30,27 @@ class ReviewsStubPersistence(IReviewsPersistence):
         # Return Review id
         return review_id
 
+    def update_review(
+        self,
+        review_id,
+        washroom_id,  # Foreign Key
+        user_id,  # Foreign Key
+        rating_id,  # Foreign Key
+        comment,
+        upvote_count
+    ):
+        if review_id >= 0 and review_id < len(self.reviews) and \
+           self.reviews[review_id] is not None:
+            self.reviews[review_id] = Review(
+                review_id,
+                washroom_id,
+                datetime.now(),
+                user_id,
+                comment,
+                upvote_count,
+                rating_id
+            )
+
     def get_review(
         self,
         review_id

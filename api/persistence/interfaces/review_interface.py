@@ -19,10 +19,12 @@ class IReviewsPersistence(ABC):
     def update_review(
         self,
         review_id,
+        washroom_id,  # Foreign Key
+        user_id,  # Foreign Key
+        rating_id,  # Foreign Key
         comment,
         upvote_count
     ):
-        # this assumes ratings would be updated directly
         pass
 
     @abstractmethod
