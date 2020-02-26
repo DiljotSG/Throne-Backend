@@ -13,9 +13,9 @@ mod = Blueprint('washrooms', __name__)
 cors = CORS(mod)
 
 
-@mod.route("")
+@mod.route("", methods=["GET"])
 @cross_origin()
-def washrooms():
+def get_washrooms():
     result = None
 
     # Try to get the URL parameters as floats
@@ -37,13 +37,40 @@ def washrooms():
     return return_as_json(result)
 
 
-@mod.route("/<int:washroom_id>")
+@mod.route("", methods=["POST"])
 @cross_origin()
-def washrooms_id(washroom_id):
+def post_washrooms():
+    # longitude = request.json["longitude"]
+    # latitude = request.json["latitude"]
+    # building_id = request.json["building_id"]
+    return return_as_json({"msg": "Needs to be implemented"})
+
+
+@mod.route("/<int:washroom_id>", methods=["GET"])
+@cross_origin()
+def get_washrooms_id(washroom_id):
     return return_as_json(washroom_store.get_washroom(washroom_id))
 
 
-@mod.route("/<int:washroom_id>/reviews")
+@mod.route("/<int:washroom_id>/reviews", methods=["GET"])
 @cross_origin()
-def washrooms_reviews(washroom_id):
+def get_washrooms_reviews(washroom_id):
     return return_as_json(washroom_store.get_reviews_by_washrooms(washroom_id))
+
+
+@mod.route("/<int:washroom_id>/reviews", methods=["POST"])
+@cross_origin()
+def post_washrooms_reviews(washroom_id):
+    return return_as_json({"msg": "Needs to be implemented"})
+
+
+@mod.route("/<int:washroom_id>/reviews/<int:review_id>", methods=["PUT"])
+@cross_origin()
+def put_washroom_review(washroom_id, review_id):
+    return return_as_json({"msg": "Needs to be implemented"})
+
+
+@mod.route("/<int:washroom_id>/reviews/<int:review_id>", methods=["DELETE"])
+@cross_origin()
+def delete_washroom_review(washroom_id, review_id):
+    return return_as_json({"msg": "Needs to be implemented"})
