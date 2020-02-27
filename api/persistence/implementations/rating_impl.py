@@ -18,11 +18,11 @@ class RatingsPersistence(IRatingsPersistence):
 
     def add_rating(
         self,
-        cleanliness,
-        privacy,
-        smell,
-        toilet_paper_quality,
-    ):
+        cleanliness: float,
+        privacy: float,
+        smell: float,
+        toilet_paper_quality: float,
+    ) -> int:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -45,8 +45,8 @@ class RatingsPersistence(IRatingsPersistence):
 
     def get_rating(
         self,
-        rating_id
-    ):
+        rating_id: int
+    ) -> Rating:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -63,12 +63,12 @@ class RatingsPersistence(IRatingsPersistence):
 
     def update_rating(
         self,
-        rating_id,
-        cleanliness,
-        privacy,
-        smell,
-        toilet_paper_quality
-    ):
+        rating_id: int,
+        cleanliness: float,
+        privacy: float,
+        smell: float,
+        toilet_paper_quality: float
+    ) -> Rating:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -89,8 +89,8 @@ class RatingsPersistence(IRatingsPersistence):
 
     def remove_rating(
         self,
-        rating_id
-    ):
+        rating_id: int
+    ) -> None:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 

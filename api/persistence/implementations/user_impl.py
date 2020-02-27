@@ -24,10 +24,10 @@ class UsersPersistence(IUsersPersistence):
 
     def add_user(
         self,
-        username,
-        profile_pic,
-        preference_id  # Foreign key
-    ):
+        username: str,
+        profile_pic: str,
+        preference_id: int  # Foreign key
+    ) -> int:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -50,8 +50,8 @@ class UsersPersistence(IUsersPersistence):
 
     def get_user(
         self,
-        user_id
-    ):
+        user_id: int
+    ) -> User:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -68,7 +68,7 @@ class UsersPersistence(IUsersPersistence):
 
     def remove_user(
         self,
-        user_id
-    ):
+        user_id: int
+    ) -> None:
         # Removing users is not MVP
         pass

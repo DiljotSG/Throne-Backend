@@ -18,7 +18,7 @@ class ReviewStore:
         user_id: int,
         comment: str,
         ratings: dict
-    ) -> Review:
+    ) -> dict:
         return None
 
     def update(
@@ -27,7 +27,7 @@ class ReviewStore:
         user_id: int,
         comment: str,
         ratings: dict
-    ) -> Review:
+    ) -> dict:
         return None
 
     def delete(
@@ -36,7 +36,7 @@ class ReviewStore:
     ) -> None:
         pass
 
-    def get_review(self, review_id):
+    def get_review(self, review_id: int) -> dict:
         result = self.__review_persistence.get_review(
             review_id
         )
@@ -45,7 +45,7 @@ class ReviewStore:
             self.__expand_review(result)
         return result
 
-    def __expand_review(self, review):
+    def __expand_review(self, review: dict):
         # Expand ratings
         rating_id = review.pop("rating_id", None)
         rating_item = self.__rating_persistence.get_rating(

@@ -1,4 +1,3 @@
-from api.objects.building import Building
 from typing import List
 
 
@@ -15,7 +14,7 @@ class BuildingStore:
         self.__review_persistence = review_persistence
         self.__rating_persistence = rating_persistence
 
-    def get_building(self, building_id: int) -> Building:
+    def get_building(self, building_id: int) -> dict:
         result = self.__building_persistence.get_building(
             building_id
         )
@@ -30,7 +29,7 @@ class BuildingStore:
         radius=5,
         max_buildings=5,
         desired_amenities=[]
-    ) -> List[Building]:
+    ) -> List[dict]:
         result = []
         query_result = self.__building_persistence.query_buildings(
             location,
@@ -46,7 +45,7 @@ class BuildingStore:
 
         return result
 
-    def __expand_building(self, building: Building):
+    def __expand_building(self, building: dict) -> None:
         # Expand best ratings
         best_rating_id = building.pop("best_rating_id", None)
         item = self.__rating_persistence.get_rating(

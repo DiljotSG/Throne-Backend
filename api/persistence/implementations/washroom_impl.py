@@ -1,12 +1,13 @@
 from . import get_sql_connection
 from datetime import datetime
-
 from api.common import convert_to_mysql_timestamp, distance_between_locations
 from .amenity_impl import AmenitiesPersistence
 from .review_impl import ReviewsPersistence
 from ...objects.location import Location
 from ...objects.washroom import Washroom
+from ...objects.amenity import Amenity
 from ..interfaces.washroom_interface import IWashroomsPersistence
+from typing import Dict, List
 
 
 # The ordering of these indicies are determined by the order of properties
@@ -27,15 +28,15 @@ class WashroomsPersistence(IWashroomsPersistence):
 
     def add_washroom(
         self,
-        building_id,  # Foreign Key
-        location,
-        title,
-        floor,
-        gender,
-        amenities_id,  # Foreign Key
-        overall_rating,
-        average_ratings_id  # Foreign Key
-    ):
+        building_id: int,  # Foreign Key
+        location: Dict[str, float],
+        title: str,
+        floor: int,
+        gender: str,
+        amenities_id: int,  # Foreign Key
+        overall_rating: int,
+        average_ratings_id: int  # Foreign Key
+    ) -> int:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -63,11 +64,11 @@ class WashroomsPersistence(IWashroomsPersistence):
 
     def query_washrooms(
         self,
-        location,
-        radius,
-        max_washrooms,
-        desired_amenities
-    ):
+        location: Dict[str, float],
+        radius: float,
+        max_washrooms: int,
+        desired_amenities: List[Amenity]
+    ) -> List[Washroom]:
         # I don't know of any way to do this complex formula in SQL, so
         # instead we're just grabbing ALL WASHROOMS AT ONCE and calculating
         # distance. It might seem inefficient but it's really not - we'd
@@ -104,8 +105,8 @@ class WashroomsPersistence(IWashroomsPersistence):
 
     def get_washrooms_by_building(
         self,
-        building_id
-    ):
+        building_id: int
+    ) -> List[Washroom]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -121,8 +122,8 @@ class WashroomsPersistence(IWashroomsPersistence):
 
     def get_washroom(
         self,
-        washroom_id
-    ):
+        washroom_id: int
+    ) -> Washroom:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -138,8 +139,8 @@ class WashroomsPersistence(IWashroomsPersistence):
 
     def remove_washroom(
         self,
-        washroom_id
-    ):
+        washroom_id: int
+    ) -> None:
         # Remove reviews, remove it from favorites, remove its amenities,
         # remove its avg ratings, then remove the washroom
         cnx = get_sql_connection()

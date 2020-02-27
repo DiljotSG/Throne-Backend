@@ -1,5 +1,3 @@
-from api.objects.washroom import Washroom
-from api.objects.review import Review
 from typing import List
 
 
@@ -28,7 +26,7 @@ class WashroomStore:
         floor: int,
         building_id: int,
         amenities: list
-    ) -> Washroom:
+    ) -> dict:
         return None
 
     def get_washrooms(
@@ -37,7 +35,7 @@ class WashroomStore:
         radius=5,
         max_washrooms=5,
         desired_amenities=[]
-    ) -> Washroom:
+    ) -> dict:
         result = []
         query_result = self.__washroom_persistence.query_washrooms(
             location,
@@ -53,7 +51,7 @@ class WashroomStore:
 
         return result
 
-    def get_washroom(self, washroom_id: int) -> Washroom:
+    def get_washroom(self, washroom_id: int) -> dict:
         result = self.__washroom_persistence.get_washroom(
             washroom_id
         )
@@ -62,7 +60,7 @@ class WashroomStore:
             self.__expand_washroom(result)
         return result
 
-    def get_reviews_by_washrooms(self, washroom_id: int) -> List[Review]:
+    def get_reviews_by_washrooms(self, washroom_id: int) -> List[dict]:
         result = []
         query_result = self.__review_persistence.get_reviews_by_washroom(
             washroom_id
@@ -75,7 +73,7 @@ class WashroomStore:
 
         return result
 
-    def get_washrooms_by_building(self, building_id: int) -> List[Washroom]:
+    def get_washrooms_by_building(self, building_id: int) -> List[dict]:
         result = []
         query_result = self.__washroom_persistence.get_washrooms_by_building(
             building_id

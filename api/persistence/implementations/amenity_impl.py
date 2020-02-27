@@ -1,6 +1,7 @@
 from . import get_sql_connection
 from api.objects.amenity import Amenity
 from ..interfaces.amenity_interface import IAmenitiesPersistence
+from typing import List
 
 
 class AmenitiesPersistence(IAmenitiesPersistence):
@@ -11,7 +12,7 @@ class AmenitiesPersistence(IAmenitiesPersistence):
     def add_amenities(
         self,
         *amenities
-    ):
+    ) -> int:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
         insert_query = """
@@ -38,8 +39,8 @@ class AmenitiesPersistence(IAmenitiesPersistence):
     # Get amenity list by ID
     def get_amenities(
         self,
-        amenities_id
-    ):
+        amenities_id: int
+    ) -> List[Amenity]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
         find_query = "SELECT * FROM amenities WHERE id = %s"
@@ -60,8 +61,8 @@ class AmenitiesPersistence(IAmenitiesPersistence):
     # Remove amenity list by ID
     def remove_amenities(
         self,
-        amenities_id
-    ):
+        amenities_id: int
+    ) -> None:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
         delete_query = "DELETE FROM amenities WHERE id = %s"

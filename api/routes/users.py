@@ -2,6 +2,7 @@ from flask import Blueprint
 from flask_cors import CORS
 from flask_cors import cross_origin
 from api.common import return_as_json
+from api.response_codes import HttpCodes
 from ..persistence import create_user_store
 
 from api.common import get_cognito_user
@@ -35,25 +36,29 @@ def get_users_reviews(user_id):
     return return_as_json(user_store.get_reviews_by_user(user_id))
 
 
-@mod.route("/<int:user_id>/favorites", methods=["GET"])
+@mod.route("/favorites", methods=["GET"])
 @cross_origin()
-def get_user_favorites(user_id):
-    return return_as_json(user_store.get_favorites_by_user(user_id))
+def get_user_favorites():
+    # TODO: Add support for retrieving user by username
+    return "", HttpCodes.HTTP_501_NOT_IMPLEMENTED
 
 
-@mod.route("/<int:user_id>/favorites", methods=["POST"])
+@mod.route("/favorites", methods=["POST"])
 @cross_origin()
-def post_user_favorites(user_id):
-    return return_as_json({"msg": "Needs to be implemented"})
+def post_user_favorites():
+    # TODO: Add support for retrieving user by username
+    return "", HttpCodes.HTTP_501_NOT_IMPLEMENTED
 
 
-@mod.route("/<int:user_id>/favorites/<int:favorites_id>", methods=["DELETE"])
+@mod.route("/favorites/<int:favorites_id>", methods=["DELETE"])
 @cross_origin()
-def delete_user_favorites(user_id, favorites_id):
-    return return_as_json({"msg": "Needs to be implemented"})
+def delete_user_favorites(favorites_id):
+    # TODO: Add support for retrieving user by username
+    return "", HttpCodes.HTTP_501_NOT_IMPLEMENTED
 
 
 @mod.route("/preferences", methods=["GET"])
 @cross_origin()
 def get_preferences():
-    return return_as_json({"msg": "Needs to be implemented"})
+    # TODO: Add support for retrieving user by username
+    return "", HttpCodes.HTTP_501_NOT_IMPLEMENTED

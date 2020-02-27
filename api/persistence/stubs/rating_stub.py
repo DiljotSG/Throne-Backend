@@ -3,16 +3,16 @@ from ..interfaces.rating_interface import IRatingsPersistence
 
 
 class RatingsStubPersistence(IRatingsPersistence):
-    def __init__(self):
+    def __init__(self) -> None:
         self.ratings = []
 
     def add_rating(
         self,
-        cleanliness,
-        privacy,
-        smell,
-        toilet_paper_quality,
-    ):
+        cleanliness: float,
+        privacy: float,
+        smell: float,
+        toilet_paper_quality: float,
+    ) -> int:
         rating_id = len(self.ratings)
         new_rating = Rating(
             rating_id,
@@ -27,8 +27,8 @@ class RatingsStubPersistence(IRatingsPersistence):
 
     def get_rating(
         self,
-        rating_id
-    ):
+        rating_id: int
+    ) -> Rating:
         if rating_id >= 0 and rating_id < len(self.ratings) and \
            self.ratings[rating_id] is not None:
             return self.ratings[rating_id]
@@ -36,12 +36,12 @@ class RatingsStubPersistence(IRatingsPersistence):
 
     def update_rating(
         self,
-        rating_id,
-        cleanliness,
-        privacy,
-        smell,
-        toilet_paper_quality
-    ):
+        rating_id: int,
+        cleanliness: float,
+        privacy: float,
+        smell: float,
+        toilet_paper_quality: float
+    ) -> Rating:
         if rating_id >= 0 and rating_id < len(self.ratings) and \
            self.ratings[rating_id] is not None:
             self.ratings[rating_id] = Rating(
@@ -54,7 +54,7 @@ class RatingsStubPersistence(IRatingsPersistence):
 
     def remove_rating(
         self,
-        rating_id
-    ):
+        rating_id: int
+    ) -> None:
         if rating_id >= 0 and rating_id < len(self.ratings):
             self.ratings.pop(rating_id)

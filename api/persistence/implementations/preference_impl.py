@@ -18,10 +18,10 @@ class PreferencesPersistence(IPreferencesPersistence):
 
     def add_preference(
         self,
-        gender,
-        wheelchair_accessible,
-        main_floor_access
-    ):
+        gender: str,
+        wheelchair_accessible: bool,
+        main_floor_access: bool
+    ) -> int:
         if len(gender) > 25:
             return -1
 
@@ -44,10 +44,19 @@ class PreferencesPersistence(IPreferencesPersistence):
         cursor.execute(find_query)
         return list(cursor)[0][0]
 
+    def update_preference(
+        self,
+        preference_id: int,
+        gender: str,
+        wheelchair_accessible: bool,
+        main_floor_access: bool
+    ) -> Preference:
+        pass
+
     def get_preference(
         self,
-        preference_id
-    ):
+        preference_id: int
+    ) -> Preference:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -65,8 +74,8 @@ class PreferencesPersistence(IPreferencesPersistence):
 
     def remove_preference(
         self,
-        preference_id
-    ):
+        preference_id: int
+    ) -> None:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
