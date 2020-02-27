@@ -23,6 +23,22 @@ class PreferencesStubPersistence(IPreferencesPersistence):
         self.preferences.append(new_preference)
         return preference_id
 
+    def update_preference(
+        self,
+        preference_id,
+        gender,
+        wheelchair_accessible,
+        main_floor_access
+    ):
+        if preference_id >= 0 and preference_id < len(self.preferences) and \
+           self.preferences[preference_id] is not None:
+            self.preferences[preference_id] = Preference(
+                preference_id,
+                gender,
+                wheelchair_accessible,
+                main_floor_access
+            )
+
     def get_preference(
         self,
         preference_id

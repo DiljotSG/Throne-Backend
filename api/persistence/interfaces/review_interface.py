@@ -16,6 +16,18 @@ class IReviewsPersistence(ABC):
         pass
 
     @abstractmethod
+    def update_review(
+        self,
+        review_id,
+        washroom_id,  # Foreign Key
+        user_id,  # Foreign Key
+        rating_id,  # Foreign Key
+        comment,
+        upvote_count
+    ):
+        pass
+
+    @abstractmethod
     def get_review(
         self,
         review_id
