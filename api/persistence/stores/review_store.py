@@ -1,6 +1,3 @@
-from api.objects.review import Review
-
-
 class ReviewStore:
     def __init__(
         self,
