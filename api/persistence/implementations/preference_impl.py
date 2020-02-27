@@ -44,6 +44,15 @@ class PreferencesPersistence(IPreferencesPersistence):
         cursor.execute(find_query)
         return list(cursor)[0][0]
 
+    def update_preference(
+        self,
+        preference_id,
+        gender,
+        wheelchair_accessible,
+        main_floor_access
+    ):
+        pass
+
     def get_preference(
         self,
         preference_id
