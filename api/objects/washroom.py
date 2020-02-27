@@ -1,17 +1,20 @@
+from typing import Dict
+
+
 class Washroom:
     def __init__(
         self,
-        washroom_id,
-        title,
-        location,
-        created_at,
-        gender,
-        floor,
-        building_id,
-        overall_rating,
-        average_rating_id,
-        amenities_id
-    ):
+        washroom_id: int,
+        title: str,
+        location: Dict[str, float],
+        created_at: str,
+        gender: str,
+        floor: int,
+        building_id: int,
+        overall_rating: int,
+        average_rating_id: int,
+        amenities_id: int
+    ) -> None:
         self.id = washroom_id
         self.title = title
         self.location = location
@@ -22,3 +25,13 @@ class Washroom:
         self.overall_rating = overall_rating
         self.average_rating_id = average_rating_id
         self.amenities_id = amenities_id
+
+    @staticmethod
+    def verify(
+        title: str,
+        longitude: float,
+        latitude: float,
+        gender: str,
+        floor: int,
+    ):
+        return True

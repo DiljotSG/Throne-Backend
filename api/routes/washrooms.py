@@ -2,11 +2,16 @@ from flask import request
 from flask import Blueprint
 from flask_cors import CORS
 from flask_cors import cross_origin
+from api.objects.washroom import Washroom
+from api.objects.amenity import Amenity
 from api.common import return_as_json
+from api.response_codes import HttpCodes
 from ..objects.location import Location
 from ..persistence import create_washroom_store
+from ..persistence import create_building_store
 
 washroom_store = create_washroom_store()
+building_store = create_building_store()
 
 
 mod = Blueprint('washrooms', __name__)
@@ -40,10 +45,39 @@ def get_washrooms():
 @mod.route("", methods=["POST"])
 @cross_origin()
 def post_washrooms():
-    # longitude = request.json["longitude"]
-    # latitude = request.json["latitude"]
-    # building_id = request.json["building_id"]
-    return return_as_json({"msg": "Needs to be implemented"})
+    code = HttpCodes.HTTP_200_OK
+    result = None
+
+    try:
+        title = str(request.json["title"])
+        longitude = float(request.json["location"]["longitude"])
+        latitude = float(request.json["location"]["longitude"])
+        gender = str(request.json["gender"])
+        floor = int(request.json["floor"])
+        building_id = int(request.json["building_id"])
+        amenities = list(request.json["amenities"])
+
+        if Washroom.verify(title, longitude, latitude, gender, floor) and \
+           building_store.get_building(building_id) is not None and \
+           Amenity.verify_list(amenities):
+
+            result = washroom_store.create(
+                title,
+                longitude,
+                latitude,
+                gender,
+                floor,
+                building_id,
+                amenities
+            )
+
+        else:
+            code = HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY
+
+    except (Exception):
+        code = HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY
+
+    return return_as_json(result, code)
 
 
 @mod.route("/<int:washroom_id>", methods=["GET"])

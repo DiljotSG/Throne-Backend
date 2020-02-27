@@ -1,5 +1,5 @@
 from ...objects.location import Location
-from ...db_objects.amenity import Amenity
+from api.objects.amenity import Amenity
 
 
 def populate_stub_data(

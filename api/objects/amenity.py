@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import List
 
 
 class Amenity(str, Enum):
@@ -19,3 +20,7 @@ class Amenity(str, Enum):
     BATHROOM_ATTENDANT: str = "Bathroom Attendant"
     PERFUME_COLOGNE: str = "Perfume/Cologne"
     LOTION: str = "Lotion"
+
+    @staticmethod
+    def verify_list(amenities: List[str]):
+        return True

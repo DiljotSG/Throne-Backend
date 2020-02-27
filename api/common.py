@@ -4,9 +4,8 @@ from flask import jsonify
 from jsonschema import validate
 from jsonschema import ValidationError
 from math import sin, cos, sqrt, atan2, radians
+from .response_codes import HttpCodes
 
-OK = 200
-BAD_REQUEST = 400
 TIMESTAMP_FORMAT = '%Y-%m-%d %H:%M:%S'
 
 
@@ -48,16 +47,15 @@ def get_cognito_user():
     return username
 
 
-def return_as_json(data):
+def return_as_json(data, code=HttpCodes.HTTP_200_OK):
     result = data
-    code = OK
 
     # If our data is non-existant, this is a bad request.
     if data is None:
         result = {
             "Error": "Invalid Request"
         }
-        code = BAD_REQUEST
+        code = HttpCodes.HTTP_400_BAD_REQUEST
 
     return jsonify(result), code
 

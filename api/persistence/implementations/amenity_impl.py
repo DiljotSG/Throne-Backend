@@ -1,5 +1,5 @@
 from . import get_sql_connection
-from api.db_objects.amenity import Amenity
+from api.objects.amenity import Amenity
 from ..interfaces.amenity_interface import IAmenitiesPersistence
 
 
