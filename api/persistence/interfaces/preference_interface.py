@@ -14,6 +14,16 @@ class IPreferencesPersistence(ABC):
         pass
 
     @abstractmethod
+    def update_preference(
+        self,
+        preference_id,
+        gender,
+        wheelchair_accessible,
+        main_floor_access
+    ):
+        pass
+
+    @abstractmethod
     def get_preference(
         self,
         preference_id
