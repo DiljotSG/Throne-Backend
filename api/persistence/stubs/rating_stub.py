@@ -1,4 +1,4 @@
-from ...db_objects.rating import Rating
+from ...objects.rating import Rating
 from ..interfaces.rating_interface import IRatingsPersistence
 
 

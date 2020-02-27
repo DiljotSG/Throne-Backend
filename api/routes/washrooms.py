@@ -4,14 +4,18 @@ from flask_cors import CORS
 from flask_cors import cross_origin
 from api.objects.washroom import Washroom
 from api.objects.amenity import Amenity
+from api.objects.review import Review
 from api.common import return_as_json
 from api.response_codes import HttpCodes
 from ..objects.location import Location
 from ..persistence import create_washroom_store
 from ..persistence import create_building_store
+from ..persistence import create_review_store
+from api.common import get_cognito_user
 
 washroom_store = create_washroom_store()
 building_store = create_building_store()
+review_store = create_review_store()
 
 
 mod = Blueprint('washrooms', __name__)
@@ -57,22 +61,15 @@ def post_washrooms():
         building_id = int(request.json["building_id"])
         amenities = list(request.json["amenities"])
 
-        if Washroom.verify(title, longitude, latitude, gender, floor) and \
-           building_store.get_building(building_id) is not None and \
-           Amenity.verify_list(amenities):
-
-            result = washroom_store.create(
-                title,
-                longitude,
-                latitude,
-                gender,
-                floor,
-                building_id,
-                amenities
-            )
-
-        else:
-            code = HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY
+        result = washroom_store.create(
+            title,
+            longitude,
+            latitude,
+            gender,
+            floor,
+            building_id,
+            amenities
+        )
 
     except (Exception):
         code = HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY
@@ -95,7 +92,26 @@ def get_washrooms_reviews(washroom_id):
 @mod.route("/<int:washroom_id>/reviews", methods=["POST"])
 @cross_origin()
 def post_washrooms_reviews(washroom_id):
-    return return_as_json({"msg": "Needs to be implemented"})
+    code = HttpCodes.HTTP_200_OK
+    result = None
+
+    try:
+        washroom_id = int(request.json["washroom_id"])
+        user_id = get_cognito_user()
+        comment = str(request.json["comment"])
+        ratings = list(request.json["ratings"])
+
+        result = review_store.create(
+            washroom_id,
+            user_id,
+            comment,
+            ratings
+        )
+
+    except (Exception):
+        code = HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY
+
+    return return_as_json(result, code)
 
 
 @mod.route("/<int:washroom_id>/reviews/<int:review_id>", methods=["PUT"])

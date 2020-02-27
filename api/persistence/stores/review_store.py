@@ -1,3 +1,6 @@
+from api.objects.review import Review
+
+
 class ReviewStore:
     def __init__(
         self,
@@ -8,6 +11,15 @@ class ReviewStore:
         self.__review_persistence = review_persistence
         self.__rating_persistence = rating_persistence
         self.__user_persistence = user_persistence
+
+    def create(
+        self,
+        washroom_id,
+        user_id,
+        comment,
+        ratings
+    ) -> Review:
+        pass
 
     def get_review(self, review_id):
         result = self.__review_persistence.get_review(

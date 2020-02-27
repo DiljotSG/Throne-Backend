@@ -1,5 +1,5 @@
 from . import get_sql_connection
-from ...db_objects.preference import Preference
+from ...objects.preference import Preference
 from ..interfaces.preference_interface import IPreferencesPersistence
 
 
