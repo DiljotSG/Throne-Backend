@@ -2,9 +2,6 @@ from flask import request
 from flask import Blueprint
 from flask_cors import CORS
 from flask_cors import cross_origin
-from api.objects.washroom import Washroom
-from api.objects.amenity import Amenity
-from api.objects.review import Review
 from api.common import return_as_json
 from api.response_codes import HttpCodes
 from ..objects.location import Location
@@ -49,7 +46,7 @@ def get_washrooms():
 @mod.route("", methods=["POST"])
 @cross_origin()
 def post_washrooms():
-    code = HttpCodes.HTTP_200_OK
+    code = HttpCodes.HTTP_201_CREATED
     result = None
 
     try:
@@ -92,11 +89,10 @@ def get_washrooms_reviews(washroom_id):
 @mod.route("/<int:washroom_id>/reviews", methods=["POST"])
 @cross_origin()
 def post_washrooms_reviews(washroom_id):
-    code = HttpCodes.HTTP_200_OK
+    code = HttpCodes.HTTP_201_CREATED
     result = None
 
     try:
-        washroom_id = int(request.json["washroom_id"])
         user_id = get_cognito_user()
         comment = str(request.json["comment"])
         ratings = list(request.json["ratings"])
@@ -117,10 +113,22 @@ def post_washrooms_reviews(washroom_id):
 @mod.route("/<int:washroom_id>/reviews/<int:review_id>", methods=["PUT"])
 @cross_origin()
 def put_washroom_review(washroom_id, review_id):
-    return return_as_json({"msg": "Needs to be implemented"})
+    code = HttpCodes.HTTP_200_OK
+    result = None
 
+    try:
+        user_id = get_cognito_user()
+        comment = str(request.json["comment"])
+        ratings = list(request.json["ratings"])
 
-@mod.route("/<int:washroom_id>/reviews/<int:review_id>", methods=["DELETE"])
-@cross_origin()
-def delete_washroom_review(washroom_id, review_id):
-    return return_as_json({"msg": "Needs to be implemented"})
+        result = review_store.update(
+            washroom_id,
+            user_id,
+            comment,
+            ratings
+        )
+
+    except (Exception):
+        code = HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY
+
+    return return_as_json(result, code)

@@ -12,7 +12,6 @@ from api.routes.washrooms import mod as washrooms_mod
 from api.routes.buildings import mod as buildings_mod
 from api.routes.reviews import mod as reviews_mod
 from api.routes.users import mod as users_mod
-from api.routes.preferences import mod as preferences_mod
 
 
 # Custom JSON Encoder to enforce isoformat for datetime
@@ -49,7 +48,6 @@ def create():
     app.register_blueprint(buildings_mod, url_prefix="/buildings")
     app.register_blueprint(reviews_mod, url_prefix="/reviews")
     app.register_blueprint(users_mod, url_prefix="/users")
-    app.register_blueprint(preferences_mod, url_prefix="/preferences")
 
     # Get a map of all the endpoints for the root endpoint
     data = root_data()

@@ -51,3 +51,9 @@ def post_user_favorites(user_id):
 @cross_origin()
 def delete_user_favorites(user_id, favorites_id):
     return return_as_json({"msg": "Needs to be implemented"})
+
+
+@mod.route("/preferences", methods=["GET"])
+@cross_origin()
+def get_preferences():
+    return return_as_json({"msg": "Needs to be implemented"})

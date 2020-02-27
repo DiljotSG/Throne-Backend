@@ -14,11 +14,26 @@ class ReviewStore:
 
     def create(
         self,
-        washroom_id,
-        user_id,
-        comment,
-        ratings
+        washroom_id: int,
+        user_id: int,
+        comment: str,
+        ratings: dict
     ) -> Review:
+        return None
+
+    def update(
+        self,
+        washroom_id: int,
+        user_id: int,
+        comment: str,
+        ratings: dict
+    ) -> Review:
+        return None
+
+    def delete(
+        self,
+        review_id: int
+    ) -> None:
         pass
 
     def get_review(self, review_id):
