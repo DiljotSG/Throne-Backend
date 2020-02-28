@@ -27,5 +27,4 @@ jobs:
     - name: Run mypy (Optional Static Typing for Python)
       run: mypy api/ --ignore-missing-imports
     - name: Test with python unit test framework
-      run: |
-        python -m unittest discover tests
+      run: python -m unittest discover tests
