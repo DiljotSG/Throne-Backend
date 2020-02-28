@@ -11,7 +11,7 @@ class Building:
         maps_service_id: str,
         created_at: datetime,
         overall_rating: int,
-        best_rating_id: int
+        best_ratings_id: int
     ):
         self.id = building_id
         self.location = location
@@ -19,4 +19,4 @@ class Building:
         self.title = title
         self.created_at = created_at
         self.overall_rating = overall_rating
-        self.best_rating_id = best_rating_id
+        self.best_ratings_id = best_ratings_id

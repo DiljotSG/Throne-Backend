@@ -47,13 +47,13 @@ class BuildingStore:
 
     def __expand_building(self, building: dict) -> None:
         # Expand best ratings
-        best_rating_id = building.pop("best_rating_id", None)
+        best_ratings_id = building.pop("best_ratings_id", None)
         item = self.__rating_persistence.get_rating(
-            best_rating_id
+            best_ratings_id
         ).__dict__.copy()
 
         # Expand location
         building["location"] = building["location"].__dict__.copy()
 
         item.pop("id", None)
-        building["best_rating"] = item
+        building["best_ratings"] = item
