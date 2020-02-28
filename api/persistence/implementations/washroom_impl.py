@@ -163,7 +163,7 @@ class WashroomsPersistence(IWashroomsPersistence):
         query4 = "DELETE FROM ratings WHERE id = %s"
 
         cursor.execute(find_query, (washroom_id,))
-        result = result_to_washroom(list(cursor)[0])
+        result = result_to_washroom(cursor.fetchall()[0])
 
         cursor.execute(query0, (washroom_id,))
         reviewList = cursor.fetchall()

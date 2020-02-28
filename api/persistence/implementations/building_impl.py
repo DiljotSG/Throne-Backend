@@ -122,10 +122,10 @@ class BuildingsPersistence(IBuildingsPersistence):
         query2 = "DELETE FROM ratings WHERE id = %s"
 
         cursor.execute(find_query, (building_id,))
-        result = _result_to_building(list(cursor)[0])
+        result = _result_to_building(cursor.fetchall()[0])
 
         cursor.execute(query0, (building_id,))
-        washroomIDs = list(cursor)
+        washroomIDs = cursor.fetchall()
 
         for id in washroomIDs:
             self.washroomPersistence.remove_washroom(id[0])

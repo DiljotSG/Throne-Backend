@@ -17,8 +17,7 @@ class AmenitiesPersistence(IAmenitiesPersistence):
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
         insert_query = """
-        INSERT INTO amenities
-        VALUES
+        INSERT INTO amenities VALUES
         (NULL,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
         %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
         """

@@ -9,9 +9,9 @@ from api.persistence.implementations.user_impl import UsersPersistence
 from api.persistence.implementations.washroom_impl import WashroomsPersistence
 
 from api.db_objects.amenity import Amenity
-# from api.db_objects.favorite import Favorite
-# from api.db_objects.preference import Preference
-# from api.db_objects.rating import Rating
+# from api.objects.favorite import Favorite
+# from api.objects.preference import Preference
+# from api.objects.rating import Rating
 # from api.objects.building import Building
 from api.objects.location import Location
 # from api.objects.review import Review

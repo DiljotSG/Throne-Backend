@@ -219,7 +219,7 @@ def __create_amenities(
 ) -> List[int]:
     amenity1_id = amenity_persistence.add_amenities(
         Amenity.AIR_DRYER,
-        Amenity.AUTOMATIC_TOILET
+        Amenity.AUTO_TOILET
     )
     amenity2_id = amenity_persistence.add_amenities(
         Amenity.CONTRACEPTION,

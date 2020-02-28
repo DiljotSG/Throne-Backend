@@ -147,7 +147,7 @@ class ReviewsPersistence(IReviewsPersistence):
         query_tuple = (review_id,)
 
         cursor.execute(find_query, query_tuple)
-        ratingID = list(cursor)[0][0]
+        ratingID = cursor.fetchall()[0][0]
         remove_rating_tuple = (ratingID,)
 
         cursor.execute(remove_review_query, query_tuple)
