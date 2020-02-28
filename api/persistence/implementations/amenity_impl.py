@@ -33,7 +33,9 @@ class AmenitiesPersistence(IAmenitiesPersistence):
 
         # Get the ID of the thing that we just inserted
         cursor.execute(find_query)
-        return list(cursor)[0][0]
+        returnid = cursor.fetchall()[0][0]
+
+        return returnid
 
     # Get amenity list by ID
     def get_amenities(
@@ -46,7 +48,10 @@ class AmenitiesPersistence(IAmenitiesPersistence):
         find_tuple = (amenities_id,)
 
         cursor.execute(find_query, find_tuple)
-        result = list(cursor)
+
+        result = cursor.fetchall()
+        cnx.commit()
+
         if len(result) != 1:
             return None
 
@@ -64,6 +69,7 @@ class AmenitiesPersistence(IAmenitiesPersistence):
     ) -> None:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
+
         delete_query = "DELETE FROM amenities WHERE id = %s"
         delete_tuple = (amenities_id,)
 

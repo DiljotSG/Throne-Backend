@@ -60,9 +60,11 @@ class WashroomsPersistence(IWashroomsPersistence):
         cursor.execute(insert_query, insert_tuple)
         cnx.commit()
 
-        # Get the ID of what we just inserted
+        # Get the ID of the thing that we just inserted
         cursor.execute(find_query)
-        return list(cursor)[0][0]
+        returnid = cursor.fetchall()[0][0]
+
+        return returnid
 
     def query_washrooms(
         self,
@@ -81,7 +83,9 @@ class WashroomsPersistence(IWashroomsPersistence):
         find_query = "SELECT * FROM washrooms"
         cursor.execute(find_query)
 
-        results = list(cursor)
+        results = cursor.fetchall()
+        cnx.commit()
+
         results = [result_to_washroom(result) for result in results]
 
         if location is not None:
@@ -116,10 +120,10 @@ class WashroomsPersistence(IWashroomsPersistence):
         find_tuple = (building_id,)
 
         cursor.execute(find_query, find_tuple)
+        results = cursor.fetchall()
+        cnx.commit()
 
-        results = list(cursor)
         results = [result_to_washroom(result) for result in results]
-
         return results
 
     def get_washroom(
@@ -132,10 +136,12 @@ class WashroomsPersistence(IWashroomsPersistence):
         find_query = "SELECT * FROM washrooms WHERE id = %s"
         find_tuple = (washroom_id,)
         cursor.execute(find_query, find_tuple)
+        result = cursor.fetchall()
+        cnx.commit()
 
-        result = list(cursor)
         if len(result) != 1:
             return None
+
         result = result[0]
         return result_to_washroom(result)
 
@@ -160,7 +166,8 @@ class WashroomsPersistence(IWashroomsPersistence):
         result = result_to_washroom(list(cursor)[0])
 
         cursor.execute(query0, (washroom_id,))
-        reviewList = list(cursor)
+        reviewList = cursor.fetchall()
+
         for review in reviewList:
             self.reviewsPersistence.remove_review(review[0])
 
