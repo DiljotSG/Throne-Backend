@@ -18,11 +18,9 @@ class AmenitiesPersistence(IAmenitiesPersistence):
         cursor = cnx.cachedCursor
         insert_query = """
         INSERT INTO amenities
-        (paperTowel, airDryer, soap, wheelChairAccess, autoSink,
-        autoToilet, autoPaperTowel, autoDryer, shower, urinal,
-        paperSeatCovers, hygieneProducts, needleDisposal,
-        contraceptives, bathroomAttendant, perfume, lotion)
-        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+        VALUES
+        (NULL,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
+        %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
         """
         find_query = "SELECT LAST_INSERT_ID()"
 
