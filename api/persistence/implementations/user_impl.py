@@ -67,6 +67,26 @@ class UsersPersistence(IUsersPersistence):
         result = result[0]
         return _result_to_user(result)
 
+    def get_id_by_username(
+        self,
+        username: str
+    ) -> Optional[int]:
+        cnx = get_sql_connection()
+        cursor = cnx.cachedCursor
+
+        find_query = "SELECT id FROM users WHERE username = %s"
+        find_tuple = (username,)
+        cursor.execute(find_query, find_tuple)
+
+        result = cursor.fetchall()
+        cnx.commit()
+
+        if len(result) != 1:
+            return None
+
+        result = result[0]
+        return result[0]
+
     def remove_user(
         self,
         user_id: int

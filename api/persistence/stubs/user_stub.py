@@ -36,6 +36,15 @@ class UsersStubPersistence(IUsersPersistence):
             return self.users[user_id]
         return None
 
+    def get_id_by_username(
+        self,
+        username: str
+    ) -> Optional[int]:
+        for user in self.users:
+            if user.username == username:
+                return user.id
+        return None
+
     def remove_user(
         self,
         user_id: int

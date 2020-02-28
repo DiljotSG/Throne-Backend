@@ -25,6 +25,13 @@ class IUsersPersistence(ABC):
         pass
 
     @abstractmethod
+    def get_id_by_username(
+        self,
+        username: str
+    ) -> Optional[int]:
+        pass
+
+    @abstractmethod
     def remove_user(
         self,
         user_id: int
