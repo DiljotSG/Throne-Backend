@@ -70,7 +70,7 @@ class ReviewsPersistence(IReviewsPersistence):
         user = %s,
         ratingID = %s,
         comment = %s,
-        upvote_count = %s
+        upvoteCount = %s
         WHERE id = %s
         """
 
