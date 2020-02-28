@@ -55,7 +55,24 @@ class PreferencesPersistence(IPreferencesPersistence):
         wheelchair_accessible: bool,
         main_floor_access: bool
     ) -> Optional[Preference]:
-        pass
+        cnx = get_sql_connection()
+        cursor = cnx.cachedCursor
+
+        update_query = """
+        UPDATE preferences
+        SET gender = %s,
+        wheelchairAccess = %s,
+        mainFloorAccess = %s
+        WHERE id = %s
+        """
+
+        update_tuple = (
+            gender, wheelchair_accessible, main_floor_access, preference_id
+        )
+        cursor.execute(update_query, update_tuple)
+        cnx.commit()
+
+        return self.get_preference(preference_id)
 
     def get_preference(
         self,

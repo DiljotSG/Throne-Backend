@@ -62,8 +62,27 @@ class ReviewsPersistence(IReviewsPersistence):
         rating_id: int,  # Foreign Key
         comment: str,
         upvote_count: int
-    ) -> Review:
-        pass
+    ) -> Optional[Review]:
+        cnx = get_sql_connection()
+        cursor = cnx.cachedCursor
+
+        update_query = """
+        UPDATE reviews
+        SET washroomID = %s,
+        user = %s,
+        ratingID = %s,
+        comment = %s,
+        upvoteCount = %s
+        WHERE id = %s
+        """
+
+        update_tuple = (
+            washroom_id, user_id, rating_id, comment, upvote_count, review_id
+        )
+        cursor.execute(update_query, update_tuple)
+        cnx.commit()
+
+        return self.get_review(review_id)
 
     def get_review(
         self,
