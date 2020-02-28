@@ -88,8 +88,8 @@ class TestBuildingsAPI(unittest.TestCase):
         expected_data = [
                 {
                     "amenities": [
-                        "Contraception",
-                        "Lotion"
+                        "contraception",
+                        "lotion"
                     ],
                     "average_ratings": {
                         "cleanliness": 2.2,
