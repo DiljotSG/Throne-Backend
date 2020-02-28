@@ -1,4 +1,4 @@
-from typing import Dict
+from .location import Location
 
 
 class Washroom:
@@ -6,7 +6,7 @@ class Washroom:
         self,
         washroom_id: int,
         title: str,
-        location: Dict[str, float],
+        location: Location,
         created_at: str,
         gender: str,
         floor: int,
