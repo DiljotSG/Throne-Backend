@@ -1,5 +1,6 @@
-from ...objects.rating import Rating
 from ..interfaces.rating_interface import IRatingsPersistence
+from ...objects.rating import Rating
+
 from typing import List, Optional
 
 

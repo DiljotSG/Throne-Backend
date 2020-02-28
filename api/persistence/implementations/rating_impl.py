@@ -1,6 +1,7 @@
 from . import get_sql_connection
-from ...objects.rating import Rating
 from ..interfaces.rating_interface import IRatingsPersistence
+
+from ...objects.rating import Rating
 from typing import Optional
 
 

@@ -1,5 +1,6 @@
 from abc import ABC
 from abc import abstractmethod
+
 from ...objects.washroom import Washroom
 from ...objects.amenity import Amenity
 from ...objects.location import Location

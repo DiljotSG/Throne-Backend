@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from .location import Location
 
 

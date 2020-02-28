@@ -1,5 +1,6 @@
-from ...objects.favorite import Favorite
 from ..interfaces.favorite_interface import IFavoritesPersistence
+from ...objects.favorite import Favorite
+
 from typing import Optional, List
 
 

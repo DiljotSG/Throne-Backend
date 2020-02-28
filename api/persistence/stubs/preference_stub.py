@@ -1,5 +1,6 @@
-from ...objects.preference import Preference
 from ..interfaces.preference_interface import IPreferencesPersistence
+from ...objects.preference import Preference
+
 from typing import Optional, List
 
 

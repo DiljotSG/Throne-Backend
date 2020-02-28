@@ -1,6 +1,7 @@
 from . import get_sql_connection
-from api.objects.amenity import Amenity
 from ..interfaces.amenity_interface import IAmenitiesPersistence
+
+from ...objects.amenity import Amenity
 from typing import List, Optional
 
 

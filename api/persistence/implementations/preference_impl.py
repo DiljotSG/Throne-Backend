@@ -1,6 +1,7 @@
 from . import get_sql_connection
-from ...objects.preference import Preference
 from ..interfaces.preference_interface import IPreferencesPersistence
+
+from ...objects.preference import Preference
 from typing import Optional
 
 

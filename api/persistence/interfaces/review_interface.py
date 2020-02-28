@@ -1,5 +1,6 @@
 from abc import ABC
 from abc import abstractmethod
+
 from ...objects.review import Review
 from typing import List, Optional
 

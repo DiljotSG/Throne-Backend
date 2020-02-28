@@ -1,7 +1,8 @@
 from abc import ABC
 from abc import abstractmethod
-from typing import Optional
+
 from ...objects.preference import Preference
+from typing import Optional
 
 
 class IPreferencesPersistence(ABC):

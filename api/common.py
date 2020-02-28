@@ -2,14 +2,17 @@ import datetime
 from flask import request
 from flask import jsonify
 from jsonschema import validate
-from jsonschema import ValidationError
-from math import sin, cos, sqrt, atan2, radians
 from .response_codes import HttpCodes
+from jsonschema import ValidationError
+from api.objects.location import Location
+from math import sin, cos, sqrt, atan2, radians
+from typing import Optional
+
 
 TIMESTAMP_FORMAT = '%Y-%m-%d %H:%M:%S'
 
 
-def is_valid_schema(obj, schema):
+def is_valid_schema(obj, schema: dict) -> bool:
     result = True
     try:
         validate(instance=obj, schema=schema)
@@ -18,7 +21,7 @@ def is_valid_schema(obj, schema):
     return result
 
 
-def get_cognito_user():
+def get_cognito_user() -> Optional[str]:
     # Get the name of the currently authenticated Cognito user
     event = request.environ.get("serverless.event", "no event")
 
@@ -69,7 +72,7 @@ def return_not_implemented():
 
 
 # Returns distance in kilometers
-def distance_between_locations(loc1, loc2):
+def distance_between_locations(loc1: Location, loc2: Location):
     radius = 6371
     lat1 = radians(loc1.latitude)
     lat2 = radians(loc2.latitude)

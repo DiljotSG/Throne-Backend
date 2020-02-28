@@ -1,10 +1,10 @@
-from datetime import datetime
-from typing import List, Optional
-
 from ..interfaces.building_interface import IBuildingsPersistence
 from ...objects.building import Building
 from ...objects.amenity import Amenity
 from ...objects.location import Location
+
+from datetime import datetime
+from typing import List, Optional
 
 
 class BuildingsStubPersistence(IBuildingsPersistence):

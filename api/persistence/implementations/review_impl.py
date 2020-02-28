@@ -1,8 +1,9 @@
 from . import get_sql_connection
-from datetime import datetime
-from ...objects.review import Review
 from ..interfaces.review_interface import IReviewsPersistence
+
+from ...objects.review import Review
 from api.common import convert_to_mysql_timestamp
+from datetime import datetime
 from typing import List, Optional
 
 

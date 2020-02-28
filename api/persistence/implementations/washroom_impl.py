@@ -1,14 +1,15 @@
 from . import get_sql_connection
-from datetime import datetime
-from typing import List, Optional
-
-from api.common import convert_to_mysql_timestamp, distance_between_locations
 from ..interfaces.washroom_interface import IWashroomsPersistence
 from .amenity_impl import AmenitiesPersistence
 from .review_impl import ReviewsPersistence
+
 from ...objects.washroom import Washroom
 from ...objects.location import Location
 from ...objects.amenity import Amenity
+from api.common import convert_to_mysql_timestamp
+from api.common import distance_between_locations
+from datetime import datetime
+from typing import List, Optional
 
 
 # The ordering of these indicies are determined by the order of properties

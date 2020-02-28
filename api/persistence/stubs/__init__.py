@@ -7,8 +7,8 @@ from ..interfaces.review_interface import IReviewsPersistence
 from ..interfaces.user_interface import IUsersPersistence
 from ..interfaces.washroom_interface import IWashroomsPersistence
 
-from ...objects.location import Location
 from ...objects.amenity import Amenity
+from ...objects.location import Location
 
 from typing import List
 

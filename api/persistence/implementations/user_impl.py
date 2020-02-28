@@ -1,11 +1,11 @@
 from . import get_sql_connection
-from datetime import datetime
-
-from api.common import convert_to_mysql_timestamp
+from ..interfaces.user_interface import IUsersPersistence
 from .favorite_impl import FavoritesPersistence
 from .review_impl import ReviewsPersistence
+
 from ...objects.user import User
-from ..interfaces.user_interface import IUsersPersistence
+from api.common import convert_to_mysql_timestamp
+from datetime import datetime
 from typing import Optional
 
 
