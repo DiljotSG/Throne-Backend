@@ -1,5 +1,6 @@
 from abc import ABC
 from abc import abstractmethod
+from typing import Optional
 from ...objects.rating import Rating
 
 
@@ -19,7 +20,7 @@ class IRatingsPersistence(ABC):
     def get_rating(
         self,
         rating_id: int
-    ) -> Rating:
+    ) -> Optional[Rating]:
         pass
 
     @abstractmethod
@@ -30,7 +31,7 @@ class IRatingsPersistence(ABC):
         privacy: float,
         smell: float,
         toilet_paper_quality: float
-    ) -> Rating:
+    ) -> Optional[Rating]:
         pass
 
     @abstractmethod

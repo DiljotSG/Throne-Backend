@@ -1,10 +1,11 @@
 from ...objects.rating import Rating
 from ..interfaces.rating_interface import IRatingsPersistence
+from typing import List, Optional
 
 
 class RatingsStubPersistence(IRatingsPersistence):
     def __init__(self) -> None:
-        self.ratings = []
+        self.ratings: List[Rating] = []
 
     def add_rating(
         self,
@@ -28,7 +29,7 @@ class RatingsStubPersistence(IRatingsPersistence):
     def get_rating(
         self,
         rating_id: int
-    ) -> Rating:
+    ) -> Optional[Rating]:
         if rating_id >= 0 and rating_id < len(self.ratings) and \
            self.ratings[rating_id] is not None:
             return self.ratings[rating_id]
@@ -41,16 +42,19 @@ class RatingsStubPersistence(IRatingsPersistence):
         privacy: float,
         smell: float,
         toilet_paper_quality: float
-    ) -> Rating:
+    ) -> Optional[Rating]:
+        new_rating = None
         if rating_id >= 0 and rating_id < len(self.ratings) and \
            self.ratings[rating_id] is not None:
-            self.ratings[rating_id] = Rating(
+            new_rating = Rating(
                 rating_id,
                 cleanliness,
                 privacy,
                 smell,
                 toilet_paper_quality
             )
+            self.ratings[rating_id] = new_rating
+        return new_rating
 
     def remove_rating(
         self,

@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 
 class WashroomStore:
@@ -26,7 +26,7 @@ class WashroomStore:
         floor: int,
         building_id: int,
         amenities: list
-    ) -> dict:
+    ) -> Optional[dict]:
         return None
 
     def get_washrooms(
@@ -35,7 +35,7 @@ class WashroomStore:
         radius=5,
         max_washrooms=5,
         desired_amenities=[]
-    ) -> dict:
+    ) -> List[dict]:
         result = []
         query_result = self.__washroom_persistence.query_washrooms(
             location,

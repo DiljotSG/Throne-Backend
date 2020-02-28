@@ -1,5 +1,6 @@
 from abc import ABC
 from abc import abstractmethod
+from typing import Optional
 from ...objects.preference import Preference
 
 
@@ -21,14 +22,14 @@ class IPreferencesPersistence(ABC):
         gender: str,
         wheelchair_accessible: bool,
         main_floor_access: bool
-    ) -> Preference:
+    ) -> Optional[Preference]:
         pass
 
     @abstractmethod
     def get_preference(
         self,
         preference_id: int
-    ) -> Preference:
+    ) -> Optional[Preference]:
         pass
 
     @abstractmethod

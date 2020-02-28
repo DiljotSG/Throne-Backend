@@ -1,10 +1,11 @@
 from ...objects.preference import Preference
 from ..interfaces.preference_interface import IPreferencesPersistence
+from typing import Optional, List
 
 
 class PreferencesStubPersistence(IPreferencesPersistence):
     def __init__(self) -> None:
-        self.preferences = []
+        self.preferences: List[Preference] = []
 
     def add_preference(
         self,
@@ -29,7 +30,7 @@ class PreferencesStubPersistence(IPreferencesPersistence):
         gender: str,
         wheelchair_accessible: bool,
         main_floor_access: bool
-    ) -> Preference:
+    ) -> Optional[Preference]:
         updated_pref = None
         if preference_id >= 0 and preference_id < len(self.preferences) and \
            self.preferences[preference_id] is not None:
@@ -45,7 +46,7 @@ class PreferencesStubPersistence(IPreferencesPersistence):
     def get_preference(
         self,
         preference_id: int
-    ) -> Preference:
+    ) -> Optional[Preference]:
         if preference_id >= 0 and preference_id < len(self.preferences) and \
            self.preferences[preference_id] is not None:
             return self.preferences[preference_id]

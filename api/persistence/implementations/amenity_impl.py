@@ -1,7 +1,7 @@
 from . import get_sql_connection
 from api.objects.amenity import Amenity
 from ..interfaces.amenity_interface import IAmenitiesPersistence
-from typing import List
+from typing import List, Optional
 
 
 class AmenitiesPersistence(IAmenitiesPersistence):
@@ -40,7 +40,7 @@ class AmenitiesPersistence(IAmenitiesPersistence):
     def get_amenities(
         self,
         amenities_id: int
-    ) -> List[Amenity]:
+    ) -> Optional[List[Amenity]]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
         find_query = "SELECT * FROM amenities WHERE id = %s"

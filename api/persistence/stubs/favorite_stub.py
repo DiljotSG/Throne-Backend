@@ -1,10 +1,11 @@
 from ...objects.favorite import Favorite
 from ..interfaces.favorite_interface import IFavoritesPersistence
+from typing import Optional, List
 
 
 class FavoritesStubPersistence(IFavoritesPersistence):
     def __init__(self) -> None:
-        self.favorites = []
+        self.favorites: List[Favorite] = []
 
     def add_favorite(
         self,
@@ -24,7 +25,7 @@ class FavoritesStubPersistence(IFavoritesPersistence):
     def get_favorite(
         self,
         favorite_id: int
-    ) -> Favorite:
+    ) -> Optional[Favorite]:
         if favorite_id >= 0 and favorite_id < len(self.favorites) and \
            self.favorites[favorite_id] is not None:
             return self.favorites[favorite_id]
@@ -33,7 +34,7 @@ class FavoritesStubPersistence(IFavoritesPersistence):
     def get_favorites_by_user(
         self,
         user_id: int  # Foreign Key
-    ) -> Favorite:
+    ) -> Optional[List[Favorite]]:
         user_favorites = []
         for favorite in self.favorites:
             if favorite is not None and user_id == favorite.user_id:

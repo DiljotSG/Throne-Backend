@@ -1,5 +1,6 @@
 from abc import ABC
 from abc import abstractmethod
+from typing import Optional, List
 from ...objects.favorite import Favorite
 
 
@@ -17,14 +18,14 @@ class IFavoritesPersistence(ABC):
     def get_favorite(
         self,
         favorite_id: int
-    ) -> Favorite:
+    ) -> Optional[Favorite]:
         pass
 
     @abstractmethod
     def get_favorites_by_user(
         self,
         user_id: int  # Foreign Key
-    ) -> Favorite:
+    ) -> Optional[List[Favorite]]:
         pass
 
     @abstractmethod

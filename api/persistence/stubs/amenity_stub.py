@@ -1,6 +1,6 @@
 from ..interfaces.amenity_interface import IAmenitiesPersistence
 from ...objects.amenity import Amenity
-from typing import List
+from typing import List, Optional
 
 
 class AmenitiesStubPersistence(IAmenitiesPersistence):
@@ -17,7 +17,7 @@ class AmenitiesStubPersistence(IAmenitiesPersistence):
     def get_amenities(
         self,
         amenities_id: int
-    ) -> List[Amenity]:
+    ) -> Optional[List[Amenity]]:
         if amenities_id >= 0 and amenities_id < len(self.amenities):
             return self.amenities[amenities_id]
         return None

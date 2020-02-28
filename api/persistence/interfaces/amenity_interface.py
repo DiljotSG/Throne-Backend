@@ -1,7 +1,7 @@
 from abc import ABC
 from abc import abstractmethod
 from api.objects.amenity import Amenity
-from typing import List
+from typing import List, Optional
 
 
 class IAmenitiesPersistence(ABC):
@@ -17,7 +17,7 @@ class IAmenitiesPersistence(ABC):
     def get_amenities(
         self,
         amenities_id: int
-    ) -> List[Amenity]:
+    ) -> Optional[List[Amenity]]:
         pass
 
     @abstractmethod

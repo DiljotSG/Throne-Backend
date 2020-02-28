@@ -1,3 +1,6 @@
+from typing import Optional
+
+
 class ReviewStore:
     def __init__(
         self,
@@ -15,7 +18,7 @@ class ReviewStore:
         user_id: int,
         comment: str,
         ratings: dict
-    ) -> dict:
+    ) -> Optional[dict]:
         # TODO: Add support for creating a new Review based
         # on the provided data - If data is invalid, throw
         # and exception
@@ -27,7 +30,7 @@ class ReviewStore:
         user_id: int,
         comment: str,
         ratings: dict
-    ) -> dict:
+    ) -> Optional[dict]:
         # TODO: Add support for updating a Review based
         # on the provided data - If data is invalid, throw
         # and exception
@@ -36,7 +39,7 @@ class ReviewStore:
     def delete_review(
         self,
         review_id: int
-    ) -> None:
+    ) -> Optional[None]:
         # TODO: Add support for deleting a Review based
         # on the provided data - If data is invalid, throw
         # and exception

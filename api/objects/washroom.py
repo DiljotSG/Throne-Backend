@@ -1,5 +1,5 @@
 from .location import Location
-
+from datetime import datetime
 
 class Washroom:
     def __init__(
@@ -7,7 +7,7 @@ class Washroom:
         washroom_id: int,
         title: str,
         location: Location,
-        created_at: str,
+        created_at: datetime,
         gender: str,
         floor: int,
         building_id: int,

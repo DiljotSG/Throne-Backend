@@ -10,17 +10,12 @@ from ..interfaces.washroom_interface import IWashroomsPersistence
 from ...objects.location import Location
 from ...objects.amenity import Amenity
 from ...objects.building import Building
-from ...objects.favorite import Favorite
-from ...objects.location import Location
 from ...objects.preference import Preference
 from ...objects.rating import Rating
-from ...objects.review import Review
 from ...objects.user import User
 from ...objects.washroom import Washroom
 
-from api.objects.amenity import Amenity
-
-from typing import List, Dict
+from typing import List
 
 
 def populate_stub_data(
@@ -249,7 +244,7 @@ def __create_amenities(
 def __create_buildings(
     building_persistence: IBuildingsPersistence,
     building_best_ratings: List[Rating]
-) -> List[Building]:
+) -> List[int]:
     location1 = Location(10.2, 15.9)
     location2 = Location(104, 230.5)
 

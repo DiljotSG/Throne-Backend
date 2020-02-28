@@ -3,12 +3,12 @@ from ...objects.washroom import Washroom
 from ..interfaces.washroom_interface import IWashroomsPersistence
 from ...objects.amenity import Amenity
 from ...objects.location import Location
-from typing import List
+from typing import List, Optional
 
 
 class WashroomsStubPersistence(IWashroomsPersistence):
     def __init__(self):
-        self.washrooms = []
+        self.washrooms: List[Washroom] = []
 
     def add_washroom(
         self,
@@ -45,7 +45,7 @@ class WashroomsStubPersistence(IWashroomsPersistence):
         max_washrooms: int,
         desired_amenities: List[Amenity]
     ) -> List[Washroom]:
-        filtered_washrooms = []
+        filtered_washrooms: List[Washroom] = []
 
         for washroom in self.washrooms:
             if len(filtered_washrooms) >= max_washrooms:
