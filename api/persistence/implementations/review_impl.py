@@ -48,9 +48,11 @@ class ReviewsPersistence(IReviewsPersistence):
         cursor.execute(insert_query, insert_tuple)
         cnx.commit()
 
-        # Get the ID of what we just inserted
+        # Get the ID of the thing that we just inserted
         cursor.execute(find_query)
-        return list(cursor)[0][0]
+        returnid = cursor.fetchall()[0][0]
+
+        return returnid
 
     def update_review(
         self,
@@ -92,8 +94,9 @@ class ReviewsPersistence(IReviewsPersistence):
         find_query = "SELECT * FROM reviews WHERE id = %s"
         find_tuple = (review_id,)
         cursor.execute(find_query, find_tuple)
+        result = cursor.fetchall()
+        cnx.commit()
 
-        result = list(cursor)
         if len(result) != 1:
             return None
 
@@ -111,7 +114,9 @@ class ReviewsPersistence(IReviewsPersistence):
         find_tuple = (user_id,)
         cursor.execute(find_query, find_tuple)
 
-        reviews = list(cursor)
+        reviews = cursor.fetchall()
+        cnx.commit()
+
         return [_result_to_review(result) for result in reviews]
 
     def get_reviews_by_washroom(
@@ -125,7 +130,9 @@ class ReviewsPersistence(IReviewsPersistence):
         find_tuple = (washroom_id,)
         cursor.execute(find_query, find_tuple)
 
-        reviews = list(cursor)
+        reviews = cursor.fetchall()
+        cnx.commit()
+
         return [_result_to_review(result) for result in reviews]
 
     def remove_reviews_by_washroom(
@@ -159,7 +166,7 @@ class ReviewsPersistence(IReviewsPersistence):
         query_tuple = (review_id,)
 
         cursor.execute(find_query, query_tuple)
-        ratingID = list(cursor)[0][0]
+        ratingID = cursor.fetchall()[0][0]
         remove_rating_tuple = (ratingID,)
 
         cursor.execute(remove_review_query, query_tuple)

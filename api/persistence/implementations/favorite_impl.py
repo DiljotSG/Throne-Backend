@@ -38,9 +38,11 @@ class FavoritesPersistence(IFavoritesPersistence):
         cursor.execute(insert_query, insert_tuple)
         cnx.commit()
 
-        # Get the ID of what we just inserted
+        # Get the ID of the thing that we just inserted
         cursor.execute(find_query)
-        return list(cursor)[0][0]
+        returnid = cursor.fetchall()[0][0]
+
+        return returnid
 
     def get_favorite(
         self,
@@ -52,10 +54,12 @@ class FavoritesPersistence(IFavoritesPersistence):
         find_query = "SELECT * FROM favorites WHERE id = %s"
         find_tuple = (favorite_id,)
         cursor.execute(find_query, find_tuple)
+        result = cursor.fetchall()
+        cnx.commit()
 
-        result = list(cursor)
         if len(result) != 1:
             return None
+
         result = result[0]
         return _result_to_favorite(result)
 
@@ -70,8 +74,8 @@ class FavoritesPersistence(IFavoritesPersistence):
         find_tuple = (user_id,)
 
         cursor.execute(find_query, find_tuple)
-
-        results = list(cursor)
+        results = cursor.fetchall()
+        cnx.commit()
 
         return [_result_to_favorite(result) for result in results]
 

@@ -72,7 +72,7 @@ def return_not_implemented():
 
 
 # Returns distance in kilometers
-def distance_between_locations(loc1: Location, loc2: Location):
+def distance_between_locations(loc1: Location, loc2: Location) -> float:
     radius = 6371
     lat1 = radians(loc1.latitude)
     lat2 = radians(loc2.latitude)

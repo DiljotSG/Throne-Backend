@@ -19,8 +19,8 @@ class TestWashroomAPI(unittest.TestCase):
         data = json.loads(response.data.decode())
         expected_data = {
             "amenities": [
-                "Air Dryer",
-                "Automatic Toilet"
+                "air_dryer",
+                "auto_toilet"
             ],
             "average_ratings": {
                 "cleanliness": 3.2,
@@ -50,8 +50,8 @@ class TestWashroomAPI(unittest.TestCase):
         data = json.loads(response.data.decode())
         expected_data = {
             "amenities": [
-                "Air Dryer",
-                "Automatic Toilet"
+                "air_dryer",
+                "auto_toilet"
             ],
             "average_ratings": {
                 "cleanliness": 3.2,
