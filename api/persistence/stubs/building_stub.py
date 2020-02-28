@@ -15,7 +15,7 @@ class BuildingsStubPersistence(IBuildingsPersistence):
         self,
         location: Location,
         title: str,
-        map_service_id: int,
+        map_service_id: str,
         overall_rating: int,
         best_rating_id: int
     ) -> int:

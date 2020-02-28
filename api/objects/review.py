@@ -1,3 +1,4 @@
+from datetime import datetime
 
 
 class Review:
@@ -5,7 +6,7 @@ class Review:
         self,
         review_id: int,
         washroom_id: int,
-        created_at: str,
+        created_at: datetime,
         user_id: int,
         comment: str,
         upvote_count: int,
