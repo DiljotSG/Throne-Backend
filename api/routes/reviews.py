@@ -2,7 +2,7 @@ from flask import Blueprint
 from flask_cors import CORS
 from flask_cors import cross_origin
 from api.common import return_as_json
-from api.response_codes import HttpCodes
+from api.common import return_no_content
 from ..persistence import create_review_store
 
 review_store = create_review_store()
@@ -21,5 +21,5 @@ def get_review(review_id):
 @mod.route("/<int:review_id>", methods=["DELETE"])
 @cross_origin()
 def delete_review(review_id):
-    review_store.delete(review_id)
-    return "", HttpCodes.HTTP_204_NO_CONTENT
+    review_store.delete_review(review_id)
+    return return_no_content()

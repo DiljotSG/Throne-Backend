@@ -58,7 +58,7 @@ def post_washrooms():
         building_id = int(request.json["building_id"])
         amenities = list(request.json["amenities"])
 
-        result = washroom_store.create(
+        result = washroom_store.create_washroom(
             title,
             longitude,
             latitude,
@@ -68,7 +68,7 @@ def post_washrooms():
             amenities
         )
 
-    except (Exception):
+    except (ValueError):
         code = HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY
 
     return return_as_json(result, code)
@@ -93,18 +93,20 @@ def post_washrooms_reviews(washroom_id):
     result = None
 
     try:
+        # TODO: get_cognito_user() returns a username, support for
+        # retrieving current user's id is required
         user_id = get_cognito_user()
         comment = str(request.json["comment"])
         ratings = list(request.json["ratings"])
 
-        result = review_store.create(
+        result = review_store.create_review(
             washroom_id,
             user_id,
             comment,
             ratings
         )
 
-    except (Exception):
+    except (ValueError):
         code = HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY
 
     return return_as_json(result, code)
@@ -117,18 +119,20 @@ def put_washroom_review(washroom_id, review_id):
     result = None
 
     try:
+        # TODO: get_cognito_user() returns a username, support for
+        # retrieving current user's id is required
         user_id = get_cognito_user()
         comment = str(request.json["comment"])
         ratings = list(request.json["ratings"])
 
-        result = review_store.update(
+        result = review_store.update_review(
             washroom_id,
             user_id,
             comment,
             ratings
         )
 
-    except (Exception):
+    except (ValueError):
         code = HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY
 
     return return_as_json(result, code)

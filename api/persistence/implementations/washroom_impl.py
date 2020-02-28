@@ -1,13 +1,14 @@
 from . import get_sql_connection
 from datetime import datetime
+from typing import List
+
 from api.common import convert_to_mysql_timestamp, distance_between_locations
+from ..interfaces.washroom_interface import IWashroomsPersistence
 from .amenity_impl import AmenitiesPersistence
 from .review_impl import ReviewsPersistence
-from ...objects.location import Location
 from ...objects.washroom import Washroom
+from ...objects.location import Location
 from ...objects.amenity import Amenity
-from ..interfaces.washroom_interface import IWashroomsPersistence
-from typing import Dict, List
 
 
 # The ordering of these indicies are determined by the order of properties
@@ -29,7 +30,7 @@ class WashroomsPersistence(IWashroomsPersistence):
     def add_washroom(
         self,
         building_id: int,  # Foreign Key
-        location: Dict[str, float],
+        location: Location,
         title: str,
         floor: int,
         gender: str,
@@ -64,7 +65,7 @@ class WashroomsPersistence(IWashroomsPersistence):
 
     def query_washrooms(
         self,
-        location: Dict[str, float],
+        location: Location,
         radius: float,
         max_washrooms: int,
         desired_amenities: List[Amenity]

@@ -11,7 +11,7 @@ class AmenitiesPersistence(IAmenitiesPersistence):
     # Add a new amenity list
     def add_amenities(
         self,
-        *amenities
+        *amenities: Amenity
     ) -> int:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor

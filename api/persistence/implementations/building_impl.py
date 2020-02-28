@@ -6,7 +6,7 @@ from ...objects.building import Building
 from ..interfaces.building_interface import IBuildingsPersistence
 from ...objects.location import Location
 from ...objects.amenity import Amenity
-from typing import Dict, List
+from typing import List
 
 
 # The ordering of these indicies are determined by the order of properties
@@ -25,7 +25,7 @@ class BuildingsPersistence(IBuildingsPersistence):
 
     def add_building(
         self,
-        location: Dict[str, float],
+        location: Location,
         title: str,
         map_service_id: int,
         overall_rating: int,
@@ -58,7 +58,7 @@ class BuildingsPersistence(IBuildingsPersistence):
 
     def query_buildings(
         self,
-        location: Dict[str, float],
+        location: Location,
         radius: float,
         max_buildings: int,
         desired_amenities: List[Amenity]

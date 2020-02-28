@@ -56,7 +56,7 @@ else:
     )
 
 
-def create_building_store():
+def create_building_store() -> BuildingStore:
     return BuildingStore(
         __building_persistence,
         __washroom_persistence,
@@ -65,7 +65,7 @@ def create_building_store():
     )
 
 
-def create_washroom_store():
+def create_washroom_store() -> WashroomStore:
     return WashroomStore(
         __washroom_persistence,
         __review_persistence,
@@ -75,7 +75,7 @@ def create_washroom_store():
     )
 
 
-def create_review_store():
+def create_review_store() -> ReviewStore:
     return ReviewStore(
         __review_persistence,
         __rating_persistence,
@@ -83,7 +83,7 @@ def create_review_store():
     )
 
 
-def create_user_store():
+def create_user_store() -> UserStore:
     return UserStore(
         __user_persistence,
         __favorite_persistence,

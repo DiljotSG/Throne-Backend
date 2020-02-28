@@ -1,15 +1,17 @@
 from abc import ABC
 from abc import abstractmethod
+from typing import List
+
 from ...objects.amenity import Amenity
 from ...objects.building import Building
-from typing import Dict, List
+from ...objects.location import Location
 
 
 class IBuildingsPersistence(ABC):
     @abstractmethod
     def add_building(
         self,
-        location: Dict[str, float],
+        location: Location,
         title: str,
         map_service_id: int,
         overall_rating: int,
@@ -21,7 +23,7 @@ class IBuildingsPersistence(ABC):
     @abstractmethod
     def query_buildings(
         self,
-        location: Dict[str, float],
+        location: Location,
         radius: float,
         max_buildings: int,
         desired_amenities: List[Amenity]

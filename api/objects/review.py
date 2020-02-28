@@ -1,3 +1,5 @@
+
+
 class Review:
     def __init__(
         self,
@@ -19,4 +21,6 @@ class Review:
 
     @staticmethod
     def verify(comment: str) -> bool:
+        # TODO: Add support for verifying if a comment contains
+        # valid input. Ex. is not empty, etc
         return True

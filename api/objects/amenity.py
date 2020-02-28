@@ -23,4 +23,6 @@ class Amenity(str, Enum):
 
     @staticmethod
     def verify_list(amenities: List[str]):
+        # TODO: Add support for verifying if a list of strings
+        # of contains all valid Amenities
         return True

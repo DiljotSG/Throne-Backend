@@ -2,7 +2,8 @@ from abc import ABC
 from abc import abstractmethod
 from ...objects.washroom import Washroom
 from ...objects.amenity import Amenity
-from typing import Dict, List
+from ...objects.location import Location
+from typing import List
 
 
 class IWashroomsPersistence(ABC):
@@ -11,7 +12,7 @@ class IWashroomsPersistence(ABC):
     def add_washroom(
         self,
         building_id: int,  # Foreign Key
-        location: Dict[str, float],
+        location: Location,
         title: str,
         floor: int,
         gender: str,
@@ -25,7 +26,7 @@ class IWashroomsPersistence(ABC):
     @abstractmethod
     def query_washrooms(
         self,
-        location: Dict[str, float],
+        location: Location,
         radius: float,
         max_washrooms: int,
         desired_amenities: List[Amenity]

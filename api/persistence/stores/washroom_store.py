@@ -17,7 +17,7 @@ class WashroomStore:
         self.__ratings_persistence = ratings_persistence
         self.__user_persistence = user_persistence
 
-    def create(
+    def create_washroom(
         self,
         title: str,
         longitude: float,

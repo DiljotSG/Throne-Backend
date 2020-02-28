@@ -60,6 +60,14 @@ def return_as_json(data, code=HttpCodes.HTTP_200_OK):
     return jsonify(result), code
 
 
+def return_no_content():
+    return "", HttpCodes.HTTP_204_NO_CONTENT
+
+
+def return_not_implemented():
+    return "", HttpCodes.HTTP_501_NOT_IMPLEMENTED
+
+
 # Returns distance in kilometers
 def distance_between_locations(loc1, loc2):
     radius = 6371

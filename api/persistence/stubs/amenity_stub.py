@@ -9,7 +9,7 @@ class AmenitiesStubPersistence(IAmenitiesPersistence):
 
     def add_amenities(
         self,
-        *amenities
+        *amenities: Amenity
     ) -> int:
         self.amenities.append(amenities)
         return len(self.amenities) - 1

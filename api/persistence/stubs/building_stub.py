@@ -1,8 +1,10 @@
 from datetime import datetime
-from ...objects.building import Building
+from typing import List
+
 from ..interfaces.building_interface import IBuildingsPersistence
+from ...objects.building import Building
 from ...objects.amenity import Amenity
-from typing import Dict, List
+from ...objects.location import Location
 
 
 class BuildingsStubPersistence(IBuildingsPersistence):
@@ -11,11 +13,11 @@ class BuildingsStubPersistence(IBuildingsPersistence):
 
     def add_building(
         self,
-        location: Dict[str, float],
+        location: Location,
         title: str,
         map_service_id: int,
         overall_rating: int,
-        best_rating_id: int,
+        best_rating_id: int
     ) -> int:
         building_id = len(self.buildings)
         new_building = Building(
@@ -33,7 +35,7 @@ class BuildingsStubPersistence(IBuildingsPersistence):
 
     def query_buildings(
         self,
-        location: Dict[str, float],
+        location: Location,
         radius: float,
         max_buildings: int,
         desired_amenities: List[Amenity]
