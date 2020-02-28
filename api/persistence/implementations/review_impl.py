@@ -60,7 +60,7 @@ class ReviewsPersistence(IReviewsPersistence):
         rating_id: int,  # Foreign Key
         comment: str,
         upvote_count: int
-    ) -> Review:
+    ) -> Optional[Review]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
