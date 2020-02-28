@@ -34,6 +34,6 @@ class Washroom:
         gender: str,
         floor: int,
     ):
-        # TODO: Verify if the supplied input is valid data 
+        # TODO: Verify if the supplied input is valid data
         # to be used in creating a washroom
         return True
