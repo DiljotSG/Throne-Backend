@@ -1,6 +1,8 @@
 from . import get_sql_connection
-from ...db_objects.rating import Rating
 from ..interfaces.rating_interface import IRatingsPersistence
+
+from ...objects.rating import Rating
+from typing import Optional
 
 
 # The ordering of these indicies are determined by the order of properties
@@ -18,11 +20,11 @@ class RatingsPersistence(IRatingsPersistence):
 
     def add_rating(
         self,
-        cleanliness,
-        privacy,
-        smell,
-        toilet_paper_quality,
-    ):
+        cleanliness: float,
+        privacy: float,
+        smell: float,
+        toilet_paper_quality: float,
+    ) -> int:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -45,8 +47,8 @@ class RatingsPersistence(IRatingsPersistence):
 
     def get_rating(
         self,
-        rating_id
-    ):
+        rating_id: int
+    ) -> Optional[Rating]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -63,12 +65,12 @@ class RatingsPersistence(IRatingsPersistence):
 
     def update_rating(
         self,
-        rating_id,
-        cleanliness,
-        privacy,
-        smell,
-        toilet_paper_quality
-    ):
+        rating_id: int,
+        cleanliness: float,
+        privacy: float,
+        smell: float,
+        toilet_paper_quality: float
+    ) -> Optional[Rating]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -87,10 +89,12 @@ class RatingsPersistence(IRatingsPersistence):
         cursor.execute(update_query, update_tuple)
         cnx.commit()
 
+        return self.get_rating(rating_id)
+
     def remove_rating(
         self,
-        rating_id
-    ):
+        rating_id: int
+    ) -> None:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 

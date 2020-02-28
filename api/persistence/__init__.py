@@ -17,12 +17,32 @@ from .implementations.review_impl import ReviewsPersistence
 from .implementations.user_impl import UsersPersistence
 from .implementations.washroom_impl import WashroomsPersistence
 
+from .interfaces.amenity_interface import IAmenitiesPersistence
+from .interfaces.building_interface import IBuildingsPersistence
+from .interfaces.favorite_interface import IFavoritesPersistence
+from .interfaces.preference_interface import IPreferencesPersistence
+from .interfaces.rating_interface import IRatingsPersistence
+from .interfaces.review_interface import IReviewsPersistence
+from .interfaces.user_interface import IUsersPersistence
+from .interfaces.washroom_interface import IWashroomsPersistence
+
 from .stores.building_store import BuildingStore
 from .stores.review_store import ReviewStore
 from .stores.user_store import UserStore
 from .stores.washroom_store import WashroomStore
 
+from typing import Optional
+
 import os
+
+__amenity_persistence: Optional[IAmenitiesPersistence] = None
+__building_persistence: Optional[IBuildingsPersistence] = None
+__favorite_persistence: Optional[IFavoritesPersistence] = None
+__preference_persistence: Optional[IPreferencesPersistence] = None
+__rating_persistence: Optional[IRatingsPersistence] = None
+__review_persistence: Optional[IReviewsPersistence] = None
+__user_persistence: Optional[IUsersPersistence] = None
+__washroom_persistence: Optional[IWashroomsPersistence] = None
 
 if (os.environ.get("IS_LAMBDA") or os.environ.get("THRONE_USE_DB")) and \
      not (os.environ.get("THRONE_NO_DB_CREDS")):
@@ -56,7 +76,7 @@ else:
     )
 
 
-def create_building_store():
+def create_building_store() -> BuildingStore:
     return BuildingStore(
         __building_persistence,
         __washroom_persistence,
@@ -65,7 +85,7 @@ def create_building_store():
     )
 
 
-def create_washroom_store():
+def create_washroom_store() -> WashroomStore:
     return WashroomStore(
         __washroom_persistence,
         __review_persistence,
@@ -75,7 +95,7 @@ def create_washroom_store():
     )
 
 
-def create_review_store():
+def create_review_store() -> ReviewStore:
     return ReviewStore(
         __review_persistence,
         __rating_persistence,
@@ -83,7 +103,7 @@ def create_review_store():
     )
 
 
-def create_user_store():
+def create_user_store() -> UserStore:
     return UserStore(
         __user_persistence,
         __favorite_persistence,

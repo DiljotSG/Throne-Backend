@@ -1,6 +1,8 @@
 from . import get_sql_connection
-from ...db_objects.preference import Preference
 from ..interfaces.preference_interface import IPreferencesPersistence
+
+from ...objects.preference import Preference
+from typing import Optional
 
 
 # The ordering of these indicies are determined by the order of properties
@@ -18,10 +20,10 @@ class PreferencesPersistence(IPreferencesPersistence):
 
     def add_preference(
         self,
-        gender,
-        wheelchair_accessible,
-        main_floor_access
-    ):
+        gender: str,
+        wheelchair_accessible: bool,
+        main_floor_access: bool
+    ) -> int:
         if len(gender) > 25:
             return -1
 
@@ -46,17 +48,17 @@ class PreferencesPersistence(IPreferencesPersistence):
 
     def update_preference(
         self,
-        preference_id,
-        gender,
-        wheelchair_accessible,
-        main_floor_access
-    ):
+        preference_id: int,
+        gender: str,
+        wheelchair_accessible: bool,
+        main_floor_access: bool
+    ) -> Optional[Preference]:
         pass
 
     def get_preference(
         self,
-        preference_id
-    ):
+        preference_id: int
+    ) -> Optional[Preference]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -74,8 +76,8 @@ class PreferencesPersistence(IPreferencesPersistence):
 
     def remove_preference(
         self,
-        preference_id
-    ):
+        preference_id: int
+    ) -> None:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 

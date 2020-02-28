@@ -1,24 +1,27 @@
-from datetime import datetime
-
-from ...objects.washroom import Washroom
 from ..interfaces.washroom_interface import IWashroomsPersistence
+from ...objects.washroom import Washroom
+from ...objects.location import Location
+from ...objects.amenity import Amenity
+
+from datetime import datetime
+from typing import List, Optional
 
 
 class WashroomsStubPersistence(IWashroomsPersistence):
     def __init__(self):
-        self.washrooms = []
+        self.washrooms: List[Washroom] = []
 
     def add_washroom(
         self,
-        building_id,  # Foreign Key
-        location,
-        title,
-        floor,
-        gender,
-        amenities_id,  # Foreign Key
-        overall_rating,
-        average_ratings_id  # Foreign Key
-    ):
+        building_id: int,  # Foreign Key
+        location: Location,
+        title: str,
+        floor: int,
+        gender: str,
+        amenities_id: int,  # Foreign Key
+        overall_rating: int,
+        average_ratings_id: int  # Foreign Key
+    ) -> int:
         washroom_id = len(self.washrooms)
         new_washroom = Washroom(
             washroom_id,
@@ -38,12 +41,12 @@ class WashroomsStubPersistence(IWashroomsPersistence):
 
     def query_washrooms(
         self,
-        location,
-        radius,
-        max_washrooms,
-        desired_amenities
-    ):
-        filtered_washrooms = []
+        location: Location,
+        radius: float,
+        max_washrooms: int,
+        desired_amenities: List[Amenity]
+    ) -> List[Washroom]:
+        filtered_washrooms: List[Washroom] = []
 
         for washroom in self.washrooms:
             if len(filtered_washrooms) >= max_washrooms:
@@ -55,8 +58,8 @@ class WashroomsStubPersistence(IWashroomsPersistence):
 
     def get_washrooms_by_building(
         self,
-        building_id
-    ):
+        building_id: int
+    ) -> List[Washroom]:
         washrooms = []
         for washroom in self.washrooms:
             if washroom is not None and washroom.building_id == building_id:
@@ -65,8 +68,8 @@ class WashroomsStubPersistence(IWashroomsPersistence):
 
     def get_washroom(
         self,
-        washroom_id
-    ):
+        washroom_id: int
+    ) -> Optional[Washroom]:
         if washroom_id >= 0 and washroom_id < len(self.washrooms) and \
            self.washrooms[washroom_id] is not None:
             return self.washrooms[washroom_id]
@@ -74,7 +77,7 @@ class WashroomsStubPersistence(IWashroomsPersistence):
 
     def remove_washroom(
         self,
-        washroom_id
-    ):
+        washroom_id: int
+    ) -> None:
         if washroom_id >= 0 and washroom_id < len(self.washrooms):
             self.washrooms.pop(washroom_id)

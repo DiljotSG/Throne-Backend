@@ -2,15 +2,17 @@ import datetime
 from flask import request
 from flask import jsonify
 from jsonschema import validate
+from .response_codes import HttpCodes
 from jsonschema import ValidationError
+from api.objects.location import Location
 from math import sin, cos, sqrt, atan2, radians
+from typing import Optional
 
-OK = 200
-BAD_REQUEST = 400
+
 TIMESTAMP_FORMAT = '%Y-%m-%d %H:%M:%S'
 
 
-def is_valid_schema(obj, schema):
+def is_valid_schema(obj, schema: dict) -> bool:
     result = True
     try:
         validate(instance=obj, schema=schema)
@@ -19,7 +21,7 @@ def is_valid_schema(obj, schema):
     return result
 
 
-def get_cognito_user():
+def get_cognito_user() -> Optional[str]:
     # Get the name of the currently authenticated Cognito user
     event = request.environ.get("serverless.event", "no event")
 
@@ -48,22 +50,29 @@ def get_cognito_user():
     return username
 
 
-def return_as_json(data):
+def return_as_json(data, code=HttpCodes.HTTP_200_OK):
     result = data
-    code = OK
 
     # If our data is non-existant, this is a bad request.
     if data is None:
         result = {
             "Error": "Invalid Request"
         }
-        code = BAD_REQUEST
+        code = HttpCodes.HTTP_400_BAD_REQUEST
 
     return jsonify(result), code
 
 
+def return_no_content():
+    return "", HttpCodes.HTTP_204_NO_CONTENT
+
+
+def return_not_implemented():
+    return "", HttpCodes.HTTP_501_NOT_IMPLEMENTED
+
+
 # Returns distance in kilometers
-def distance_between_locations(loc1, loc2):
+def distance_between_locations(loc1: Location, loc2: Location):
     radius = 6371
     lat1 = radians(loc1.latitude)
     lat2 = radians(loc2.latitude)
@@ -77,5 +86,5 @@ def distance_between_locations(loc1, loc2):
     return radius * c
 
 
-def convert_to_mysql_timestamp(timestamp: datetime):
+def convert_to_mysql_timestamp(timestamp: datetime.date):
     return timestamp.strftime(TIMESTAMP_FORMAT)

@@ -1,3 +1,6 @@
+from typing import List
+
+
 class UserStore:
     def __init__(
         self,
@@ -13,7 +16,7 @@ class UserStore:
         self.__preference_persistence = preference_persistence
         self.__ratings_persistence = ratings_persistence
 
-    def get_user(self, user_id):
+    def get_user(self, user_id: int) -> dict:
         result = self.__user_persistence.get_user(
             user_id
         )
@@ -22,7 +25,7 @@ class UserStore:
             self.__expand_user(result)
         return result
 
-    def get_reviews_by_user(self, user_id):
+    def get_reviews_by_user(self, user_id: int) -> List[dict]:
         result = []
         query_result = self.__review_persistence.get_reviews_by_user(user_id)
 
@@ -33,7 +36,7 @@ class UserStore:
 
         return result
 
-    def get_favorites_by_user(self, user_id):
+    def get_favorites_by_user(self, user_id: int) -> List[dict]:
         result = []
         query_result = self.__favorite_persistence.get_favorites_by_user(
             user_id
@@ -44,7 +47,7 @@ class UserStore:
 
         return result
 
-    def __expand_user(self, user):
+    def __expand_user(self, user: dict) -> None:
         # Expand preferences
         preference_id = user.pop("preference_id", None)
         item = self.__preference_persistence.get_preference(
@@ -54,7 +57,7 @@ class UserStore:
         item.pop("id", None)
         user["preferences"] = item
 
-    def __expand_review(self, review):
+    def __expand_review(self, review: dict) -> None:
         # Expand ratings
         rating_id = review.pop("rating_id", None)
         item = self.__ratings_persistence.get_rating(

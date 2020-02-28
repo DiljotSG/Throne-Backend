@@ -1,6 +1,8 @@
 from . import get_sql_connection
-from api.db_objects.favorite import Favorite
 from ..interfaces.favorite_interface import IFavoritesPersistence
+
+from ...objects.favorite import Favorite
+from typing import Optional, List
 
 
 # The ordering of these indicies are determined by the order of properties
@@ -18,9 +20,9 @@ class FavoritesPersistence(IFavoritesPersistence):
 
     def add_favorite(
         self,
-        user_id,  # Foreign Key
-        washroom_id  # Foreign Key
-    ):
+        user_id: int,  # Foreign Key
+        washroom_id: int  # Foreign Key
+    ) -> int:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -42,8 +44,8 @@ class FavoritesPersistence(IFavoritesPersistence):
 
     def get_favorite(
         self,
-        favorite_id
-    ):
+        favorite_id: int
+    ) -> Optional[Favorite]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -59,8 +61,8 @@ class FavoritesPersistence(IFavoritesPersistence):
 
     def get_favorites_by_user(
         self,
-        user_id  # Foreign Key
-    ):
+        user_id: int  # Foreign Key
+    ) -> Optional[List[Favorite]]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -75,8 +77,8 @@ class FavoritesPersistence(IFavoritesPersistence):
 
     def remove_favorite(
         self,
-        favorite_id
-    ):
+        favorite_id: int
+    ) -> None:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 

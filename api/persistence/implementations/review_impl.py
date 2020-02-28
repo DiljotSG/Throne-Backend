@@ -1,8 +1,10 @@
 from . import get_sql_connection
-from datetime import datetime
-from ...objects.review import Review
 from ..interfaces.review_interface import IReviewsPersistence
+
+from ...objects.review import Review
 from api.common import convert_to_mysql_timestamp
+from datetime import datetime
+from typing import List, Optional
 
 
 # The ordering of these indicies are determined by the order of properties
@@ -21,12 +23,12 @@ class ReviewsPersistence(IReviewsPersistence):
 
     def add_review(
         self,
-        washroom_id,  # Foreign Key
-        user_id,  # Foreign Key
-        rating_id,  # Foreign Key
-        comment,
-        upvote_count,
-    ):
+        washroom_id: int,  # Foreign Key
+        user_id: int,  # Foreign Key
+        rating_id: int,  # Foreign Key
+        comment: str,
+        upvote_count: int
+    ) -> int:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -52,19 +54,19 @@ class ReviewsPersistence(IReviewsPersistence):
 
     def update_review(
         self,
-        review_id,
-        washroom_id,  # Foreign Key
-        user_id,  # Foreign Key
-        rating_id,  # Foreign Key
-        comment,
-        upvote_count
-    ):
+        review_id: int,
+        washroom_id: int,  # Foreign Key
+        user_id: int,  # Foreign Key
+        rating_id: int,  # Foreign Key
+        comment: str,
+        upvote_count: int
+    ) -> Review:
         pass
 
     def get_review(
         self,
-        review_id
-    ):
+        review_id: int
+    ) -> Optional[Review]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -81,8 +83,8 @@ class ReviewsPersistence(IReviewsPersistence):
 
     def get_reviews_by_user(
         self,
-        user_id  # Foreign Key
-    ):
+        user_id: int  # Foreign Key
+    ) -> List[Review]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -95,8 +97,8 @@ class ReviewsPersistence(IReviewsPersistence):
 
     def get_reviews_by_washroom(
         self,
-        washroom_id  # Foreign Key
-    ):
+        washroom_id: int  # Foreign Key
+    ) -> List[Review]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -127,8 +129,8 @@ class ReviewsPersistence(IReviewsPersistence):
     # TODO: Check that foreign keys are removed properly
     def remove_review(
         self,
-        review_id
-    ):
+        review_id: int
+    ) -> None:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 

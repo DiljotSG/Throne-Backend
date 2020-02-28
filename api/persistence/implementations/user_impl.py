@@ -1,11 +1,12 @@
 from . import get_sql_connection
-from datetime import datetime
-
-from api.common import convert_to_mysql_timestamp
+from ..interfaces.user_interface import IUsersPersistence
 from .favorite_impl import FavoritesPersistence
 from .review_impl import ReviewsPersistence
+
 from ...objects.user import User
-from ..interfaces.user_interface import IUsersPersistence
+from api.common import convert_to_mysql_timestamp
+from datetime import datetime
+from typing import Optional
 
 
 # The ordering of these indicies are determined by the order of properties
@@ -24,10 +25,10 @@ class UsersPersistence(IUsersPersistence):
 
     def add_user(
         self,
-        username,
-        profile_pic,
-        preference_id  # Foreign key
-    ):
+        username: str,
+        profile_pic: str,
+        preference_id: int  # Foreign key
+    ) -> int:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -50,8 +51,8 @@ class UsersPersistence(IUsersPersistence):
 
     def get_user(
         self,
-        user_id
-    ):
+        user_id: int
+    ) -> Optional[User]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -68,7 +69,7 @@ class UsersPersistence(IUsersPersistence):
 
     def remove_user(
         self,
-        user_id
-    ):
+        user_id: int
+    ) -> None:
         # Removing users is not MVP
         pass

@@ -15,9 +15,9 @@ mod = Blueprint('buildings', __name__)
 cors = CORS(mod)
 
 
-@mod.route("")
+@mod.route("", methods=["GET"])
 @cross_origin()
-def buildings():
+def get_buildings():
     result = None
 
     # Try to get the URL parameters
@@ -39,13 +39,13 @@ def buildings():
     return return_as_json(result)
 
 
-@mod.route("/<int:building_id>")
+@mod.route("/<int:building_id>", methods=["GET"])
 @cross_origin()
 def buildings_id(building_id):
     return return_as_json(building_store.get_building(building_id))
 
 
-@mod.route("/<int:building_id>/washrooms")
+@mod.route("/<int:building_id>/washrooms", methods=["GET"])
 @cross_origin()
 def building_washrooms(building_id):
     return return_as_json(

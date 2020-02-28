@@ -1,6 +1,8 @@
 from . import get_sql_connection
-from api.db_objects.amenity import Amenity
 from ..interfaces.amenity_interface import IAmenitiesPersistence
+
+from ...objects.amenity import Amenity
+from typing import List, Optional
 
 
 class AmenitiesPersistence(IAmenitiesPersistence):
@@ -10,8 +12,8 @@ class AmenitiesPersistence(IAmenitiesPersistence):
     # Add a new amenity list
     def add_amenities(
         self,
-        *amenities
-    ):
+        *amenities: Amenity
+    ) -> int:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
         insert_query = """
@@ -26,8 +28,8 @@ class AmenitiesPersistence(IAmenitiesPersistence):
 
         # Strategy: create a list of bools, each of which
         # is true if anything in the list matches it
-        amenities = set(amenities)
-        insert_tuple = tuple([a in amenities for a in self.amenitylist])
+        amenities_set: set = set(amenities)
+        insert_tuple = tuple([a in amenities_set for a in self.amenitylist])
         cursor.execute(insert_query, insert_tuple)
         cnx.commit()
 
@@ -38,8 +40,8 @@ class AmenitiesPersistence(IAmenitiesPersistence):
     # Get amenity list by ID
     def get_amenities(
         self,
-        amenities_id
-    ):
+        amenities_id: int
+    ) -> Optional[List[Amenity]]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
         find_query = "SELECT * FROM amenities WHERE id = %s"
@@ -60,8 +62,8 @@ class AmenitiesPersistence(IAmenitiesPersistence):
     # Remove amenity list by ID
     def remove_amenities(
         self,
-        amenities_id
-    ):
+        amenities_id: int
+    ) -> None:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
         delete_query = "DELETE FROM amenities WHERE id = %s"

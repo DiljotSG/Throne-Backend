@@ -1,11 +1,11 @@
 class Preference:
     def __init__(
         self,
-        preference_id,
-        gender,
-        wheelchair_accessible,
-        main_floor_access
-    ):
+        preference_id: int,
+        gender: str,
+        wheelchair_accessible: bool,
+        main_floor_access: bool
+    ) -> None:
         self.id = preference_id
         self.gender = gender
         self.wheelchair_accessible = wheelchair_accessible

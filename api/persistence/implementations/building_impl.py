@@ -1,11 +1,14 @@
 from . import get_sql_connection
-from datetime import datetime
-
-from api.common import convert_to_mysql_timestamp, distance_between_locations
-from .washroom_impl import WashroomsPersistence
-from ...objects.building import Building
 from ..interfaces.building_interface import IBuildingsPersistence
+from .washroom_impl import WashroomsPersistence
+
+from ...objects.building import Building
 from ...objects.location import Location
+from ...objects.amenity import Amenity
+from api.common import convert_to_mysql_timestamp
+from api.common import distance_between_locations
+from datetime import datetime
+from typing import List, Optional
 
 
 # The ordering of these indicies are determined by the order of properties
@@ -24,12 +27,12 @@ class BuildingsPersistence(IBuildingsPersistence):
 
     def add_building(
         self,
-        location,
-        title,
-        map_service_id,
-        overall_rating,
-        best_rating_id,
-    ):
+        location: Location,
+        title: str,
+        map_service_id: str,
+        overall_rating: int,
+        best_rating_id: int
+    ) -> int:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -57,11 +60,11 @@ class BuildingsPersistence(IBuildingsPersistence):
 
     def query_buildings(
         self,
-        location,
-        radius,
-        max_buildings,
-        desired_amenities
-    ):
+        location: Location,
+        radius: float,
+        max_buildings: int,
+        desired_amenities: List[Amenity]
+    ) -> List[Building]:
         # TODO: Take into account amenities
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
@@ -84,8 +87,8 @@ class BuildingsPersistence(IBuildingsPersistence):
 
     def get_building(
         self,
-        building_id
-    ):
+        building_id: int
+    ) -> Optional[Building]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -101,8 +104,8 @@ class BuildingsPersistence(IBuildingsPersistence):
 
     def remove_building(
         self,
-        building_id
-    ):
+        building_id: int
+    ) -> None:
         # Remove all the washrooms, remove the buliding, remove the rating
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor

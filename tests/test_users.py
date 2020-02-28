@@ -52,16 +52,3 @@ class TestUsersAPI(unittest.TestCase):
         created_at = data[0].pop("created_at", None)
         self.assertNotEqual(created_at, None)
         self.assertEqual(data, expected)
-
-    def test_favorites(self):
-        response = self.app.get("/users/1/favorites")
-        data = json.loads(response.data.decode())
-        expected = [
-            {
-                "id": 1,
-                "user_id": 1,
-                "washroom_id": 1
-            }
-        ]
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(data, expected)

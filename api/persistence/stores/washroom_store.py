@@ -1,3 +1,6 @@
+from typing import List, Optional
+
+
 class WashroomStore:
     def __init__(
         self,
@@ -14,13 +17,25 @@ class WashroomStore:
         self.__ratings_persistence = ratings_persistence
         self.__user_persistence = user_persistence
 
+    def create_washroom(
+        self,
+        title: str,
+        longitude: float,
+        latitude: float,
+        gender: str,
+        floor: int,
+        building_id: int,
+        amenities: list
+    ) -> Optional[dict]:
+        return None
+
     def get_washrooms(
         self,
         location=None,
         radius=5,
         max_washrooms=5,
         desired_amenities=[]
-    ):
+    ) -> List[dict]:
         result = []
         query_result = self.__washroom_persistence.query_washrooms(
             location,
@@ -36,7 +51,7 @@ class WashroomStore:
 
         return result
 
-    def get_washroom(self, washroom_id):
+    def get_washroom(self, washroom_id: int) -> dict:
         result = self.__washroom_persistence.get_washroom(
             washroom_id
         )
@@ -45,7 +60,7 @@ class WashroomStore:
             self.__expand_washroom(result)
         return result
 
-    def get_reviews_by_washrooms(self, washroom_id):
+    def get_reviews_by_washrooms(self, washroom_id: int) -> List[dict]:
         result = []
         query_result = self.__review_persistence.get_reviews_by_washroom(
             washroom_id
@@ -58,7 +73,7 @@ class WashroomStore:
 
         return result
 
-    def get_washrooms_by_building(self, building_id):
+    def get_washrooms_by_building(self, building_id: int) -> List[dict]:
         result = []
         query_result = self.__washroom_persistence.get_washrooms_by_building(
             building_id
@@ -71,7 +86,7 @@ class WashroomStore:
 
         return result
 
-    def __expand_washroom(self, washroom):
+    def __expand_washroom(self, washroom: dict) -> None:
         # Expand amenities
         amenities_id = washroom.pop("amenities_id", None)
         washroom["amenities"] = self.__amenity_persistence.get_amenities(
@@ -90,7 +105,7 @@ class WashroomStore:
         item.pop("id", None)
         washroom["average_ratings"] = item
 
-    def __expand_review(self, review):
+    def __expand_review(self, review: dict) -> None:
         # Expand ratings
         rating_id = review.pop("rating_id", None)
         rating_item = self.__ratings_persistence.get_rating(

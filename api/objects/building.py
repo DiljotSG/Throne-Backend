@@ -1,13 +1,17 @@
+from datetime import datetime
+from .location import Location
+
+
 class Building:
     def __init__(
         self,
-        building_id,
-        location,
-        title,
-        maps_service_id,
-        created_at,
-        overall_rating,
-        best_rating_id
+        building_id: int,
+        location: Location,
+        title: str,
+        maps_service_id: str,
+        created_at: datetime,
+        overall_rating: int,
+        best_rating_id: int
     ):
         self.id = building_id
         self.location = location
