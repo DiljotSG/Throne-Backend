@@ -1,6 +1,6 @@
 from . import get_sql_connection
 from datetime import datetime
-from typing import List
+from typing import List, Optional
 
 from api.common import convert_to_mysql_timestamp, distance_between_locations
 from ..interfaces.washroom_interface import IWashroomsPersistence
@@ -124,7 +124,7 @@ class WashroomsPersistence(IWashroomsPersistence):
     def get_washroom(
         self,
         washroom_id: int
-    ) -> Washroom:
+    ) -> Optional[Washroom]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 

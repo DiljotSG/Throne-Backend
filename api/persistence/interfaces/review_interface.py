@@ -1,7 +1,7 @@
 from abc import ABC
 from abc import abstractmethod
 from ...objects.review import Review
-from typing import List
+from typing import List, Optional
 
 
 class IReviewsPersistence(ABC):
@@ -26,14 +26,14 @@ class IReviewsPersistence(ABC):
         rating_id: int,  # Foreign Key
         comment: str,
         upvote_count: int
-    ) -> Review:
+    ) -> Optional[Review]:
         pass
 
     @abstractmethod
     def get_review(
         self,
         review_id: int
-    ) -> Review:
+    ) -> Optional[Review]:
         pass
 
     @abstractmethod

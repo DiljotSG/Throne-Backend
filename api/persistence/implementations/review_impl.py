@@ -3,7 +3,7 @@ from datetime import datetime
 from ...objects.review import Review
 from ..interfaces.review_interface import IReviewsPersistence
 from api.common import convert_to_mysql_timestamp
-from typing import List
+from typing import List, Optional
 
 
 # The ordering of these indicies are determined by the order of properties
@@ -65,7 +65,7 @@ class ReviewsPersistence(IReviewsPersistence):
     def get_review(
         self,
         review_id: int
-    ) -> Review:
+    ) -> Optional[Review]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 

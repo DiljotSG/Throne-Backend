@@ -3,7 +3,7 @@ from abc import abstractmethod
 from ...objects.washroom import Washroom
 from ...objects.amenity import Amenity
 from ...objects.location import Location
-from typing import List
+from typing import List, Optional
 
 
 class IWashroomsPersistence(ABC):
@@ -44,7 +44,7 @@ class IWashroomsPersistence(ABC):
     def get_washroom(
         self,
         washroom_id: int
-    ) -> Washroom:
+    ) -> Optional[Washroom]:
         pass
 
     @abstractmethod

@@ -6,7 +6,7 @@ from ...objects.building import Building
 from ..interfaces.building_interface import IBuildingsPersistence
 from ...objects.location import Location
 from ...objects.amenity import Amenity
-from typing import List
+from typing import List, Optional
 
 
 # The ordering of these indicies are determined by the order of properties
@@ -86,7 +86,7 @@ class BuildingsPersistence(IBuildingsPersistence):
     def get_building(
         self,
         building_id: int
-    ) -> Building:
+    ) -> Optional[Building]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 

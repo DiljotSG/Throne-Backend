@@ -6,6 +6,7 @@ from .favorite_impl import FavoritesPersistence
 from .review_impl import ReviewsPersistence
 from ...objects.user import User
 from ..interfaces.user_interface import IUsersPersistence
+from typing import Optional
 
 
 # The ordering of these indicies are determined by the order of properties
@@ -51,7 +52,7 @@ class UsersPersistence(IUsersPersistence):
     def get_user(
         self,
         user_id: int
-    ) -> User:
+    ) -> Optional[User]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 

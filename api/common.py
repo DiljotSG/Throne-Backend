@@ -83,5 +83,5 @@ def distance_between_locations(loc1, loc2):
     return radius * c
 
 
-def convert_to_mysql_timestamp(timestamp: datetime):
+def convert_to_mysql_timestamp(timestamp: datetime.date):
     return timestamp.strftime(TIMESTAMP_FORMAT)

@@ -10,7 +10,6 @@ from ..interfaces.washroom_interface import IWashroomsPersistence
 from ...objects.location import Location
 from ...objects.amenity import Amenity
 from ...objects.building import Building
-from ...objects.preference import Preference
 from ...objects.rating import Rating
 from ...objects.user import User
 from ...objects.washroom import Washroom
@@ -54,8 +53,8 @@ def populate_stub_data(
     # washroom_id
 def __create_favorites(
     favorite_persistence: IFavoritesPersistence,
-    users: User,
-    washrooms: List[Washroom]
+    users: List[int],
+    washrooms: List[int]
 ) -> None:
     favorite_persistence.add_favorite(
         users[0],
@@ -78,10 +77,10 @@ def __create_favorites(
     # ratings for each review
 def __create_reviews(
     review_persistence: IReviewsPersistence,
-    users: List[User],
-    washrooms: List[Washroom],
-    ratings: List[Rating],
-    review_ratings: List[Rating]
+    users: List[int],
+    washrooms: List[int],
+    ratings: List[int],
+    review_ratings: List[int]
 ) -> None:
     review_persistence.add_review(
         washrooms[0],
@@ -105,7 +104,7 @@ def __create_reviews(
     # privacy
     # smell
     # toilet_paper_quality
-def __create_ratings(rating_persistence: IRatingsPersistence) -> List[Rating]:
+def __create_ratings(rating_persistence: IRatingsPersistence) -> List[int]:
     # Average ratings
     rating1 = rating_persistence.add_rating(
         3.2,
@@ -146,7 +145,7 @@ def __create_ratings(rating_persistence: IRatingsPersistence) -> List[Rating]:
     # toilet_paper_quality
 def __create_building_best_ratings(
     rating_persistence: IRatingsPersistence
-) -> List[Rating]:
+) -> List[int]:
     # Average ratings
     rating1 = rating_persistence.add_rating(
         3.2,
@@ -176,10 +175,10 @@ def __create_building_best_ratings(
     # average_ratings_id
 def __create_washrooms(
     washroom_persistence: IWashroomsPersistence,
-    buildings: List[Building],
-    amenities: List[Amenity],
-    ratings: List[Rating]
-) -> List[Washroom]:
+    buildings: List[int],
+    amenities: List[int],
+    ratings: List[int]
+) -> List[int]:
     location1 = Location(12.2, 17.9)
     location2 = Location(114, 200.5)
 
@@ -221,7 +220,7 @@ def __create_washrooms(
 
 def __create_amenities(
     amenity_persistence: IAmenitiesPersistence
-) -> List[Amenity]:
+) -> List[int]:
     amenity1_id = amenity_persistence.add_amenities(
         Amenity.AIR_DRYER,
         Amenity.AUTOMATIC_TOILET
@@ -243,7 +242,7 @@ def __create_amenities(
     # best ratings for each building
 def __create_buildings(
     building_persistence: IBuildingsPersistence,
-    building_best_ratings: List[Rating]
+    building_best_ratings: List[int]
 ) -> List[int]:
     location1 = Location(10.2, 15.9)
     location2 = Location(104, 230.5)
@@ -251,7 +250,7 @@ def __create_buildings(
     building1_id = building_persistence.add_building(
         location1,
         "Engineering",
-        0,
+        "0",
         4,
         building_best_ratings[0]
     )
@@ -259,7 +258,7 @@ def __create_buildings(
     building2_id = building_persistence.add_building(
         location2,
         "Science",
-        1,
+        "1",
         3,
         building_best_ratings[1]
     )
@@ -274,7 +273,7 @@ def __create_buildings(
 def __create_users(
     preference_persistence: IPreferencesPersistence,
     user_persistence: IUsersPersistence
-) -> List[User]:
+) -> List[int]:
     user_preferences_ids = __create_preferences(preference_persistence)
 
     user1_id = user_persistence.add_user(
@@ -298,7 +297,7 @@ def __create_users(
     # main_floor_access
 def __create_preferences(
     preference_persistence: IPreferencesPersistence
-) -> List[Preference]:
+) -> List[int]:
     user_pref1_id = preference_persistence.add_preference(
         "women",
         True,

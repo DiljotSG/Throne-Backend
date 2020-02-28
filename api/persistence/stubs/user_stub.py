@@ -2,11 +2,12 @@ from datetime import datetime
 
 from ...objects.user import User
 from ..interfaces.user_interface import IUsersPersistence
+from typing import List, Optional
 
 
 class UsersStubPersistence(IUsersPersistence):
     def __init__(self) -> None:
-        self.users = []
+        self.users: List[User] = []
 
     def add_user(
         self,
@@ -29,7 +30,7 @@ class UsersStubPersistence(IUsersPersistence):
     def get_user(
         self,
         user_id: int
-    ) -> User:
+    ) -> Optional[User]:
         if user_id >= 0 and user_id < len(self.users) and \
            self.users is not None:
             return self.users[user_id]

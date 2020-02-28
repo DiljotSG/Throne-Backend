@@ -68,7 +68,7 @@ class WashroomsStubPersistence(IWashroomsPersistence):
     def get_washroom(
         self,
         washroom_id: int
-    ) -> Washroom:
+    ) -> Optional[Washroom]:
         if washroom_id >= 0 and washroom_id < len(self.washrooms) and \
            self.washrooms[washroom_id] is not None:
             return self.washrooms[washroom_id]

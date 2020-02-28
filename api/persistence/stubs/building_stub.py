@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List
+from typing import List, Optional
 
 from ..interfaces.building_interface import IBuildingsPersistence
 from ...objects.building import Building
@@ -9,7 +9,7 @@ from ...objects.location import Location
 
 class BuildingsStubPersistence(IBuildingsPersistence):
     def __init__(self) -> None:
-        self.buildings = []
+        self.buildings: List[Building] = []
 
     def add_building(
         self,
@@ -40,7 +40,7 @@ class BuildingsStubPersistence(IBuildingsPersistence):
         max_buildings: int,
         desired_amenities: List[Amenity]
     ) -> List[Building]:
-        filtered_buildings = []
+        filtered_buildings: List[Building] = []
 
         for building in self.buildings:
             if len(filtered_buildings) >= max_buildings:
@@ -53,7 +53,7 @@ class BuildingsStubPersistence(IBuildingsPersistence):
     def get_building(
         self,
         building_id: int
-    ) -> Building:
+    ) -> Optional[Building]:
         if building_id >= 0 and building_id < len(self.buildings) and \
            self.buildings[building_id] is not None:
             return self.buildings[building_id]

@@ -27,8 +27,8 @@ class AmenitiesPersistence(IAmenitiesPersistence):
 
         # Strategy: create a list of bools, each of which
         # is true if anything in the list matches it
-        amenities = set(amenities)
-        insert_tuple = tuple([a in amenities for a in self.amenitylist])
+        amenities_set: set = set(amenities)
+        insert_tuple = tuple([a in amenities_set for a in self.amenitylist])
         cursor.execute(insert_query, insert_tuple)
         cnx.commit()
 

@@ -1,7 +1,7 @@
 from abc import ABC
 from abc import abstractmethod
 from ...objects.user import User
-
+from typing import Optional
 
 class IUsersPersistence(ABC):
 
@@ -19,7 +19,7 @@ class IUsersPersistence(ABC):
     def get_user(
         self,
         user_id: int
-    ) -> User:
+    ) -> Optional[User]:
         pass
 
     @abstractmethod

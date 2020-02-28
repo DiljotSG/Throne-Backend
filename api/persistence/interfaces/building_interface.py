@@ -1,6 +1,6 @@
 from abc import ABC
 from abc import abstractmethod
-from typing import List
+from typing import List, Optional
 
 from ...objects.amenity import Amenity
 from ...objects.building import Building
@@ -34,7 +34,7 @@ class IBuildingsPersistence(ABC):
     def get_building(
         self,
         building_id: int
-    ) -> Building:
+    ) -> Optional[Building]:
         pass
 
     @abstractmethod
