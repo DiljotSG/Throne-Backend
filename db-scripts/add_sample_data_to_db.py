@@ -8,7 +8,7 @@ from api.persistence.implementations.review_impl import ReviewsPersistence
 from api.persistence.implementations.user_impl import UsersPersistence
 from api.persistence.implementations.washroom_impl import WashroomsPersistence
 
-from api.db_objects.amenity import Amenity
+from api.objects.amenity import Amenity
 # from api.objects.favorite import Favorite
 # from api.objects.preference import Preference
 # from api.objects.rating import Rating
@@ -36,8 +36,8 @@ rRating_bad_id = ra.add_rating(1, 2, 4, 1)
 
 wAmenities_good_id = a.add_amenities(
     Amenity.AIR_DRYER,
-    Amenity.AUTOMATIC_SINK,
-    Amenity.AUTOMATIC_TOILET
+    Amenity.AUTO_SINK,
+    Amenity.AUTO_TOILET
 )
 wAmenities_bad_id = a.add_amenities(
     Amenity.LOTION,
@@ -121,3 +121,5 @@ review_bad_id = re.add_review(
     'SMELLS BAD!',
     542
 )
+
+print("Done!")
