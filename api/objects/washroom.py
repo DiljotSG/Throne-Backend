@@ -1,5 +1,6 @@
-from .location import Location
 from datetime import datetime
+from .location import Location
+
 
 class Washroom:
     def __init__(

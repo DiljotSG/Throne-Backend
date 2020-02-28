@@ -9,10 +9,6 @@ from ..interfaces.washroom_interface import IWashroomsPersistence
 
 from ...objects.location import Location
 from ...objects.amenity import Amenity
-from ...objects.building import Building
-from ...objects.rating import Rating
-from ...objects.user import User
-from ...objects.washroom import Washroom
 
 from typing import List
 
