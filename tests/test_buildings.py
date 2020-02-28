@@ -19,7 +19,7 @@ class TestBuildingsAPI(unittest.TestCase):
         data = json.loads(response.data.decode())
         expected_data = [
             {
-                "best_rating": {
+                "best_ratings": {
                     "cleanliness": 3.2,
                     "privacy": 1.2,
                     "smell": 2.7,
@@ -35,7 +35,7 @@ class TestBuildingsAPI(unittest.TestCase):
                 "title": "Engineering"
             },
             {
-                "best_rating": {
+                "best_ratings": {
                     "cleanliness": 2.2,
                     "privacy": 4.2,
                     "smell": 2.8,
@@ -62,7 +62,7 @@ class TestBuildingsAPI(unittest.TestCase):
         response = self.app.get("/buildings/1")
         data = json.loads(response.data.decode())
         expected_data = {
-            "best_rating": {
+            "best_ratings": {
                 "cleanliness": 2.2,
                 "privacy": 4.2,
                 "smell": 2.8,
