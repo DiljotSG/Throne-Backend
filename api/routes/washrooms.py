@@ -8,7 +8,7 @@ from ..objects.location import Location
 from ..persistence import create_washroom_store
 from ..persistence import create_building_store
 from ..persistence import create_review_store
-from api.common import get_cognito_user
+# from api.common import get_cognito_user
 
 washroom_store = create_washroom_store()
 building_store = create_building_store()
@@ -23,24 +23,28 @@ cors = CORS(mod)
 @cross_origin()
 def get_washrooms():
     result = None
+    code = HttpCodes.HTTP_200_OK
 
-    # Try to get the URL parameters as floats
-    lat = request.args.get("latitude", type=float)
-    long = request.args.get("longitude", type=float)
-    radius = request.args.get("radius", type=float)
+    try:
+        # Try to get the URL parameters as floats
+        lat = request.args.get("latitude", type=float)
+        long = request.args.get("longitude", type=float)
+        radius = request.args.get("radius", type=float)
 
-    if lat is None or long is None:
-        result = washroom_store.get_washrooms()
-    else:
-        result = washroom_store.get_washrooms(
-            Location(
-                lat,
-                long
-            ),
-            radius,
-        )
+        if lat is None or long is None:
+            result = washroom_store.get_washrooms()
+        else:
+            result = washroom_store.get_washrooms(
+                Location(
+                    lat,
+                    long
+                ),
+                radius,
+            )
+    except (ValueError):
+        code = HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY
 
-    return return_as_json(result)
+    return return_as_json(result, code)
 
 
 @mod.route("", methods=["POST"])
@@ -95,7 +99,8 @@ def post_washrooms_reviews(washroom_id):
     try:
         # TODO: get_cognito_user() returns a username, support for
         # retrieving current user's id is required
-        user_id = get_cognito_user()
+        # user_id = get_cognito_user()
+        user_id = 0
         comment = str(request.json["comment"])
         ratings = list(request.json["ratings"])
 
@@ -121,7 +126,8 @@ def put_washroom_review(washroom_id, review_id):
     try:
         # TODO: get_cognito_user() returns a username, support for
         # retrieving current user's id is required
-        user_id = get_cognito_user()
+        # user_name = get_cognito_user()
+        user_id = 0
         comment = str(request.json["comment"])
         ratings = list(request.json["ratings"])
 
