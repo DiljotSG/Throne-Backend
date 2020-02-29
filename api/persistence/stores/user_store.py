@@ -6,7 +6,7 @@ from ..interfaces.user_interface import IUsersPersistence
 from api.common import should_use_db
 from api.common import get_cognito_user
 
-from typing import List
+from typing import List, Optional, Any
 
 
 class UserStore:
@@ -27,13 +27,13 @@ class UserStore:
         self.__ratings_persistence: IRatingsPersistence = ratings_persistence
 
     # Gives the currently authenticated user's ID
-    def __get_current_user_id(self) -> int:
+    def __get_current_user_id(self) -> Optional[int]:
         # Get the user persistence layer and the preference persistence layer
         # We are accessing the user store's private values
         # Might be considered bad, but this is the only case we need to do this
 
         # Default user ID for the stubs is 0
-        user_id = 0
+        user_id: Optional[int] = 0
 
         # If we are using the DB, we can fetch user ID
         if should_use_db():
@@ -52,9 +52,9 @@ class UserStore:
                 if user_id is None:
                     # Make their preferences object first
                     pref_id = self.__preference_persistence.add_preference(
-                        None,
-                        None,
-                        None
+                        "undefined",
+                        False,
+                        False
                     )
 
                     # Finally insert this user into the Users table
@@ -68,7 +68,7 @@ class UserStore:
         return user_id
 
     def get_user(self, user_id: int) -> dict:
-        result = self.__user_persistence.get_user(
+        result: Any = self.__user_persistence.get_user(
             user_id
         )
         if result:
@@ -93,8 +93,9 @@ class UserStore:
             user_id
         )
 
-        for favorite in query_result:
-            result.append(favorite.__dict__.copy())
+        if query_result:
+            for favorite in query_result:
+                result.append(favorite.__dict__.copy())
 
         return result
 

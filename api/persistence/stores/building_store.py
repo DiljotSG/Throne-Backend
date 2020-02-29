@@ -3,7 +3,7 @@ from ..interfaces.rating_interface import IRatingsPersistence
 from ..interfaces.review_interface import IReviewsPersistence
 from ..interfaces.washroom_interface import IWashroomsPersistence
 
-from typing import List
+from typing import List, Any
 
 
 class BuildingStore:
@@ -22,7 +22,7 @@ class BuildingStore:
         self.__rating_persistence: IRatingsPersistence = rating_persistence
 
     def get_building(self, building_id: int) -> dict:
-        result = self.__building_persistence.get_building(
+        result: Any = self.__building_persistence.get_building(
             building_id
         )
         if result:

@@ -12,7 +12,7 @@ from typing import Optional
 TIMESTAMP_FORMAT = '%Y-%m-%d %H:%M:%S'
 
 
-def should_use_db() -> bool:
+def should_use_db():
     return (os.environ.get("IS_LAMBDA") or os.environ.get("THRONE_USE_DB"))\
         and not (os.environ.get("THRONE_NO_DB_CREDS"))
 

@@ -2,7 +2,7 @@ from ..interfaces.rating_interface import IRatingsPersistence
 from ..interfaces.review_interface import IReviewsPersistence
 from ..interfaces.user_interface import IUsersPersistence
 
-from typing import Optional
+from typing import Optional, Any
 
 
 class ReviewStore:
@@ -50,7 +50,7 @@ class ReviewStore:
         pass
 
     def get_review(self, review_id: int) -> dict:
-        result = self.__review_persistence.get_review(
+        result: Any = self.__review_persistence.get_review(
             review_id
         )
         if result:

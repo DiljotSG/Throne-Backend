@@ -4,7 +4,7 @@ from ..interfaces.review_interface import IReviewsPersistence
 from ..interfaces.user_interface import IUsersPersistence
 from ..interfaces.washroom_interface import IWashroomsPersistence
 
-from typing import List, Optional
+from typing import List, Optional, Any
 
 
 class WashroomStore:
@@ -58,7 +58,7 @@ class WashroomStore:
         return result
 
     def get_washroom(self, washroom_id: int) -> dict:
-        result = self.__washroom_persistence.get_washroom(
+        result: Any = self.__washroom_persistence.get_washroom(
             washroom_id
         )
         if result:
