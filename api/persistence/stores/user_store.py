@@ -106,14 +106,19 @@ class UserStore:
         return result
 
     def __expand_user(self, user: dict) -> None:
-        # Expand preferences
-        preference_id = user.pop("preference_id", None)
-        item = self.__preference_persistence.get_preference(
-            preference_id
-        ).__dict__.copy()
+        # Only expand preferences if the Username matches current user
 
-        item.pop("id", None)
-        user["preferences"] = item
+        if user["username"] == get_cognito_user():
+            # Expand preferences
+            preference_id = user.pop("preference_id", None)
+            item = self.__preference_persistence.get_preference(
+                preference_id
+            ).__dict__.copy()
+            item.pop("id", None)
+            user["preferences"] = item
+
+        # Cleanup
+        user.pop("preference_id", None)
 
     def __expand_review(self, review: dict) -> None:
         # Expand ratings

@@ -15,7 +15,8 @@ class TestWashroomAPI(unittest.TestCase):
     def test_root(self):
         response = self.app.get(
             "/washrooms",
-            follow_redirects=True)
+            follow_redirects=True
+        )
         data = json.loads(response.data.decode())
         expected_data = {
             "amenities": [

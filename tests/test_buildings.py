@@ -14,8 +14,9 @@ class TestBuildingsAPI(unittest.TestCase):
 
     def test_root(self):
         response = self.app.get(
-            "/buildings?location=12",
-            follow_redirects=True)
+            "/buildings",
+            follow_redirects=True
+        )
         data = json.loads(response.data.decode())
         expected_data = [
             {
