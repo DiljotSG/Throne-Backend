@@ -34,19 +34,20 @@ functions:
           path: '{proxy+}'
           cors: true
 
-exclude:
-- "__pycache__/**"
-- ".vscode/**"
-- ".github/**"
-- ".git/**"
-- "venv/**"
-- "node_modules/**"
-- "db-scripts/**"
-- "tests/**"
-- ".gitignore"
-- ".env"
-- "docs/**"
-- requirements.txt
-- LICENSE
-- CODEOWNERS
-- README.md
+package:
+  exclude:
+  - "__pycache__/**"
+  - ".vscode/**"
+  - ".github/**"
+  - ".git/**"
+  - "venv/**"
+  - "node_modules/**"
+  - "db-scripts/**"
+  - "tests/**"
+  - ".gitignore"
+  - ".env"
+  - "docs/**"
+  - requirements.txt
+  - LICENSE
+  - CODEOWNERS
+  - README.md
