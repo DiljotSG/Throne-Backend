@@ -11,7 +11,7 @@ class Amenity(str, Enum):
     AUTO_TOILET: str = "auto_toilet"
     BABY_CHANGE_STATION: str = "baby_change_station"
     BABY_POWDER: str = "baby_powder"
-    BATHROOM_ATTENDANT: str = "bathroom_attendant "
+    BATHROOM_ATTENDANT: str = "bathroom_attendant"
     BIDET: str = "bidet"
     BODY_TOWEL: str = "body_towel"
     BODYWASH: str = "bodywash"
