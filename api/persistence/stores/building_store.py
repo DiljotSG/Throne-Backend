@@ -1,9 +1,9 @@
-from typing import List
-
 from ..interfaces.building_interface import IBuildingsPersistence
 from ..interfaces.rating_interface import IRatingsPersistence
 from ..interfaces.review_interface import IReviewsPersistence
 from ..interfaces.washroom_interface import IWashroomsPersistence
+
+from typing import List
 
 
 class BuildingStore:

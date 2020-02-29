@@ -1,8 +1,8 @@
-from typing import Optional
-
 from ..interfaces.rating_interface import IRatingsPersistence
 from ..interfaces.review_interface import IReviewsPersistence
 from ..interfaces.user_interface import IUsersPersistence
+
+from typing import Optional
 
 
 class ReviewStore:

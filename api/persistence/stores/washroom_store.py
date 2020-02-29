@@ -1,10 +1,10 @@
-from typing import List, Optional
-
 from ..interfaces.amenity_interface import IAmenitiesPersistence
 from ..interfaces.rating_interface import IRatingsPersistence
 from ..interfaces.review_interface import IReviewsPersistence
 from ..interfaces.user_interface import IUsersPersistence
 from ..interfaces.washroom_interface import IWashroomsPersistence
+
+from typing import List, Optional
 
 
 class WashroomStore:

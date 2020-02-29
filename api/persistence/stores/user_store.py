@@ -1,10 +1,10 @@
-from typing import List
-
 from ..interfaces.favorite_interface import IFavoritesPersistence
 from ..interfaces.preference_interface import IPreferencesPersistence
 from ..interfaces.rating_interface import IRatingsPersistence
 from ..interfaces.review_interface import IReviewsPersistence
 from ..interfaces.user_interface import IUsersPersistence
+
+from typing import List
 
 
 class UserStore:
