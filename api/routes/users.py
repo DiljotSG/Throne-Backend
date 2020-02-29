@@ -5,7 +5,6 @@ from api.common import return_as_json
 from api.common import return_not_implemented
 from ..persistence import create_user_store
 
-from api.common import get_cognito_user
 
 user_store = create_user_store()
 
@@ -17,11 +16,7 @@ cors = CORS(mod)
 @mod.route("", methods=["GET"])
 @cross_origin()
 def get_current_user():
-    # This is temporary, in the future we will return the user object
-    data = {
-        "username": get_cognito_user()
-    }
-    return return_as_json(data)
+    return return_as_json(user_store.get_current_user())
 
 
 @mod.route("/<int:user_id>", methods=["GET"])

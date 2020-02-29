@@ -67,6 +67,9 @@ class UserStore:
         # We did it! We got the user ID finally.
         return user_id
 
+    def get_current_user(self) -> dict:
+        return self.get_user(self.__get_current_user_id())
+
     def get_user(self, user_id: int) -> dict:
         result: Any = self.__user_persistence.get_user(
             user_id
