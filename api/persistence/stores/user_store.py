@@ -3,7 +3,7 @@ from ..interfaces.preference_interface import IPreferencesPersistence
 from ..interfaces.rating_interface import IRatingsPersistence
 from ..interfaces.review_interface import IReviewsPersistence
 from ..interfaces.user_interface import IUsersPersistence
-from api.common import should_use_db
+from ...persistence import get_current_user_id
 from api.common import get_cognito_user
 
 from typing import List, Any
@@ -27,7 +27,7 @@ class UserStore:
         self.__ratings_persistence: IRatingsPersistence = ratings_persistence
 
     def get_current_user(self) -> dict:
-        return self.get_user(self.__get_current_user_id())
+        return self.get_user(get_current_user_id())
 
     def get_user(self, user_id: int) -> dict:
         result: Any = self.__user_persistence.get_user(

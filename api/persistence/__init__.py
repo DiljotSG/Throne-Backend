@@ -109,7 +109,7 @@ def create_user_store() -> UserStore:
 
 
 # Gives the currently authenticated user's ID
-def __get_current_user_id(self) -> int:
+def get_current_user_id(self) -> int:
     # Default user ID for the Stubs is 0
     user_id: int = 0
 
