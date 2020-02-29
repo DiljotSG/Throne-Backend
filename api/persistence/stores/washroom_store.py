@@ -1,21 +1,27 @@
 from typing import List, Optional
 
+from ..interfaces.amenity_interface import IAmenitiesPersistence
+from ..interfaces.rating_interface import IRatingsPersistence
+from ..interfaces.review_interface import IReviewsPersistence
+from ..interfaces.user_interface import IUsersPersistence
+from ..interfaces.washroom_interface import IWashroomsPersistence
+
 
 class WashroomStore:
     def __init__(
         self,
-        washroom_persistence,
-        review_persistence,
-        amenity_persistence,
-        ratings_persistence,
-        user_persistence
+        washroom_persistence: IWashroomsPersistence,
+        review_persistence: IReviewsPersistence,
+        amenity_persistence: IAmenitiesPersistence,
+        ratings_persistence: IRatingsPersistence,
+        user_persistence: IUsersPersistence
     ):
-        self.__washroom_persistence = washroom_persistence
-        self.__review_persistence = review_persistence
-        self.__amenity_persistence = amenity_persistence
-        self.__amenity_persistence = amenity_persistence
-        self.__ratings_persistence = ratings_persistence
-        self.__user_persistence = user_persistence
+        self.__washroom_persistence: IWashroomsPersistence = \
+            washroom_persistence
+        self.__review_persistence: IReviewsPersistence = review_persistence
+        self.__amenity_persistence: IAmenitiesPersistence = amenity_persistence
+        self.__ratings_persistence: IRatingsPersistence = ratings_persistence
+        self.__user_persistence: IUsersPersistence = user_persistence
 
     def create_washroom(
         self,

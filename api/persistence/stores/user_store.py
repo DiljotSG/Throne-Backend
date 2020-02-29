@@ -1,20 +1,28 @@
 from typing import List
 
+from ..interfaces.favorite_interface import IFavoritesPersistence
+from ..interfaces.preference_interface import IPreferencesPersistence
+from ..interfaces.rating_interface import IRatingsPersistence
+from ..interfaces.review_interface import IReviewsPersistence
+from ..interfaces.user_interface import IUsersPersistence
+
 
 class UserStore:
     def __init__(
         self,
-        user_persistence,
-        favorite_preference,
-        review_persistence,
-        preference_persistence,
-        ratings_persistence
+        user_persistence: IUsersPersistence,
+        favorite_preference: IFavoritesPersistence,
+        review_persistence: IReviewsPersistence,
+        preference_persistence: IPreferencesPersistence,
+        ratings_persistence: IRatingsPersistence
     ):
-        self.__user_persistence = user_persistence
-        self.__favorite_persistence = favorite_preference
-        self.__review_persistence = review_persistence
-        self.__preference_persistence = preference_persistence
-        self.__ratings_persistence = ratings_persistence
+        self.__user_persistence: IUsersPersistence = user_persistence
+        self.__favorite_persistence: IFavoritesPersistence = \
+            favorite_preference
+        self.__review_persistence: IReviewsPersistence = review_persistence
+        self.__preference_persistence: IPreferencesPersistence = \
+            preference_persistence
+        self.__ratings_persistence: IRatingsPersistence = ratings_persistence
 
     def get_user(self, user_id: int) -> dict:
         result = self.__user_persistence.get_user(
