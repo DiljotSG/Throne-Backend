@@ -6,7 +6,6 @@ from .stubs.rating_stub import RatingsStubPersistence
 from .stubs.review_stub import ReviewsStubPersistence
 from .stubs.user_stub import UsersStubPersistence
 from .stubs.washroom_stub import WashroomsStubPersistence
-from .stubs import populate_stub_data
 
 from .implementations.amenity_impl import AmenitiesPersistence
 from .implementations.building_impl import BuildingsPersistence
@@ -31,9 +30,10 @@ from .stores.review_store import ReviewStore
 from .stores.user_store import UserStore
 from .stores.washroom_store import WashroomStore
 
+from .stubs import populate_stub_data
+from api.common import should_use_db
 from typing import Optional
 
-import os
 
 __amenity_persistence: Optional[IAmenitiesPersistence] = None
 __building_persistence: Optional[IBuildingsPersistence] = None
@@ -44,8 +44,9 @@ __review_persistence: Optional[IReviewsPersistence] = None
 __user_persistence: Optional[IUsersPersistence] = None
 __washroom_persistence: Optional[IWashroomsPersistence] = None
 
-if (os.environ.get("IS_LAMBDA") or os.environ.get("THRONE_USE_DB")) and \
-     not (os.environ.get("THRONE_NO_DB_CREDS")):
+
+if should_use_db():
+    # Use the DB
     __amenity_persistence = AmenitiesPersistence()
     __building_persistence = BuildingsPersistence()
     __favorite_persistence = FavoritesPersistence()
@@ -55,6 +56,7 @@ if (os.environ.get("IS_LAMBDA") or os.environ.get("THRONE_USE_DB")) and \
     __user_persistence = UsersPersistence()
     __washroom_persistence = WashroomsPersistence()
 else:
+    # Use the Stubs
     __amenity_persistence = AmenitiesStubPersistence()
     __building_persistence = BuildingsStubPersistence()
     __favorite_persistence = FavoritesStubPersistence()
