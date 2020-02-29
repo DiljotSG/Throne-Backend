@@ -6,7 +6,7 @@ from ..interfaces.user_interface import IUsersPersistence
 from api.common import should_use_db
 from api.common import get_cognito_user
 
-from typing import List, Optional, Any
+from typing import List, Any
 
 
 class UserStore:
@@ -27,29 +27,32 @@ class UserStore:
         self.__ratings_persistence: IRatingsPersistence = ratings_persistence
 
     # Gives the currently authenticated user's ID
-    def __get_current_user_id(self) -> Optional[int]:
-        # Get the user persistence layer and the preference persistence layer
-        # We are accessing the user store's private values
-        # Might be considered bad, but this is the only case we need to do this
-
-        # Default user ID for the stubs is 0
-        user_id: Optional[int] = 0
+    def __get_current_user_id(self) -> int:
+        # Default user ID for the Stubs is 0
+        user_id: int = 0
 
         # If we are using the DB, we can fetch user ID
         if should_use_db():
-
+            # Try to get the current user's username
+            username = get_cognito_user()
             # We can only get the username if this is the Lambda
             # If we get None back, we are not running in the Lambda
-            username = get_cognito_user()
-
             if username:
                 # Is this user in the Users table?
-                user_id = self.__user_persistence.get_id_by_username(username)
+                # Try to fetch the user from the table
+                opt_user_id = self.__user_persistence.get_id_by_username(
+                    username
+                )
+
+                # Check that the user ID is not None before we assign it
+                # This makes the static type checker happy
+                if opt_user_id is not None:
+                    user_id = opt_user_id
 
                 # If they don't have a user ID, we haven't
                 # inserted them into the Users table yet.
                 # Let's do that now
-                if user_id is None:
+                if opt_user_id is None:
                     # Make their preferences object first
                     pref_id = self.__preference_persistence.add_preference(
                         "undefined",
