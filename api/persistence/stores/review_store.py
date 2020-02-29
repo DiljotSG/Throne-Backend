@@ -1,16 +1,20 @@
-from typing import Optional
+from ..interfaces.rating_interface import IRatingsPersistence
+from ..interfaces.review_interface import IReviewsPersistence
+from ..interfaces.user_interface import IUsersPersistence
+
+from typing import Optional, Any
 
 
 class ReviewStore:
     def __init__(
         self,
-        review_persistence,
-        rating_persistence,
-        user_persistence
+        review_persistence: IReviewsPersistence,
+        rating_persistence: IRatingsPersistence,
+        user_persistence: IUsersPersistence
     ):
-        self.__review_persistence = review_persistence
-        self.__rating_persistence = rating_persistence
-        self.__user_persistence = user_persistence
+        self.__review_persistence: IReviewsPersistence = review_persistence
+        self.__rating_persistence: IRatingsPersistence = rating_persistence
+        self.__user_persistence: IUsersPersistence = user_persistence
 
     def create_review(
         self,
@@ -46,7 +50,7 @@ class ReviewStore:
         pass
 
     def get_review(self, review_id: int) -> dict:
-        result = self.__review_persistence.get_review(
+        result: Any = self.__review_persistence.get_review(
             review_id
         )
         if result:

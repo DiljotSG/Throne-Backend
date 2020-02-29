@@ -6,7 +6,6 @@ from .stubs.rating_stub import RatingsStubPersistence
 from .stubs.review_stub import ReviewsStubPersistence
 from .stubs.user_stub import UsersStubPersistence
 from .stubs.washroom_stub import WashroomsStubPersistence
-from .stubs import populate_stub_data
 
 from .implementations.amenity_impl import AmenitiesPersistence
 from .implementations.building_impl import BuildingsPersistence
@@ -31,21 +30,24 @@ from .stores.review_store import ReviewStore
 from .stores.user_store import UserStore
 from .stores.washroom_store import WashroomStore
 
-from typing import Optional
+from .stubs import populate_stub_data
+from api.common import should_use_db
 
-import os
 
-__amenity_persistence: Optional[IAmenitiesPersistence] = None
-__building_persistence: Optional[IBuildingsPersistence] = None
-__favorite_persistence: Optional[IFavoritesPersistence] = None
-__preference_persistence: Optional[IPreferencesPersistence] = None
-__rating_persistence: Optional[IRatingsPersistence] = None
-__review_persistence: Optional[IReviewsPersistence] = None
-__user_persistence: Optional[IUsersPersistence] = None
-__washroom_persistence: Optional[IWashroomsPersistence] = None
+# Make the Stubs
+__amenity_persistence: IAmenitiesPersistence = AmenitiesStubPersistence()
+__building_persistence: IBuildingsPersistence = BuildingsStubPersistence()
+__favorite_persistence: IFavoritesPersistence = FavoritesStubPersistence()
+__preference_persistence: IPreferencesPersistence = \
+    PreferencesStubPersistence()
+__rating_persistence: IRatingsPersistence = RatingsStubPersistence()
+__review_persistence: IReviewsPersistence = ReviewsStubPersistence()
+__user_persistence: IUsersPersistence = UsersStubPersistence()
+__washroom_persistence: IWashroomsPersistence = WashroomsStubPersistence()
 
-if (os.environ.get("IS_LAMBDA") or os.environ.get("THRONE_USE_DB")) and \
-     not (os.environ.get("THRONE_NO_DB_CREDS")):
+
+if should_use_db():
+    # Use the DB and replace the Stubs
     __amenity_persistence = AmenitiesPersistence()
     __building_persistence = BuildingsPersistence()
     __favorite_persistence = FavoritesPersistence()
@@ -55,15 +57,7 @@ if (os.environ.get("IS_LAMBDA") or os.environ.get("THRONE_USE_DB")) and \
     __user_persistence = UsersPersistence()
     __washroom_persistence = WashroomsPersistence()
 else:
-    __amenity_persistence = AmenitiesStubPersistence()
-    __building_persistence = BuildingsStubPersistence()
-    __favorite_persistence = FavoritesStubPersistence()
-    __preference_persistence = PreferencesStubPersistence()
-    __rating_persistence = RatingsStubPersistence()
-    __review_persistence = ReviewsStubPersistence()
-    __user_persistence = UsersStubPersistence()
-    __washroom_persistence = WashroomsStubPersistence()
-
+    # Init the Stubs
     populate_stub_data(
         __amenity_persistence,
         __building_persistence,

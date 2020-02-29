@@ -1,23 +1,80 @@
-from typing import List
+from ..interfaces.favorite_interface import IFavoritesPersistence
+from ..interfaces.preference_interface import IPreferencesPersistence
+from ..interfaces.rating_interface import IRatingsPersistence
+from ..interfaces.review_interface import IReviewsPersistence
+from ..interfaces.user_interface import IUsersPersistence
+from api.common import should_use_db
+from api.common import get_cognito_user
+
+from typing import List, Any
 
 
 class UserStore:
     def __init__(
         self,
-        user_persistence,
-        favorite_preference,
-        review_persistence,
-        preference_persistence,
-        ratings_persistence
+        user_persistence: IUsersPersistence,
+        favorite_preference: IFavoritesPersistence,
+        review_persistence: IReviewsPersistence,
+        preference_persistence: IPreferencesPersistence,
+        ratings_persistence: IRatingsPersistence
     ):
-        self.__user_persistence = user_persistence
-        self.__favorite_persistence = favorite_preference
-        self.__review_persistence = review_persistence
-        self.__preference_persistence = preference_persistence
-        self.__ratings_persistence = ratings_persistence
+        self.__user_persistence: IUsersPersistence = user_persistence
+        self.__favorite_persistence: IFavoritesPersistence = \
+            favorite_preference
+        self.__review_persistence: IReviewsPersistence = review_persistence
+        self.__preference_persistence: IPreferencesPersistence = \
+            preference_persistence
+        self.__ratings_persistence: IRatingsPersistence = ratings_persistence
+
+    # Gives the currently authenticated user's ID
+    def __get_current_user_id(self) -> int:
+        # Default user ID for the Stubs is 0
+        user_id: int = 0
+
+        # If we are using the DB, we can fetch user ID
+        if should_use_db():
+            # Try to get the current user's username
+            username = get_cognito_user()
+            # We can only get the username if this is the Lambda
+            # If we get None back, we are not running in the Lambda
+            if username:
+                # Is this user in the Users table?
+                # Try to fetch the user from the table
+                opt_user_id = self.__user_persistence.get_id_by_username(
+                    username
+                )
+
+                # Check that the user ID is not None before we assign it
+                # This makes the static type checker happy
+                if opt_user_id is not None:
+                    user_id = opt_user_id
+
+                # If they don't have a user ID, we haven't
+                # inserted them into the Users table yet.
+                # Let's do that now
+                if opt_user_id is None:
+                    # Make their preferences object first
+                    pref_id = self.__preference_persistence.add_preference(
+                        "undefined",
+                        False,
+                        False
+                    )
+
+                    # Finally insert this user into the Users table
+                    user_id = self.__user_persistence.add_user(
+                        username,
+                        "default",
+                        pref_id
+                    )
+
+        # We did it! We got the user ID finally.
+        return user_id
+
+    def get_current_user(self) -> dict:
+        return self.get_user(self.__get_current_user_id())
 
     def get_user(self, user_id: int) -> dict:
-        result = self.__user_persistence.get_user(
+        result: Any = self.__user_persistence.get_user(
             user_id
         )
         if result:
@@ -42,20 +99,26 @@ class UserStore:
             user_id
         )
 
-        for favorite in query_result:
-            result.append(favorite.__dict__.copy())
+        if query_result:
+            for favorite in query_result:
+                result.append(favorite.__dict__.copy())
 
         return result
 
     def __expand_user(self, user: dict) -> None:
-        # Expand preferences
-        preference_id = user.pop("preference_id", None)
-        item = self.__preference_persistence.get_preference(
-            preference_id
-        ).__dict__.copy()
+        # Only expand preferences if the Username matches current user
 
-        item.pop("id", None)
-        user["preferences"] = item
+        if user["username"] == get_cognito_user():
+            # Expand preferences
+            preference_id = user.pop("preference_id", None)
+            item = self.__preference_persistence.get_preference(
+                preference_id
+            ).__dict__.copy()
+            item.pop("id", None)
+            user["preferences"] = item
+
+        # Cleanup
+        user.pop("preference_id", None)
 
     def __expand_review(self, review: dict) -> None:
         # Expand ratings

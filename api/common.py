@@ -1,3 +1,4 @@
+import os
 import datetime
 from flask import request
 from flask import jsonify
@@ -8,8 +9,12 @@ from api.objects.location import Location
 from math import sin, cos, sqrt, atan2, radians
 from typing import Optional
 
-
 TIMESTAMP_FORMAT = '%Y-%m-%d %H:%M:%S'
+
+
+def should_use_db():
+    return (os.environ.get("IS_LAMBDA") or os.environ.get("THRONE_USE_DB"))\
+        and not (os.environ.get("THRONE_NO_DB_CREDS"))
 
 
 def is_valid_schema(obj, schema: dict) -> bool:
@@ -21,8 +26,8 @@ def is_valid_schema(obj, schema: dict) -> bool:
     return result
 
 
+# Get the name of the currently authenticated Cognito user
 def get_cognito_user() -> Optional[str]:
-    # Get the name of the currently authenticated Cognito user
     event = request.environ.get("serverless.event", "no event")
 
     schema = {

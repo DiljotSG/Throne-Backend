@@ -1,21 +1,28 @@
-from typing import List
+from ..interfaces.building_interface import IBuildingsPersistence
+from ..interfaces.rating_interface import IRatingsPersistence
+from ..interfaces.review_interface import IReviewsPersistence
+from ..interfaces.washroom_interface import IWashroomsPersistence
+
+from typing import List, Any
 
 
 class BuildingStore:
     def __init__(
         self,
-        building_persistence,
-        washroom_persistence,
-        review_persistence,
-        rating_persistence
+        building_persistence: IBuildingsPersistence,
+        washroom_persistence: IWashroomsPersistence,
+        review_persistence: IReviewsPersistence,
+        rating_persistence: IRatingsPersistence
     ):
-        self.__building_persistence = building_persistence
-        self.__washroom_persistence = washroom_persistence
-        self.__review_persistence = review_persistence
-        self.__rating_persistence = rating_persistence
+        self.__building_persistence: IBuildingsPersistence = \
+            building_persistence
+        self.__washroom_persistence: IWashroomsPersistence = \
+            washroom_persistence
+        self.__review_persistence: IReviewsPersistence = review_persistence
+        self.__rating_persistence: IRatingsPersistence = rating_persistence
 
     def get_building(self, building_id: int) -> dict:
-        result = self.__building_persistence.get_building(
+        result: Any = self.__building_persistence.get_building(
             building_id
         )
         if result:

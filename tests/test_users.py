@@ -12,16 +12,27 @@ class TestUsersAPI(unittest.TestCase):
         self.app = app.test_client()
         self.assertEqual(app.debug, False)
 
+    def test_root(self):
+        response = self.app.get(
+            "/users",
+            follow_redirects=True
+        )
+        data = json.loads(response.data.decode())
+        expected_data = {
+            "id": 0,
+            "profile_picture": "picture",
+            "username": "janesmith"
+        }
+        self.assertEqual(response.status_code, 200)
+        created_at = data.pop("created_at", None)
+        self.assertNotEqual(created_at, None)
+        self.assertEqual(data, expected_data)
+
     def test_by_id(self):
         response = self.app.get("/users/1")
         data = json.loads(response.data.decode())
         expected_data = {
             "id": 1,
-            "preferences": {
-                "gender": "men",
-                "main_floor_access": True,
-                "wheelchair_accessible": False
-            },
             "profile_picture": "picture",
             "username": "johnsmith"
         }
