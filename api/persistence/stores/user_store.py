@@ -27,7 +27,10 @@ class UserStore:
         self.__ratings_persistence: IRatingsPersistence = ratings_persistence
 
     def get_current_user(self) -> dict:
-        return self.get_user(get_current_user_id())
+        return self.get_user(get_current_user_id(
+            self.__user_persistence,
+            self.__preference_persistence
+        ))
 
     def get_user(self, user_id: int) -> dict:
         result: Any = self.__user_persistence.get_user(

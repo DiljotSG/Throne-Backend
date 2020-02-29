@@ -1,9 +1,15 @@
 from api.common import should_use_db
 from api.common import get_cognito_user
 
+from .interfaces.user_interface import IUsersPersistence
+from .interfaces.preference_interface import IPreferencesPersistence
+
 
 # Gives the currently authenticated user's ID
-def get_current_user_id(self) -> int:
+def get_current_user_id(
+    user_persistence: IUsersPersistence,
+    preference_persistence: IPreferencesPersistence
+) -> int:
     # Default user ID for the Stubs is 0
     user_id: int = 0
 
@@ -16,7 +22,7 @@ def get_current_user_id(self) -> int:
         if username:
             # Is this user in the Users table?
             # Try to fetch the user from the table
-            opt_user_id = self.__user_persistence.get_id_by_username(
+            opt_user_id = user_persistence.get_id_by_username(
                 username
             )
 
@@ -30,14 +36,14 @@ def get_current_user_id(self) -> int:
             # Let's do that now
             if opt_user_id is None:
                 # Make their preferences object first
-                pref_id = self.__preference_persistence.add_preference(
+                pref_id = preference_persistence.add_preference(
                     "undefined",
                     False,
                     False
                 )
 
                 # Finally insert this user into the Users table
-                user_id = self.__user_persistence.add_user(
+                user_id = user_persistence.add_user(
                     username,
                     "default",
                     pref_id
