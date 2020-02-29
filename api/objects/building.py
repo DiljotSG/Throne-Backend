@@ -20,3 +20,7 @@ class Building:
         self.created_at = created_at
         self.overall_rating = overall_rating
         self.best_ratings_id = best_ratings_id
+
+    @staticmethod
+    def verify(floor: int) -> bool:
+        return floor > 0 and floor < 10

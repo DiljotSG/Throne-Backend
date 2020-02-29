@@ -39,8 +39,19 @@ class Amenity(str, Enum):
     TISSUES: str = "tissues"
     WHEEL_CHAIR_ACCESS: str = "wheel_chair_access"
 
-    @staticmethod
-    def verify_list(amenities: List[str]):
-        # TODO: Add support for verifying if a list of strings
-        # of contains all valid Amenities
-        return True
+
+def verify_amenity_list(amenities: List[str]) -> bool:
+    amenity_strings = [a.value for a in Amenity]
+    for amenity in amenities:
+        if not amenity.lower() in amenity_strings:
+            return False
+    return True
+
+
+def convert_to_amenities(amenities: List[str]) -> List[Amenity]:
+    amenity_strings = [a.value for a in Amenity]
+    results = []
+    for amenity in amenities:
+        if amenity.lower() in amenity_strings:
+            results.append(Amenity[amenity.upper()])
+    return results

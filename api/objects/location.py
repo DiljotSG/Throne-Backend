@@ -6,3 +6,8 @@ class Location:
     ) -> None:
         self.latitude = latitude
         self.longitude = longitude
+
+    @staticmethod
+    def verify(latitude: float, longitude: float) -> bool:
+        return latitude <= 90 and latitude >= -90 and \
+            longitude <= 180 and longitude >= -180

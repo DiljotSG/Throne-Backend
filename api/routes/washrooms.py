@@ -3,12 +3,14 @@ from flask import Blueprint
 from flask_cors import CORS
 from flask_cors import cross_origin
 from api.common import return_as_json
+from api.common import return_error
 from api.response_codes import HttpCodes
 from ..objects.location import Location
 from ..persistence import create_washroom_store
 from ..persistence import create_building_store
 from ..persistence import create_review_store
-# from api.common import get_cognito_user
+
+from ..exceptions.throne_exception import ThroneException
 
 washroom_store = create_washroom_store()
 building_store = create_building_store()
@@ -50,13 +52,12 @@ def get_washrooms():
 @mod.route("", methods=["POST"])
 @cross_origin()
 def post_washrooms():
-    code = HttpCodes.HTTP_201_CREATED
     result = None
 
     try:
         title = str(request.json["title"])
         longitude = float(request.json["location"]["longitude"])
-        latitude = float(request.json["location"]["longitude"])
+        latitude = float(request.json["location"]["latitude"])
         gender = str(request.json["gender"])
         floor = int(request.json["floor"])
         building_id = int(request.json["building_id"])
@@ -72,10 +73,16 @@ def post_washrooms():
             amenities
         )
 
-    except (ValueError):
-        code = HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY
+    except ThroneException as e:
+        return return_error(HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY, str(e))
 
-    return return_as_json(result, code)
+    except ValueError:
+        return return_error(HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY)
+
+    except KeyError:
+        return return_error(HttpCodes.HTTP_400_BAD_REQUEST)
+
+    return return_as_json(result)
 
 
 @mod.route("/<int:washroom_id>", methods=["GET"])

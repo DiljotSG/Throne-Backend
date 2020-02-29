@@ -29,12 +29,6 @@ class Washroom:
 
     @staticmethod
     def verify(
-        title: str,
-        longitude: float,
-        latitude: float,
-        gender: str,
-        floor: int,
-    ):
-        # TODO: Verify if the supplied input is valid data
-        # to be used in creating a washroom
-        return True
+        title: str
+    ) -> bool:
+        return len(title) > 0
