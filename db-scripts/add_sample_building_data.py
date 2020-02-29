@@ -2,7 +2,6 @@ import json
 from api.persistence.implementations.building_impl import BuildingsPersistence
 from api.persistence.implementations.rating_impl import RatingsPersistence
 from api.objects.location import Location
-from datetime import datetime
 
 
 data = None
@@ -24,7 +23,6 @@ for building in buildings:
         ),
         building["title"],
         building["map_service_id"],
-        datetime.now(),
         building["overall_rating"],
         best_ratings_id
     )
