@@ -128,13 +128,11 @@ class WashroomStore:
                     self.__preference_persistence
                 )
             )
-        is_favorite = False
-        for favorite in favorites:
-            if favorite.washroom_id == washroom["id"]:
-                is_favorite = True
-                break
 
-        washroom["is_favorite"] = is_favorite
+        washroom["is_favorite"] = any(
+            favorite.washroom_id == washroom["id"]
+            for favorite in favorites
+        )
 
     def __expand_review(self, review: dict) -> None:
         # Expand ratings
