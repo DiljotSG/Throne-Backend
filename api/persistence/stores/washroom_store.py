@@ -129,10 +129,13 @@ class WashroomStore:
                 )
             )
 
-        washroom["is_favorite"] = any(
-            favorite.washroom_id == washroom["id"]
-            for favorite in favorites
-        )
+        if favorites is not None:
+            washroom["is_favorite"] = any(
+                favorite.washroom_id == washroom["id"]
+                for favorite in favorites
+            )
+        else:
+            washroom["is_favorite"] = False
 
     def __expand_review(self, review: dict) -> None:
         # Expand ratings
