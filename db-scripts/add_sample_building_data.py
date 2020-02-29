@@ -16,7 +16,6 @@ with open('db-scripts/buildings.json') as f:
 buildings = data["buildings"]
 
 for building in buildings:
-    overall_rating_id = ra.add_rating(0, 0, 0, 0)
     best_ratings_id = ra.add_rating(0, 0, 0, 0)
     building = b.add_building(
         Location(
@@ -27,7 +26,7 @@ for building in buildings:
         building["map_service_id"],
         datetime.now(),
         building["overall_rating"],
-        building["best_ratings_id"]
+        best_ratings_id
     )
 
 print("Done!")
