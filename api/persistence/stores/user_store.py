@@ -3,7 +3,7 @@ from ..interfaces.preference_interface import IPreferencesPersistence
 from ..interfaces.rating_interface import IRatingsPersistence
 from ..interfaces.review_interface import IReviewsPersistence
 from ..interfaces.user_interface import IUsersPersistence
-from ...persistence import get_current_user_id
+from ...persistence.common import get_current_user_id
 from api.common import get_cognito_user
 
 from typing import List, Any
