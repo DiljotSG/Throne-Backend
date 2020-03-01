@@ -77,7 +77,7 @@ class UsersPersistence(IUsersPersistence):
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
-        find_query = "SELECT id FROM users WHERE username = %s"
+        find_query = "SELECT id FROM users WHERE username = %s LIMIT 1"
         find_tuple = (username,)
         cursor.execute(find_query, find_tuple)
 

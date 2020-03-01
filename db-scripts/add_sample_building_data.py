@@ -30,6 +30,7 @@ for building in buildings:
         building["overall_rating"],
         best_ratings_id
     )
+    print(f"Added building #{buildingID}")
 
 # Add two (REAL!) washrooms
 # Use the University Centre and the Elizabeth Dafoe Library
@@ -48,11 +49,12 @@ w.add_washroom(
     ),
     "University Centre Main Floor Washroom",
     2,
-    "Male",
+    "men",
     amenity0,
     0,
     rating0
 )
+print("Added U Centre washroom")
 
 dafoe = buildings[9]
 amenity1 = a.add_amenities(
@@ -75,10 +77,10 @@ w.add_washroom(
     ),
     "Elizabeth Dafoe Library Main Floor Washroom",
     2,
-    "Male",
+    "men",
     amenity1,
     0,
     rating1
 )
-
+print("Added Dafoe Library washroom")
 print("Done!")
