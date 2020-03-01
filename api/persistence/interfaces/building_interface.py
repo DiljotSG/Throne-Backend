@@ -14,7 +14,7 @@ class IBuildingsPersistence(ABC):
         self,
         location: Location,
         title: str,
-        map_service_id: str,
+        map_service_id: int,
         overall_rating: int,
         best_ratings_id: int
     ) -> int:
@@ -35,6 +35,18 @@ class IBuildingsPersistence(ABC):
     def get_building(
         self,
         building_id: int
+    ) -> Optional[Building]:
+        pass
+
+    @abstractmethod
+    def update_building(
+        self,
+        building_id: int,
+        location: Location,
+        title: str,
+        maps_service_id: int,
+        overall_rating: float,
+        best_ratings_id: int
     ) -> Optional[Building]:
         pass
 

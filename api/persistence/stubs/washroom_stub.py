@@ -19,7 +19,7 @@ class WashroomsStubPersistence(IWashroomsPersistence):
         floor: int,
         gender: str,
         amenities_id: int,  # Foreign Key
-        overall_rating: int,
+        overall_rating: float,
         average_ratings_id: int  # Foreign Key
     ) -> int:
         washroom_id = len(self.washrooms)
@@ -66,6 +66,12 @@ class WashroomsStubPersistence(IWashroomsPersistence):
                 washrooms.append(washroom)
         return washrooms
 
+    def get_washroom_count_by_building(
+        self,
+        building_id: int
+    ) -> int:
+        return len(self.get_washrooms_by_building(building_id))
+
     def get_washroom(
         self,
         washroom_id: int
@@ -75,9 +81,38 @@ class WashroomsStubPersistence(IWashroomsPersistence):
             return self.washrooms[washroom_id]
         return None
 
+    def update_washroom(
+        self,
+        washroom_id: int,
+        title: str,
+        location: Location,
+        floor: int,
+        gender: str,
+        amenities_id: int,
+        overall_rating: float,
+        average_ratings_id: int
+    ) -> Optional[Washroom]:
+        new_washroom = None
+        if 0 <= washroom_id < len(self.washrooms) and \
+                self.washrooms[washroom_id] is not None:
+            new_washroom = Washroom(
+                washroom_id,
+                title,
+                location,
+                self.washrooms[washroom_id].created_at,
+                gender,
+                floor,
+                self.washrooms[washroom_id].building_id,
+                overall_rating,
+                average_ratings_id,
+                amenities_id
+            )
+            self.washrooms[washroom_id] = new_washroom
+        return new_washroom
+
     def remove_washroom(
         self,
         washroom_id: int
     ) -> None:
-        if washroom_id >= 0 and washroom_id < len(self.washrooms):
+        if 0 <= washroom_id < len(self.washrooms):
             self.washrooms.pop(washroom_id)
