@@ -103,6 +103,7 @@ class TestBuildingsAPI(unittest.TestCase):
                     "gender": "men",
                     "id": 2,
                     'is_favorite': False,
+                    "review_count": 1,
                     "location": {
                         "latitude": 114,
                         "longitude": 200.5
