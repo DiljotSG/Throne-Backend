@@ -33,6 +33,8 @@ class TestWashroomAPI(unittest.TestCase):
             "floor": 1,
             "gender": "women",
             "id": 0,
+            "is_favorite": True,
+            "review_count": 1,
             "location": {
                 "latitude": 12.2,
                 "longitude": 17.9
@@ -64,6 +66,8 @@ class TestWashroomAPI(unittest.TestCase):
             "floor": 1,
             "gender": "women",
             "id": 0,
+            "is_favorite": True,
+            "review_count": 1,
             "location": {
                 "latitude": 12.2,
                 "longitude": 17.9
