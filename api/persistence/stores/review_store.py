@@ -5,7 +5,6 @@ from ..interfaces.washroom_interface import IWashroomsPersistence
 from ..interfaces.preference_interface import IPreferencesPersistence
 from ..interfaces.building_interface import IBuildingsPersistence
 
-from ..objects.washroom import Washroom
 from ...objects.rating import Rating
 from ..common import get_current_user_id
 from ...exceptions.throne_validation_exception import ThroneValidationException
