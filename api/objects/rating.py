@@ -20,7 +20,7 @@ class Rating:
         smell: float,
         toilet_paper_quality: float
     ) -> bool:
-        return cleanliness >= 0 and cleanliness <= 5 and \
-            privacy >= 0 and privacy <= 5 and \
-            smell >= 0 and smell <= 5 and \
-            toilet_paper_quality >= 0 and toilet_paper_quality <= 5
+        return cleanliness > 0 and cleanliness <= 5 and \
+            privacy > 0 and privacy <= 5 and \
+            smell > 0 and smell <= 5 and \
+            toilet_paper_quality > 0 and toilet_paper_quality <= 5
