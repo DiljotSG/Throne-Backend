@@ -52,6 +52,13 @@ class IReviewsPersistence(ABC):
         pass
 
     @abstractmethod
+    def get_review_count_by_washroom(
+        self,
+        washroom_id: int
+    ) -> int:
+        pass
+
+    @abstractmethod
     def remove_review(
         self,
         review_id: int

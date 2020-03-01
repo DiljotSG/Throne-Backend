@@ -120,6 +120,12 @@ class WashroomStore:
         item.pop("id", None)
         washroom["average_ratings"] = item
 
+        # Add review count
+        washroom["review_count"] = \
+            self.__review_persistence.get_review_count_by_washroom(
+                washroom["id"]
+            )
+
         # Add is_favorite
         favorites = \
             self.__favorite_persistence.get_favorites_by_user(
