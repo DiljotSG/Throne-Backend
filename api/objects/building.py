@@ -8,9 +8,9 @@ class Building:
         building_id: int,
         location: Location,
         title: str,
-        maps_service_id: str,
+        maps_service_id: int,
         created_at: datetime,
-        overall_rating: int,
+        overall_rating: float,
         best_ratings_id: int
     ):
         self.id = building_id

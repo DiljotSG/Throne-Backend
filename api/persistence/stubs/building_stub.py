@@ -15,7 +15,7 @@ class BuildingsStubPersistence(IBuildingsPersistence):
         self,
         location: Location,
         title: str,
-        map_service_id: str,
+        map_service_id: int,
         overall_rating: int,
         best_ratings_id: int
     ) -> int:
@@ -58,6 +58,30 @@ class BuildingsStubPersistence(IBuildingsPersistence):
            self.buildings[building_id] is not None:
             return self.buildings[building_id]
         return None
+
+    def update_building(
+        self,
+        building_id: int,
+        location: Location,
+        title: str,
+        maps_service_id: int,
+        overall_rating: float,
+        best_ratings_id: int
+    ) -> Optional[Building]:
+        new_building = None
+        if 0 <= building_id < len(self.buildings) and \
+                self.buildings[building_id] is not None:
+            new_building = Building(
+                building_id,
+                location,
+                title,
+                maps_service_id,
+                self.buildings[building_id].created_at,
+                overall_rating,
+                best_ratings_id
+            )
+            self.buildings[building_id] = new_building
+        return new_building
 
     def remove_building(
         self,

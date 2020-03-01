@@ -31,7 +31,7 @@ class TestBuildingsAPI(unittest.TestCase):
                     "latitude": 10.2,
                     "longitude": 15.9
                 },
-                "maps_service_id": "0",
+                "maps_service_id": 0,
                 "overall_rating": 4,
                 "title": "Engineering"
             },
@@ -47,7 +47,7 @@ class TestBuildingsAPI(unittest.TestCase):
                     "latitude": 104,
                     "longitude": 230.5
                 },
-                "maps_service_id": "1",
+                "maps_service_id": 1,
                 "overall_rating": 3,
                 "title": "Science"
             }
@@ -74,7 +74,7 @@ class TestBuildingsAPI(unittest.TestCase):
                 "latitude": 104,
                 "longitude": 230.5
             },
-            "maps_service_id": "1",
+            "maps_service_id": 1,
             "overall_rating": 3,
             "title": "Science"
         }

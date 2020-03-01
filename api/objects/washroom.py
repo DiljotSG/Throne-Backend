@@ -12,7 +12,7 @@ class Washroom:
         gender: str,
         floor: int,
         building_id: int,
-        overall_rating: int,
+        overall_rating: float,
         average_rating_id: int,
         amenities_id: int
     ) -> None:

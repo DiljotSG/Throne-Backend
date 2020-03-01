@@ -18,7 +18,7 @@ class IWashroomsPersistence(ABC):
         floor: int,
         gender: str,
         amenities_id: int,  # Foreign Key
-        overall_rating: int,
+        overall_rating: float,
         average_ratings_id: int  # Foreign Key
     ) -> int:
         # Return Washroom id
@@ -42,9 +42,30 @@ class IWashroomsPersistence(ABC):
         pass
 
     @abstractmethod
+    def get_washroom_count_by_building(
+        self,
+        building_id: int
+    ) -> int:
+        pass
+
+    @abstractmethod
     def get_washroom(
         self,
         washroom_id: int
+    ) -> Optional[Washroom]:
+        pass
+
+    @abstractmethod
+    def update_washroom(
+        self,
+        washroom_id: int,
+        title: str,
+        location: Location,
+        floor: int,
+        gender: str,
+        amenities_id: int,
+        overall_rating: float,
+        average_ratings_id: int
     ) -> Optional[Washroom]:
         pass
 
