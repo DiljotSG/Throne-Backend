@@ -42,6 +42,13 @@ class IWashroomsPersistence(ABC):
         pass
 
     @abstractmethod
+    def get_washroom_count_by_building(
+        self,
+        building_id: int
+    ) -> int:
+        pass
+
+    @abstractmethod
     def get_washroom(
         self,
         washroom_id: int
