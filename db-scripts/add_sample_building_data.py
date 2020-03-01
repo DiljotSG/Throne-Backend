@@ -38,6 +38,7 @@ amenity0 = a.add_amenities(
     Amenity.AUTO_DRYER, Amenity.PAPER_TOWEL,
     Amenity.CONTRACEPTION, Amenity.GARBAGE_CAN
 )
+rating0 = ra.add_rating(0, 0, 0, 0)
 
 w.add_washroom(
     u_centre["id"],
@@ -48,8 +49,36 @@ w.add_washroom(
     "University Centre Main Floor Washroom",
     2,
     "Male",
+    amenity0,
+    0,
+    rating0
+)
 
+dafoe = buildings[9]
+amenity1 = a.add_amenities(
+    Amenity.AIR_DRYER,
+    Amenity.AUTO_SINK,
+    Amenity.BRAILLE_LABELING,
+    Amenity.COAT_HOOK,
+    Amenity.GARBAGE_CAN,
+    Amenity.PAPER_TOWEL,
+    Amenity.SAFETY_RAIL,
+    Amenity.WHEEL_CHAIR_ACCESS,
+)
+rating1 = ra.add_rating(0, 0, 0, 0)
 
+w.add_washroom(
+    dafoe["id"],
+    Location(
+        dafoe["location"]["latitude"],
+        dafoe["location"]["longitude"]
+    ),
+    "Elizabeth Dafoe Library Main Floor Washroom",
+    2,
+    "Male",
+    amenity1,
+    0,
+    rating1
 )
 
 print("Done!")
