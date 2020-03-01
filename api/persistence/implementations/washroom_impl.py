@@ -36,7 +36,7 @@ class WashroomsPersistence(IWashroomsPersistence):
         floor: int,
         gender: str,
         amenities_id: int,  # Foreign Key
-        overall_rating: int,
+        overall_rating: float,
         average_ratings_id: int  # Foreign Key
     ) -> int:
         cnx = get_sql_connection()

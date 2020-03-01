@@ -18,7 +18,7 @@ class IWashroomsPersistence(ABC):
         floor: int,
         gender: str,
         amenities_id: int,  # Foreign Key
-        overall_rating: int,
+        overall_rating: float,
         average_ratings_id: int  # Foreign Key
     ) -> int:
         # Return Washroom id

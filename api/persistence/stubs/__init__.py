@@ -246,7 +246,7 @@ def __create_buildings(
     building1_id = building_persistence.add_building(
         location1,
         "Engineering",
-        "0",
+        0,
         4,
         building_best_ratings[0]
     )
@@ -254,7 +254,7 @@ def __create_buildings(
     building2_id = building_persistence.add_building(
         location2,
         "Science",
-        "1",
+        1,
         3,
         building_best_ratings[1]
     )
