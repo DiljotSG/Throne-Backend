@@ -3,13 +3,12 @@ from ..interfaces.review_interface import IReviewsPersistence
 from ..interfaces.user_interface import IUsersPersistence
 from ..interfaces.washroom_interface import IWashroomsPersistence
 from ..interfaces.preference_interface import IPreferencesPersistence
+from ..interfaces.building_interface import IBuildingsPersistence
 
-from ..common import get_current_user_id
-
-from ...exceptions.throne_validation_exception import ThroneValidationException
-
+from ..objects.washroom import Washroom
 from ...objects.rating import Rating
-
+from ..common import get_current_user_id
+from ...exceptions.throne_validation_exception import ThroneValidationException
 from typing import Optional, Any
 
 
@@ -20,7 +19,8 @@ class ReviewStore:
         rating_persistence: IRatingsPersistence,
         user_persistence: IUsersPersistence,
         preference_persistence: IPreferencesPersistence,
-        washroom_persistence: IWashroomsPersistence
+        washroom_persistence: IWashroomsPersistence,
+        building_persistence: IBuildingsPersistence
     ):
         self.__review_persistence: IReviewsPersistence = review_persistence
         self.__rating_persistence: IRatingsPersistence = rating_persistence
@@ -29,6 +29,8 @@ class ReviewStore:
             preference_persistence
         self.__washroom_persistence: IWashroomsPersistence = \
             washroom_persistence
+        self.__building_persistence: IBuildingsPersistence = \
+            building_persistence
 
     def create_review(
         self,
@@ -75,17 +77,54 @@ class ReviewStore:
             0
         )
 
-        # Update the average washroom rating
-        washroom_avg_ratings_id = self.__washroom_persistence.get_washroom(
+        # Update the washroom rating
+        self.__update_washroom_rating(
+            washroom_id,
+            cleanliness,
+            privacy,
+            smell,
+            toilet_paper_quality
+        )
+        # Update the building rating
+        self.__update_building_rating(
+            washroom_id,
+            cleanliness,
+            privacy,
+            smell,
+            toilet_paper_quality
+        )
+
+        # Return the review
+        review = self.__review_persistence.get_review(review_id)
+        result = review.__dict__.copy()
+        self.__expand_review(result)
+        return result
+
+    def __update_washroom_rating(
+        self,
+        washroom_id: int,
+        cleanliness: float,
+        privacy: float,
+        smell: float,
+        toilet_paper_quality: float
+    ):
+        # Get the washroom
+        washroom = self.__washroom_persistence.get_washroom(
             washroom_id
-        )["average_rating_id"]
+        )
+        # Get the average ratings
+        washroom_avg_ratings_id = washroom["average_rating_id"]
         washroom_avg_rating = self.__rating_persistence.get_rating(
             washroom_avg_ratings_id
         )
-        # TODO: Get the review count for this washroom
-        review_count_washroom = 10  
-
-        # If the averages are zero, this is our first washroom review.
+        # Get the review count of the washrooms
+        review_count_washroom = self.__review_persistence.\
+            get_review_count_by_washroom(
+                washroom_id
+            )
+        # Update the average washroom rating
+        # If the averages are zero, this is our first washroom review
+        # Otherwise update the averages
         # Set the averages to the user rating
         if (washroom_avg_rating.cleanliness == 0
             and washroom_avg_rating.privacy == 0
@@ -95,6 +134,12 @@ class ReviewStore:
             washroom_avg_rating.privacy = privacy
             washroom_avg_rating.smell = smell
             washroom_avg_rating.toilet_paper_quality = toilet_paper_quality
+            ratings = [
+                washroom_avg_rating.cleanliness,
+                washroom_avg_rating.privacy,
+                washroom_avg_rating.smell,
+                washroom_avg_rating.toilet_paper_quality
+            ]
         else:
             ratings = [
                 washroom_avg_rating.cleanliness,
@@ -102,6 +147,7 @@ class ReviewStore:
                 washroom_avg_rating.smell,
                 washroom_avg_rating.toilet_paper_quality
             ]
+            # Update the averages
             for x in [cleanliness, privacy, smell, toilet_paper_quality]:
                 ratings = [((rating * review_count_washroom) + x) /
                            (review_count_washroom + 1) for rating in ratings]
@@ -110,10 +156,77 @@ class ReviewStore:
                 washroom_avg_rating.smell = ratings[2]
                 washroom_avg_rating.toilet_paper_quality = ratings[3]
 
-        review = self.__review_persistence.get_review(review_id)
-        result = review.__dict__.copy()
-        self.__expand_review(result)
-        return result
+        # Actually update DB with the new rating
+        self.__rating_persistence.update_rating(
+            washroom_avg_ratings_id,
+            washroom_avg_rating.cleanliness,
+            washroom_avg_rating.privacy,
+            washroom_avg_rating.smell,
+            washroom_avg_rating.toilet_paper_quality
+        )
+        # Update the overall rating for the washroom
+        new_overall_rating = sum(ratings) / len(ratings)
+        self.__washroom_persistence.update_washroom(
+            washroom_id,
+            new_overall_rating
+        )
+
+    def __update_building_rating(
+        self,
+        washroom_id: int
+    ):
+        # Get the washroom
+        washroom = self.__washroom_persistence.get_washroom(
+            washroom_id
+        )
+        # Get the average ratings
+        washroom_avg_ratings_id = washroom["average_rating_id"]
+        washroom_avg_rating = self.__rating_persistence.get_rating(
+            washroom_avg_ratings_id
+        )
+        # Get the building
+        building = self.__building_persistence.get_building(
+            washroom.building_id
+        )
+        # Get the best ratings for this building
+        building_best_ratings_id = building["best_ratings_id"]
+        building_best_ratings = self.__rating_persistence.get_rating(
+            building_best_ratings_id
+        )
+        washroom_ratings = [
+                washroom_avg_rating.cleanliness,
+                washroom_avg_rating.privacy,
+                washroom_avg_rating.smell,
+                washroom_avg_rating.toilet_paper_quality
+            ]
+        building_ratings = [
+            building_best_ratings.cleanliness,
+            building_best_ratings.privacy,
+            building_best_ratings.smell,
+            building_best_ratings.toilet_paper_quality
+        ]
+
+        # Update the best building ratings
+        for x in washroom_ratings:
+            building_ratings = [max(rating, x) for rating in building_ratings]
+            building_best_ratings.cleanliness = building_ratings[0]
+            building_best_ratings.privacy = building_ratings[1]
+            building_best_ratings.smell = building_ratings[2]
+            building_best_ratings.toilet_paper_quality = building_ratings[3]
+        # Actually update the DB with the new ratings
+        self.__rating_persistence.update_rating(
+            building_best_ratings_id,
+            building_best_ratings.cleanliness,
+            building_best_ratings.privacy,
+            building_best_ratings.smell,
+            building_best_ratings.toilet_paper_quality
+        )
+        # Update the overall rating for the building
+        new_overall_rating = sum(building_ratings) / len(building_ratings)
+        self.__building_persistence.update_building(
+            washroom.building_id,
+            new_overall_rating
+        )
 
     def update_review(
         self,

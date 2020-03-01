@@ -98,7 +98,8 @@ def create_review_store() -> ReviewStore:
         __rating_persistence,
         __user_persistence,
         __preference_persistence,
-        __washroom_persistence
+        __washroom_persistence,
+        __building_persistence
     )
 
 
