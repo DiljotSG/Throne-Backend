@@ -34,7 +34,7 @@ class BuildingStore:
         self,
         location=None,
         radius=5,
-        max_buildings=5,
+        max_buildings=100,
         desired_amenities=[]
     ) -> List[dict]:
         result = []
