@@ -161,6 +161,42 @@ class WashroomsPersistence(IWashroomsPersistence):
         result = result[0]
         return result_to_washroom(result)
 
+    def update_washroom(
+        self,
+        washroom_id: int,
+        title: str,
+        location: Location,
+        floor: int,
+        gender: str,
+        amenities_id: int,
+        overall_rating: float,
+        average_ratings_id: int
+    ) -> Optional[Washroom]:
+        cnx = get_sql_connection()
+        cursor = cnx.cachedCursor
+
+        update_query = """
+        UPDATE washrooms
+        SET latitude = %s,
+        longitude = %s,
+        title = %s,
+        floor = %s,
+        gender = %s,
+        amenities = %s,
+        overallRating = %s,
+        avgRatingsID = %s
+        WHERE id = %s
+        """
+
+        update_tuple = (
+            location.latitude, location.longitude, title, floor, gender,
+            amenities_id, overall_rating, average_ratings_id, washroom_id
+        )
+        cursor.execute(update_query, update_tuple)
+        cnx.commit()
+
+        return self.get_washroom(washroom_id)
+
     def remove_washroom(
         self,
         washroom_id: int

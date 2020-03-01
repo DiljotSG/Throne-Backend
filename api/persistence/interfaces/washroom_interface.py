@@ -56,6 +56,20 @@ class IWashroomsPersistence(ABC):
         pass
 
     @abstractmethod
+    def update_washroom(
+        self,
+        washroom_id: int,
+        title: str,
+        location: Location,
+        floor: int,
+        gender: str,
+        amenities_id: int,
+        overall_rating: float,
+        average_ratings_id: int
+    ) -> Optional[Washroom]:
+        pass
+
+    @abstractmethod
     def remove_washroom(
         self,
         washroom_id: int
