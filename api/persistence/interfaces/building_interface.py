@@ -39,6 +39,18 @@ class IBuildingsPersistence(ABC):
         pass
 
     @abstractmethod
+    def update_building(
+        self,
+        building_id: int,
+        location: Location,
+        title: str,
+        maps_service_id: int,
+        overall_rating: float,
+        best_ratings_id: int
+    ) -> Optional[Building]:
+        pass
+
+    @abstractmethod
     def remove_building(
         self,
         building_id: int

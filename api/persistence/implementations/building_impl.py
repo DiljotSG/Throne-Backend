@@ -108,6 +108,38 @@ class BuildingsPersistence(IBuildingsPersistence):
         result = result[0]
         return _result_to_building(result)
 
+    def update_building(
+        self,
+        building_id: int,
+        location: Location,
+        title: str,
+        maps_service_id: int,
+        overall_rating: float,
+        best_ratings_id: int
+    ) -> Optional[Building]:
+        cnx = get_sql_connection()
+        cursor = cnx.cachedCursor
+
+        update_query = """
+        UPDATE buildings
+        SET latitude = %s,
+        longitude = %s,
+        title = %s,
+        mapServiceID = %s,
+        overallRating = %s,
+        bestRatingID = %s
+        WHERE id = %s
+        """
+
+        update_tuple = (
+            location.latitude, location.longitude, title, maps_service_id,
+            overall_rating, best_ratings_id, building_id
+        )
+        cursor.execute(update_query, update_tuple)
+        cnx.commit()
+
+        return self.get_building(building_id)
+
     def remove_building(
         self,
         building_id: int
