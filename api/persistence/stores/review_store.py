@@ -168,7 +168,13 @@ class ReviewStore:
         new_overall_rating = sum(ratings) / len(ratings)
         self.__washroom_persistence.update_washroom(
             washroom_id,
-            new_overall_rating
+            washroom.title,
+            washroom.location,
+            washroom.floor,
+            washroom.gender,
+            washroom.amenities_id,
+            new_overall_rating,
+            washroom_avg_ratings_id
         )
 
     def __update_building_rating(
@@ -224,8 +230,12 @@ class ReviewStore:
         # Update the overall rating for the building
         new_overall_rating = sum(building_ratings) / len(building_ratings)
         self.__building_persistence.update_building(
-            washroom.building_id,
-            new_overall_rating
+            building.id,
+            building.location,
+            building.title,
+            building.maps_service_id,
+            new_overall_rating,
+            building_best_ratings_id
         )
 
     def update_review(
