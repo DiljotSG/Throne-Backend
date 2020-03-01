@@ -49,7 +49,7 @@ w.add_washroom(
     ),
     "University Centre Main Floor Washroom",
     2,
-    "Male",
+    "men",
     amenity0,
     0,
     rating0
@@ -77,7 +77,7 @@ w.add_washroom(
     ),
     "Elizabeth Dafoe Library Main Floor Washroom",
     2,
-    "Male",
+    "men",
     amenity1,
     0,
     rating1
