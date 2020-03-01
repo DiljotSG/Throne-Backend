@@ -53,29 +53,66 @@ class ReviewStore:
         ):
             raise ThroneValidationException("Ratings are invalid")
 
+        # Get the user ID
+        user_id = get_current_user_id(
+            self.__user_persistence,
+            self.__preference_persistence
+        )
+
+        # Add the rating
         rating_id = self.__rating_persistence.add_rating(
             cleanliness,
             privacy,
             smell,
             toilet_paper_quality
         )
-
+        # Add the review
         review_id = self.__review_persistence.add_review(
             washroom_id,
-            get_current_user_id(
-                self.__user_persistence,
-                self.__preference_persistence
-            ),
+            user_id,
             rating_id,
             comment,
             0
         )
 
-        review = self.__review_persistence.get_review(review_id)
+        # Update the average washroom rating
+        washroom_avg_ratings_id = self.__washroom_persistence.get_washroom(
+            washroom_id
+        )["average_rating_id"]
+        washroom_avg_rating = self.__rating_persistence.get_rating(
+            washroom_avg_ratings_id
+        )
+        # TODO: Get the review count for this washroom
+        review_count_washroom = 10  
 
+        # If the averages are zero, this is our first washroom review.
+        # Set the averages to the user rating
+        if (washroom_avg_rating.cleanliness == 0
+            and washroom_avg_rating.privacy == 0
+                and washroom_avg_rating.smell == 0
+                and washroom_avg_rating.toilet_paper_quality == 0):
+            washroom_avg_rating.cleanliness = cleanliness
+            washroom_avg_rating.privacy = privacy
+            washroom_avg_rating.smell = smell
+            washroom_avg_rating.toilet_paper_quality = toilet_paper_quality
+        else:
+            ratings = [
+                washroom_avg_rating.cleanliness,
+                washroom_avg_rating.privacy,
+                washroom_avg_rating.smell,
+                washroom_avg_rating.toilet_paper_quality
+            ]
+            for x in [cleanliness, privacy, smell, toilet_paper_quality]:
+                ratings = [((rating * review_count_washroom) + x) /
+                           (review_count_washroom + 1) for rating in ratings]
+                washroom_avg_rating.cleanliness = ratings[0]
+                washroom_avg_rating.privacy = ratings[1]
+                washroom_avg_rating.smell = ratings[2]
+                washroom_avg_rating.toilet_paper_quality = ratings[3]
+
+        review = self.__review_persistence.get_review(review_id)
         result = review.__dict__.copy()
         self.__expand_review(result)
-
         return result
 
     def update_review(
