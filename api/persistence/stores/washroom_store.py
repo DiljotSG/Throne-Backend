@@ -84,7 +84,7 @@ class WashroomStore:
 
         gender = gender.lower()  # Ensure its lower case
         location = Location(latitude, longitude)
-        overall_rating_id = self.__ratings_persistence.add_rating(0, 0, 0, 0)
+        overall_rating = 0
         average_rating_id = self.__ratings_persistence.add_rating(0, 0, 0, 0)
         amenities_id = self.__amenity_persistence.add_amenities(
             convert_to_amenities(amenities)
@@ -98,7 +98,7 @@ class WashroomStore:
             floor,
             gender,
             amenities_id,
-            overall_rating_id,
+            overall_rating,
             average_rating_id
         )
 
