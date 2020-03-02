@@ -11,6 +11,8 @@ from ..persistence import create_building_store
 from ..persistence import create_review_store
 
 from ..exceptions.throne_exception import ThroneException
+from ..exceptions.throne_unauthorized_exception import \
+    ThroneUnauthorizedException
 
 washroom_store = create_washroom_store()
 building_store = create_building_store()
@@ -162,6 +164,8 @@ def put_washroom_review(washroom_id, review_id):
             toilet_paper_quality
         )
 
+    except ThroneUnauthorizedException as e:
+        return return_error(HttpCodes.HTTP_401_UNAUTHORIZED, str(e))
     except ThroneException as e:
         return return_error(HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY, str(e))
     except ValueError:

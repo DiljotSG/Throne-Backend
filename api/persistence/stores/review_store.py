@@ -10,6 +10,8 @@ from ...objects.washroom import Washroom
 from ...objects.building import Building
 from ..common import get_current_user_id
 from ...exceptions.throne_validation_exception import ThroneValidationException
+from ...exceptions.throne_unauthorized_exception import \
+    ThroneUnauthorizedException
 from typing import Optional, Any
 
 
@@ -128,6 +130,12 @@ class ReviewStore:
             raise ThroneValidationException(
                 "Comment cannot be an empty string"
             )
+
+        if review.user_id != get_current_user_id(
+            self.__user_persistence,
+            self.__preference_persistence
+        ):
+            raise ThroneUnauthorizedException()
 
         if not Rating.verify(
             cleanliness,
