@@ -62,6 +62,10 @@ class BuildingStore:
             self.__expand_building(item, location)
             result.append(item)
 
+        result = sorted(
+            result,
+            key=lambda k: ("distance" not in k, k.get("distance", None))
+        )
         return result
 
     def __expand_building(

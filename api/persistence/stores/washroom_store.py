@@ -138,6 +138,10 @@ class WashroomStore:
             self.__expand_washroom(item, location)
             result.append(item)
 
+        result = sorted(
+            result,
+            key=lambda k: ("distance" not in k, k.get("distance", None))
+        )
         return result
 
     def get_washroom(self, washroom_id: int) -> dict:
