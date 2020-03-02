@@ -55,15 +55,20 @@ def get_cognito_user() -> Optional[str]:
     return username
 
 
+def return_error(
+    code: int = HttpCodes.HTTP_400_BAD_REQUEST,
+    message: str = "Invalid Request"
+):
+    message = str({"Error": message})
+    return jsonify(message), code
+
+
 def return_as_json(data, code=HttpCodes.HTTP_200_OK):
     result = data
 
     # If our data is non-existant, this is a bad request.
     if data is None:
-        result = {
-            "Error": "Invalid Request"
-        }
-        code = HttpCodes.HTTP_400_BAD_REQUEST
+        return return_error()
 
     return jsonify(result), code
 
@@ -93,3 +98,8 @@ def distance_between_locations(loc1: Location, loc2: Location) -> float:
 
 def convert_to_mysql_timestamp(timestamp: datetime.date):
     return timestamp.strftime(TIMESTAMP_FORMAT)
+
+
+def verify_gender(gender: str) -> bool:
+    gender = gender.lower()
+    return gender == "women" or gender == "men" or gender == "all"

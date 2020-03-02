@@ -86,6 +86,7 @@ def create_washroom_store() -> WashroomStore:
         __amenity_persistence,
         __rating_persistence,
         __user_persistence,
+        __building_persistence,
         __favorite_persistence,
         __preference_persistence
     )
@@ -95,7 +96,10 @@ def create_review_store() -> ReviewStore:
     return ReviewStore(
         __review_persistence,
         __rating_persistence,
-        __user_persistence
+        __user_persistence,
+        __preference_persistence,
+        __washroom_persistence,
+        __building_persistence
     )
 
 

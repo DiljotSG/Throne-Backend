@@ -5,6 +5,18 @@ from ..interfaces.rating_interface import IRatingsPersistence
 from ..interfaces.review_interface import IReviewsPersistence
 from ..interfaces.user_interface import IUsersPersistence
 from ..interfaces.washroom_interface import IWashroomsPersistence
+from ..interfaces.building_interface import IBuildingsPersistence
+
+from ...exceptions.throne_validation_exception import ThroneValidationException
+
+from ...objects.location import Location
+from ...objects.building import Building
+from ...objects.washroom import Washroom
+
+from ...objects.amenity import verify_amenity_list
+from ...objects.amenity import convert_to_amenities
+
+from ...common import verify_gender
 from api.persistence.common import get_current_user_id
 
 from typing import List, Optional, Any
@@ -18,6 +30,7 @@ class WashroomStore:
         amenity_persistence: IAmenitiesPersistence,
         ratings_persistence: IRatingsPersistence,
         user_persistence: IUsersPersistence,
+        building_persistence: IBuildingsPersistence,
         favorite_persistence: IFavoritesPersistence,
         preference_persistence: IPreferencesPersistence
     ):
@@ -27,6 +40,8 @@ class WashroomStore:
         self.__amenity_persistence: IAmenitiesPersistence = amenity_persistence
         self.__ratings_persistence: IRatingsPersistence = ratings_persistence
         self.__user_persistence: IUsersPersistence = user_persistence
+        self.__building_persistence: IBuildingsPersistence = \
+            building_persistence
         self.__favorite_persistence: \
             IFavoritesPersistence = favorite_persistence
         self.__preference_persistence: \
@@ -42,7 +57,57 @@ class WashroomStore:
         building_id: int,
         amenities: list
     ) -> Optional[dict]:
-        return None
+        # Check if location is correct
+        if not Location.verify(latitude, longitude):
+            raise ThroneValidationException("Location provided is not valid")
+
+        # Check if washroom title is valid
+        if not Washroom.verify(title):
+            raise ThroneValidationException("Washroom title is not valid")
+
+        # Check if floor is correct - Note: Really we should be storing
+        # the floor of each building and comparing it against that.
+        if not Building.verify(floor):
+            raise ThroneValidationException("Floor number is not valid")
+
+        # Check if gender is correct
+        if not verify_gender(gender):
+            raise ThroneValidationException("Gender is not valid")
+
+        # Check if building exists
+        if self.__building_persistence.get_building(building_id) is None:
+            raise ThroneValidationException("Building id is not valid")
+
+        # Check if amenities are all valid
+        if not verify_amenity_list(amenities):
+            raise ThroneValidationException("Amenities contain invalid types")
+
+        gender = gender.lower()  # Ensure its lower case
+        location = Location(latitude, longitude)
+        overall_rating = 0
+        average_rating_id = self.__ratings_persistence.add_rating(0, 0, 0, 0)
+        amenities_id = self.__amenity_persistence.add_amenities(
+            convert_to_amenities(amenities)
+        )
+
+        # Create the washroom
+        washroom_id = self.__washroom_persistence.add_washroom(
+            building_id,
+            location,
+            title,
+            floor,
+            gender,
+            amenities_id,
+            overall_rating,
+            average_rating_id
+        )
+
+        # Return the washroom
+        washroom = self.__washroom_persistence.get_washroom(washroom_id)
+        item = washroom.__dict__.copy()
+        self.__expand_washroom(item)
+
+        return item
 
     def get_washrooms(
         self,
