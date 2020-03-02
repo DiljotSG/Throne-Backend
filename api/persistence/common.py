@@ -51,7 +51,7 @@ def get_current_user_id(
                         pref_id
                     )
                 except InterfaceError:
-                    # We already have this user in the table
+                    # We already have this user in the table!
                     # Cleanup
                     preference_persistence.remove_preference(pref_id)
 
