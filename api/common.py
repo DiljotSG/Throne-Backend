@@ -100,6 +100,6 @@ def convert_to_mysql_timestamp(timestamp: datetime.date):
     return timestamp.strftime(TIMESTAMP_FORMAT)
 
 
-def verify_gender(gender: str):
+def verify_gender(gender: str) -> bool:
     gender = gender.lower()
     return gender == "women" or gender == "men" or gender == "all"
