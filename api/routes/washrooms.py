@@ -4,6 +4,7 @@ from flask_cors import CORS
 from flask_cors import cross_origin
 from api.common import return_as_json
 from api.common import return_error
+from api.common import return_not_implemented
 from api.response_codes import HttpCodes
 from ..objects.location import Location
 from ..persistence import create_washroom_store
@@ -68,6 +69,10 @@ def get_washrooms():
 def post_washrooms():
     result = None
 
+    # Don't accept garbage input
+    if request.json is None:
+        return return_error(HttpCodes.HTTP_400_BAD_REQUEST)
+
     try:
         title = str(request.json["title"])
         longitude = float(request.json["location"]["longitude"])
@@ -114,6 +119,10 @@ def get_washrooms_reviews(washroom_id):
 def post_washrooms_reviews(washroom_id):
     result = None
 
+    # Don't accept garbage input
+    if request.json is None:
+        return return_error(HttpCodes.HTTP_400_BAD_REQUEST)
+
     try:
         comment = str(request.json["comment"])
         cleanliness = float(request.json["ratings"]["cleanliness"])
@@ -146,6 +155,10 @@ def post_washrooms_reviews(washroom_id):
 def put_washroom_review(washroom_id, review_id):
     result = None
 
+    # Don't accept garbage input
+    if request.json is None:
+        return return_error(HttpCodes.HTTP_400_BAD_REQUEST)
+
     try:
         comment = str(request.json["comment"])
         cleanliness = float(request.json["ratings"]["cleanliness"])
@@ -174,3 +187,10 @@ def put_washroom_review(washroom_id, review_id):
         return return_error(HttpCodes.HTTP_400_BAD_REQUEST)
 
     return return_as_json(result)
+
+
+@mod.route("/<int:washroom_id>/reviews/<int:review_id>", methods=["DELETE"])
+@cross_origin()
+def delete_washroom_review(washroom_id, review_id):
+    # TODO: Add support for retrieving user by username
+    return return_not_implemented()
