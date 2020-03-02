@@ -59,7 +59,7 @@ def return_error(
     code: int = HttpCodes.HTTP_400_BAD_REQUEST,
     message: str = "Invalid Request"
 ):
-    message = {"Error": str(message)}
+    message = str({"Error": message})
     return jsonify(message), code
 
 
