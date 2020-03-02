@@ -3,7 +3,10 @@ from ..interfaces.rating_interface import IRatingsPersistence
 from ..interfaces.review_interface import IReviewsPersistence
 from ..interfaces.washroom_interface import IWashroomsPersistence
 
-from typing import List, Any
+from ...objects.location import Location
+from ...objects.amenity import convert_to_amenities
+
+from typing import List, Optional, Any
 
 
 class BuildingStore:
@@ -32,17 +35,25 @@ class BuildingStore:
 
     def get_buildings(
         self,
-        location=None,
-        radius=5,
-        max_buildings=100,
-        desired_amenities=[]
+        location: Optional[Location],
+        radius: Optional[float],
+        max_buildings: Optional[int],
+        desired_amenities: Optional[List[str]]
     ) -> List[dict]:
+        # Process inputs
+        if radius is None:
+            radius = 5
+        if max_buildings is None:
+            max_buildings = 100
+        if desired_amenities is None:
+            desired_amenities = []
+
         result = []
         query_result = self.__building_persistence.query_buildings(
             location,
             radius,
             max_buildings,
-            desired_amenities
+            convert_to_amenities(desired_amenities)
         )
 
         for building in query_result:

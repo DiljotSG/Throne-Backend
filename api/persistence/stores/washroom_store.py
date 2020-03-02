@@ -111,17 +111,25 @@ class WashroomStore:
 
     def get_washrooms(
         self,
-        location=None,
-        radius=5,
-        max_washrooms=5,
-        desired_amenities=[]
+        location: Optional[Location],
+        radius: Optional[float],
+        max_washrooms: Optional[int],
+        desired_amenities: Optional[List[str]]
     ) -> List[dict]:
+        # Process inputs
+        if radius is None:
+            radius = 5
+        if max_washrooms is None:
+            max_washrooms = 100
+        if desired_amenities is None:
+            desired_amenities = []
+
         result = []
         query_result = self.__washroom_persistence.query_washrooms(
             location,
             radius,
             max_washrooms,
-            desired_amenities
+            convert_to_amenities(desired_amenities)
         )
 
         for washroom in query_result:
