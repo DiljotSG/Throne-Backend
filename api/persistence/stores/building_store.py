@@ -63,10 +63,10 @@ class BuildingStore:
             result.append(item)
 
         # Sort by distance
-        result = sorted(
-            result,
-            key=lambda k: ("distance" not in k, k.get("distance", None))
-        )
+        # result = sorted(
+        #     result,
+        #     key=lambda k: ("distance" not in k, k.get("distance", None))
+        # )
         return result
 
     def __expand_building(
@@ -82,19 +82,20 @@ class BuildingStore:
 
         # Add distance to building
         if user_loc:
-            building["distance"] = distance_between_locations(
-                user_loc,
-                building["location"]
-            ) * 1000
+            # building["distance"] = distance_between_locations(
+            #     user_loc,
+            #     building["location"]
+            # ) * 1000
+            pass
 
         # Expand location
         building["location"] = building["location"].__dict__.copy()
 
         # Add washroom count
-        building["washrooms"] = self.__washroom_persistence.\
-            get_washroom_count_by_building(
-                building["id"]
-            )
+        # building["washrooms"] = self.__washroom_persistence.\
+        #     get_washroom_count_by_building(
+        #         building["id"]
+        #     )
 
         item.pop("id", None)
         building["best_ratings"] = item

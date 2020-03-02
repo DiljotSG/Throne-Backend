@@ -139,10 +139,10 @@ class WashroomStore:
             result.append(item)
 
         # Sort by distance
-        result = sorted(
-            result,
-            key=lambda k: ("distance" not in k, k.get("distance", None))
-        )
+        # result = sorted(
+        #     result,
+        #     key=lambda k: ("distance" not in k, k.get("distance", None))
+        # )
         return result
 
     def get_washroom(self, washroom_id: int) -> dict:
@@ -193,10 +193,11 @@ class WashroomStore:
 
         # Add distance to washroom
         if user_loc:
-            washroom["distance"] = distance_between_locations(
-                user_loc,
-                washroom["location"]
-            ) * 1000
+            # washroom["distance"] = distance_between_locations(
+            #     user_loc,
+            #     washroom["location"]
+            # ) * 1000
+            pass
 
         # Expand location
         washroom["location"] = washroom["location"].__dict__.copy()
