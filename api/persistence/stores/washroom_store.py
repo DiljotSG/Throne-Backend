@@ -18,7 +18,7 @@ from ...objects.amenity import convert_to_amenities
 
 from ...common import verify_gender
 from api.persistence.common import get_current_user_id
-# from api.common import distance_between_locations
+from api.common import distance_between_locations
 
 from typing import List, Optional, Any
 
@@ -139,10 +139,10 @@ class WashroomStore:
             result.append(item)
 
         # Sort by distance
-        # result = sorted(
-        #     result,
-        #     key=lambda k: ("distance" not in k, k.get("distance", None))
-        # )
+        result = sorted(
+            result,
+            key=lambda k: ("distance" not in k, k.get("distance", None))
+        )
         return result
 
     def get_washroom(self, washroom_id: int) -> dict:
@@ -193,11 +193,10 @@ class WashroomStore:
 
         # Add distance to washroom
         if user_loc:
-            # washroom["distance"] = distance_between_locations(
-            #     user_loc,
-            #     washroom["location"]
-            # ) * 1000
-            pass
+            washroom["distance"] = distance_between_locations(
+                user_loc,
+                washroom["location"]
+            ) * 1000
 
         # Expand location
         washroom["location"] = washroom["location"].__dict__.copy()
@@ -248,6 +247,7 @@ class WashroomStore:
         user_item = self.__user_persistence.get_user(
             user_id
         ).__dict__.copy()
+
         user_item.pop("preference_id", None)
         user_item.pop("created_at", None)
         review["user"] = user_item

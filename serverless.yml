@@ -16,6 +16,7 @@ provider:
   runtime: python3.8
   stage: dev
   region: us-east-1
+  timeout: 25
   environment:
     IS_LAMBDA: true
     DB_HOSTNAME: "${opt:stage}-db.findmythrone.com"
