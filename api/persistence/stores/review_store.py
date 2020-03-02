@@ -242,20 +242,23 @@ class ReviewStore:
             average_rating.toilet_paper_quality
         ]
 
+        values = [
+            cleanliness,
+            privacy,
+            smell,
+            toilet_paper_quality
+        ]
+
         # Calculate the new average's with us adding the
         # new ratings to the average
         if adding_values:
-            for v in [cleanliness, privacy, smell, toilet_paper_quality]:
-                avgs = [
-                    ((a * review_cnt) + v) / (review_cnt + 1) for a in avgs
-                ]
+            for i, v in enumerate(values):
+                avgs[i] = ((avgs[i] * review_cnt) + v) / (review_cnt + 1)
 
         # Calculate the new averages's with us replacing the values
         else:
-            for v in [cleanliness, privacy, smell, toilet_paper_quality]:
-                avgs = [
-                    (((a * review_cnt) - a) + v) / review_cnt for a in avgs
-                ]
+            for i, v in enumerate(values):
+                avgs[i] = (((avgs[i] * review_cnt) - avgs[i]) + v) / review_cnt
 
         # Update the average rating object
         self.__rating_persistence.update_rating(
