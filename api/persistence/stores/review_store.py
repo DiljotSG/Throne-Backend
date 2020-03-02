@@ -311,6 +311,14 @@ class ReviewStore:
 
         new_overall = sum(rating_values) / len(rating_values)
 
+        self.__rating_persistence.update_rating(
+            building.best_ratings_id,
+            rating.cleanliness,
+            rating.privacy,
+            rating.smell,
+            rating.toilet_paper_quality
+        )
+
         self.__building_persistence.update_building(
             building.id,
             building.location,
