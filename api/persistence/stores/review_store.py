@@ -171,14 +171,23 @@ class ReviewStore:
             washroom.building_id
         )
 
+        if building is None:
+            return None
+
         # Get the next best washroom and it's rating
-        next_best_washroom = self.__get_nsext_best_washroom(
+        next_best_washroom = self.__get_next_best_washroom(
             washroom.building_id
         )
+
+        if next_best_washroom is None:
+            return None
 
         next_best_washroom_rating = self.__rating_persistence.get_rating(
             next_best_washroom.average_rating_id
         )
+
+        if next_best_washroom_rating is None:
+            return None
 
         # Update the building by rolling back to the washroom
         # with the next best rating
@@ -215,6 +224,9 @@ class ReviewStore:
         average_rating = self.__rating_persistence.get_rating(
             washroom.average_rating_id
         )
+
+        if average_rating is None:
+            return
 
         # Get the number of reviews found
         review_cnt = self.__review_persistence.\
@@ -314,15 +326,24 @@ class ReviewStore:
             washroom.average_rating_id
         )
 
+        if washroom_average_rating is None:
+            return
+
         # Get the building the washroom is in
         building = self.__building_persistence.get_building(
             washroom.building_id
         )
 
+        if building is None:
+            return
+
         # Get the building's best washroom
         building_best_rating = self.__rating_persistence.get_rating(
             building.best_ratings_id
         )
+
+        if building_best_rating is None:
+            return
 
         # Collect values
         washroom_rating_values = [
