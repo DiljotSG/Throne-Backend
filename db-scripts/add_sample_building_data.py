@@ -36,8 +36,8 @@ for building in buildings:
 # Use the University Centre and the Elizabeth Dafoe Library
 u_centre = buildings[1]
 amenity0 = a.add_amenities(
-    Amenity.AUTO_DRYER, Amenity.PAPER_TOWEL,
-    Amenity.CONTRACEPTION, Amenity.GARBAGE_CAN
+    [Amenity.AUTO_DRYER, Amenity.PAPER_TOWEL,
+        Amenity.CONTRACEPTION, Amenity.GARBAGE_CAN]
 )
 rating0 = ra.add_rating(0, 0, 0, 0)
 
@@ -58,14 +58,16 @@ print("Added U Centre washroom")
 
 dafoe = buildings[9]
 amenity1 = a.add_amenities(
-    Amenity.AIR_DRYER,
-    Amenity.AUTO_SINK,
-    Amenity.BRAILLE_LABELING,
-    Amenity.COAT_HOOK,
-    Amenity.GARBAGE_CAN,
-    Amenity.PAPER_TOWEL,
-    Amenity.SAFETY_RAIL,
-    Amenity.WHEEL_CHAIR_ACCESS,
+    [
+        Amenity.AIR_DRYER,
+        Amenity.AUTO_SINK,
+        Amenity.BRAILLE_LABELING,
+        Amenity.COAT_HOOK,
+        Amenity.GARBAGE_CAN,
+        Amenity.PAPER_TOWEL,
+        Amenity.SAFETY_RAIL,
+        Amenity.WHEEL_CHAIR_ACCESS,
+    ]
 )
 rating1 = ra.add_rating(0, 0, 0, 0)
 

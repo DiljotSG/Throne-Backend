@@ -35,13 +35,17 @@ rRating_good_id = ra.add_rating(5, 4, 2, 5)
 rRating_bad_id = ra.add_rating(1, 2, 4, 1)
 
 wAmenities_good_id = a.add_amenities(
-    Amenity.AIR_DRYER,
-    Amenity.AUTO_SINK,
-    Amenity.AUTO_TOILET
+    [
+        Amenity.AIR_DRYER,
+        Amenity.AUTO_SINK,
+        Amenity.AUTO_TOILET
+    ]
 )
 wAmenities_bad_id = a.add_amenities(
-    Amenity.LOTION,
-    Amenity.CONTRACEPTION
+    [
+        Amenity.LOTION,
+        Amenity.CONTRACEPTION
+    ]
 )
 uPreferences_good_id = p.add_preference(
     'women',

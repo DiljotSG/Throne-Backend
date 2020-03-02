@@ -9,7 +9,7 @@ class IAmenitiesPersistence(ABC):
     @abstractmethod
     def add_amenities(
         self,
-        *amenities: List[Amenity]
+        amenities: List[Amenity]
     ) -> int:
         # Return Amenity id
         pass
