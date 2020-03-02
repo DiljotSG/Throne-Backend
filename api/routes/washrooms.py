@@ -178,7 +178,7 @@ def put_washroom_review(washroom_id, review_id):
         )
 
     except ThroneUnauthorizedException as e:
-        return return_error(HttpCodes.HTTP_401_UNAUTHORIZED, str(e))
+        return return_error(HttpCodes.HTTP_403_FORBIDDEN, str(e))
     except ThroneException as e:
         return return_error(HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY, str(e))
     except ValueError:
