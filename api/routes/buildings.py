@@ -3,7 +3,6 @@ from flask import Blueprint
 from flask_cors import CORS
 from flask_cors import cross_origin
 from api.common import return_as_json
-from api.common import return_error
 from api.response_codes import HttpCodes
 from ..objects.location import Location
 from ..persistence import create_building_store
