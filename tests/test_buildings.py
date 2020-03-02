@@ -33,7 +33,8 @@ class TestBuildingsAPI(unittest.TestCase):
                 },
                 "maps_service_id": 0,
                 "overall_rating": 4,
-                "title": "Engineering"
+                "title": "Engineering",
+                "washrooms": 2
             },
             {
                 "best_ratings": {
@@ -49,9 +50,11 @@ class TestBuildingsAPI(unittest.TestCase):
                 },
                 "maps_service_id": 1,
                 "overall_rating": 3,
-                "title": "Science"
+                "title": "Science",
+                "washrooms": 1
             }
         ]
+
         self.assertEqual(response.status_code, 200)
         created_at = data[0].pop("created_at", None)
         self.assertNotEqual(created_at, None)
@@ -76,7 +79,8 @@ class TestBuildingsAPI(unittest.TestCase):
             },
             "maps_service_id": 1,
             "overall_rating": 3,
-            "title": "Science"
+            "title": "Science",
+            "washrooms": 1
         }
         self.assertEqual(response.status_code, 200)
         created_at = data.pop("created_at", None)
