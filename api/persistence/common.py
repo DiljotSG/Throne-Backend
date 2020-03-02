@@ -1,6 +1,7 @@
 from api.common import should_use_db
 from api.common import get_cognito_user
 
+from mysql.connector.errors import InterfaceError
 from .interfaces.user_interface import IUsersPersistence
 from .interfaces.preference_interface import IPreferencesPersistence
 
@@ -42,12 +43,27 @@ def get_current_user_id(
                     False
                 )
 
-                # Finally insert this user into the Users table
-                user_id = user_persistence.add_user(
-                    username,
-                    "default",
-                    pref_id
-                )
+                try:
+                    # Finally insert this user into the Users table
+                    user_id = user_persistence.add_user(
+                        username,
+                        "default",
+                        pref_id
+                    )
+                except InterfaceError:
+                    # We already have this user in the table!
+                    # Cleanup
+                    preference_persistence.remove_preference(pref_id)
+
+                    # Return user ID
+                    # Try to fetch the user from the table now
+                    opt_user_id = user_persistence.get_id_by_username(
+                        username
+                    )
+                    # Check that the user ID is not None before we assign it
+                    # This makes the static type checker happy
+                    if opt_user_id is not None:
+                        user_id = opt_user_id
 
     # We did it! We got the user ID finally.
     return user_id

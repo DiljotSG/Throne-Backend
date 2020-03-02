@@ -3,7 +3,11 @@ from ..interfaces.rating_interface import IRatingsPersistence
 from ..interfaces.review_interface import IReviewsPersistence
 from ..interfaces.washroom_interface import IWashroomsPersistence
 
-from typing import List, Any
+from ...objects.location import Location
+from ...objects.amenity import convert_to_amenities
+from api.common import distance_between_locations
+
+from typing import List, Optional, Any
 
 
 class BuildingStore:
@@ -32,35 +36,65 @@ class BuildingStore:
 
     def get_buildings(
         self,
-        location=None,
-        radius=5,
-        max_buildings=100,
-        desired_amenities=[]
+        location: Optional[Location],
+        radius: Optional[float],
+        max_buildings: Optional[int],
+        desired_amenities: Optional[List[str]]
     ) -> List[dict]:
+        # Process inputs
+        if radius is None:
+            radius = 5
+        if max_buildings is None:
+            max_buildings = 100
+        if desired_amenities is None:
+            desired_amenities = []
+
         result = []
         query_result = self.__building_persistence.query_buildings(
             location,
             radius,
             max_buildings,
-            desired_amenities
+            convert_to_amenities(desired_amenities)
         )
 
         for building in query_result:
             item = building.__dict__.copy()
-            self.__expand_building(item)
+            self.__expand_building(item, location)
             result.append(item)
 
+        # Sort by distance
+        result = sorted(
+            result,
+            key=lambda k: ("distance" not in k, k.get("distance", None))
+        )
         return result
 
-    def __expand_building(self, building: dict) -> None:
+    def __expand_building(
+        self,
+        building: dict,
+        user_loc: Optional[Location] = None
+    ) -> None:
         # Expand best ratings
         best_ratings_id = building.pop("best_ratings_id", None)
         item = self.__rating_persistence.get_rating(
             best_ratings_id
         ).__dict__.copy()
 
+        # Add distance to building
+        if user_loc:
+            building["distance"] = distance_between_locations(
+                user_loc,
+                building["location"]
+            ) * 1000
+
         # Expand location
         building["location"] = building["location"].__dict__.copy()
+
+        # Add washroom count
+        building["washrooms"] = self.__washroom_persistence.\
+            get_washroom_count_by_building(
+                building["id"]
+            )
 
         item.pop("id", None)
         building["best_ratings"] = item

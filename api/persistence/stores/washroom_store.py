@@ -18,6 +18,7 @@ from ...objects.amenity import convert_to_amenities
 
 from ...common import verify_gender
 from api.persistence.common import get_current_user_id
+from api.common import distance_between_locations
 
 from typing import List, Optional, Any
 
@@ -111,24 +112,37 @@ class WashroomStore:
 
     def get_washrooms(
         self,
-        location=None,
-        radius=5,
-        max_washrooms=5,
-        desired_amenities=[]
+        location: Optional[Location],
+        radius: Optional[float],
+        max_washrooms: Optional[int],
+        desired_amenities: Optional[List[str]]
     ) -> List[dict]:
+        # Process inputs
+        if radius is None:
+            radius = 5
+        if max_washrooms is None:
+            max_washrooms = 100
+        if desired_amenities is None:
+            desired_amenities = []
+
         result = []
         query_result = self.__washroom_persistence.query_washrooms(
             location,
             radius,
             max_washrooms,
-            desired_amenities
+            convert_to_amenities(desired_amenities)
         )
 
         for washroom in query_result:
             item = washroom.__dict__.copy()
-            self.__expand_washroom(item)
+            self.__expand_washroom(item, location)
             result.append(item)
 
+        # Sort by distance
+        result = sorted(
+            result,
+            key=lambda k: ("distance" not in k, k.get("distance", None))
+        )
         return result
 
     def get_washroom(self, washroom_id: int) -> dict:
@@ -166,12 +180,23 @@ class WashroomStore:
 
         return result
 
-    def __expand_washroom(self, washroom: dict) -> None:
+    def __expand_washroom(
+        self,
+        washroom: dict,
+        user_loc: Optional[Location] = None
+    ) -> None:
         # Expand amenities
         amenities_id = washroom.pop("amenities_id", None)
         washroom["amenities"] = self.__amenity_persistence.get_amenities(
             amenities_id
         )
+
+        # Add distance to washroom
+        if user_loc:
+            washroom["distance"] = distance_between_locations(
+                user_loc,
+                washroom["location"]
+            ) * 1000
 
         # Expand location
         washroom["location"] = washroom["location"].__dict__.copy()

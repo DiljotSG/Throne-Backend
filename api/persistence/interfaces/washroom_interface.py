@@ -27,7 +27,7 @@ class IWashroomsPersistence(ABC):
     @abstractmethod
     def query_washrooms(
         self,
-        location: Location,
+        location: Optional[Location],
         radius: float,
         max_washrooms: int,
         desired_amenities: List[Amenity]
