@@ -192,5 +192,4 @@ def put_washroom_review(washroom_id, review_id):
 @mod.route("/<int:washroom_id>/reviews/<int:review_id>", methods=["DELETE"])
 @cross_origin()
 def delete_washroom_review(washroom_id, review_id):
-    # TODO: Add support for retrieving user by username
     return return_not_implemented()
