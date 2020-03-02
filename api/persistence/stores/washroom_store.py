@@ -18,7 +18,7 @@ from ...objects.amenity import convert_to_amenities
 
 from ...common import verify_gender
 from api.persistence.common import get_current_user_id
-from api.common import distance_between_locations
+# from api.common import distance_between_locations
 
 from typing import List, Optional, Any
 
