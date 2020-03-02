@@ -24,7 +24,7 @@ class IBuildingsPersistence(ABC):
     @abstractmethod
     def query_buildings(
         self,
-        location: Location,
+        location: Optional[Location],
         radius: float,
         max_buildings: int,
         desired_amenities: List[Amenity]
