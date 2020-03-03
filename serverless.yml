@@ -53,3 +53,5 @@ package:
   - LICENSE
   - CODEOWNERS
   - README.md
+  - package.json
+  - package-lock.json
