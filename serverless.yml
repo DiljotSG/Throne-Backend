@@ -25,6 +25,7 @@ provider:
 functions:
   api:
     handler: wsgi_handler.handler
+    reservedConcurrency: 60
     events:
       - http: 
           method: ANY 
@@ -52,3 +53,5 @@ package:
   - LICENSE
   - CODEOWNERS
   - README.md
+  - package.json
+  - package-lock.json
