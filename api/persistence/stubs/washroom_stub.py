@@ -15,7 +15,7 @@ class WashroomsStubPersistence(IWashroomsPersistence):
         self,
         building_id: int,  # Foreign Key
         location: Location,
-        title: str,
+        comment: str,
         floor: int,
         gender: str,
         urinal_count: int,
@@ -27,7 +27,7 @@ class WashroomsStubPersistence(IWashroomsPersistence):
         washroom_id = len(self.washrooms)
         new_washroom = Washroom(
             washroom_id,
-            title,
+            comment,
             location,
             datetime.now(),
             gender,
@@ -81,7 +81,7 @@ class WashroomsStubPersistence(IWashroomsPersistence):
         self,
         washroom_id: int
     ) -> Optional[Washroom]:
-        if washroom_id >= 0 and washroom_id < len(self.washrooms) and \
+        if 0 <= washroom_id < len(self.washrooms) and \
            self.washrooms[washroom_id] is not None:
             return self.washrooms[washroom_id]
         return None
@@ -89,7 +89,7 @@ class WashroomsStubPersistence(IWashroomsPersistence):
     def update_washroom(
         self,
         washroom_id: int,
-        title: str,
+        comment: str,
         location: Location,
         floor: int,
         gender: str,
@@ -105,7 +105,7 @@ class WashroomsStubPersistence(IWashroomsPersistence):
                 self.washrooms[washroom_id] is not None:
             new_washroom = Washroom(
                 washroom_id,
-                title,
+                comment,
                 location,
                 self.washrooms[washroom_id].created_at,
                 gender,

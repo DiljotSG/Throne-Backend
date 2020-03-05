@@ -18,8 +18,8 @@ from typing import List, Optional
 def result_to_washroom(result):
     return Washroom(
         result[0], result[5], Location(result[3], result[4]),
-        result[1], result[7], result[6], result[2], result[9],
-        result[10], result[8]
+        result[1], result[7], result[6], result[8], result[9],
+        result[2], result[11], result[12], result[10], result[13]
     )
 
 
@@ -168,13 +168,16 @@ class WashroomsPersistence(IWashroomsPersistence):
     def update_washroom(
         self,
         washroom_id: int,
-        title: str,
+        comment: str,
         location: Location,
         floor: int,
         gender: str,
+        urinal_count: int,
+        stall_count: int,
         amenities_id: int,
         overall_rating: float,
-        average_ratings_id: int
+        average_ratings_id: int,
+        review_count: int
     ) -> Optional[Washroom]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
@@ -183,17 +186,20 @@ class WashroomsPersistence(IWashroomsPersistence):
         UPDATE washrooms
         SET latitude = %s,
         longitude = %s,
-        title = %s,
+        comment = %s,
         floor = %s,
         gender = %s,
+        urinalCount = %s,
+        stallCount = %s,
         amenities = %s,
         overallRating = %s,
-        avgRatingsID = %s
+        avgRatingsID = %s,
+        reviewCount = %s
         WHERE id = %s
         """
 
         update_tuple = (
-            location.latitude, location.longitude, title, floor, gender,
+            location.latitude, location.longitude, comment, floor, gender,
             amenities_id, overall_rating, average_ratings_id, washroom_id
         )
         cursor.execute(update_query, update_tuple)

@@ -35,6 +35,6 @@ class Washroom:
 
     @staticmethod
     def verify(
-        title: str
+        comment: str
     ) -> bool:
-        return len(title) > 0
+        return len(comment) > 0

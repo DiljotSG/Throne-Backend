@@ -79,6 +79,8 @@ def post_washrooms():
         latitude = float(request.json["location"]["latitude"])
         gender = str(request.json["gender"])
         floor = int(request.json["floor"])
+        urinal_count = int(request.json["urinal_count"])
+        stall_count = int(request.json["stall_count"])
         building_id = int(request.json["building_id"])
         amenities = list(request.json["amenities"])
 
@@ -88,6 +90,8 @@ def post_washrooms():
             latitude,
             gender,
             floor,
+            urinal_count,
+            stall_count,
             building_id,
             amenities
         )

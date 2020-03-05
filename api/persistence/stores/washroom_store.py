@@ -50,11 +50,13 @@ class WashroomStore:
 
     def create_washroom(
         self,
-        title: str,
+        comment: str,
         longitude: float,
         latitude: float,
         gender: str,
         floor: int,
+        urinal_count: int,
+        stall_count: int,
         building_id: int,
         amenities: list
     ) -> Optional[dict]:
@@ -63,8 +65,8 @@ class WashroomStore:
             raise ThroneValidationException("Location provided is not valid")
 
         # Check if washroom title is valid
-        if not Washroom.verify(title):
-            raise ThroneValidationException("Washroom title is not valid")
+        if not Washroom.verify(comment):
+            raise ThroneValidationException("Washroom comment is not valid")
 
         # Check if floor is correct - Note: Really we should be storing
         # the floor of each building and comparing it against that.
@@ -95,9 +97,11 @@ class WashroomStore:
         washroom_id = self.__washroom_persistence.add_washroom(
             building_id,
             location,
-            title,
+            comment,
             floor,
             gender,
+            urinal_count,
+            stall_count,
             amenities_id,
             overall_rating,
             average_rating_id
