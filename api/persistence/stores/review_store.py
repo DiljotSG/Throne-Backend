@@ -205,7 +205,7 @@ class ReviewStore:
         best_washroom = self.__get_best_washroom(
             washroom.building_id
         )
-        if best_washroom is None:  
+        if best_washroom is None:
             return None  # This is done to make mypy happy
 
         best_washroom_rating = self.__rating_persistence.get_rating(
