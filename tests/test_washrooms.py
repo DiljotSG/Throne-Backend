@@ -30,13 +30,18 @@ class TestWashroomAPI(unittest.TestCase):
                 "toilet_paper_quality": 4.5
             },
             "building_id": 0,
+            "building_title": "Engineering",
             "floor": 1,
             "gender": "women",
             "urinal_count": 0,
             "stall_count": 4,
             "id": 0,
             "is_favorite": True,
-            "review_count": 1,
+            "review_count": 0,
+            # This is 0 because we add to stubs directly using the stub classes
+            # The logic for updating review count is in the store classes
+            # New reviews will adjust this count, but it won't include
+            # The original reviews added through the stub init file.
             "location": {
                 "latitude": 12.2,
                 "longitude": 17.9
@@ -65,13 +70,18 @@ class TestWashroomAPI(unittest.TestCase):
                 "toilet_paper_quality": 4.5
             },
             "building_id": 0,
+            "building_title": "Engineering",
             "floor": 1,
             "gender": "women",
             "urinal_count": 0,
             "stall_count": 4,
             "id": 0,
             "is_favorite": True,
-            "review_count": 1,
+            "review_count": 0,
+            # This is 0 because we add to stubs directly using the stub classes
+            # The logic for updating review count is in the store classes
+            # New reviews will adjust this count, but it won't include
+            # The original reviews added through the stub init file.
             "location": {
                 "latitude": 12.2,
                 "longitude": 17.9

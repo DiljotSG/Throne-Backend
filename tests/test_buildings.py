@@ -35,6 +35,10 @@ class TestBuildingsAPI(unittest.TestCase):
                 "overall_rating": 4,
                 "title": "Engineering",
                 "washroom_count": 0
+                # This is 0 because we add to stubs directly using the stub
+                # The logic for updating washroom count is in the store
+                # New washrooms will adjust this count, but it won't include
+                # The original washrooms added through the stub init file.
             },
             {
                 "best_ratings": {
@@ -52,6 +56,10 @@ class TestBuildingsAPI(unittest.TestCase):
                 "overall_rating": 3,
                 "title": "Science",
                 "washroom_count": 0
+                # This is 0 because we add to stubs directly using the stub
+                # The logic for updating washroom count is in the store
+                # New washrooms will adjust this count, but it won't include
+                # The original washrooms added through the stub init file.
             }
         ]
 
@@ -102,6 +110,7 @@ class TestBuildingsAPI(unittest.TestCase):
                         "smell": 2.8,
                         "toilet_paper_quality": 4.2
                     },
+                    "building_title": "Science",
                     "building_id": 1,
                     "floor": 1,
                     "gender": "men",
@@ -109,7 +118,11 @@ class TestBuildingsAPI(unittest.TestCase):
                     "stall_count": 4,
                     "id": 2,
                     'is_favorite': False,
-                    "review_count": 1,
+                    "review_count": 0,
+                    # This is 0 because we add to stubs directly using the stub
+                    # The logic for updating review count is in the store
+                    # New reviews will adjust this count, but it won't include
+                    # The original reviews added through the stub init file.
                     "location": {
                         "latitude": 114,
                         "longitude": 200.5
