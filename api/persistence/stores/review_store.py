@@ -139,12 +139,13 @@ class ReviewStore:
     ) -> Optional[dict]:
         washroom = self.__washroom_persistence.get_washroom(washroom_id)
         review = self.__review_persistence.get_review(review_id)
-        building = self.__building_persistence.get_building(
-            washroom.building_id
-        )
 
         if washroom is None:
             raise ThroneValidationException("Washroom id is not valid")
+
+        building = self.__building_persistence.get_building(
+            washroom.building_id
+        )
 
         if review is None:
             raise ThroneValidationException("Review id is not valid")
