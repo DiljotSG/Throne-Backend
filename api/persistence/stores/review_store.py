@@ -45,9 +45,20 @@ class ReviewStore:
         toilet_paper_quality: float
     ) -> Optional[dict]:
         washroom = self.__washroom_persistence.get_washroom(washroom_id)
+        user_id = get_current_user_id(
+            self.__user_persistence,
+            self.__preference_persistence
+        )
 
         if washroom is None:
             raise ThroneValidationException("Washroom id is not valid")
+
+        building = self.__building_persistence.get_building(
+            washroom.building_id
+        )
+
+        if building is None:
+            raise ThroneValidationException("Invalid building")
 
         if not len(comment) > 0:
             raise ThroneValidationException(
@@ -63,24 +74,13 @@ class ReviewStore:
             raise ThroneValidationException("Ratings are invalid")
 
         # Update the average and overall ratings
-        self.__update_washroom_average_and_overall(
+        self.__update_washroom(
             washroom,
             cleanliness,
             privacy,
             smell,
             toilet_paper_quality,
             True
-        )
-
-        # Update the building
-        self.__update_building_rating(
-            washroom
-        )
-
-        # Get the user ID
-        user_id = get_current_user_id(
-            self.__user_persistence,
-            self.__preference_persistence
         )
 
         # Add the rating
@@ -98,6 +98,26 @@ class ReviewStore:
             rating_id,
             comment,
             0
+        )
+
+        # Get the best washroom and it's rating
+        best_washroom = self.__get_best_washroom(
+            washroom.building_id
+        )
+        if best_washroom is None:
+            return None
+
+        best_washroom_rating = self.__rating_persistence.get_rating(
+            best_washroom.average_rating_id
+        )
+        if best_washroom_rating is None:
+            return None
+
+        # Update the building by rolling back to the washroom
+        # with the next best rating
+        self.__update_building(
+            building,
+            best_washroom_rating
         )
 
         # retrieve and extract dict from review object
@@ -119,12 +139,18 @@ class ReviewStore:
     ) -> Optional[dict]:
         washroom = self.__washroom_persistence.get_washroom(washroom_id)
         review = self.__review_persistence.get_review(review_id)
+        building = self.__building_persistence.get_building(
+            washroom.building_id
+        )
 
         if washroom is None:
             raise ThroneValidationException("Washroom id is not valid")
 
         if review is None:
             raise ThroneValidationException("Review id is not valid")
+
+        if building is None:
+            raise ThroneValidationException("Building is Invalid")
 
         if not len(comment) > 0:
             raise ThroneValidationException(
@@ -146,7 +172,7 @@ class ReviewStore:
             raise ThroneValidationException("Ratings are invalid")
 
         # Update the average and overall ratings
-        self.__update_washroom_average_and_overall(
+        self.__update_washroom(
             washroom,
             cleanliness,
             privacy,
@@ -174,34 +200,24 @@ class ReviewStore:
             review.upvote_count
         )
 
-        # Get the building
-        building = self.__building_persistence.get_building(
+        # Get the best washroom and it's rating
+        best_washroom = self.__get_best_washroom(
             washroom.building_id
         )
-
-        if building is None:
+        if best_washroom is None:
             return None
 
-        # Get the next best washroom and it's rating
-        next_best_washroom = self.__get_next_best_washroom(
-            washroom.building_id
+        best_washroom_rating = self.__rating_persistence.get_rating(
+            best_washroom.average_rating_id
         )
-
-        if next_best_washroom is None:
-            return None
-
-        next_best_washroom_rating = self.__rating_persistence.get_rating(
-            next_best_washroom.average_rating_id
-        )
-
-        if next_best_washroom_rating is None:
+        if best_washroom_rating is None:
             return None
 
         # Update the building by rolling back to the washroom
         # with the next best rating
-        self.__set_building_rating_and_overall(
+        self.__update_building(
             building,
-            next_best_washroom_rating
+            best_washroom_rating
         )
 
         # Return the updated review
@@ -219,7 +235,7 @@ class ReviewStore:
             self.__expand_review(result)
         return result
 
-    def __update_washroom_average_and_overall(
+    def __update_washroom(
         self,
         washroom: Washroom,
         cleanliness: float,
@@ -237,10 +253,7 @@ class ReviewStore:
             return
 
         # Get the number of reviews found
-        review_cnt = self.__review_persistence.\
-            get_review_count_by_washroom(
-                washroom.id
-            )
+        review_cnt = washroom.review_count
 
         # Compute the new average ratings
         avgs = [
@@ -280,6 +293,12 @@ class ReviewStore:
         # Compute the overall average rating
         new_overall_average = sum(avgs) / len(avgs)
 
+        # Compute new number of reviews
+        if adding_values:
+            num_reviews = washroom.review_count + 1
+        else:
+            num_reviews = washroom.review_count
+
         # Update the overall average
         self.__washroom_persistence.update_washroom(
             washroom.id,
@@ -292,10 +311,10 @@ class ReviewStore:
             washroom.amenities_id,
             new_overall_average,
             washroom.average_rating_id,
-            washroom.review_count
+            num_reviews
         )
 
-    def __get_next_best_washroom(
+    def __get_best_washroom(
         self,
         building_id: int
     ) -> Optional[Washroom]:
@@ -308,7 +327,7 @@ class ReviewStore:
                 best = w
         return best
 
-    def __set_building_rating_and_overall(
+    def __update_building(
         self,
         building: Building,
         rating: Rating
@@ -339,57 +358,6 @@ class ReviewStore:
             building.best_ratings_id,
             building.washroom_count
         )
-
-    def __update_building_rating(
-        self,
-        washroom: Washroom
-    ) -> None:
-        # Get the average washroom rating
-        washroom_average_rating = self.__rating_persistence.get_rating(
-            washroom.average_rating_id
-        )
-
-        if washroom_average_rating is None:
-            return
-
-        # Get the building the washroom is in
-        building = self.__building_persistence.get_building(
-            washroom.building_id
-        )
-
-        if building is None:
-            return
-
-        # Get the building's best washroom
-        building_best_rating = self.__rating_persistence.get_rating(
-            building.best_ratings_id
-        )
-
-        if building_best_rating is None:
-            return
-
-        # Collect values
-        washroom_rating_values = [
-            washroom_average_rating.cleanliness,
-            washroom_average_rating.privacy,
-            washroom_average_rating.smell,
-            washroom_average_rating.toilet_paper_quality
-        ]
-
-        building_rating_values = [
-            building_best_rating.cleanliness,
-            building_best_rating.privacy,
-            building_best_rating.smell,
-            building_best_rating.toilet_paper_quality
-        ]
-
-        # Only update the building's best and the building's overall
-        # if its better than what we've seen previously
-        if sum(building_rating_values) < sum(washroom_rating_values):
-            self.__set_building_rating_and_overall(
-                building,
-                washroom_average_rating
-            )
 
     def __expand_review(self, review: dict) -> None:
         # Expand ratings
