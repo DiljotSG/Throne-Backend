@@ -135,7 +135,7 @@ class BuildingsPersistence(IBuildingsPersistence):
 
         update_tuple = (
             location.latitude, location.longitude, title, maps_service_id,
-            overall_rating, best_ratings_id, building_id, washroom_count
+            overall_rating, best_ratings_id, washroom_count, building_id
         )
         cursor.execute(update_query, update_tuple)
         cnx.commit()
