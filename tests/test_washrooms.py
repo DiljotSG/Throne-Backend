@@ -81,7 +81,7 @@ class TestWashroomAPI(unittest.TestCase):
             # This is 0 because we add to stubs directly using the stub classes
             # The logic for updating review count is in the store classes
             # New reviews will adjust this count, but it won't include
-            # The original washrooms added through the stub init file.
+            # The original reviews added through the stub init file.
             "location": {
                 "latitude": 12.2,
                 "longitude": 17.9
