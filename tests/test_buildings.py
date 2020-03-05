@@ -102,6 +102,7 @@ class TestBuildingsAPI(unittest.TestCase):
                         "smell": 2.8,
                         "toilet_paper_quality": 4.2
                     },
+                    "building_title": "Science",
                     "building_id": 1,
                     "floor": 1,
                     "gender": "men",
@@ -109,7 +110,7 @@ class TestBuildingsAPI(unittest.TestCase):
                     "stall_count": 4,
                     "id": 2,
                     'is_favorite': False,
-                    "review_count": 1,
+                    "review_count": 0,
                     "location": {
                         "latitude": 114,
                         "longitude": 200.5
