@@ -105,13 +105,13 @@ class ReviewStore:
             washroom.building_id
         )
         if best_washroom is None:
-            return None  # Flake8 thing
+            return None  # MyPi thing
 
         best_washroom_rating = self.__rating_persistence.get_rating(
             best_washroom.average_rating_id
         )
         if best_washroom_rating is None:
-            return None  # Flake8 thing
+            return None  # Mypy thing
 
         # Update the building by rolling back to the washroom
         # with the next best rating
