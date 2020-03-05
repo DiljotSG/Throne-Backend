@@ -184,7 +184,8 @@ class WashroomsPersistence(IWashroomsPersistence):
 
         update_tuple = (
             location.latitude, location.longitude, comment, floor, gender,
-            amenities_id, overall_rating, average_ratings_id, washroom_id
+            urinal_count, stall_count, amenities_id, overall_rating,
+            average_ratings_id, review_count, washroom_id
         )
         cursor.execute(update_query, update_tuple)
         cnx.commit()
