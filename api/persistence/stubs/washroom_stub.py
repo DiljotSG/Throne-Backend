@@ -18,6 +18,8 @@ class WashroomsStubPersistence(IWashroomsPersistence):
         title: str,
         floor: int,
         gender: str,
+        urinal_count: int,
+        stall_count: int,
         amenities_id: int,  # Foreign Key
         overall_rating: float,
         average_ratings_id: int  # Foreign Key
