@@ -205,14 +205,14 @@ class ReviewStore:
         best_washroom = self.__get_best_washroom(
             washroom.building_id
         )
-        if best_washroom is None:
-            return None
+        if best_washroom is None:  
+            return None  # This is done to make mypy happy
 
         best_washroom_rating = self.__rating_persistence.get_rating(
             best_washroom.average_rating_id
         )
         if best_washroom_rating is None:
-            return None
+            return None  # This is done to make mypy happy
 
         # Update the building by rolling back to the washroom
         # with the next best rating
@@ -251,7 +251,7 @@ class ReviewStore:
         )
 
         if average_rating is None:
-            return
+            return  # This is done to make mypy happy
 
         # Get the number of reviews found
         review_cnt = washroom.review_count
