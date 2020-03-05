@@ -26,7 +26,7 @@ for building in buildings:
             building["location"]["longitude"]
         ),
         building["title"],
-        building["map_service_id"],
+        building["maps_service_id"],
         building["overall_rating"],
         best_ratings_id
     )
