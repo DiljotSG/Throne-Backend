@@ -88,12 +88,6 @@ class ReviewsStubPersistence(IReviewsPersistence):
 
         return washroom_reviews
 
-    def get_review_count_by_washroom(
-        self,
-        washroom_id: int
-    ) -> int:
-        return len(self.get_reviews_by_washroom(washroom_id))
-
     def remove_review(
         self,
         review_id: int

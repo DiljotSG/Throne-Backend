@@ -135,22 +135,6 @@ class ReviewsPersistence(IReviewsPersistence):
 
         return [_result_to_review(result) for result in reviews]
 
-    def get_review_count_by_washroom(
-        self,
-        washroom_id: int
-    ) -> int:
-        cnx = get_sql_connection()
-        cursor = cnx.cachedCursor
-
-        find_query = "SELECT COUNT(*) FROM reviews WHERE washroomID = %s"
-        find_tuple = (washroom_id,)
-        cursor.execute(find_query, find_tuple)
-
-        reviewcount = cursor.fetchall()[0][0]
-        cnx.commit()
-
-        return reviewcount
-
     def remove_reviews_by_washroom(
         self,
         washroom_id  # Foreign key
