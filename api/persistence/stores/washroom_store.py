@@ -64,24 +64,24 @@ class WashroomStore:
 
         # Check if location is correct
         if not Location.verify(latitude, longitude):
-            raise ThroneValidationException("Location provided is not valid")
+            raise ThroneValidationException("Location provided is invalid")
 
         # Check if washroom title is valid
         if not Washroom.verify(comment):
-            raise ThroneValidationException("Washroom comment is not valid")
+            raise ThroneValidationException("Washroom comment is invalid")
 
         # Check if floor is correct - Note: Really we should be storing
         # the floor of each building and comparing it against that.
         if not Building.verify(floor):
-            raise ThroneValidationException("Floor number is not valid")
+            raise ThroneValidationException("Floor number is invalid")
 
         # Check if gender is correct
         if not verify_gender(gender):
-            raise ThroneValidationException("Gender is not valid")
+            raise ThroneValidationException("Gender is invalid")
 
         # Check if building exists
         if building is None:
-            raise ThroneValidationException("Building id is not valid")
+            raise ThroneValidationException("Building id is invalid")
 
         # Check if amenities are all valid
         if not verify_amenity_list(amenities):

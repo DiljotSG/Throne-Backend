@@ -105,13 +105,13 @@ class ReviewStore:
             washroom.building_id
         )
         if best_washroom is None:
-            return None  # MyPy thing
+            return None  # Done to please mypy
 
         best_washroom_rating = self.__rating_persistence.get_rating(
             best_washroom.average_rating_id
         )
         if best_washroom_rating is None:
-            return None  # Mypy thing
+            return None  # Done to please mypy
 
         # Update the building by rolling back to the washroom
         # with the next best rating
@@ -141,17 +141,17 @@ class ReviewStore:
         review = self.__review_persistence.get_review(review_id)
 
         if washroom is None:
-            raise ThroneValidationException("Washroom id is not valid")
+            raise ThroneValidationException("Washroom id is invalid")
 
         building = self.__building_persistence.get_building(
             washroom.building_id
         )
 
         if review is None:
-            raise ThroneValidationException("Review id is not valid")
+            raise ThroneValidationException("Review id is invalid")
 
         if building is None:
-            raise ThroneValidationException("Building is Invalid")
+            raise ThroneValidationException("Building is invalid")
 
         if not len(comment) > 0:
             raise ThroneValidationException(
