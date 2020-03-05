@@ -203,6 +203,13 @@ class WashroomStore:
         washroom: dict,
         user_loc: Optional[Location] = None
     ) -> None:
+        # Add the building title
+        building = self.__building_persistence.get_building(
+            washroom["building_id"]
+        )
+        if building is not None:
+            washroom["building_title"] = building.title
+
         # Expand amenities
         amenities_id = washroom.pop("amenities_id", None)
         washroom["amenities"] = self.__amenity_persistence.get_amenities(
