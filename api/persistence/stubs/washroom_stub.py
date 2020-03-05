@@ -71,12 +71,6 @@ class WashroomsStubPersistence(IWashroomsPersistence):
                 washrooms.append(washroom)
         return washrooms
 
-    def get_washroom_count_by_building(
-        self,
-        building_id: int
-    ) -> int:
-        return len(self.get_washrooms_by_building(building_id))
-
     def get_washroom(
         self,
         washroom_id: int

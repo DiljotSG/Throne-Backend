@@ -130,22 +130,6 @@ class WashroomsPersistence(IWashroomsPersistence):
         results = [result_to_washroom(result) for result in results]
         return results
 
-    def get_washroom_count_by_building(
-        self,
-        building_id: int
-    ) -> int:
-        cnx = get_sql_connection()
-        cursor = cnx.cachedCursor
-
-        find_query = "SELECT COUNT(*) FROM washrooms WHERE buildingID = %s"
-        find_tuple = (building_id,)
-        cursor.execute(find_query, find_tuple)
-
-        washroomcount = cursor.fetchall()[0][0]
-        cnx.commit()
-
-        return washroomcount
-
     def get_washroom(
         self,
         washroom_id: int
