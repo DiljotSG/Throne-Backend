@@ -60,6 +60,8 @@ class WashroomStore:
         building_id: int,
         amenities: list
     ) -> Optional[dict]:
+        building = self.__building_persistence.get_building(building_id)
+
         # Check if location is correct
         if not Location.verify(latitude, longitude):
             raise ThroneValidationException("Location provided is not valid")
@@ -78,7 +80,7 @@ class WashroomStore:
             raise ThroneValidationException("Gender is not valid")
 
         # Check if building exists
-        if self.__building_persistence.get_building(building_id) is None:
+        if building is None:
             raise ThroneValidationException("Building id is not valid")
 
         # Check if amenities are all valid
@@ -87,6 +89,7 @@ class WashroomStore:
 
         gender = gender.lower()  # Ensure its lower case
         location = Location(latitude, longitude)
+        new_washroom_count = building.washroom_count + 1
         overall_rating = 0
         average_rating_id = self.__ratings_persistence.add_rating(0, 0, 0, 0)
         amenities_id = self.__amenity_persistence.add_amenities(
@@ -105,6 +108,17 @@ class WashroomStore:
             amenities_id,
             overall_rating,
             average_rating_id
+        )
+
+        # Update the building
+        self.__building_persistence.update_building(
+            building.id,
+            building.location,
+            building.title,
+            building.maps_service_id,
+            building.overall_rating,
+            building.best_ratings_id,
+            new_washroom_count
         )
 
         # Return the washroom
@@ -213,12 +227,6 @@ class WashroomStore:
 
         item.pop("id", None)
         washroom["average_ratings"] = item
-
-        # Add review count
-        washroom["review_count"] = \
-            self.__review_persistence.get_review_count_by_washroom(
-                washroom["id"]
-            )
 
         # Add is_favorite
         favorites = \
