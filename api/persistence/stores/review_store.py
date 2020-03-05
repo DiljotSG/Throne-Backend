@@ -105,7 +105,7 @@ class ReviewStore:
             washroom.building_id
         )
         if best_washroom is None:
-            return None  # MyPi thing
+            return None  # MyPy thing
 
         best_washroom_rating = self.__rating_persistence.get_rating(
             best_washroom.average_rating_id
