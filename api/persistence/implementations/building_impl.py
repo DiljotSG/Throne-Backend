@@ -17,7 +17,7 @@ from typing import List, Optional
 def _result_to_building(result):
     return Building(
         result[0], Location(result[2], result[3]), result[4], result[5],
-        result[1], result[6], result[7]
+        result[1], result[6], result[7], result[8]
     )
 
 
@@ -39,15 +39,15 @@ class BuildingsPersistence(IBuildingsPersistence):
         insert_query = """
         INSERT INTO buildings
         (created, latitude, longitude, title,
-         mapServiceID, overallRating, bestRatingID)
-        VALUES (%s,%s,%s,%s,%s,%s,%s)
+         mapServiceID, overallRating, bestRatingID, washroomCount)
+        VALUES (%s,%s,%s,%s,%s,%s,%s,%s)
         """
 
         find_query = "SELECT LAST_INSERT_ID()"
         insert_tuple = (
             convert_to_mysql_timestamp(datetime.now()), location.latitude,
             location.longitude, title, map_service_id,
-            overall_rating, best_rating_id
+            overall_rating, best_rating_id, 0
         )
 
         # Insert and commit
@@ -115,7 +115,8 @@ class BuildingsPersistence(IBuildingsPersistence):
         title: str,
         maps_service_id: int,
         overall_rating: float,
-        best_ratings_id: int
+        best_ratings_id: int,
+        washroom_count: int
     ) -> Optional[Building]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
@@ -127,13 +128,14 @@ class BuildingsPersistence(IBuildingsPersistence):
         title = %s,
         mapServiceID = %s,
         overallRating = %s,
-        bestRatingID = %s
+        bestRatingID = %s,
+        washroomCount = %s
         WHERE id = %s
         """
 
         update_tuple = (
             location.latitude, location.longitude, title, maps_service_id,
-            overall_rating, best_ratings_id, building_id
+            overall_rating, best_ratings_id, building_id, washroom_count
         )
         cursor.execute(update_query, update_tuple)
         cnx.commit()
@@ -163,5 +165,5 @@ class BuildingsPersistence(IBuildingsPersistence):
             self.washroomPersistence.remove_washroom(id[0])
 
         cursor.execute(query1, (building_id,))
-        cursor.execute(query2, (result.best_rating_id,))
+        cursor.execute(query2, (result.best_ratings_id,))
         cnx.commit()

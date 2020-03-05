@@ -32,10 +32,13 @@ class WashroomsStubPersistence(IWashroomsPersistence):
             datetime.now(),
             gender,
             floor,
+            urinal_count,
+            stall_count,
             building_id,
             overall_rating,
             average_ratings_id,
-            amenities_id
+            amenities_id,
+            0
         )
         self.washrooms.append(new_washroom)
         # Return Washroom id
@@ -90,9 +93,12 @@ class WashroomsStubPersistence(IWashroomsPersistence):
         location: Location,
         floor: int,
         gender: str,
+        urinal_count: int,
+        stall_count: int,
         amenities_id: int,
         overall_rating: float,
-        average_ratings_id: int
+        average_ratings_id: int,
+        review_count: int
     ) -> Optional[Washroom]:
         new_washroom = None
         if 0 <= washroom_id < len(self.washrooms) and \
@@ -104,10 +110,13 @@ class WashroomsStubPersistence(IWashroomsPersistence):
                 self.washrooms[washroom_id].created_at,
                 gender,
                 floor,
+                urinal_count,
+                stall_count,
                 self.washrooms[washroom_id].building_id,
                 overall_rating,
                 average_ratings_id,
-                amenities_id
+                amenities_id,
+                review_count
             )
             self.washrooms[washroom_id] = new_washroom
         return new_washroom

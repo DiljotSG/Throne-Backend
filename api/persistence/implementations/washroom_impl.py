@@ -32,9 +32,11 @@ class WashroomsPersistence(IWashroomsPersistence):
         self,
         building_id: int,  # Foreign Key
         location: Location,
-        title: str,
+        comment: str,
         floor: int,
         gender: str,
+        urinal_count: int,
+        stall_count: int,
         amenities_id: int,  # Foreign Key
         overall_rating: float,
         average_ratings_id: int  # Foreign Key
@@ -44,16 +46,18 @@ class WashroomsPersistence(IWashroomsPersistence):
 
         insert_query = """
         INSERT INTO washrooms
-        (created, buildingID, latitude, longitude, title,
-         floor, gender, amenities, overallRating, avgRatingsID)
-        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+        (created, buildingID, latitude, longitude, comment,
+        floor, gender, urinalCount, stallCount, amenities,
+         overallRating, avgRatingsID, reviewCount)
+        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
         """
 
         find_query = "SELECT LAST_INSERT_ID()"
         insert_tuple = (
             convert_to_mysql_timestamp(datetime.now()), building_id,
-            location.latitude, location.longitude, title, floor, gender,
-            amenities_id, overall_rating, average_ratings_id
+            location.latitude, location.longitude, comment, floor, gender,
+            urinal_count, stall_count, amenities_id, overall_rating,
+            average_ratings_id, 0
         )
 
         # Insert and commit

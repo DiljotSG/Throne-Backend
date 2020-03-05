@@ -25,4 +25,4 @@ class Building:
 
     @staticmethod
     def verify(floor: int) -> bool:
-        return floor > 0 and floor < 10
+        return 0 < floor < 10

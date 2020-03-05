@@ -46,7 +46,8 @@ class IBuildingsPersistence(ABC):
         title: str,
         maps_service_id: int,
         overall_rating: float,
-        best_ratings_id: int
+        best_ratings_id: int,
+        washroom_count: int
     ) -> Optional[Building]:
         pass
 

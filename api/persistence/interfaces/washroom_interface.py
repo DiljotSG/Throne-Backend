@@ -14,9 +14,11 @@ class IWashroomsPersistence(ABC):
         self,
         building_id: int,  # Foreign Key
         location: Location,
-        title: str,
+        comment: str,
         floor: int,
         gender: str,
+        urinal_count: int,
+        stall_count: int,
         amenities_id: int,  # Foreign Key
         overall_rating: float,
         average_ratings_id: int  # Foreign Key
@@ -59,13 +61,16 @@ class IWashroomsPersistence(ABC):
     def update_washroom(
         self,
         washroom_id: int,
-        title: str,
+        comment: str,
         location: Location,
         floor: int,
         gender: str,
+        urinal_count: int,
+        stall_count: int,
         amenities_id: int,
         overall_rating: float,
-        average_ratings_id: int
+        average_ratings_id: int,
+        review_count: int
     ) -> Optional[Washroom]:
         pass
 

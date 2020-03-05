@@ -68,7 +68,7 @@ class BuildingsStubPersistence(IBuildingsPersistence):
         maps_service_id: int,
         overall_rating: float,
         best_ratings_id: int,
-        review_count: int,
+        washroom_count: int,
     ) -> Optional[Building]:
         new_building = None
         if 0 <= building_id < len(self.buildings) and \
@@ -81,7 +81,7 @@ class BuildingsStubPersistence(IBuildingsPersistence):
                 self.buildings[building_id].created_at,
                 overall_rating,
                 best_ratings_id,
-                review_count
+                washroom_count
             )
             self.buildings[building_id] = new_building
         return new_building
