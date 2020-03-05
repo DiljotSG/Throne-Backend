@@ -26,7 +26,7 @@ for building in buildings:
             building["location"]["longitude"]
         ),
         building["title"],
-        building["map_service_id"],
+        building["maps_service_id"],
         building["overall_rating"],
         best_ratings_id
     )
@@ -50,6 +50,8 @@ w.add_washroom(
     "University Centre Main Floor Washroom",
     2,
     "men",
+    2,
+    1,
     amenity0,
     0,
     rating0
@@ -80,6 +82,8 @@ w.add_washroom(
     "Elizabeth Dafoe Library Main Floor Washroom",
     2,
     "men",
+    3,
+    3,
     amenity1,
     0,
     rating1

@@ -34,7 +34,7 @@ class TestBuildingsAPI(unittest.TestCase):
                 "maps_service_id": 0,
                 "overall_rating": 4,
                 "title": "Engineering",
-                # "washrooms": 2
+                "washroom_count": 0
             },
             {
                 "best_ratings": {
@@ -51,7 +51,7 @@ class TestBuildingsAPI(unittest.TestCase):
                 "maps_service_id": 1,
                 "overall_rating": 3,
                 "title": "Science",
-                # "washrooms": 1
+                "washroom_count": 0
             }
         ]
 
@@ -80,7 +80,7 @@ class TestBuildingsAPI(unittest.TestCase):
             "maps_service_id": 1,
             "overall_rating": 3,
             "title": "Science",
-            # "washrooms": 1
+            "washroom_count": 0
         }
         self.assertEqual(response.status_code, 200)
         created_at = data.pop("created_at", None)
@@ -105,6 +105,8 @@ class TestBuildingsAPI(unittest.TestCase):
                     "building_id": 1,
                     "floor": 1,
                     "gender": "men",
+                    "urinal_count": 3,
+                    "stall_count": 4,
                     "id": 2,
                     'is_favorite': False,
                     "review_count": 1,
@@ -113,7 +115,7 @@ class TestBuildingsAPI(unittest.TestCase):
                         "longitude": 200.5
                     },
                     "overall_rating": 3,
-                    "title": "Science 1"
+                    "comment": "Science 1"
                 }
             ]
         self.assertEqual(response.status_code, 200)

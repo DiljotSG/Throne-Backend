@@ -283,13 +283,16 @@ class ReviewStore:
         # Update the overall average
         self.__washroom_persistence.update_washroom(
             washroom.id,
-            washroom.title,
+            washroom.comment,
             washroom.location,
             washroom.floor,
             washroom.gender,
+            washroom.urinal_count,
+            washroom.stall_count,
             washroom.amenities_id,
             new_overall_average,
-            washroom.average_rating_id
+            washroom.average_rating_id,
+            washroom.review_count
         )
 
     def __get_next_best_washroom(
@@ -333,7 +336,8 @@ class ReviewStore:
             building.title,
             building.maps_service_id,
             new_overall,
-            building.best_ratings_id
+            building.best_ratings_id,
+            building.washroom_count
         )
 
     def __update_building_rating(

@@ -27,7 +27,8 @@ class BuildingsStubPersistence(IBuildingsPersistence):
             map_service_id,
             datetime.now(),
             overall_rating,
-            best_ratings_id
+            best_ratings_id,
+            0
         )
         # Return Building id
         self.buildings.append(new_building)
@@ -66,7 +67,8 @@ class BuildingsStubPersistence(IBuildingsPersistence):
         title: str,
         maps_service_id: int,
         overall_rating: float,
-        best_ratings_id: int
+        best_ratings_id: int,
+        washroom_count: int,
     ) -> Optional[Building]:
         new_building = None
         if 0 <= building_id < len(self.buildings) and \
@@ -78,7 +80,8 @@ class BuildingsStubPersistence(IBuildingsPersistence):
                 maps_service_id,
                 self.buildings[building_id].created_at,
                 overall_rating,
-                best_ratings_id
+                best_ratings_id,
+                washroom_count
             )
             self.buildings[building_id] = new_building
         return new_building
@@ -87,5 +90,5 @@ class BuildingsStubPersistence(IBuildingsPersistence):
         self,
         building_id: int
     ) -> None:
-        if building_id >= 0 and building_id < len(self.buildings):
+        if 0 <= building_id < len(self.buildings):
             self.buildings.pop(building_id)

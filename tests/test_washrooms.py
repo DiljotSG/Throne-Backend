@@ -32,6 +32,8 @@ class TestWashroomAPI(unittest.TestCase):
             "building_id": 0,
             "floor": 1,
             "gender": "women",
+            "urinal_count": 0,
+            "stall_count": 4,
             "id": 0,
             "is_favorite": True,
             "review_count": 1,
@@ -40,7 +42,7 @@ class TestWashroomAPI(unittest.TestCase):
                 "longitude": 17.9
             },
             "overall_rating": 4,
-            "title": "Engineering 1"
+            "comment": "Engineering 1"
         }
 
         self.assertEqual(response.status_code, 200)
@@ -65,6 +67,8 @@ class TestWashroomAPI(unittest.TestCase):
             "building_id": 0,
             "floor": 1,
             "gender": "women",
+            "urinal_count": 0,
+            "stall_count": 4,
             "id": 0,
             "is_favorite": True,
             "review_count": 1,
@@ -73,7 +77,7 @@ class TestWashroomAPI(unittest.TestCase):
                 "longitude": 17.9
             },
             "overall_rating": 4,
-            "title": "Engineering 1"
+            "comment": "Engineering 1"
         }
         self.assertEqual(response.status_code, 200)
         data.pop("created_at", None)

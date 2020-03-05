@@ -184,6 +184,8 @@ def __create_washrooms(
         "Engineering 1",
         1,
         "women",
+        0,
+        4,
         amenities[0],
         4,
         ratings[0]
@@ -195,6 +197,8 @@ def __create_washrooms(
         "Engineering 2",
         1,
         "men",
+        3,
+        4,
         amenities[0],
         3,
         ratings[0]
@@ -206,6 +210,8 @@ def __create_washrooms(
         "Science 1",
         1,
         "men",
+        3,
+        4,
         amenities[1],
         3,
         ratings[1]

@@ -62,7 +62,7 @@ create table preferences(
 
 create table users(
 	id INT NOT NULL AUTO_INCREMENT,
-	username VARCHAR(25) NOT NULL,
+	username VARCHAR(25) UNIQUE NOT NULL,
 	created TIMESTAMP NOT NULL,
 	profilePic TEXT,
 	preferences INT NOT NULL,
@@ -83,6 +83,7 @@ create table buildings(
 	mapServiceID INT,
 	overallRating FLOAT NOT NULL,
 	bestRatingID INT NOT NULL,
+	washroomCount INT NOT NULL,
 	PRIMARY KEY (id),
 
 	FOREIGN KEY (bestRatingID)
@@ -96,12 +97,15 @@ create table washrooms(
 	buildingID INT NOT NULL,
 	latitude FLOAT NOT NULL,
 	longitude FLOAT NOT NULL,
-	title VARCHAR(100) NOT NULL,
+	comment VARCHAR(100) NOT NULL,
 	floor INT NOT NULL,
 	gender VARCHAR(25) NOT NULL,
+	urinalCount INT NOT NULL,
+	stallCount INT NOT NULL,
 	amenities INT NOT NULL,
 	overallRating FLOAT NOT NULL,
 	avgRatingsID INT NOT NULL,
+	reviewCount INT NOT NULL,
 	PRIMARY KEY (id),
 
 	FOREIGN KEY (buildingID)

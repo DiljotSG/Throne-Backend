@@ -11,7 +11,8 @@ class Building:
         maps_service_id: int,
         created_at: datetime,
         overall_rating: float,
-        best_ratings_id: int
+        best_ratings_id: int,
+        washroom_count: int,
     ):
         self.id = building_id
         self.location = location
@@ -20,7 +21,8 @@ class Building:
         self.created_at = created_at
         self.overall_rating = overall_rating
         self.best_ratings_id = best_ratings_id
+        self.washroom_count = washroom_count
 
     @staticmethod
     def verify(floor: int) -> bool:
-        return floor > 0 and floor < 10
+        return 0 < floor < 10

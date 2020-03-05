@@ -15,9 +15,11 @@ class WashroomsStubPersistence(IWashroomsPersistence):
         self,
         building_id: int,  # Foreign Key
         location: Location,
-        title: str,
+        comment: str,
         floor: int,
         gender: str,
+        urinal_count: int,
+        stall_count: int,
         amenities_id: int,  # Foreign Key
         overall_rating: float,
         average_ratings_id: int  # Foreign Key
@@ -25,15 +27,18 @@ class WashroomsStubPersistence(IWashroomsPersistence):
         washroom_id = len(self.washrooms)
         new_washroom = Washroom(
             washroom_id,
-            title,
+            comment,
             location,
             datetime.now(),
             gender,
             floor,
+            urinal_count,
+            stall_count,
             building_id,
             overall_rating,
             average_ratings_id,
-            amenities_id
+            amenities_id,
+            0
         )
         self.washrooms.append(new_washroom)
         # Return Washroom id
@@ -76,7 +81,7 @@ class WashroomsStubPersistence(IWashroomsPersistence):
         self,
         washroom_id: int
     ) -> Optional[Washroom]:
-        if washroom_id >= 0 and washroom_id < len(self.washrooms) and \
+        if 0 <= washroom_id < len(self.washrooms) and \
            self.washrooms[washroom_id] is not None:
             return self.washrooms[washroom_id]
         return None
@@ -84,28 +89,34 @@ class WashroomsStubPersistence(IWashroomsPersistence):
     def update_washroom(
         self,
         washroom_id: int,
-        title: str,
+        comment: str,
         location: Location,
         floor: int,
         gender: str,
+        urinal_count: int,
+        stall_count: int,
         amenities_id: int,
         overall_rating: float,
-        average_ratings_id: int
+        average_ratings_id: int,
+        review_count: int
     ) -> Optional[Washroom]:
         new_washroom = None
         if 0 <= washroom_id < len(self.washrooms) and \
                 self.washrooms[washroom_id] is not None:
             new_washroom = Washroom(
                 washroom_id,
-                title,
+                comment,
                 location,
                 self.washrooms[washroom_id].created_at,
                 gender,
                 floor,
+                urinal_count,
+                stall_count,
                 self.washrooms[washroom_id].building_id,
                 overall_rating,
                 average_ratings_id,
-                amenities_id
+                amenities_id,
+                review_count
             )
             self.washrooms[washroom_id] = new_washroom
         return new_washroom
