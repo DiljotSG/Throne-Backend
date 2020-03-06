@@ -17,8 +17,6 @@ from ...objects.amenity import verify_amenity_list
 from ...objects.amenity import convert_to_amenities
 
 from ...common import verify_gender
-from api.persistence.common import get_current_user_id
-from api.common import distance_between_locations
 
 from typing import List, Optional, Any
 
@@ -123,8 +121,14 @@ class WashroomStore:
 
         # Return the washroom
         washroom = self.__washroom_persistence.get_washroom(washroom_id)
-        item = washroom.__dict__.copy()
-        self.__expand_washroom(item)
+        item = washroom.get_dict(
+            self.__building_persistence,
+            self.__amenity_persistence,
+            self.__ratings_persistence,
+            self.__favorite_persistence,
+            self.__user_persistence,
+            self.__preference_persistence
+        )
 
         return item
 
@@ -152,9 +156,18 @@ class WashroomStore:
         )
 
         for washroom in query_result:
-            item = washroom.__dict__.copy()
-            self.__expand_washroom(item, location)
+            item = washroom.get_dict(
+                self.__building_persistence,
+                self.__amenity_persistence,
+                self.__ratings_persistence,
+                self.__favorite_persistence,
+                self.__user_persistence,
+                self.__preference_persistence,
+                location
+            )
             result.append(item)
+
+        print(result)
 
         # Sort by distance
         result = sorted(
@@ -168,8 +181,14 @@ class WashroomStore:
             washroom_id
         )
         if result:
-            result = result.__dict__.copy()
-            self.__expand_washroom(result)
+            result = result.get_dict(
+                self.__building_persistence,
+                self.__amenity_persistence,
+                self.__ratings_persistence,
+                self.__favorite_persistence,
+                self.__user_persistence,
+                self.__preference_persistence
+            )
         return result
 
     def get_reviews_by_washrooms(self, washroom_id: int) -> List[dict]:
@@ -192,65 +211,17 @@ class WashroomStore:
         )
 
         for washroom in query_result:
-            item = washroom.__dict__.copy()
-            self.__expand_washroom(item)
+            item = washroom.get_dict(
+                self.__building_persistence,
+                self.__amenity_persistence,
+                self.__ratings_persistence,
+                self.__favorite_persistence,
+                self.__user_persistence,
+                self.__preference_persistence
+            )
             result.append(item)
 
         return result
-
-    def __expand_washroom(
-        self,
-        washroom: dict,
-        user_loc: Optional[Location] = None
-    ) -> None:
-        # Add the building title
-        building = self.__building_persistence.get_building(
-            washroom["building_id"]
-        )
-        if building is not None:
-            washroom["building_title"] = building.title
-
-        # Expand amenities
-        amenities_id = washroom.pop("amenities_id", None)
-        washroom["amenities"] = self.__amenity_persistence.get_amenities(
-            amenities_id
-        )
-
-        # Add distance to washroom
-        if user_loc:
-            washroom["distance"] = distance_between_locations(
-                user_loc,
-                washroom["location"]
-            ) * 1000
-
-        # Expand location
-        washroom["location"] = washroom["location"].__dict__.copy()
-
-        # Expand average ratings
-        average_rating_id = washroom.pop("average_rating_id", None)
-        item = self.__ratings_persistence.get_rating(
-            average_rating_id
-        ).__dict__.copy()
-
-        item.pop("id", None)
-        washroom["average_ratings"] = item
-
-        # Add is_favorite
-        favorites = \
-            self.__favorite_persistence.get_favorites_by_user(
-                get_current_user_id(
-                    self.__user_persistence,
-                    self.__preference_persistence
-                )
-            )
-
-        if favorites is not None:
-            washroom["is_favorite"] = any(
-                favorite.washroom_id == washroom["id"]
-                for favorite in favorites
-            )
-        else:
-            washroom["is_favorite"] = False
 
     def __expand_review(self, review: dict) -> None:
         # Expand ratings

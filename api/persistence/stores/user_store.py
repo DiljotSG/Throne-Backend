@@ -77,7 +77,9 @@ class UserStore:
 
         if query_result:
             for favorite in query_result:
-                result.append(favorite.__dict__.copy())
+                item = favorite.__dict__.copy()
+                self.__expand_favorite(item)
+                result.append(item)
 
         return result
 
@@ -89,6 +91,19 @@ class UserStore:
 
         if washroom is None:
             raise ThroneValidationException("Washroom id is invalid")
+
+        query_result = self.__favorite_persistence.get_favorites_by_user(
+            get_current_user_id(
+                self.__user_persistence,
+                self.__preference_persistence
+            )
+        )
+
+        if query_result:
+            for favorite in query_result:
+                # We have already favorited this washroomxxxxxxxxx
+                if favorite.washroom_id == washroom_id:
+                    return self.get_favorites()
 
         # Add the new favorite
         self.__favorite_persistence.add_favorite(
@@ -176,3 +191,14 @@ class UserStore:
 
         item.pop("id", None)
         review["ratings"] = item
+
+    def __expand_favorite(self, favorite: dict) -> None:
+        # Expand favorite
+        favorite.pop("id", None)
+        favorite.pop("user_id", None)
+        washroom_id = favorite.pop("washroom_id", None)
+        item = self.__washroom_persistence.get_washroom(
+            washroom_id
+        ).__dict__.copy()
+
+        favorite.update(item)

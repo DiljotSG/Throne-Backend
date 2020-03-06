@@ -74,7 +74,7 @@ def post_washrooms():
         return return_error(HttpCodes.HTTP_400_BAD_REQUEST)
 
     try:
-        title = str(request.json["title"])
+        comment = str(request.json["comment"])
         longitude = float(request.json["location"]["longitude"])
         latitude = float(request.json["location"]["latitude"])
         gender = str(request.json["gender"])
@@ -85,7 +85,7 @@ def post_washrooms():
         amenities = list(request.json["amenities"])
 
         result = washroom_store.create_washroom(
-            title,
+            comment,
             longitude,
             latitude,
             gender,
