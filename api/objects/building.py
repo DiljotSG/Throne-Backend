@@ -29,7 +29,7 @@ class Building:
 
     @staticmethod
     def verify(floor: int) -> bool:
-        return 0 < floor < 10
+        return 0 <= floor <= 10
 
     def to_dict(
         self,
