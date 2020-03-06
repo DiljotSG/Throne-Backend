@@ -26,7 +26,7 @@ class IFavoritesPersistence(ABC):
     def get_favorites_by_user(
         self,
         user_id: int  # Foreign Key
-    ) -> Optional[List[Favorite]]:
+    ) -> List[Favorite]:
         pass
 
     @abstractmethod

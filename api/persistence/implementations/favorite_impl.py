@@ -66,7 +66,7 @@ class FavoritesPersistence(IFavoritesPersistence):
     def get_favorites_by_user(
         self,
         user_id: int  # Foreign Key
-    ) -> Optional[List[Favorite]]:
+    ) -> List[Favorite]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 

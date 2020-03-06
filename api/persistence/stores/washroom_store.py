@@ -67,8 +67,8 @@ class WashroomStore:
             raise ThroneValidationException("Location provided is invalid")
 
         # Check if washroom title is valid
-        if not Washroom.verify(comment):
-            raise ThroneValidationException("Washroom comment is invalid")
+        if not Washroom.verify(comment, urinal_count, stall_count):
+            raise ThroneValidationException("Washroom information is invalid")
 
         # Check if floor is correct - Note: Really we should be storing
         # the floor of each building and comparing it against that.

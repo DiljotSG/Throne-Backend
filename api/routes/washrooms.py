@@ -48,7 +48,7 @@ def get_washrooms():
             amenities = amenities.split(",")
 
         # Don't waste resources if they want nothing back
-        if max_results == 0:
+        if max_results and max_results <= 0:
             result = []
             return return_as_json(result, code)
 
