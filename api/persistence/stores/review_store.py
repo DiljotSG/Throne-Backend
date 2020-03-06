@@ -245,7 +245,8 @@ class ReviewStore:
         if result:
             result = result.to_dict(
                 self.__rating_persistence,
-                self.__user_persistence
+                self.__user_persistence,
+                self.__preference_persistence
             )
         return result
 
