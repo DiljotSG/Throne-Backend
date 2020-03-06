@@ -35,7 +35,7 @@ class FavoritesStubPersistence(IFavoritesPersistence):
     def get_favorites_by_user(
         self,
         user_id: int  # Foreign Key
-    ) -> Optional[List[Favorite]]:
+    ) -> List[Favorite]:
         user_favorites = []
         for favorite in self.favorites:
             if favorite is not None and user_id == favorite.user_id:
