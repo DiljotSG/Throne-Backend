@@ -8,6 +8,8 @@ from api.common import return_no_content
 from api.response_codes import HttpCodes
 from ..persistence import create_user_store
 from ..exceptions.throne_exception import ThroneException
+from ..exceptions.throne_unauthorized_exception import\
+    ThroneUnauthorizedException
 
 user_store = create_user_store()
 
@@ -113,6 +115,8 @@ def get_preferences():
             main_floor_access
         )
 
+    except ThroneUnauthorizedException as e:
+        return return_error(HttpCodes.HTTP_403_FORBIDDEN, str(e))
     except ThroneException as e:
         return return_error(HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY, str(e))
     except ValueError:

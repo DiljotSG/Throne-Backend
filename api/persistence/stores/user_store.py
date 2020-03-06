@@ -138,7 +138,7 @@ class UserStore:
             user_id
         )
 
-        if user is None:
+        if user is None:  # This is mostly for mypy
             raise ThroneUnauthorizedException()
 
         # Update it's preferences
