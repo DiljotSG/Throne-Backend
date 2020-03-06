@@ -1,8 +1,9 @@
 from datetime import datetime
-from .location import Location
 from typing import Optional
+
 from api.common import distance_between_locations
 from api.persistence.interfaces.rating_interface import IRatingsPersistence
+from .location import Location
 
 
 class Building:

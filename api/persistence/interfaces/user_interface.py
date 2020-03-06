@@ -1,8 +1,8 @@
 from abc import ABC
 from abc import abstractmethod
+from typing import Optional
 
 from ...objects.user import User
-from typing import Optional
 
 
 class IUsersPersistence(ABC):

@@ -1,18 +1,18 @@
+from typing import Optional, Any
+
+from ..common import get_current_user_id
+from ..interfaces.building_interface import IBuildingsPersistence
+from ..interfaces.preference_interface import IPreferencesPersistence
 from ..interfaces.rating_interface import IRatingsPersistence
 from ..interfaces.review_interface import IReviewsPersistence
 from ..interfaces.user_interface import IUsersPersistence
 from ..interfaces.washroom_interface import IWashroomsPersistence
-from ..interfaces.preference_interface import IPreferencesPersistence
-from ..interfaces.building_interface import IBuildingsPersistence
-
-from ...objects.rating import Rating
-from ...objects.washroom import Washroom
-from ...objects.building import Building
-from ..common import get_current_user_id
-from ...exceptions.throne_validation_exception import ThroneValidationException
 from ...exceptions.throne_unauthorized_exception import \
     ThroneUnauthorizedException
-from typing import Optional, Any
+from ...exceptions.throne_validation_exception import ThroneValidationException
+from ...objects.building import Building
+from ...objects.rating import Rating
+from ...objects.washroom import Washroom
 
 
 class ReviewStore:

@@ -1,7 +1,7 @@
+from typing import Optional, List
+
 from ..interfaces.preference_interface import IPreferencesPersistence
 from ...objects.preference import Preference
-
-from typing import Optional, List
 
 
 class PreferencesStubPersistence(IPreferencesPersistence):

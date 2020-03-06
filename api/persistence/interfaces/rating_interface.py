@@ -1,8 +1,8 @@
 from abc import ABC
 from abc import abstractmethod
+from typing import Optional
 
 from ...objects.rating import Rating
-from typing import Optional
 
 
 class IRatingsPersistence(ABC):

@@ -1,19 +1,19 @@
-from flask import request
 from flask import Blueprint
+from flask import request
 from flask_cors import CORS
 from flask_cors import cross_origin
+
 from api.common import return_as_json
 from api.common import return_error
 from api.common import return_not_implemented
 from api.response_codes import HttpCodes
-from ..objects.location import Location
-from ..persistence import create_washroom_store
-from ..persistence import create_building_store
-from ..persistence import create_review_store
-
 from ..exceptions.throne_exception import ThroneException
 from ..exceptions.throne_unauthorized_exception import \
     ThroneUnauthorizedException
+from ..objects.location import Location
+from ..persistence import create_building_store
+from ..persistence import create_review_store
+from ..persistence import create_washroom_store
 
 washroom_store = create_washroom_store()
 building_store = create_building_store()

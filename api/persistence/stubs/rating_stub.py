@@ -1,7 +1,7 @@
+from typing import List, Optional
+
 from ..interfaces.rating_interface import IRatingsPersistence
 from ...objects.rating import Rating
-
-from typing import List, Optional
 
 
 class RatingsStubPersistence(IRatingsPersistence):

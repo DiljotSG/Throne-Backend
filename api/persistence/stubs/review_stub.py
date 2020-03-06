@@ -1,8 +1,8 @@
-from ..interfaces.review_interface import IReviewsPersistence
-from ...objects.review import Review
-
 from datetime import datetime
 from typing import List, Optional
+
+from ..interfaces.review_interface import IReviewsPersistence
+from ...objects.review import Review
 
 
 class ReviewsStubPersistence(IReviewsPersistence):

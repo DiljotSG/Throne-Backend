@@ -1,8 +1,8 @@
+from datetime import datetime
+from typing import List, Optional
+
 from ..interfaces.user_interface import IUsersPersistence
 from ...objects.user import User
-
-from typing import List, Optional
-from datetime import datetime
 
 
 class UsersStubPersistence(IUsersPersistence):

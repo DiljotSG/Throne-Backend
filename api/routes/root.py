@@ -1,7 +1,8 @@
-from flask import request
 from flask import Blueprint
+from flask import request
 from flask_cors import CORS
 from flask_cors import cross_origin
+
 from api.common import return_as_json
 
 mod = Blueprint('root', __name__)

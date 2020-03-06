@@ -1,10 +1,10 @@
-from . import get_sql_connection
-from ..interfaces.review_interface import IReviewsPersistence
-
-from ...objects.review import Review
-from api.common import convert_to_mysql_timestamp
 from datetime import datetime
 from typing import List, Optional
+
+from api.common import convert_to_mysql_timestamp
+from . import get_sql_connection
+from ..interfaces.review_interface import IReviewsPersistence
+from ...objects.review import Review
 
 
 # The ordering of these indicies are determined by the order of properties

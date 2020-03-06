@@ -1,6 +1,7 @@
 from flask import Blueprint
 from flask_cors import CORS
 from flask_cors import cross_origin
+
 from api.common import return_as_json
 from ..persistence import create_review_store
 
