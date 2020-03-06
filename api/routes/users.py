@@ -53,6 +53,7 @@ def get_user_favorites():
 def post_user_favorites():
     result = None
 
+    # Don't accept garbage input
     if request.json is None:
         return return_error(HttpCodes.HTTP_400_BAD_REQUEST)
 
@@ -76,6 +77,7 @@ def post_user_favorites():
 @mod.route("/favorites", methods=["DELETE"])
 @cross_origin()
 def delete_user_favorites():
+    # Don't accept garbage input
     if request.json is None:
         return return_error(HttpCodes.HTTP_400_BAD_REQUEST)
 
@@ -101,6 +103,7 @@ def delete_user_favorites():
 def get_preferences():
     result = None
 
+    # Don't accept garbage input
     if request.json is None:
         return return_error(HttpCodes.HTTP_400_BAD_REQUEST)
 
