@@ -29,6 +29,12 @@ def get_user(user_id):
     return return_as_json(user_store.get_user(user_id))
 
 
+@mod.route("/reviews", methods=["GET"])
+@cross_origin()
+def get_reviews():
+    return return_as_json(user_store.get_reviews())
+
+
 @mod.route("/<int:user_id>/reviews", methods=["GET"])
 @cross_origin()
 def get_users_reviews(user_id):

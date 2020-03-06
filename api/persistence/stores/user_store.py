@@ -59,6 +59,13 @@ class UserStore:
 
         return result
 
+    def get_reviews(self) -> List[dict]:
+        user_id = get_current_user_id(
+            self.__user_persistence,
+            self.__preference_persistence
+        )
+        return self.get_reviews_by_user(user_id)
+
     def get_favorites(self) -> List[dict]:
         result = []
         query_result = self.__favorite_persistence.get_favorites_by_user(
