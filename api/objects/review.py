@@ -1,9 +1,9 @@
 from datetime import datetime
 
-from api.persistence.interfaces.rating_interface import IRatingsPersistence
-from api.persistence.interfaces.user_interface import IUsersPersistence
 from api.persistence.interfaces.preference_interface import \
     IPreferencesPersistence
+from api.persistence.interfaces.rating_interface import IRatingsPersistence
+from api.persistence.interfaces.user_interface import IUsersPersistence
 
 
 class Review:
