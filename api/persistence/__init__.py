@@ -1,12 +1,4 @@
-from .stubs.amenity_stub import AmenitiesStubPersistence
-from .stubs.building_stub import BuildingsStubPersistence
-from .stubs.favorite_stub import FavoritesStubPersistence
-from .stubs.preference_stub import PreferencesStubPersistence
-from .stubs.rating_stub import RatingsStubPersistence
-from .stubs.review_stub import ReviewsStubPersistence
-from .stubs.user_stub import UsersStubPersistence
-from .stubs.washroom_stub import WashroomsStubPersistence
-
+from api.common import should_use_db
 from .implementations.amenity_impl import AmenitiesPersistence
 from .implementations.building_impl import BuildingsPersistence
 from .implementations.favorite_impl import FavoritesPersistence
@@ -15,7 +7,6 @@ from .implementations.rating_impl import RatingsPersistence
 from .implementations.review_impl import ReviewsPersistence
 from .implementations.user_impl import UsersPersistence
 from .implementations.washroom_impl import WashroomsPersistence
-
 from .interfaces.amenity_interface import IAmenitiesPersistence
 from .interfaces.building_interface import IBuildingsPersistence
 from .interfaces.favorite_interface import IFavoritesPersistence
@@ -24,15 +15,19 @@ from .interfaces.rating_interface import IRatingsPersistence
 from .interfaces.review_interface import IReviewsPersistence
 from .interfaces.user_interface import IUsersPersistence
 from .interfaces.washroom_interface import IWashroomsPersistence
-
 from .stores.building_store import BuildingStore
 from .stores.review_store import ReviewStore
 from .stores.user_store import UserStore
 from .stores.washroom_store import WashroomStore
-
 from .stubs import populate_stub_data
-from api.common import should_use_db
-
+from .stubs.amenity_stub import AmenitiesStubPersistence
+from .stubs.building_stub import BuildingsStubPersistence
+from .stubs.favorite_stub import FavoritesStubPersistence
+from .stubs.preference_stub import PreferencesStubPersistence
+from .stubs.rating_stub import RatingsStubPersistence
+from .stubs.review_stub import ReviewsStubPersistence
+from .stubs.user_stub import UsersStubPersistence
+from .stubs.washroom_stub import WashroomsStubPersistence
 
 # Make the Stubs
 __amenity_persistence: IAmenitiesPersistence = AmenitiesStubPersistence()

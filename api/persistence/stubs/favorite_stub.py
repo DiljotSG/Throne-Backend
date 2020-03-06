@@ -1,7 +1,7 @@
+from typing import Optional, List
+
 from ..interfaces.favorite_interface import IFavoritesPersistence
 from ...objects.favorite import Favorite
-
-from typing import Optional, List
 
 
 class FavoritesStubPersistence(IFavoritesPersistence):

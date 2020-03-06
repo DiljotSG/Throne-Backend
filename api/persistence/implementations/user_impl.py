@@ -1,12 +1,12 @@
-from . import get_sql_connection
-from ..interfaces.user_interface import IUsersPersistence
-from .favorite_impl import FavoritesPersistence
-from .review_impl import ReviewsPersistence
-
-from ...objects.user import User
-from api.common import convert_to_mysql_timestamp
 from datetime import datetime
 from typing import Optional
+
+from api.common import convert_to_mysql_timestamp
+from . import get_sql_connection
+from .favorite_impl import FavoritesPersistence
+from .review_impl import ReviewsPersistence
+from ..interfaces.user_interface import IUsersPersistence
+from ...objects.user import User
 
 
 # The ordering of these indicies are determined by the order of properties

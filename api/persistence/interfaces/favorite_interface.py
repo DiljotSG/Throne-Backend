@@ -1,8 +1,8 @@
 from abc import ABC
 from abc import abstractmethod
+from typing import Optional, List
 
 from ...objects.favorite import Favorite
-from typing import Optional, List
 
 
 class IFavoritesPersistence(ABC):

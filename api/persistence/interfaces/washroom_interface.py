@@ -1,10 +1,10 @@
 from abc import ABC
 from abc import abstractmethod
+from typing import List, Optional
 
-from ...objects.washroom import Washroom
 from ...objects.amenity import Amenity
 from ...objects.location import Location
-from typing import List, Optional
+from ...objects.washroom import Washroom
 
 
 class IWashroomsPersistence(ABC):

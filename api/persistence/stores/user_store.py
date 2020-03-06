@@ -1,18 +1,18 @@
+from typing import List, Any
+
+from api.common import verify_gender
+from ..interfaces.amenity_interface import IAmenitiesPersistence
+from ..interfaces.building_interface import IBuildingsPersistence
 from ..interfaces.favorite_interface import IFavoritesPersistence
 from ..interfaces.preference_interface import IPreferencesPersistence
 from ..interfaces.rating_interface import IRatingsPersistence
 from ..interfaces.review_interface import IReviewsPersistence
-from ..interfaces.washroom_interface import IWashroomsPersistence
 from ..interfaces.user_interface import IUsersPersistence
-from ..interfaces.building_interface import IBuildingsPersistence
-from ..interfaces.amenity_interface import IAmenitiesPersistence
-from ...persistence.common import get_current_user_id
-from api.common import get_cognito_user
-from api.common import verify_gender
-from ...exceptions.throne_validation_exception import ThroneValidationException
+from ..interfaces.washroom_interface import IWashroomsPersistence
 from ...exceptions.throne_unauthorized_exception import \
     ThroneUnauthorizedException
-from typing import List, Any
+from ...exceptions.throne_validation_exception import ThroneValidationException
+from ...persistence.common import get_current_user_id
 
 
 class UserStore:

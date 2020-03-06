@@ -1,15 +1,16 @@
 from datetime import datetime
-from .location import Location
 from typing import Optional
+
 from api.common import distance_between_locations
 from api.persistence.common import get_current_user_id
 from api.persistence.interfaces.amenity_interface import IAmenitiesPersistence
+from api.persistence.interfaces.building_interface import IBuildingsPersistence
 from api.persistence.interfaces.favorite_interface import IFavoritesPersistence
 from api.persistence.interfaces.preference_interface import \
     IPreferencesPersistence
 from api.persistence.interfaces.rating_interface import IRatingsPersistence
 from api.persistence.interfaces.user_interface import IUsersPersistence
-from api.persistence.interfaces.building_interface import IBuildingsPersistence
+from .location import Location
 
 
 class Washroom:

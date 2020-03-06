@@ -1,11 +1,10 @@
 from abc import ABC
 from abc import abstractmethod
+from typing import List, Optional
 
 from ...objects.amenity import Amenity
 from ...objects.building import Building
 from ...objects.location import Location
-
-from typing import List, Optional
 
 
 class IBuildingsPersistence(ABC):
