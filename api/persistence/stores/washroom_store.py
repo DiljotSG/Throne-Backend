@@ -228,7 +228,7 @@ class WashroomStore:
         rating_id = review.pop("rating_id", None)
         rating_item = self.__ratings_persistence.get_rating(
             rating_id
-        ).__dict__.copy()
+        ).to_dict()
 
         rating_item.pop("id", None)
         review["ratings"] = rating_item

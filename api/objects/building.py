@@ -1,5 +1,8 @@
 from datetime import datetime
 from .location import Location
+from typing import Optional
+from api.common import distance_between_locations
+from api.persistence.interfaces.rating_interface import IRatingsPersistence
 
 
 class Building:
@@ -26,3 +29,28 @@ class Building:
     @staticmethod
     def verify(floor: int) -> bool:
         return 0 < floor < 10
+
+    def __expand_building(
+        self,
+        rating_persistence: IRatingsPersistence,
+        user_loc: Optional[Location] = None
+    ) -> dict:
+        building = self.__dict__.copy()
+
+        # Expand best ratings
+        best_ratings_id = building.pop("best_ratings_id", None)
+        building["best_ratings"] = rating_persistence.get_rating(
+            best_ratings_id
+        ).to_dict()
+
+        # Add distance to building
+        if user_loc:
+            building["distance"] = distance_between_locations(
+                user_loc,
+                building["location"]
+            ) * 1000
+
+        # Expand location
+        building["location"] = building["location"].to_dict()
+
+        return building

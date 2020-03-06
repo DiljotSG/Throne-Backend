@@ -76,13 +76,13 @@ class Washroom:
             ) * 1000
 
         # Expand location
-        washroom["location"] = washroom["location"].__dict__.copy()
+        washroom["location"] = washroom["location"].to_dict()
 
         # Expand average ratings
         average_rating_id = washroom.pop("average_rating_id", None)
         item = ratings_persistence.get_rating(
             average_rating_id
-        ).__dict__.copy()
+        ).to_dict()
 
         item.pop("id", None)
         washroom["average_ratings"] = item

@@ -359,21 +359,3 @@ class ReviewStore:
             building.best_ratings_id,
             building.washroom_count
         )
-
-    def __expand_review(self, review: dict) -> None:
-        # Expand ratings
-        rating_id = review.pop("rating_id", None)
-        rating_item = self.__rating_persistence.get_rating(
-            rating_id
-        ).__dict__.copy()
-
-        rating_item.pop("id", None)
-        review["ratings"] = rating_item
-
-        user_id = review.pop("user_id", None)
-        user_item = self.__user_persistence.get_user(
-            user_id
-        ).__dict__.copy()
-        user_item.pop("preference_id", None)
-        user_item.pop("created_at", None)
-        review["user"] = user_item

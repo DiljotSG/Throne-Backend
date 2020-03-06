@@ -8,3 +8,23 @@ class Favorite:
         self.id = favorite_id
         self.user_id = user_id
         self.washroom_id = washroom_id
+
+    def to_dict(
+        self,
+        washroom_persistence
+    ) -> dict:
+        favorite = self.__dict__.copy()
+
+        # Remove ids
+        favorite.pop("id", None)
+        favorite.pop("user_id", None)
+
+        # Expand washroom
+        washroom_id = favorite.pop("washroom_id", None)
+        item = washroom_persistence.get_washroom(
+            washroom_id
+        ).to_dict()
+
+        favorite.update(item)
+
+        return favorite

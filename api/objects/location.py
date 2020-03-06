@@ -11,3 +11,6 @@ class Location:
     def verify(latitude: float, longitude: float) -> bool:
         return latitude <= 90 and latitude >= -90 and \
             longitude <= 180 and longitude >= -180
+
+    def to_dict(self) -> dict:
+        return self.__dict__.copy()
