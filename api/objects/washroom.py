@@ -82,10 +82,13 @@ class Washroom:
         average_rating_id = washroom.pop("average_rating_id", None)
         item = ratings_persistence.get_rating(
             average_rating_id
-        ).to_dict()
+        )
 
-        item.pop("id", None)
-        washroom["average_ratings"] = item
+        # Done to make mypy happy
+        if item:
+            rating = item.to_dict()
+            rating.pop("id", None)
+            washroom["average_ratings"] = rating
 
         # Add is_favorite
         favorites = \

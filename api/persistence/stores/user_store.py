@@ -52,7 +52,9 @@ class UserStore:
             user_id
         )
         if result:
-            result = result.to_dict()
+            result = result.to_dict(
+                self.__preference_persistence
+            )
         return result
 
     def get_reviews_by_user(self, user_id: int) -> List[dict]:
@@ -62,7 +64,8 @@ class UserStore:
         for review in query_result:
             item = review.to_dict(
                 self.__ratings_persistence,
-                self.__user_persistence
+                self.__user_persistence,
+                self.__preference_persistence
             )
             result.append(item)
 

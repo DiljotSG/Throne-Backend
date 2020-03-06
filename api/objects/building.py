@@ -39,9 +39,13 @@ class Building:
 
         # Expand best ratings
         best_ratings_id = building.pop("best_ratings_id", None)
-        building["best_ratings"] = rating_persistence.get_rating(
+        item = rating_persistence.get_rating(
             best_ratings_id
-        ).to_dict()
+        )
+
+        # Make mypy happy
+        if item:
+            building["best_ratings"] = item.to_dict()
 
         # Add distance to building
         if user_loc:

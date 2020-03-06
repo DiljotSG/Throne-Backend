@@ -18,7 +18,8 @@ class User:
         self.preference_id = preference_id
 
     def to_dict(
-        self
+        self,
+        preference_persistence
     ) -> dict:
         user = self.__dict__.copy()
 
@@ -26,7 +27,7 @@ class User:
         if user["username"] == get_cognito_user():
             # Expand preferences
             preference_id = user.pop("preference_id", None)
-            user["preferences"] = self.__preference_persistence.get_preference(
+            user["preferences"] = preference_persistence.get_preference(
                 preference_id
             ).to_dict()
 

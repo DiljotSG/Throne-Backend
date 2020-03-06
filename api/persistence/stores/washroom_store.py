@@ -121,16 +121,19 @@ class WashroomStore:
 
         # Return the washroom
         washroom = self.__washroom_persistence.get_washroom(washroom_id)
-        item = washroom.to_dict(
-            self.__building_persistence,
-            self.__amenity_persistence,
-            self.__ratings_persistence,
-            self.__favorite_persistence,
-            self.__user_persistence,
-            self.__preference_persistence
-        )
 
-        return item
+        result = {}
+        if washroom:
+            result = washroom.to_dict(
+                self.__building_persistence,
+                self.__amenity_persistence,
+                self.__ratings_persistence,
+                self.__favorite_persistence,
+                self.__user_persistence,
+                self.__preference_persistence
+            )
+
+        return result
 
     def get_washrooms(
         self,
@@ -198,7 +201,8 @@ class WashroomStore:
         for review in query_result:
             item = review.to_dict(
                 self.__ratings_persistence,
-                self.__user_persistence
+                self.__user_persistence,
+                self.__preference_persistence
             )
             result.append(item)
 

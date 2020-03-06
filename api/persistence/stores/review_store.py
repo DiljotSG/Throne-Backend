@@ -120,12 +120,16 @@ class ReviewStore:
             best_washroom_rating
         )
 
-        # retrieve and extract dict from review object
+        # Retrieve and extract dict from review object
         review = self.__review_persistence.get_review(review_id)
-        result = review.to_dict(
-            self.__rating_persistence,
-            self.__user_persistence
-        )
+
+        # Done to make mypy happy
+        if review:
+            result = review.to_dict(
+                self.__rating_persistence,
+                self.__user_persistence,
+                self.__preference_persistence
+            )
 
         return result
 
@@ -223,11 +227,14 @@ class ReviewStore:
             best_washroom_rating
         )
 
-        # Return the updated review
-        result = review.to_dict(
-            self.__rating_persistence,
-            self.__user_persistence
-        )
+        # Done to make mypy happy
+        if review:
+            # Return the updated review
+            result = review.to_dict(
+                self.__rating_persistence,
+                self.__user_persistence,
+                self.__preference_persistence
+            )
 
         return result
 
