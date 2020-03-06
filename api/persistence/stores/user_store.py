@@ -104,7 +104,7 @@ class UserStore:
     def remove_favorite(
         self,
         washroom_id: int
-    ) -> None:
+    ) -> bool:
         favorites = self.__favorite_persistence.get_favorites_by_user(
             get_current_user_id(
                 self.__user_persistence,
@@ -115,9 +115,9 @@ class UserStore:
         for fav in favorites:
             if fav.washroom_id == washroom_id:
                 self.__favorite_persistence.remove_favorite(fav.id)
-                return
+                return True
 
-        raise ThroneValidationException("Washroom id is invalid")
+        return False
 
     def update_preferences(
         self,
