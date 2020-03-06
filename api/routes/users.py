@@ -89,7 +89,7 @@ def delete_user_favorites():
     return return_no_content()
 
 
-@mod.route("/preferences", methods=["GET"])
+@mod.route("/preferences", methods=["PUT"])
 @cross_origin()
 def get_preferences():
     result = None
