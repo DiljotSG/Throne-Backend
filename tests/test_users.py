@@ -55,11 +55,22 @@ class TestUsersAPI(unittest.TestCase):
                     "toilet_paper_quality": 4.2
                 },
                 "upvote_count": 10,
-                "user_id": 1,
+                "user": {
+                    "id": 1,
+                    "profile_picture": "picture",
+                    "username": "johnsmith"
+                },
                 "washroom_id": 2
             }
         ]
+
         self.assertEqual(response.status_code, 200)
         created_at = data[0].pop("created_at", None)
         self.assertNotEqual(created_at, None)
+
+        if "user" in data[0]:
+            user = data[0]["user"]
+            created_at_user = user.pop("created_at", None)
+            self.assertNotEqual(created_at_user, None)
+
         self.assertEqual(data, expected)

@@ -121,7 +121,7 @@ class WashroomStore:
 
         # Return the washroom
         washroom = self.__washroom_persistence.get_washroom(washroom_id)
-        item = washroom.get_dict(
+        item = washroom.to_dict(
             self.__building_persistence,
             self.__amenity_persistence,
             self.__ratings_persistence,
@@ -156,7 +156,7 @@ class WashroomStore:
         )
 
         for washroom in query_result:
-            item = washroom.get_dict(
+            item = washroom.to_dict(
                 self.__building_persistence,
                 self.__amenity_persistence,
                 self.__ratings_persistence,
@@ -166,8 +166,6 @@ class WashroomStore:
                 location
             )
             result.append(item)
-
-        print(result)
 
         # Sort by distance
         result = sorted(
@@ -181,7 +179,7 @@ class WashroomStore:
             washroom_id
         )
         if result:
-            result = result.get_dict(
+            result = result.to_dict(
                 self.__building_persistence,
                 self.__amenity_persistence,
                 self.__ratings_persistence,
@@ -198,8 +196,10 @@ class WashroomStore:
         )
 
         for review in query_result:
-            item = review.__dict__.copy()
-            self.__expand_review(item)
+            item = review.to_dict(
+                self.__ratings_persistence,
+                self.__user_persistence
+            )
             result.append(item)
 
         return result
@@ -211,7 +211,7 @@ class WashroomStore:
         )
 
         for washroom in query_result:
-            item = washroom.get_dict(
+            item = washroom.to_dict(
                 self.__building_persistence,
                 self.__amenity_persistence,
                 self.__ratings_persistence,
@@ -222,22 +222,3 @@ class WashroomStore:
             result.append(item)
 
         return result
-
-    def __expand_review(self, review: dict) -> None:
-        # Expand ratings
-        rating_id = review.pop("rating_id", None)
-        rating_item = self.__ratings_persistence.get_rating(
-            rating_id
-        ).to_dict()
-
-        rating_item.pop("id", None)
-        review["ratings"] = rating_item
-
-        user_id = review.pop("user_id", None)
-        user_item = self.__user_persistence.get_user(
-            user_id
-        ).__dict__.copy()
-
-        user_item.pop("preference_id", None)
-        user_item.pop("created_at", None)
-        review["user"] = user_item

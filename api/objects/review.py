@@ -1,4 +1,6 @@
 from datetime import datetime
+from api.persistence.interfaces.rating_interface import IRatingsPersistence
+from api.persistence.interfaces.user_interface import IUsersPersistence
 
 
 class Review:
@@ -26,17 +28,22 @@ class Review:
         # valid input. Ex. is not empty, etc
         return True
 
-    def to_dict(self) -> dict:
+    def to_dict(
+        self,
+        rating_persistence: IRatingsPersistence,
+        user_persistence: IUsersPersistence
+    ) -> dict:
         review = self.__dict__.copy()
 
         # Expand ratings
         rating_id = review.pop("rating_id", None)
-        review["ratings"] = self.__rating_persistence.get_rating(
+        review["ratings"] = rating_persistence.get_rating(
             rating_id
         ).to_dict()
 
+        # Expand user
         user_id = review.pop("user_id", None)
-        review["user"] = self.__user_persistence.get_user(
+        review["user"] = user_persistence.get_user(
             user_id
         ).to_dict()
 

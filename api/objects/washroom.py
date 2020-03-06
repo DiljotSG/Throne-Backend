@@ -43,7 +43,7 @@ class Washroom:
         self.amenities_id = amenities_id
         self.review_count = review_count
 
-    def get_dict(
+    def to_dict(
         self,
         building_persistence: IBuildingsPersistence,
         amenity_persistence: IAmenitiesPersistence,

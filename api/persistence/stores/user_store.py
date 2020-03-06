@@ -4,6 +4,8 @@ from ..interfaces.rating_interface import IRatingsPersistence
 from ..interfaces.review_interface import IReviewsPersistence
 from ..interfaces.washroom_interface import IWashroomsPersistence
 from ..interfaces.user_interface import IUsersPersistence
+from ..interfaces.building_interface import IBuildingsPersistence
+from ..interfaces.amenity_interface import IAmenitiesPersistence
 from ...persistence.common import get_current_user_id
 from api.common import get_cognito_user
 from api.common import verify_gender
@@ -21,7 +23,9 @@ class UserStore:
         review_persistence: IReviewsPersistence,
         preference_persistence: IPreferencesPersistence,
         ratings_persistence: IRatingsPersistence,
-        washroom_persistence: IWashroomsPersistence
+        washroom_persistence: IWashroomsPersistence,
+        building_persistence: IBuildingsPersistence,
+        amenity_persistence: IAmenitiesPersistence
     ):
         self.__user_persistence: IUsersPersistence = user_persistence
         self.__favorite_persistence: IFavoritesPersistence = \
@@ -32,6 +36,10 @@ class UserStore:
         self.__ratings_persistence: IRatingsPersistence = ratings_persistence
         self.__washroom_persistence: IWashroomsPersistence = \
             washroom_persistence
+        self.__building_persistence: IBuildingsPersistence = \
+            building_persistence
+        self.__amenity_persistence: IAmenitiesPersistence = \
+            amenity_persistence
 
     def get_current_user(self) -> dict:
         return self.get_user(get_current_user_id(
@@ -44,8 +52,7 @@ class UserStore:
             user_id
         )
         if result:
-            result = result.__dict__.copy()
-            self.__expand_user(result)
+            result = result.to_dict()
         return result
 
     def get_reviews_by_user(self, user_id: int) -> List[dict]:
@@ -53,8 +60,10 @@ class UserStore:
         query_result = self.__review_persistence.get_reviews_by_user(user_id)
 
         for review in query_result:
-            item = review.__dict__.copy()
-            self.__expand_review(item)
+            item = review.to_dict(
+                self.__ratings_persistence,
+                self.__user_persistence
+            )
             result.append(item)
 
         return result
@@ -77,8 +86,15 @@ class UserStore:
 
         if query_result:
             for favorite in query_result:
-                item = favorite.__dict__.copy()
-                self.__expand_favorite(item)
+                item = favorite.to_dict(
+                    self.__washroom_persistence,
+                    self.__building_persistence,
+                    self.__amenity_persistence,
+                    self.__ratings_persistence,
+                    self.__favorite_persistence,
+                    self.__user_persistence,
+                    self.__preference_persistence
+                )
                 result.append(item)
 
         return result
@@ -166,39 +182,3 @@ class UserStore:
 
         # Get the updated user
         return self.get_user(user_id)
-
-    def __expand_user(self, user: dict) -> None:
-        # Only expand preferences if the Username matches current user
-
-        if user["username"] == get_cognito_user():
-            # Expand preferences
-            preference_id = user.pop("preference_id", None)
-            item = self.__preference_persistence.get_preference(
-                preference_id
-            ).__dict__.copy()
-            item.pop("id", None)
-            user["preferences"] = item
-
-        # Cleanup
-        user.pop("preference_id", None)
-
-    def __expand_review(self, review: dict) -> None:
-        # Expand ratings
-        rating_id = review.pop("rating_id", None)
-        item = self.__ratings_persistence.get_rating(
-            rating_id
-        ).__dict__.copy()
-
-        item.pop("id", None)
-        review["ratings"] = item
-
-    def __expand_favorite(self, favorite: dict) -> None:
-        # Expand favorite
-        favorite.pop("id", None)
-        favorite.pop("user_id", None)
-        washroom_id = favorite.pop("washroom_id", None)
-        item = self.__washroom_persistence.get_washroom(
-            washroom_id
-        ).__dict__.copy()
-
-        favorite.update(item)

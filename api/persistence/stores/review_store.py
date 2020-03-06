@@ -122,8 +122,10 @@ class ReviewStore:
 
         # retrieve and extract dict from review object
         review = self.__review_persistence.get_review(review_id)
-        result = review.__dict__.copy()
-        self.__expand_review(result)
+        result = review.to_dict(
+            self.__rating_persistence,
+            self.__user_persistence
+        )
 
         return result
 
@@ -222,8 +224,10 @@ class ReviewStore:
         )
 
         # Return the updated review
-        result = review.__dict__.copy()
-        self.__expand_review(result)
+        result = review.to_dict(
+            self.__rating_persistence,
+            self.__user_persistence
+        )
 
         return result
 
@@ -232,8 +236,10 @@ class ReviewStore:
             review_id
         )
         if result:
-            result = result.__dict__.copy()
-            self.__expand_review(result)
+            result = result.to_dict(
+                self.__rating_persistence,
+                self.__user_persistence
+            )
         return result
 
     def __update_washroom(

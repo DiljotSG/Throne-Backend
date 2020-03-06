@@ -11,7 +11,13 @@ class Favorite:
 
     def to_dict(
         self,
-        washroom_persistence
+        washroom_persistence,
+        building_persistence,
+        amenity_persistence,
+        ratings_persistence,
+        favorite_persistence,
+        user_persistence,
+        preference_persistence
     ) -> dict:
         favorite = self.__dict__.copy()
 
@@ -23,7 +29,14 @@ class Favorite:
         washroom_id = favorite.pop("washroom_id", None)
         item = washroom_persistence.get_washroom(
             washroom_id
-        ).to_dict()
+        ).to_dict(
+            building_persistence,
+            amenity_persistence,
+            ratings_persistence,
+            favorite_persistence,
+            user_persistence,
+            preference_persistence
+        )
 
         favorite.update(item)
 

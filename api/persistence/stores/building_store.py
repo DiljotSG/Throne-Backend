@@ -30,8 +30,9 @@ class BuildingStore:
             building_id
         )
         if result:
-            result = result.__dict__.copy()
-            self.__expand_building(result)
+            result = result.to_dict(
+                self.__rating_persistence
+            )
         return result
 
     def get_buildings(
@@ -58,8 +59,10 @@ class BuildingStore:
         )
 
         for building in query_result:
-            item = building.__dict__.copy()
-            self.__expand_building(item, location)
+            item = building.to_dict(
+                self.__rating_persistence,
+                location
+            )
             result.append(item)
 
         # Sort by distance
@@ -68,4 +71,3 @@ class BuildingStore:
             key=lambda k: ("distance" not in k, k.get("distance", None))
         )
         return result
-

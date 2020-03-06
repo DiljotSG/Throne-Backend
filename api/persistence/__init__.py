@@ -110,5 +110,7 @@ def create_user_store() -> UserStore:
         __review_persistence,
         __preference_persistence,
         __rating_persistence,
-        __washroom_persistence
+        __washroom_persistence,
+        __building_persistence,
+        __amenity_persistence
     )

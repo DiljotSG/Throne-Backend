@@ -30,7 +30,7 @@ class Building:
     def verify(floor: int) -> bool:
         return 0 < floor < 10
 
-    def __expand_building(
+    def to_dict(
         self,
         rating_persistence: IRatingsPersistence,
         user_loc: Optional[Location] = None
