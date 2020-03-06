@@ -7,8 +7,6 @@ from api.common import return_as_json
 from api.common import return_error
 from api.response_codes import HttpCodes
 from ..exceptions.throne_exception import ThroneException
-from ..exceptions.throne_unauthorized_exception import \
-    ThroneUnauthorizedException
 from ..objects.location import Location
 from ..persistence import create_building_store
 from ..persistence import create_review_store

@@ -1,5 +1,5 @@
-from flask import request
 from flask import Blueprint
+from flask import request
 from flask_cors import CORS
 from flask_cors import cross_origin
 
@@ -7,11 +7,10 @@ from api.common import return_as_json
 from api.common import return_error
 from api.common import return_not_implemented
 from api.response_codes import HttpCodes
-from ..persistence import create_review_store
-
 from ..exceptions.throne_exception import ThroneException
 from ..exceptions.throne_unauthorized_exception import \
     ThroneUnauthorizedException
+from ..persistence import create_review_store
 
 review_store = create_review_store()
 
