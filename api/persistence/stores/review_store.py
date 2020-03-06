@@ -129,7 +129,6 @@ class ReviewStore:
 
     def update_review(
         self,
-        washroom_id: int,
         review_id: int,
         comment: str,
         cleanliness: float,
@@ -137,8 +136,12 @@ class ReviewStore:
         smell: float,
         toilet_paper_quality: float
     ) -> Optional[dict]:
-        washroom = self.__washroom_persistence.get_washroom(washroom_id)
         review = self.__review_persistence.get_review(review_id)
+
+        if review is None:
+            raise ThroneValidationException("Review id is invalid")
+
+        washroom = self.__washroom_persistence.get_washroom(review.washroom_id)
 
         if washroom is None:
             raise ThroneValidationException("Washroom id is invalid")
@@ -146,9 +149,6 @@ class ReviewStore:
         building = self.__building_persistence.get_building(
             washroom.building_id
         )
-
-        if review is None:
-            raise ThroneValidationException("Review id is invalid")
 
         if building is None:
             raise ThroneValidationException("Building is invalid")

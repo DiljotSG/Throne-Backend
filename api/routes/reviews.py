@@ -27,7 +27,7 @@ def get_review(review_id):
 
 @mod.route("/<int:review_id>", methods=["PUT"])
 @cross_origin()
-def put_washroom_review(washroom_id, review_id):
+def put_washroom_review(review_id):
     result = None
 
     # Don't accept garbage input
@@ -43,7 +43,6 @@ def put_washroom_review(washroom_id, review_id):
             float(request.json["ratings"]["toilet_paper_quality"])
 
         result = review_store.update_review(
-            washroom_id,
             review_id,
             comment,
             cleanliness,
@@ -66,5 +65,5 @@ def put_washroom_review(washroom_id, review_id):
 
 @mod.route("/<int:review_id>", methods=["DELETE"])
 @cross_origin()
-def delete_washroom_review(washroom_id, review_id):
+def delete_washroom_review(review_id):
     return return_not_implemented()
