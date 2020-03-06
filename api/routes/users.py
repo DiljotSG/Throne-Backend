@@ -110,7 +110,7 @@ def get_preferences():
     try:
         gender = str(request.json["gender"])
         wheelchair_accessible = bool(request.json["wheelchair_accessible"])
-        main_floor_access = bool[request.json["main_floor_access"]]
+        main_floor_access = bool(request.json["main_floor_access"])
 
         result = user_store.update_preferences(
             gender,
