@@ -6,6 +6,7 @@ from flask_cors import cross_origin
 from api.common import return_as_json
 from api.common import return_error
 from api.common import return_no_content
+from api.common import return_not_found
 from api.response_codes import HttpCodes
 from ..exceptions.throne_exception import ThroneException
 from ..exceptions.throne_unauthorized_exception import \
@@ -56,7 +57,7 @@ def post_user_favorites():
 
     # Don't accept garbage input
     if request.json is None:
-        return return_error(HttpCodes.HTTP_400_BAD_REQUEST)
+        return return_error()
 
     try:
         washroom_id = int(request.json["washroom_id"])
@@ -76,15 +77,17 @@ def post_user_favorites():
     except KeyError:
         return return_error(HttpCodes.HTTP_400_BAD_REQUEST)
 
-    return return_as_json(result)
+    return return_as_json(result, HttpCodes.HTTP_201_CREATED)
 
 
 @mod.route("/favorites", methods=["DELETE"])
 @cross_origin()
 def delete_user_favorites():
+    result = False
+
     # Don't accept garbage input
     if request.json is None:
-        return return_error(HttpCodes.HTTP_400_BAD_REQUEST)
+        return return_error()
 
     try:
         washroom_id = int(request.json["washroom_id"])
@@ -93,7 +96,7 @@ def delete_user_favorites():
         if washroom_id is None:
             washroom_id = int(request.json["id"])
 
-        user_store.remove_favorite(
+        result = user_store.remove_favorite(
             washroom_id
         )
 
@@ -103,6 +106,9 @@ def delete_user_favorites():
         return return_error(HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY)
     except KeyError:
         return return_error(HttpCodes.HTTP_400_BAD_REQUEST)
+
+    if not result:
+        return return_not_found()
 
     return return_no_content()
 
@@ -114,7 +120,7 @@ def get_preferences():
 
     # Don't accept garbage input
     if request.json is None:
-        return return_error(HttpCodes.HTTP_400_BAD_REQUEST)
+        return return_error()
 
     try:
         gender = str(request.json["gender"])

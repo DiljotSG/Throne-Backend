@@ -150,5 +150,7 @@ create table favorites(
 	  REFERENCES users(id),
 
 	FOREIGN KEY (washroomID)
-	  REFERENCES washrooms(id)
+	  REFERENCES washrooms(id),
+
+	UNIQUE KEY (userID, washroomID)
 );

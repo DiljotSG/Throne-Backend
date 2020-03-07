@@ -68,7 +68,7 @@ def post_washrooms():
 
     # Don't accept garbage input
     if request.json is None:
-        return return_error(HttpCodes.HTTP_400_BAD_REQUEST)
+        return return_error()
 
     try:
         comment = str(request.json["comment"])
@@ -100,7 +100,7 @@ def post_washrooms():
     except KeyError:
         return return_error(HttpCodes.HTTP_400_BAD_REQUEST)
 
-    return return_as_json(result)
+    return return_as_json(result, HttpCodes.HTTP_201_CREATED)
 
 
 @mod.route("/<int:washroom_id>", methods=["GET"])
@@ -122,7 +122,7 @@ def post_washrooms_reviews(washroom_id):
 
     # Don't accept garbage input
     if request.json is None:
-        return return_error(HttpCodes.HTTP_400_BAD_REQUEST)
+        return return_error()
 
     try:
         comment = str(request.json["comment"])
@@ -148,4 +148,4 @@ def post_washrooms_reviews(washroom_id):
     except KeyError:
         return return_error(HttpCodes.HTTP_400_BAD_REQUEST)
 
-    return return_as_json(result)
+    return return_as_json(result, HttpCodes.HTTP_201_CREATED)

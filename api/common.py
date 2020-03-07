@@ -75,6 +75,10 @@ def return_as_json(data, code=HttpCodes.HTTP_200_OK):
     return jsonify(result), code
 
 
+def return_not_found():
+    return "", HttpCodes.HTTP_404_NOT_FOUND
+
+
 def return_no_content():
     return "", HttpCodes.HTTP_204_NO_CONTENT
 
