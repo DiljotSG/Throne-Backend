@@ -1,18 +1,18 @@
+from typing import Optional, Any
+
+from ..common import get_current_user_id
+from ..interfaces.building_interface import IBuildingsPersistence
+from ..interfaces.preference_interface import IPreferencesPersistence
 from ..interfaces.rating_interface import IRatingsPersistence
 from ..interfaces.review_interface import IReviewsPersistence
 from ..interfaces.user_interface import IUsersPersistence
 from ..interfaces.washroom_interface import IWashroomsPersistence
-from ..interfaces.preference_interface import IPreferencesPersistence
-from ..interfaces.building_interface import IBuildingsPersistence
-
-from ...objects.rating import Rating
-from ...objects.washroom import Washroom
-from ...objects.building import Building
-from ..common import get_current_user_id
-from ...exceptions.throne_validation_exception import ThroneValidationException
 from ...exceptions.throne_unauthorized_exception import \
     ThroneUnauthorizedException
-from typing import Optional, Any
+from ...exceptions.throne_validation_exception import ThroneValidationException
+from ...objects.building import Building
+from ...objects.rating import Rating
+from ...objects.washroom import Washroom
 
 
 class ReviewStore:
@@ -120,10 +120,16 @@ class ReviewStore:
             best_washroom_rating
         )
 
-        # retrieve and extract dict from review object
+        # Retrieve and extract dict from review object
         review = self.__review_persistence.get_review(review_id)
-        result = review.__dict__.copy()
-        self.__expand_review(result)
+
+        # Done to make mypy happy
+        if review:
+            result = review.to_dict(
+                self.__rating_persistence,
+                self.__user_persistence,
+                self.__preference_persistence
+            )
 
         return result
 
@@ -221,9 +227,14 @@ class ReviewStore:
             best_washroom_rating
         )
 
-        # Return the updated review
-        result = review.__dict__.copy()
-        self.__expand_review(result)
+        # Done to make mypy happy
+        if review:
+            # Return the updated review
+            result = review.to_dict(
+                self.__rating_persistence,
+                self.__user_persistence,
+                self.__preference_persistence
+            )
 
         return result
 
@@ -232,8 +243,11 @@ class ReviewStore:
             review_id
         )
         if result:
-            result = result.__dict__.copy()
-            self.__expand_review(result)
+            result = result.to_dict(
+                self.__rating_persistence,
+                self.__user_persistence,
+                self.__preference_persistence
+            )
         return result
 
     def __update_washroom(
@@ -359,21 +373,3 @@ class ReviewStore:
             building.best_ratings_id,
             building.washroom_count
         )
-
-    def __expand_review(self, review: dict) -> None:
-        # Expand ratings
-        rating_id = review.pop("rating_id", None)
-        rating_item = self.__rating_persistence.get_rating(
-            rating_id
-        ).__dict__.copy()
-
-        rating_item.pop("id", None)
-        review["ratings"] = rating_item
-
-        user_id = review.pop("user_id", None)
-        user_item = self.__user_persistence.get_user(
-            user_id
-        ).__dict__.copy()
-        user_item.pop("preference_id", None)
-        user_item.pop("created_at", None)
-        review["user"] = user_item

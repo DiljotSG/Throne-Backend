@@ -1,5 +1,10 @@
 from datetime import datetime
 
+from api.persistence.interfaces.preference_interface import \
+    IPreferencesPersistence
+from api.persistence.interfaces.rating_interface import IRatingsPersistence
+from api.persistence.interfaces.user_interface import IUsersPersistence
+
 
 class Review:
     def __init__(
@@ -25,3 +30,35 @@ class Review:
         # TODO: Add support for verifying if a comment contains
         # valid input. Ex. is not empty, etc
         return True
+
+    def to_dict(
+        self,
+        rating_persistence: IRatingsPersistence,
+        user_persistence: IUsersPersistence,
+        preference_persistence: IPreferencesPersistence
+    ) -> dict:
+        review = self.__dict__.copy()
+
+        # Expand ratings
+        rating_id = review.pop("rating_id", None)
+        rating = rating_persistence.get_rating(
+            rating_id
+        )
+
+        # Make mypy happy
+        if rating:
+            review["ratings"] = rating.to_dict()
+
+        # Expand user
+        user_id = review.pop("user_id", None)
+        user = user_persistence.get_user(
+            user_id
+        )
+
+        # Make mypy happy
+        if user:
+            review["user"] = user.to_dict(
+                preference_persistence
+            )
+
+        return review

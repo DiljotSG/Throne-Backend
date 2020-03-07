@@ -1,17 +1,17 @@
-from flask import Flask
-from flask_cors import CORS
-from flask.json import JSONEncoder
-from flask_cors import cross_origin
-
 from datetime import datetime, date, timezone
 
+from flask import Flask
+from flask.json import JSONEncoder
+from flask_cors import CORS
+from flask_cors import cross_origin
+
 from api.common import return_as_json
-from api.routes.root import root_data
-from api.routes.root import mod as root_mod
-from api.routes.washrooms import mod as washrooms_mod
 from api.routes.buildings import mod as buildings_mod
 from api.routes.reviews import mod as reviews_mod
+from api.routes.root import mod as root_mod
+from api.routes.root import root_data
 from api.routes.users import mod as users_mod
+from api.routes.washrooms import mod as washrooms_mod
 
 
 # Custom JSON Encoder to enforce isoformat for datetime

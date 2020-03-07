@@ -1,16 +1,16 @@
-from flask import request
 from flask import Blueprint
+from flask import request
 from flask_cors import CORS
 from flask_cors import cross_origin
+
 from api.common import return_as_json
 from api.common import return_error
 from api.response_codes import HttpCodes
+from ..exceptions.throne_exception import ThroneException
 from ..objects.location import Location
-from ..persistence import create_washroom_store
 from ..persistence import create_building_store
 from ..persistence import create_review_store
-
-from ..exceptions.throne_exception import ThroneException
+from ..persistence import create_washroom_store
 
 washroom_store = create_washroom_store()
 building_store = create_building_store()
@@ -71,7 +71,7 @@ def post_washrooms():
         return return_error()
 
     try:
-        title = str(request.json["title"])
+        comment = str(request.json["comment"])
         longitude = float(request.json["location"]["longitude"])
         latitude = float(request.json["location"]["latitude"])
         gender = str(request.json["gender"])
@@ -82,7 +82,7 @@ def post_washrooms():
         amenities = list(request.json["amenities"])
 
         result = washroom_store.create_washroom(
-            title,
+            comment,
             longitude,
             latitude,
             gender,

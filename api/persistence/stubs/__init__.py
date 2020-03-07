@@ -1,3 +1,5 @@
+from typing import List
+
 from ..interfaces.amenity_interface import IAmenitiesPersistence
 from ..interfaces.building_interface import IBuildingsPersistence
 from ..interfaces.favorite_interface import IFavoritesPersistence
@@ -6,11 +8,8 @@ from ..interfaces.rating_interface import IRatingsPersistence
 from ..interfaces.review_interface import IReviewsPersistence
 from ..interfaces.user_interface import IUsersPersistence
 from ..interfaces.washroom_interface import IWashroomsPersistence
-
 from ...objects.amenity import Amenity
 from ...objects.location import Location
-
-from typing import List
 
 
 def populate_stub_data(

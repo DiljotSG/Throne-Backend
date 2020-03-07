@@ -1,13 +1,11 @@
+from typing import List, Optional, Any
+
 from ..interfaces.building_interface import IBuildingsPersistence
 from ..interfaces.rating_interface import IRatingsPersistence
 from ..interfaces.review_interface import IReviewsPersistence
 from ..interfaces.washroom_interface import IWashroomsPersistence
-
-from ...objects.location import Location
 from ...objects.amenity import convert_to_amenities
-from api.common import distance_between_locations
-
-from typing import List, Optional, Any
+from ...objects.location import Location
 
 
 class BuildingStore:
@@ -30,8 +28,9 @@ class BuildingStore:
             building_id
         )
         if result:
-            result = result.__dict__.copy()
-            self.__expand_building(result)
+            result = result.to_dict(
+                self.__rating_persistence
+            )
         return result
 
     def get_buildings(
@@ -58,8 +57,10 @@ class BuildingStore:
         )
 
         for building in query_result:
-            item = building.__dict__.copy()
-            self.__expand_building(item, location)
+            item = building.to_dict(
+                self.__rating_persistence,
+                location
+            )
             result.append(item)
 
         # Sort by distance
@@ -68,27 +69,3 @@ class BuildingStore:
             key=lambda k: ("distance" not in k, k.get("distance", None))
         )
         return result
-
-    def __expand_building(
-        self,
-        building: dict,
-        user_loc: Optional[Location] = None
-    ) -> None:
-        # Expand best ratings
-        best_ratings_id = building.pop("best_ratings_id", None)
-        item = self.__rating_persistence.get_rating(
-            best_ratings_id
-        ).__dict__.copy()
-
-        # Add distance to building
-        if user_loc:
-            building["distance"] = distance_between_locations(
-                user_loc,
-                building["location"]
-            ) * 1000
-
-        # Expand location
-        building["location"] = building["location"].__dict__.copy()
-
-        item.pop("id", None)
-        building["best_ratings"] = item

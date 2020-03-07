@@ -117,4 +117,10 @@ class TestWashroomAPI(unittest.TestCase):
         ]
         self.assertEqual(response.status_code, 200)
         data[0].pop("created_at", None)
+
+        if "user" in data[0]:
+            user = data[0]["user"]
+            created_at_user = user.pop("created_at", None)
+            self.assertNotEqual(created_at_user, None)
+
         self.assertEqual(data, expected_data)

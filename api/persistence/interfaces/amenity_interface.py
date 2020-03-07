@@ -1,8 +1,8 @@
 from abc import ABC
 from abc import abstractmethod
+from typing import List, Optional
 
 from ...objects.amenity import Amenity
-from typing import List, Optional
 
 
 class IAmenitiesPersistence(ABC):

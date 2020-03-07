@@ -10,3 +10,8 @@ class Preference:
         self.gender = gender
         self.wheelchair_accessible = wheelchair_accessible
         self.main_floor_access = main_floor_access
+
+    def to_dict(self) -> dict:
+        preference = self.__dict__.copy()
+        preference.pop("id")
+        return preference

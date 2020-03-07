@@ -1,5 +1,6 @@
-import os
 import logging
+import os
+
 import mysql.connector
 
 logger = logging.getLogger(__name__)

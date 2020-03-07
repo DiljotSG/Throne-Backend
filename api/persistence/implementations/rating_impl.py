@@ -1,8 +1,8 @@
+from typing import Optional
+
 from . import get_sql_connection
 from ..interfaces.rating_interface import IRatingsPersistence
-
 from ...objects.rating import Rating
-from typing import Optional
 
 
 # The ordering of these indicies are determined by the order of properties

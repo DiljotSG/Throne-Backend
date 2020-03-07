@@ -24,3 +24,8 @@ class Rating:
             privacy > 0 and privacy <= 5 and \
             smell > 0 and smell <= 5 and \
             toilet_paper_quality > 0 and toilet_paper_quality <= 5
+
+    def to_dict(self) -> dict:
+        rating = self.__dict__.copy()
+        rating.pop("id")
+        return rating

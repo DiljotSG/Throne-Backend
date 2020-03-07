@@ -1,8 +1,8 @@
+from typing import Optional, List
+
 from . import get_sql_connection
 from ..interfaces.favorite_interface import IFavoritesPersistence
-
 from ...objects.favorite import Favorite
-from typing import Optional, List
 
 
 # The ordering of these indicies are determined by the order of properties

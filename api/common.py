@@ -1,13 +1,15 @@
-import os
 import datetime
-from flask import request
-from flask import jsonify
-from jsonschema import validate
-from .response_codes import HttpCodes
-from jsonschema import ValidationError
-from api.objects.location import Location
+import os
 from math import sin, cos, sqrt, atan2, radians
 from typing import Optional
+
+from flask import jsonify
+from flask import request
+from jsonschema import ValidationError
+from jsonschema import validate
+
+from api.objects.location import Location
+from .response_codes import HttpCodes
 
 TIMESTAMP_FORMAT = '%Y-%m-%d %H:%M:%S'
 

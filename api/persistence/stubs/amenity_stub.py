@@ -1,7 +1,7 @@
+from typing import List, Optional
+
 from ..interfaces.amenity_interface import IAmenitiesPersistence
 from ...objects.amenity import Amenity
-
-from typing import List, Optional
 
 
 class AmenitiesStubPersistence(IAmenitiesPersistence):

@@ -1,16 +1,17 @@
-from flask import request
 from flask import Blueprint
+from flask import request
 from flask_cors import CORS
 from flask_cors import cross_origin
+
 from api.common import return_as_json
 from api.common import return_error
 from api.common import return_no_content
 from api.common import return_not_found
 from api.response_codes import HttpCodes
-from ..persistence import create_user_store
 from ..exceptions.throne_exception import ThroneException
-from ..exceptions.throne_unauthorized_exception import\
+from ..exceptions.throne_unauthorized_exception import \
     ThroneUnauthorizedException
+from ..persistence import create_user_store
 
 user_store = create_user_store()
 
@@ -61,6 +62,10 @@ def post_user_favorites():
     try:
         washroom_id = int(request.json["washroom_id"])
 
+        # If we don't get washroom_id, look for id
+        if washroom_id is None:
+            washroom_id = int(request.json["id"])
+
         result = user_store.add_favorite(
             washroom_id
         )
@@ -86,6 +91,10 @@ def delete_user_favorites():
 
     try:
         washroom_id = int(request.json["washroom_id"])
+
+        # If we don't get washroom_id, look for id
+        if washroom_id is None:
+            washroom_id = int(request.json["id"])
 
         result = user_store.remove_favorite(
             washroom_id

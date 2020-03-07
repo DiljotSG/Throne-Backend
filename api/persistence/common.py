@@ -1,9 +1,9 @@
-from api.common import should_use_db
-from api.common import get_cognito_user
-
 from mysql.connector.errors import InterfaceError
-from .interfaces.user_interface import IUsersPersistence
+
+from api.common import get_cognito_user
+from api.common import should_use_db
 from .interfaces.preference_interface import IPreferencesPersistence
+from .interfaces.user_interface import IUsersPersistence
 
 
 # Gives the currently authenticated user's ID
