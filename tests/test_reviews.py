@@ -1,6 +1,7 @@
 import api
 import json
 import unittest
+from api.response_codes import HttpCodes
 
 
 class TestReviewAPI(unittest.TestCase):
@@ -12,7 +13,7 @@ class TestReviewAPI(unittest.TestCase):
         self.app = app.test_client()
         self.assertEqual(app.debug, False)
 
-    def test_by_id(self):
+    def test_get_by_id(self):
         response = self.app.get("/reviews/1")
         data = json.loads(response.data.decode())
         expected_data = {
@@ -32,7 +33,7 @@ class TestReviewAPI(unittest.TestCase):
             },
             "washroom_id": 2
         }
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
         created_at = data.pop("created_at", None)
         self.assertNotEqual(created_at, None)
 
@@ -42,3 +43,27 @@ class TestReviewAPI(unittest.TestCase):
             self.assertNotEqual(created_at_user, None)
 
         self.assertEqual(data, expected_data)
+
+    def test_put_reviews(self):
+        data = {
+            "comment": "yay",
+            "id": 0,
+            "ratings": {
+                "cleanliness": 3.2,
+                "privacy": 1.2,
+                "smell": 2.7,
+                "toilet_paper_quality": 4.5
+            },
+            "upvote_count": 5,
+            "user": {
+                "id": 0,
+                "profile_picture": "picture",
+                "username": "janesmith"
+            },
+            "washroom_id": 0
+        }
+        response = self.app.put("/reviews/0", json=data)
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
+
+    def test_delete_reviews(self):
+        pass

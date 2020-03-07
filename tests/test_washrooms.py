@@ -87,7 +87,7 @@ class TestWashroomAPI(unittest.TestCase):
                 "latitude": 12.2,
                 "longitude": 17.9
             },
-            "overall_rating": 4,
+            "overall_rating": 2.9000000000000004,
             "comment": "Engineering 1"
         }
         self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)

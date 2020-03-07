@@ -136,7 +136,7 @@ class TestUsersAPI(unittest.TestCase):
                     "latitude": 12.2,
                     "longitude": 17.9
                 },
-                "overall_rating": 4,
+                "overall_rating": 2.9000000000000004,
                 "review_count": 0,
                 "stall_count": 4,
                 "urinal_count": 0
