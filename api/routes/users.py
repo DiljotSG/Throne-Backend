@@ -61,6 +61,10 @@ def post_user_favorites():
     try:
         washroom_id = int(request.json["washroom_id"])
 
+        # If we don't get washroom_id, look for id
+        if washroom_id is None:
+            washroom_id = int(request.json["id"])
+
         result = user_store.add_favorite(
             washroom_id
         )
@@ -84,6 +88,10 @@ def delete_user_favorites():
 
     try:
         washroom_id = int(request.json["washroom_id"])
+
+        # If we don't get washroom_id, look for id
+        if washroom_id is None:
+            washroom_id = int(request.json["id"])
 
         user_store.remove_favorite(
             washroom_id

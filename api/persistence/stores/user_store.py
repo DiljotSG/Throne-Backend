@@ -120,7 +120,7 @@ class UserStore:
 
         if query_result:
             for favorite in query_result:
-                # We have already favorited this washroomxxxxxxxxx
+                # We have already favorited this washroom
                 if favorite.washroom_id == washroom_id:
                     return self.get_favorites()
 
