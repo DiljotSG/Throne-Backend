@@ -114,30 +114,12 @@ class TestWashroomAPI(unittest.TestCase):
                     "username": "janesmith"
                 },
                 "washroom_id": 0
-            },
-            {
-                "comment": "testing",
-                "id": 2,
-                "ratings": {
-                    "cleanliness": 3.2,
-                    "privacy": 1.2,
-                    "smell": 3.7,
-                    "toilet_paper_quality": 1.5
-                },
-                "upvote_count": 0,
-                "user": {
-                    "id": 0,
-                    "profile_picture": "picture",
-                    "username": "janesmith"
-                },
-                "washroom_id": 0
             }
         ]
         self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
-        data[0].pop("created_at", None)
-        data[1].pop("created_at", None)
 
         for item in data:
+            item.pop("created_at", None)
             if "user" in item:
                 user = item["user"]
                 created_at_user = user.pop("created_at", None)

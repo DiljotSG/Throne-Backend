@@ -1,6 +1,7 @@
 import api
 import json
 import unittest
+from api.response_codes import HttpCodes
 
 
 class TestUsersAPI(unittest.TestCase):
@@ -23,12 +24,12 @@ class TestUsersAPI(unittest.TestCase):
             "profile_picture": "picture",
             "username": "janesmith"
         }
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
         created_at = data.pop("created_at", None)
         self.assertNotEqual(created_at, None)
         self.assertEqual(data, expected_data)
 
-    def test_by_id(self):
+    def test_get_user_by_id(self):
         response = self.app.get("/users/1")
         data = json.loads(response.data.decode())
         expected_data = {
@@ -36,12 +37,12 @@ class TestUsersAPI(unittest.TestCase):
             "profile_picture": "picture",
             "username": "johnsmith"
         }
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
         created_at = data.pop("created_at", None)
         self.assertNotEqual(created_at, None)
         self.assertEqual(data, expected_data)
 
-    def test_reviews(self):
+    def test_get_users_reviews(self):
         response = self.app.get("/users/1/reviews")
         data = json.loads(response.data.decode())
         expected = [
@@ -64,7 +65,7 @@ class TestUsersAPI(unittest.TestCase):
             }
         ]
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
         created_at = data[0].pop("created_at", None)
         self.assertNotEqual(created_at, None)
 
@@ -74,3 +75,120 @@ class TestUsersAPI(unittest.TestCase):
             self.assertNotEqual(created_at_user, None)
 
         self.assertEqual(data, expected)
+
+    def test_get_reviews(self):
+        response = self.app.get("/users/reviews")
+        data = json.loads(response.data.decode())
+        expected = [
+            {
+                "comment": "yay",
+                "id": 0,
+                "ratings": {
+                    "cleanliness": 3.2,
+                    "privacy": 1.2,
+                    "smell": 2.7,
+                    "toilet_paper_quality": 4.5
+                },
+                "upvote_count": 5,
+                "user": {
+                    "id": 0,
+                    "profile_picture": "picture",
+                    "username": "janesmith"
+                },
+                "washroom_id": 0
+            }
+        ]
+
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
+        created_at = data[0].pop("created_at", None)
+        self.assertNotEqual(created_at, None)
+
+        if "user" in data[0]:
+            user = data[0]["user"]
+            created_at_user = user.pop("created_at", None)
+            self.assertNotEqual(created_at_user, None)
+
+        self.assertEqual(data, expected)
+
+    def test_get_favorites(self):
+        response = self.app.get("/users/favorites")
+        data = json.loads(response.data.decode())
+        expected = [
+            {
+                "amenities": [
+                    "air_dryer",
+                    "auto_toilet"
+                ],
+                "average_ratings": {
+                    "cleanliness": 3.2,
+                    "privacy": 1.2,
+                    "smell": 2.7,
+                    "toilet_paper_quality": 4.5
+                },
+                "building_id": 0,
+                "building_title": "Engineering",
+                "comment": "Engineering 1",
+                "floor": 1,
+                "gender": "women",
+                "id": 0,
+                "is_favorite": True,
+                "location": {
+                    "latitude": 12.2,
+                    "longitude": 17.9
+                },
+                "overall_rating": 4,
+                "review_count": 0,
+                "stall_count": 4,
+                "urinal_count": 0
+            }
+        ]
+
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
+        created_at = data[0].pop("created_at", None)
+        self.assertNotEqual(created_at, None)
+
+        self.assertEqual(data, expected)
+
+    def test_post_user_favorites(self):
+        data = {
+            "amenities": [
+                "air_dryer",
+                "auto_toilet"
+            ],
+            "average_ratings": {
+                "cleanliness": 3.2,
+                "privacy": 1.2,
+                "smell": 2.7,
+                "toilet_paper_quality": 4.5
+            },
+            "building_id": 0,
+            "building_title": "Engineering",
+            "comment": "Engineering 2",
+            "created_at": "2020-03-07T12:43:48+00:00",
+            "floor": 1,
+            "gender": "men",
+            "id": 1,
+            "is_favorite": True,
+            "location": {
+                "latitude": 114,
+                "longitude": 200.5
+            },
+            "overall_rating": 3,
+            "review_count": 0,
+            "stall_count": 4,
+            "urinal_count": 3
+        }
+        response = self.app.post("/users/favorites/", json=data)
+        self.assertEqual(response.status_code, HttpCodes.HTTP_201_CREATED)
+
+    def test_delete_favorites(self):
+        pass
+
+    def test_put_user_preferences(self):
+        data = {
+            "gender": "women",
+            "wheelchair_accessible": True,
+            "main_floor_access": False
+        }
+        response = self.app.put("/users/preferences/", json=data)
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
