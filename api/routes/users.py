@@ -60,10 +60,11 @@ def post_user_favorites():
         return return_error()
 
     try:
-        washroom_id = int(request.json["washroom_id"])
-
-        # If we don't get washroom_id, look for id
-        if washroom_id is None:
+        washroom_id = 0
+        if "washroom_id" in request.json:
+            washroom_id = int(request.json["washroom_id"])
+        else:
+            # If we don't get washroom_id, look for id
             washroom_id = int(request.json["id"])
 
         result = user_store.add_favorite(
@@ -90,10 +91,11 @@ def delete_user_favorites():
         return return_error()
 
     try:
-        washroom_id = int(request.json["washroom_id"])
-
-        # If we don't get washroom_id, look for id
-        if washroom_id is None:
+        washroom_id = 0
+        if "washroom_id" in request.json:
+            washroom_id = int(request.json["washroom_id"])
+        else:
+            # If we don't get washroom_id, look for id
             washroom_id = int(request.json["id"])
 
         result = user_store.remove_favorite(
