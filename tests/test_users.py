@@ -164,7 +164,6 @@ class TestUsersAPI(unittest.TestCase):
             "building_id": 0,
             "building_title": "Engineering",
             "comment": "Engineering 2",
-            "created_at": "2020-03-07T12:43:48+00:00",
             "floor": 1,
             "gender": "men",
             "id": 1,
