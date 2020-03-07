@@ -1,6 +1,7 @@
 import api
 import json
 import unittest
+from api.response_codes import HttpCodes
 
 
 class TestBuildingsAPI(unittest.TestCase):
@@ -63,7 +64,7 @@ class TestBuildingsAPI(unittest.TestCase):
             }
         ]
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
         created_at = data[0].pop("created_at", None)
         self.assertNotEqual(created_at, None)
         created_at = data[1].pop("created_at", None)
@@ -90,7 +91,7 @@ class TestBuildingsAPI(unittest.TestCase):
             "title": "Science",
             "washroom_count": 0
         }
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
         created_at = data.pop("created_at", None)
         self.assertNotEqual(created_at, None)
         self.assertEqual(data, expected_data)
@@ -131,7 +132,7 @@ class TestBuildingsAPI(unittest.TestCase):
                     "comment": "Science 1"
                 }
             ]
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
         created_at = data[0].pop("created_at", None)
         self.assertNotEqual(created_at, None)
         self.assertEqual(data, expected_data)
