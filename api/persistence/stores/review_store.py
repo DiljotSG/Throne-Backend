@@ -289,13 +289,16 @@ class ReviewStore:
         # new ratings to the average
         if adding_values:
             for i, v in enumerate(values):
-                avgs[i] = ((avgs[i] * review_cnt) + v) / (review_cnt + 1)
+                if review_cnt + 1 != 0:
+                    avgs[i] = ((avgs[i] * review_cnt) + v) / (review_cnt + 1)
 
         # Calculate the new averages's with us replacing the values
         else:
             for i, v in enumerate(values):
                 if review_cnt != 0:
-                    avgs[i] = (((avgs[i] * review_cnt) - avgs[i]) + v) / review_cnt
+                    avgs[i] = (
+                        ((avgs[i] * review_cnt) - avgs[i]) + v
+                    ) / review_cnt
 
         # Update the average rating object
         self.__rating_persistence.update_rating(
