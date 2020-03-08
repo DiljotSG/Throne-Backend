@@ -139,6 +139,11 @@ class TestWashroomAPI(unittest.TestCase):
         }
         response = self.app.post("/washrooms/0/reviews/", json=data)
         self.assertEqual(response.status_code, HttpCodes.HTTP_201_CREATED)
+        returned_data = json.loads(response.data.decode())
 
-    def test_delete_reviews(self):
-        pass
+        data["upvote_count"] = 0
+        data["washroom_id"] = 0
+        returned_data.pop("created_at", None)
+        returned_data.pop("user", None)
+        returned_data.pop("id", None)
+        self.assertEqual(data, returned_data)

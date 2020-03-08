@@ -180,7 +180,71 @@ class TestUsersAPI(unittest.TestCase):
         response = self.app.post("/users/favorites/", json=data)
         self.assertEqual(response.status_code, HttpCodes.HTTP_201_CREATED)
 
+        returned_data = json.loads(response.data.decode())
+
+        data = [
+            {
+                'amenities': [
+                    'air_dryer',
+                    'auto_toilet'
+                ],
+                'average_ratings': {
+                    'cleanliness': 3.2,
+                    'privacy': 1.2,
+                    'smell': 2.7,
+                    'toilet_paper_quality': 4.5
+                },
+                'building_id': 0,
+                'building_title': 'Engineering',
+                'comment': 'Engineering 1',
+                'floor': 1,
+                'gender': 'women',
+                'is_favorite': True,
+                'location': {
+                    'latitude': 12.2,
+                    'longitude': 17.9
+                },
+                'overall_rating': 2.9000000000000004,
+                'review_count': 0,
+                'stall_count': 4,
+                'urinal_count': 0
+            },
+            {
+                'amenities': [
+                    'air_dryer',
+                    'auto_toilet'
+                ],
+                'average_ratings': {
+                    'cleanliness': 3.2,
+                    'privacy': 1.2,
+                    'smell': 2.7,
+                    'toilet_paper_quality': 4.5
+                },
+                'building_id': 0,
+                'building_title': 'Engineering',
+                'comment': 'Engineering 2',
+                'floor': 1,
+                'gender': 'men',
+                'is_favorite': True,
+                'location': {
+                    'latitude': 114,
+                    'longitude': 200.5
+                },
+                'overall_rating': 3,
+                'review_count': 0,
+                'stall_count': 4,
+                'urinal_count': 3
+            }
+        ]
+        for item in returned_data:
+            item.pop("created_at", None)
+            item.pop("id", None)
+        self.assertEqual(data, returned_data)
+
     def test_delete_favorites(self):
+        # response = self.app.delete("/users/favorites/",
+        # json={"washroom_id": 0})
+        # self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
         pass
 
     def test_put_user_preferences(self):
