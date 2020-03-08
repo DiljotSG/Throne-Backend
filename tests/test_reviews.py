@@ -57,6 +57,15 @@ class TestReviewAPI(unittest.TestCase):
         response = self.app.put("/reviews/0", json=data)
         self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
 
+        returned_data = json.loads(response.data.decode())
+
+        data["upvote_count"] = 5
+        data["washroom_id"] = 0
+        returned_data.pop("created_at", None)
+        returned_data.pop("user", None)
+        returned_data.pop("id", None)
+        self.assertEqual(data, returned_data)
+
         response = self.app.put("/reviews/1", json=data)
         self.assertEqual(response.status_code, HttpCodes.HTTP_403_FORBIDDEN)
 
