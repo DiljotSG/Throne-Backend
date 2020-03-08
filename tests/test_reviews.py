@@ -47,23 +47,22 @@ class TestReviewAPI(unittest.TestCase):
     def test_put_reviews(self):
         data = {
             "comment": "yay",
-            "id": 0,
             "ratings": {
                 "cleanliness": 3.2,
                 "privacy": 1.2,
                 "smell": 2.7,
                 "toilet_paper_quality": 4.5
             },
-            "upvote_count": 5,
-            "user": {
-                "id": 0,
-                "profile_picture": "picture",
-                "username": "janesmith"
-            },
-            "washroom_id": 0
         }
         response = self.app.put("/reviews/0", json=data)
         self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
 
+        response = self.app.put("/reviews/1", json=data)
+        self.assertEqual(response.status_code, HttpCodes.HTTP_403_FORBIDDEN)
+
     def test_delete_reviews(self):
-        pass
+        response = self.app.delete("/reviews/0")
+        self.assertEqual(
+            response.status_code,
+            HttpCodes.HTTP_501_NOT_IMPLEMENTED
+        )
