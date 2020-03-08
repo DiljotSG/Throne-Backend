@@ -182,7 +182,7 @@ class TestUsersAPI(unittest.TestCase):
 
         returned_data = json.loads(response.data.decode())
 
-        data = [
+        expected_data = [
             {
                 'amenities': [
                     'air_dryer',
@@ -239,7 +239,7 @@ class TestUsersAPI(unittest.TestCase):
         for item in returned_data:
             item.pop("created_at", None)
             item.pop("id", None)
-        self.assertEqual(data, returned_data)
+        self.assertEqual(expected_data, returned_data)
 
     def test_delete_favorites(self):
         # response = self.app.delete("/users/favorites/",
