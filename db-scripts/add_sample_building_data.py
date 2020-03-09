@@ -47,11 +47,11 @@ w.add_washroom(
         u_centre["location"]["latitude"],
         u_centre["location"]["longitude"]
     ),
-    "University Centre Main Floor Washroom",
-    2,
-    "men",
-    2,
+    "In Front of Answers",
     1,
+    "men",
+    4,
+    4,
     amenity0,
     0,
     rating0
@@ -79,7 +79,7 @@ w.add_washroom(
         dafoe["location"]["latitude"],
         dafoe["location"]["longitude"]
     ),
-    "Elizabeth Dafoe Library Main Floor Washroom",
+    "Beside the Front Desk",
     2,
     "men",
     3,
