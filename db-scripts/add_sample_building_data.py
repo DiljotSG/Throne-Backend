@@ -48,10 +48,10 @@ w.add_washroom(
         u_centre["location"]["longitude"]
     ),
     "In Front of Answers",
-    2,
-    "men",
-    2,
     1,
+    "men",
+    4,
+    4,
     amenity0,
     0,
     rating0
