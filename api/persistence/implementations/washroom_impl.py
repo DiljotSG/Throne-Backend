@@ -1,12 +1,15 @@
-from . import get_sql_connection
 from datetime import datetime
+from typing import List, Optional
 
-from api.common import convert_to_mysql_timestamp, distance_between_locations
+from api.common import convert_to_mysql_timestamp
+from api.common import distance_between_locations
+from . import get_sql_connection
 from .amenity_impl import AmenitiesPersistence
 from .review_impl import ReviewsPersistence
+from ..interfaces.washroom_interface import IWashroomsPersistence
+from ...objects.amenity import Amenity
 from ...objects.location import Location
 from ...objects.washroom import Washroom
-from ..interfaces.washroom_interface import IWashroomsPersistence
 
 
 # The ordering of these indicies are determined by the order of properties
@@ -15,8 +18,8 @@ from ..interfaces.washroom_interface import IWashroomsPersistence
 def result_to_washroom(result):
     return Washroom(
         result[0], result[5], Location(result[3], result[4]),
-        result[1], result[7], result[6], result[2], result[9],
-        result[10], result[8]
+        result[1], result[7], result[6], result[8], result[9],
+        result[2], result[11], result[12], result[10], result[13]
     )
 
 
@@ -27,47 +30,53 @@ class WashroomsPersistence(IWashroomsPersistence):
 
     def add_washroom(
         self,
-        building_id,  # Foreign Key
-        location,
-        title,
-        floor,
-        gender,
-        amenities_id,  # Foreign Key
-        overall_rating,
-        average_ratings_id  # Foreign Key
-    ):
+        building_id: int,  # Foreign Key
+        location: Location,
+        comment: str,
+        floor: int,
+        gender: str,
+        urinal_count: int,
+        stall_count: int,
+        amenities_id: int,  # Foreign Key
+        overall_rating: float,
+        average_ratings_id: int  # Foreign Key
+    ) -> int:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
         insert_query = """
         INSERT INTO washrooms
-        (created, buildingID, latitude, longitude, title,
-         floor, gender, amenities, overallRating, avgRatingsID)
-        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+        (created, buildingID, latitude, longitude, comment,
+        floor, gender, urinalCount, stallCount, amenities,
+         overallRating, avgRatingsID, reviewCount)
+        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
         """
 
         find_query = "SELECT LAST_INSERT_ID()"
         insert_tuple = (
             convert_to_mysql_timestamp(datetime.now()), building_id,
-            location.latitude, location.longitude, title, floor, gender,
-            amenities_id, overall_rating, average_ratings_id
+            location.latitude, location.longitude, comment, floor, gender,
+            urinal_count, stall_count, amenities_id, overall_rating,
+            average_ratings_id, 0
         )
 
         # Insert and commit
         cursor.execute(insert_query, insert_tuple)
         cnx.commit()
 
-        # Get the ID of what we just inserted
+        # Get the ID of the thing that we just inserted
         cursor.execute(find_query)
-        return list(cursor)[0][0]
+        returnid = cursor.fetchall()[0][0]
+
+        return returnid
 
     def query_washrooms(
         self,
-        location,
-        radius,
-        max_washrooms,
-        desired_amenities
-    ):
+        location: Optional[Location],
+        radius: float,
+        max_washrooms: int,
+        desired_amenities: List[Amenity]
+    ) -> List[Washroom]:
         # I don't know of any way to do this complex formula in SQL, so
         # instead we're just grabbing ALL WASHROOMS AT ONCE and calculating
         # distance. It might seem inefficient but it's really not - we'd
@@ -78,7 +87,9 @@ class WashroomsPersistence(IWashroomsPersistence):
         find_query = "SELECT * FROM washrooms"
         cursor.execute(find_query)
 
-        results = list(cursor)
+        results = cursor.fetchall()
+        cnx.commit()
+
         results = [result_to_washroom(result) for result in results]
 
         if location is not None:
@@ -104,8 +115,8 @@ class WashroomsPersistence(IWashroomsPersistence):
 
     def get_washrooms_by_building(
         self,
-        building_id
-    ):
+        building_id: int
+    ) -> List[Washroom]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -113,33 +124,78 @@ class WashroomsPersistence(IWashroomsPersistence):
         find_tuple = (building_id,)
 
         cursor.execute(find_query, find_tuple)
+        results = cursor.fetchall()
+        cnx.commit()
 
-        results = list(cursor)
         results = [result_to_washroom(result) for result in results]
-
         return results
 
     def get_washroom(
         self,
-        washroom_id
-    ):
+        washroom_id: int
+    ) -> Optional[Washroom]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
         find_query = "SELECT * FROM washrooms WHERE id = %s"
         find_tuple = (washroom_id,)
         cursor.execute(find_query, find_tuple)
+        result = cursor.fetchall()
+        cnx.commit()
 
-        result = list(cursor)
         if len(result) != 1:
             return None
+
         result = result[0]
         return result_to_washroom(result)
 
+    def update_washroom(
+        self,
+        washroom_id: int,
+        comment: str,
+        location: Location,
+        floor: int,
+        gender: str,
+        urinal_count: int,
+        stall_count: int,
+        amenities_id: int,
+        overall_rating: float,
+        average_ratings_id: int,
+        review_count: int
+    ) -> Optional[Washroom]:
+        cnx = get_sql_connection()
+        cursor = cnx.cachedCursor
+
+        update_query = """
+        UPDATE washrooms
+        SET latitude = %s,
+        longitude = %s,
+        comment = %s,
+        floor = %s,
+        gender = %s,
+        urinalCount = %s,
+        stallCount = %s,
+        amenities = %s,
+        overallRating = %s,
+        avgRatingsID = %s,
+        reviewCount = %s
+        WHERE id = %s
+        """
+
+        update_tuple = (
+            location.latitude, location.longitude, comment, floor, gender,
+            urinal_count, stall_count, amenities_id, overall_rating,
+            average_ratings_id, review_count, washroom_id
+        )
+        cursor.execute(update_query, update_tuple)
+        cnx.commit()
+
+        return self.get_washroom(washroom_id)
+
     def remove_washroom(
         self,
-        washroom_id
-    ):
+        washroom_id: int
+    ) -> None:
         # Remove reviews, remove it from favorites, remove its amenities,
         # remove its avg ratings, then remove the washroom
         cnx = get_sql_connection()
@@ -154,10 +210,11 @@ class WashroomsPersistence(IWashroomsPersistence):
         query4 = "DELETE FROM ratings WHERE id = %s"
 
         cursor.execute(find_query, (washroom_id,))
-        result = result_to_washroom(list(cursor)[0])
+        result = result_to_washroom(cursor.fetchall()[0])
 
         cursor.execute(query0, (washroom_id,))
-        reviewList = list(cursor)
+        reviewList = cursor.fetchall()
+
         for review in reviewList:
             self.reviewsPersistence.remove_review(review[0])
 

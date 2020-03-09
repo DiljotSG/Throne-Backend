@@ -35,4 +35,10 @@ class TestReviewAPI(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         created_at = data.pop("created_at", None)
         self.assertNotEqual(created_at, None)
+
+        if "user" in data:
+            user = data["user"]
+            created_at_user = user.pop("created_at", None)
+            self.assertNotEqual(created_at_user, None)
+
         self.assertEqual(data, expected_data)

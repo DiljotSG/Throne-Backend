@@ -1,6 +1,8 @@
+from typing import Optional
+
 from . import get_sql_connection
-from ...db_objects.preference import Preference
 from ..interfaces.preference_interface import IPreferencesPersistence
+from ...objects.preference import Preference
 
 
 # The ordering of these indicies are determined by the order of properties
@@ -18,10 +20,10 @@ class PreferencesPersistence(IPreferencesPersistence):
 
     def add_preference(
         self,
-        gender,
-        wheelchair_accessible,
-        main_floor_access
-    ):
+        gender: str,
+        wheelchair_accessible: bool,
+        main_floor_access: bool
+    ) -> int:
         if len(gender) > 25:
             return -1
 
@@ -40,14 +42,42 @@ class PreferencesPersistence(IPreferencesPersistence):
         cursor.execute(insert_query, insert_tuple)
         cnx.commit()
 
-        # Get the ID of what we just inserted
+        # Get the ID of the thing that we just inserted
         cursor.execute(find_query)
-        return list(cursor)[0][0]
+        returnid = cursor.fetchall()[0][0]
+
+        return returnid
+
+    def update_preference(
+        self,
+        preference_id: int,
+        gender: str,
+        wheelchair_accessible: bool,
+        main_floor_access: bool
+    ) -> Optional[Preference]:
+        cnx = get_sql_connection()
+        cursor = cnx.cachedCursor
+
+        update_query = """
+        UPDATE preferences
+        SET gender = %s,
+        wheelchairAccess = %s,
+        mainFloorAccess = %s
+        WHERE id = %s
+        """
+
+        update_tuple = (
+            gender, wheelchair_accessible, main_floor_access, preference_id
+        )
+        cursor.execute(update_query, update_tuple)
+        cnx.commit()
+
+        return self.get_preference(preference_id)
 
     def get_preference(
         self,
-        preference_id
-    ):
+        preference_id: int
+    ) -> Optional[Preference]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -55,8 +85,9 @@ class PreferencesPersistence(IPreferencesPersistence):
 
         find_tuple = (preference_id,)
         cursor.execute(find_query, find_tuple)
+        result = cursor.fetchall()
+        cnx.commit()
 
-        result = list(cursor)
         if len(result) != 1:
             return None
 
@@ -65,8 +96,8 @@ class PreferencesPersistence(IPreferencesPersistence):
 
     def remove_preference(
         self,
-        preference_id
-    ):
+        preference_id: int
+    ) -> None:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 

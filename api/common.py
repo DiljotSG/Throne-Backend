@@ -1,16 +1,25 @@
 import datetime
-from flask import request
-from flask import jsonify
-from jsonschema import validate
-from jsonschema import ValidationError
+import os
 from math import sin, cos, sqrt, atan2, radians
+from typing import Optional
 
-OK = 200
-BAD_REQUEST = 400
+from flask import jsonify
+from flask import request
+from jsonschema import ValidationError
+from jsonschema import validate
+
+from api.objects.location import Location
+from .response_codes import HttpCodes
+
 TIMESTAMP_FORMAT = '%Y-%m-%d %H:%M:%S'
 
 
-def is_valid_schema(obj, schema):
+def should_use_db():
+    return (os.environ.get("IS_LAMBDA") or os.environ.get("THRONE_USE_DB"))\
+        and not (os.environ.get("THRONE_NO_DB_CREDS"))
+
+
+def is_valid_schema(obj, schema: dict) -> bool:
     result = True
     try:
         validate(instance=obj, schema=schema)
@@ -19,8 +28,8 @@ def is_valid_schema(obj, schema):
     return result
 
 
-def get_cognito_user():
-    # Get the name of the currently authenticated Cognito user
+# Get the name of the currently authenticated Cognito user
+def get_cognito_user() -> Optional[str]:
     event = request.environ.get("serverless.event", "no event")
 
     schema = {
@@ -48,22 +57,38 @@ def get_cognito_user():
     return username
 
 
-def return_as_json(data):
+def return_error(
+    code: int = HttpCodes.HTTP_400_BAD_REQUEST,
+    message: str = "Invalid Request"
+):
+    message = str({"Error": message})
+    return jsonify(message), code
+
+
+def return_as_json(data, code=HttpCodes.HTTP_200_OK):
     result = data
-    code = OK
 
     # If our data is non-existant, this is a bad request.
     if data is None:
-        result = {
-            "Error": "Invalid Request"
-        }
-        code = BAD_REQUEST
+        return return_error()
 
     return jsonify(result), code
 
 
+def return_not_found():
+    return "", HttpCodes.HTTP_404_NOT_FOUND
+
+
+def return_no_content():
+    return "", HttpCodes.HTTP_204_NO_CONTENT
+
+
+def return_not_implemented():
+    return "", HttpCodes.HTTP_501_NOT_IMPLEMENTED
+
+
 # Returns distance in kilometers
-def distance_between_locations(loc1, loc2):
+def distance_between_locations(loc1: Location, loc2: Location) -> float:
     radius = 6371
     lat1 = radians(loc1.latitude)
     lat2 = radians(loc2.latitude)
@@ -77,5 +102,10 @@ def distance_between_locations(loc1, loc2):
     return radius * c
 
 
-def convert_to_mysql_timestamp(timestamp: datetime):
+def convert_to_mysql_timestamp(timestamp: datetime.date):
     return timestamp.strftime(TIMESTAMP_FORMAT)
+
+
+def verify_gender(gender: str) -> bool:
+    gender = gender.lower()
+    return gender == "women" or gender == "men" or gender == "all"

@@ -1,10 +1,13 @@
-from . import get_sql_connection
 from datetime import datetime
+from typing import List, Optional
 
-from api.common import convert_to_mysql_timestamp, distance_between_locations
+from api.common import convert_to_mysql_timestamp
+from api.common import distance_between_locations
+from . import get_sql_connection
 from .washroom_impl import WashroomsPersistence
-from ...objects.building import Building
 from ..interfaces.building_interface import IBuildingsPersistence
+from ...objects.amenity import Amenity
+from ...objects.building import Building
 from ...objects.location import Location
 
 
@@ -14,7 +17,7 @@ from ...objects.location import Location
 def _result_to_building(result):
     return Building(
         result[0], Location(result[2], result[3]), result[4], result[5],
-        result[1], result[6], result[7]
+        result[1], result[6], result[7], result[8]
     )
 
 
@@ -24,44 +27,46 @@ class BuildingsPersistence(IBuildingsPersistence):
 
     def add_building(
         self,
-        location,
-        title,
-        map_service_id,
-        overall_rating,
-        best_rating_id,
-    ):
+        location: Location,
+        title: str,
+        map_service_id: int,
+        overall_rating: float,
+        best_rating_id: int
+    ) -> int:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
         insert_query = """
         INSERT INTO buildings
         (created, latitude, longitude, title,
-         mapServiceID, overallRating, bestRatingID)
-        VALUES (%s,%s,%s,%s,%s,%s,%s)
+         mapServiceID, overallRating, bestRatingID, washroomCount)
+        VALUES (%s,%s,%s,%s,%s,%s,%s,%s)
         """
 
         find_query = "SELECT LAST_INSERT_ID()"
         insert_tuple = (
             convert_to_mysql_timestamp(datetime.now()), location.latitude,
             location.longitude, title, map_service_id,
-            overall_rating, best_rating_id
+            overall_rating, best_rating_id, 0
         )
 
         # Insert and commit
         cursor.execute(insert_query, insert_tuple)
         cnx.commit()
 
-        # Get the ID of what we just inserted
+        # Get the ID of the thing that we just inserted
         cursor.execute(find_query)
-        return list(cursor)[0][0]
+        returnid = cursor.fetchall()[0][0]
+
+        return returnid
 
     def query_buildings(
         self,
-        location,
-        radius,
-        max_buildings,
-        desired_amenities
-    ):
+        location: Optional[Location],
+        radius: float,
+        max_buildings: int,
+        desired_amenities: List[Amenity]
+    ) -> List[Building]:
         # TODO: Take into account amenities
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
@@ -69,7 +74,9 @@ class BuildingsPersistence(IBuildingsPersistence):
         find_query = "SELECT * FROM buildings"
         cursor.execute(find_query)
 
-        results = list(cursor)
+        results = cursor.fetchall()
+        cnx.commit()
+
         results = [_result_to_building(result) for result in results]
 
         if location is not None:
@@ -84,8 +91,8 @@ class BuildingsPersistence(IBuildingsPersistence):
 
     def get_building(
         self,
-        building_id
-    ):
+        building_id: int
+    ) -> Optional[Building]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -93,16 +100,52 @@ class BuildingsPersistence(IBuildingsPersistence):
         find_tuple = (building_id,)
         cursor.execute(find_query, find_tuple)
 
-        result = list(cursor)
+        result = cursor.fetchall()
+        cnx.commit()
+
         if len(result) != 1:
             return None
         result = result[0]
         return _result_to_building(result)
 
+    def update_building(
+        self,
+        building_id: int,
+        location: Location,
+        title: str,
+        maps_service_id: int,
+        overall_rating: float,
+        best_ratings_id: int,
+        washroom_count: int
+    ) -> Optional[Building]:
+        cnx = get_sql_connection()
+        cursor = cnx.cachedCursor
+
+        update_query = """
+        UPDATE buildings
+        SET latitude = %s,
+        longitude = %s,
+        title = %s,
+        mapServiceID = %s,
+        overallRating = %s,
+        bestRatingID = %s,
+        washroomCount = %s
+        WHERE id = %s
+        """
+
+        update_tuple = (
+            location.latitude, location.longitude, title, maps_service_id,
+            overall_rating, best_ratings_id, washroom_count, building_id
+        )
+        cursor.execute(update_query, update_tuple)
+        cnx.commit()
+
+        return self.get_building(building_id)
+
     def remove_building(
         self,
-        building_id
-    ):
+        building_id: int
+    ) -> None:
         # Remove all the washrooms, remove the buliding, remove the rating
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
@@ -113,14 +156,14 @@ class BuildingsPersistence(IBuildingsPersistence):
         query2 = "DELETE FROM ratings WHERE id = %s"
 
         cursor.execute(find_query, (building_id,))
-        result = _result_to_building(list(cursor)[0])
+        result = _result_to_building(cursor.fetchall()[0])
 
         cursor.execute(query0, (building_id,))
-        washroomIDs = list(cursor)
+        washroomIDs = cursor.fetchall()
 
         for id in washroomIDs:
             self.washroomPersistence.remove_washroom(id[0])
 
         cursor.execute(query1, (building_id,))
-        cursor.execute(query2, (result.best_rating_id,))
+        cursor.execute(query2, (result.best_ratings_id,))
         cnx.commit()

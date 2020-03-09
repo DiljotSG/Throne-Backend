@@ -1,0 +1,1245 @@
+{
+   "buildings":[
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.81175283478262,
+            "longitude":-97.13582459565218
+         },
+         "title":"Wallace Building",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":54724739,
+         "id":1,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80936430454545,
+            "longitude":-97.13449657272726
+         },
+         "title":"University Centre",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":54724743,
+         "id":2,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80908316153846,
+            "longitude":-97.13559771923077
+         },
+         "title":"Helen Glass Centre for Nursing",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":54724744,
+         "id":3,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.809030691428575,
+            "longitude":-97.13957907428573
+         },
+         "title":"Investors Group Athletic Centre",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":54724745,
+         "id":4,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.81125709999999,
+            "longitude":-97.13450660000001
+         },
+         "title":"Parker",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":54724746,
+         "id":5,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.810700999999995,
+            "longitude":-97.13462455
+         },
+         "title":"Allen",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":54724747,
+         "id":6,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.810212119999996,
+            "longitude":-97.13474162
+         },
+         "title":"Biological Sciences",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":54724749,
+         "id":7,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.809567774999984,
+            "longitude":-97.13273808888887
+         },
+         "title":"Administration",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":54724750,
+         "id":8,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.81107248000001,
+            "longitude":-97.13251874
+         },
+         "title":"Duff Roblin",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":54724751,
+         "id":9,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.8102021724138,
+            "longitude":-97.13144213103448
+         },
+         "title":"Elizabeth Dafoe Library",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":54724752,
+         "id":10,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.807977677777785,
+            "longitude":-97.13400454444444
+         },
+         "title":"McMath",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60355306,
+         "id":11,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80744234444444,
+            "longitude":-97.13859680555557
+         },
+         "title":"Extended Education Complex",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60355307,
+         "id":12,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80783930526316,
+            "longitude":-97.13649416315789
+         },
+         "title":"Faculty of Architecture: Architecture 2 Building",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60355308,
+         "id":13,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80703248333333,
+            "longitude":-97.13838286666667
+         },
+         "title":"Frank Kennedy Physical Education Centre",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60355315,
+         "id":14,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80759353333333,
+            "longitude":-97.13482986666668
+         },
+         "title":"Centre for Architectural Structures and Technology (CAST)",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60355317,
+         "id":15,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80949811666667,
+            "longitude":-97.13586670416667
+         },
+         "title":"Parkade",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60415084,
+         "id":16,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.81104704,
+            "longitude":-97.13367994000001
+         },
+         "title":"Armes",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60415089,
+         "id":17,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.811268087500004,
+            "longitude":-97.13331213750001
+         },
+         "title":"Machray Hall",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60415090,
+         "id":18,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.81050793142857,
+            "longitude":-97.13346128571428
+         },
+         "title":"Buller",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60415091,
+         "id":19,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.81078078888889,
+            "longitude":-97.13212888148146
+         },
+         "title":"Human Ecology",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60415095,
+         "id":20,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.8119245117647,
+            "longitude":-97.13062316470588
+         },
+         "title":"Robson Hall",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60428225,
+         "id":21,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.807490752941185,
+            "longitude":-97.13119474411765
+         },
+         "title":"Pembina Hall",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60441048,
+         "id":22,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80734032000001,
+            "longitude":-97.13398260000001
+         },
+         "title":"Agricultural Engineering",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60441049,
+         "id":23,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80761911111111,
+            "longitude":-97.13330073333333
+         },
+         "title":"Dairy Science",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60441057,
+         "id":24,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.8055183,
+            "longitude":-97.136079225
+         },
+         "title":"Soil Science equipment shed",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60460578,
+         "id":25,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.806058325,
+            "longitude":-97.13657744166669
+         },
+         "title":"T.K. Cheung Centre",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60460580,
+         "id":26,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.8052590875,
+            "longitude":-97.1348943375
+         },
+         "title":"Music Annex",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60460584,
+         "id":27,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.809241549999996,
+            "longitude":-97.12694525
+         },
+         "title":"Plant Science field station",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60460587,
+         "id":28,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80485736666666,
+            "longitude":-97.13676455
+         },
+         "title":"Ellis",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60460588,
+         "id":29,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.807035883333334,
+            "longitude":-97.13159692500001
+         },
+         "title":"Mary Speechly Hall",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60460589,
+         "id":30,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80726631111111,
+            "longitude":-97.13590785555556
+         },
+         "title":"Marcel A. Desautels Faculty of Music",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60460596,
+         "id":32,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.805841421052634,
+            "longitude":-97.13314984210525
+         },
+         "title":"Physical Plant/Energy Management",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60460597,
+         "id":33,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80670793870968,
+            "longitude":-97.13529353225807
+         },
+         "title":"Agriculture",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60460601,
+         "id":34,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.805593571428574,
+            "longitude":-97.13394364285713
+         },
+         "title":"Stores",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60460602,
+         "id":35,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.808900439999995,
+            "longitude":-97.12942923333331
+         },
+         "title":"Crop Technology Centre",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60460604,
+         "id":36,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80811713617022,
+            "longitude":-97.13011195957449
+         },
+         "title":"Drake Centre",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60460606,
+         "id":37,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.81047952045455,
+            "longitude":-97.13665422499999
+         },
+         "title":"St. John’s College",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60470989,
+         "id":38,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.8107247,
+            "longitude":-97.13586658333332
+         },
+         "title":"St. John’s College Residence",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60470993,
+         "id":39,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.81031013636363,
+            "longitude":-97.14131968181817
+         },
+         "title":"Campus Daycare Centre",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60613852,
+         "id":40,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.808709590909096,
+            "longitude":-97.13688117272729
+         },
+         "title":"Education",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60613858,
+         "id":41,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80998658,
+            "longitude":-97.13452799999999
+         },
+         "title":"FitzGerald",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60613867,
+         "id":42,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.811644535999996,
+            "longitude":-97.13302675600002
+         },
+         "title":"Chancellor's Hall",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60613899,
+         "id":43,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.807146485714284,
+            "longitude":-97.1339170142857
+         },
+         "title":"CWB Grain Research",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":60614656,
+         "id":44,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.808329760869555,
+            "longitude":-97.13337147826087
+         },
+         "title":"Engineering and Information Technology Complex-E1",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":97287463,
+         "id":45,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.8087261425532,
+            "longitude":-97.1338326787234
+         },
+         "title":"Engineering and Information Technology Complex-E2",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":97287465,
+         "id":46,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.808465768421044,
+            "longitude":-97.13439952105263
+         },
+         "title":"Engineering and Information Technology Complex-E3",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":97287467,
+         "id":47,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80937036,
+            "longitude":-97.13069720000001
+         },
+         "title":"Isbister",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":105917820,
+         "id":49,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80834501842105,
+            "longitude":-97.13769548684206
+         },
+         "title":"Migizii Agamik",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":105921090,
+         "id":50,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.808318716,
+            "longitude":-97.139304124
+         },
+         "title":"Max Bell Centre",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":105921924,
+         "id":51,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80671942499999,
+            "longitude":-97.132760985
+         },
+         "title":"Central Energy Plant",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":105925195,
+         "id":52,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80736090312499,
+            "longitude":-97.132963475
+         },
+         "title":"Arthur V. Mauro Student Residence",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":105925211,
+         "id":53,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80494258571427,
+            "longitude":-97.1394481732143
+         },
+         "title":"Freshwater Institute",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":105926327,
+         "id":54,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.806456540000006,
+            "longitude":-97.13679521000002
+         },
+         "title":"Agriculture Lecture Block",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":105953463,
+         "id":55,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.8074108,
+            "longitude":-97.13361413636363
+         },
+         "title":"W. R. McQuade Structures Laboratory",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":105953866,
+         "id":56,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.8091833888889,
+            "longitude":-97.13094417499997
+         },
+         "title":"Tier",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":105956220,
+         "id":57,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.8095929,
+            "longitude":-97.12582327499999
+         },
+         "title":"Vegetable Storage",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":105957298,
+         "id":58,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80979934444446,
+            "longitude":-97.13145915000001
+         },
+         "title":"Fletcher Argue",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":105957302,
+         "id":59,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80985661666666,
+            "longitude":-97.13475946666667
+         },
+         "title":"Fine Arts Annex",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":108041988,
+         "id":60,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.81076573636364,
+            "longitude":-97.1335493181818
+         },
+         "title":"Energy Research",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":134833909,
+         "id":61,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.81019343571428,
+            "longitude":-97.13857395714287
+         },
+         "title":"Sinnott",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":134833913,
+         "id":62,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.8085611,
+            "longitude":-97.13024406666666
+         },
+         "title":"ARTlab",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":149778600,
+         "id":63,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.810148037037024,
+            "longitude":-97.13772358148147
+         },
+         "title":"St. Paul's College",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":203520527,
+         "id":64,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.811327537500006,
+            "longitude":-97.13134337499999
+         },
+         "title":"University College",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":203530069,
+         "id":65,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.810957325,
+            "longitude":-97.13649005833334
+         },
+         "title":"St. John’s College Chapel",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":203533091,
+         "id":67,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.806380600000004,
+            "longitude":-97.13457500454543
+         },
+         "title":"Art Barn",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":203537077,
+         "id":68,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80810105486725,
+            "longitude":-97.13160266548667
+         },
+         "title":"Taché Hall",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":203537811,
+         "id":69,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.806116105882346,
+            "longitude":-97.13443108823529
+         },
+         "title":"Ceramics and Sculpture",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":308650391,
+         "id":70,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80659611333333,
+            "longitude":-97.13828636
+         },
+         "title":"Active Living Centre",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":312714173,
+         "id":72,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.80591038125,
+            "longitude":-97.13751793124999
+         },
+         "title":"Animal Science/Entomology",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":1508150,
+         "id":75,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.808042226315784,
+            "longitude":-97.13542747368422
+         },
+         "title":"Faculty of Architecture: John A. Russell Building",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":1508247,
+         "id":76,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.81081539615385,
+            "longitude":-97.14072992692307
+         },
+         "title":"St. Andrew’s College",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":4139226,
+         "id":77,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.811427929411764,
+            "longitude":-97.13029728235293
+         },
+         "title":"University College Residence",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":6684833,
+         "id":78,
+         "overall_rating":0
+      },
+      {
+         "amenities":[
+
+         ],
+         "location":{
+            "latitude":49.8061609,
+            "longitude":-97.1396003
+         },
+         "title":"Welcome Centre",
+         "best_ratings":[
+
+         ],
+         "created_at":"2020-02-22T19:28:41+00:00",
+         "maps_service_id":1217828805,
+         "id":80,
+         "overall_rating":0
+      }
+   ]
+}

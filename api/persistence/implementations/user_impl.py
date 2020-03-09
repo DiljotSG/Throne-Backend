@@ -1,11 +1,12 @@
-from . import get_sql_connection
 from datetime import datetime
+from typing import Optional
 
 from api.common import convert_to_mysql_timestamp
+from . import get_sql_connection
 from .favorite_impl import FavoritesPersistence
 from .review_impl import ReviewsPersistence
-from ...objects.user import User
 from ..interfaces.user_interface import IUsersPersistence
+from ...objects.user import User
 
 
 # The ordering of these indicies are determined by the order of properties
@@ -24,10 +25,10 @@ class UsersPersistence(IUsersPersistence):
 
     def add_user(
         self,
-        username,
-        profile_pic,
-        preference_id  # Foreign key
-    ):
+        username: str,
+        profile_pic: str,
+        preference_id: int  # Foreign key
+    ) -> int:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -44,31 +45,54 @@ class UsersPersistence(IUsersPersistence):
         cursor.execute(insert_query, insert_tuple)
         cnx.commit()
 
-        # Get the ID of what we just inserted
+        # Get the ID of the thing that we just inserted
         cursor.execute(find_query)
-        return list(cursor)[0][0]
+        returnid = cursor.fetchall()[0][0]
+
+        return returnid
 
     def get_user(
         self,
-        user_id
-    ):
+        user_id: int
+    ) -> Optional[User]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
         find_query = "SELECT * FROM users WHERE id = %s"
         find_tuple = (user_id,)
         cursor.execute(find_query, find_tuple)
+        result = cursor.fetchall()
+        cnx.commit()
 
-        result = list(cursor)
         if len(result) != 1:
             return None
 
         result = result[0]
         return _result_to_user(result)
 
+    def get_id_by_username(
+        self,
+        username: str
+    ) -> Optional[int]:
+        cnx = get_sql_connection()
+        cursor = cnx.cachedCursor
+
+        find_query = "SELECT id FROM users WHERE username = %s LIMIT 1"
+        find_tuple = (username,)
+        cursor.execute(find_query, find_tuple)
+
+        result = cursor.fetchall()
+        cnx.commit()
+
+        if len(result) != 1:
+            return None
+
+        result = result[0]
+        return result[0]
+
     def remove_user(
         self,
-        user_id
-    ):
+        user_id: int
+    ) -> None:
         # Removing users is not MVP
         pass

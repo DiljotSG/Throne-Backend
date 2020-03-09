@@ -14,12 +14,13 @@ class TestBuildingsAPI(unittest.TestCase):
 
     def test_root(self):
         response = self.app.get(
-            "/buildings?location=12",
-            follow_redirects=True)
+            "/buildings",
+            follow_redirects=True
+        )
         data = json.loads(response.data.decode())
         expected_data = [
             {
-                "best_rating": {
+                "best_ratings": {
                     "cleanliness": 3.2,
                     "privacy": 1.2,
                     "smell": 2.7,
@@ -32,10 +33,15 @@ class TestBuildingsAPI(unittest.TestCase):
                 },
                 "maps_service_id": 0,
                 "overall_rating": 4,
-                "title": "Engineering"
+                "title": "Engineering",
+                "washroom_count": 0
+                # This is 0 because we add to stubs directly using the stub
+                # The logic for updating washroom count is in the store
+                # New washrooms will adjust this count, but it won't include
+                # The original washrooms added through the stub init file.
             },
             {
-                "best_rating": {
+                "best_ratings": {
                     "cleanliness": 2.2,
                     "privacy": 4.2,
                     "smell": 2.8,
@@ -48,9 +54,15 @@ class TestBuildingsAPI(unittest.TestCase):
                 },
                 "maps_service_id": 1,
                 "overall_rating": 3,
-                "title": "Science"
+                "title": "Science",
+                "washroom_count": 0
+                # This is 0 because we add to stubs directly using the stub
+                # The logic for updating washroom count is in the store
+                # New washrooms will adjust this count, but it won't include
+                # The original washrooms added through the stub init file.
             }
         ]
+
         self.assertEqual(response.status_code, 200)
         created_at = data[0].pop("created_at", None)
         self.assertNotEqual(created_at, None)
@@ -62,7 +74,7 @@ class TestBuildingsAPI(unittest.TestCase):
         response = self.app.get("/buildings/1")
         data = json.loads(response.data.decode())
         expected_data = {
-            "best_rating": {
+            "best_ratings": {
                 "cleanliness": 2.2,
                 "privacy": 4.2,
                 "smell": 2.8,
@@ -75,7 +87,8 @@ class TestBuildingsAPI(unittest.TestCase):
             },
             "maps_service_id": 1,
             "overall_rating": 3,
-            "title": "Science"
+            "title": "Science",
+            "washroom_count": 0
         }
         self.assertEqual(response.status_code, 200)
         created_at = data.pop("created_at", None)
@@ -88,8 +101,8 @@ class TestBuildingsAPI(unittest.TestCase):
         expected_data = [
                 {
                     "amenities": [
-                        "Contraception",
-                        "Lotion"
+                        "contraception",
+                        "lotion"
                     ],
                     "average_ratings": {
                         "cleanliness": 2.2,
@@ -97,16 +110,25 @@ class TestBuildingsAPI(unittest.TestCase):
                         "smell": 2.8,
                         "toilet_paper_quality": 4.2
                     },
+                    "building_title": "Science",
                     "building_id": 1,
                     "floor": 1,
                     "gender": "men",
+                    "urinal_count": 3,
+                    "stall_count": 4,
                     "id": 2,
+                    'is_favorite': False,
+                    "review_count": 0,
+                    # This is 0 because we add to stubs directly using the stub
+                    # The logic for updating review count is in the store
+                    # New reviews will adjust this count, but it won't include
+                    # The original reviews added through the stub init file.
                     "location": {
                         "latitude": 114,
                         "longitude": 200.5
                     },
                     "overall_rating": 3,
-                    "title": "Science 1"
+                    "comment": "Science 1"
                 }
             ]
         self.assertEqual(response.status_code, 200)

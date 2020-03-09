@@ -1,8 +1,10 @@
-from . import get_sql_connection
 from datetime import datetime
-from ...objects.review import Review
-from ..interfaces.review_interface import IReviewsPersistence
+from typing import List, Optional
+
 from api.common import convert_to_mysql_timestamp
+from . import get_sql_connection
+from ..interfaces.review_interface import IReviewsPersistence
+from ...objects.review import Review
 
 
 # The ordering of these indicies are determined by the order of properties
@@ -21,12 +23,12 @@ class ReviewsPersistence(IReviewsPersistence):
 
     def add_review(
         self,
-        washroom_id,  # Foreign Key
-        user_id,  # Foreign Key
-        rating_id,  # Foreign Key
-        comment,
-        upvote_count,
-    ):
+        washroom_id: int,  # Foreign Key
+        user_id: int,  # Foreign Key
+        rating_id: int,  # Foreign Key
+        comment: str,
+        upvote_count: int
+    ) -> int:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -46,22 +48,55 @@ class ReviewsPersistence(IReviewsPersistence):
         cursor.execute(insert_query, insert_tuple)
         cnx.commit()
 
-        # Get the ID of what we just inserted
+        # Get the ID of the thing that we just inserted
         cursor.execute(find_query)
-        return list(cursor)[0][0]
+        returnid = cursor.fetchall()[0][0]
+
+        return returnid
+
+    def update_review(
+        self,
+        review_id: int,
+        washroom_id: int,  # Foreign Key
+        user_id: int,  # Foreign Key
+        rating_id: int,  # Foreign Key
+        comment: str,
+        upvote_count: int
+    ) -> Optional[Review]:
+        cnx = get_sql_connection()
+        cursor = cnx.cachedCursor
+
+        update_query = """
+        UPDATE reviews
+        SET washroomID = %s,
+        user = %s,
+        ratingID = %s,
+        comment = %s,
+        upvoteCount = %s
+        WHERE id = %s
+        """
+
+        update_tuple = (
+            washroom_id, user_id, rating_id, comment, upvote_count, review_id
+        )
+        cursor.execute(update_query, update_tuple)
+        cnx.commit()
+
+        return self.get_review(review_id)
 
     def get_review(
         self,
-        review_id
-    ):
+        review_id: int
+    ) -> Optional[Review]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
         find_query = "SELECT * FROM reviews WHERE id = %s"
         find_tuple = (review_id,)
         cursor.execute(find_query, find_tuple)
+        result = cursor.fetchall()
+        cnx.commit()
 
-        result = list(cursor)
         if len(result) != 1:
             return None
 
@@ -70,8 +105,8 @@ class ReviewsPersistence(IReviewsPersistence):
 
     def get_reviews_by_user(
         self,
-        user_id  # Foreign Key
-    ):
+        user_id: int  # Foreign Key
+    ) -> List[Review]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -79,13 +114,15 @@ class ReviewsPersistence(IReviewsPersistence):
         find_tuple = (user_id,)
         cursor.execute(find_query, find_tuple)
 
-        reviews = list(cursor)
+        reviews = cursor.fetchall()
+        cnx.commit()
+
         return [_result_to_review(result) for result in reviews]
 
     def get_reviews_by_washroom(
         self,
-        washroom_id  # Foreign Key
-    ):
+        washroom_id: int  # Foreign Key
+    ) -> List[Review]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -93,7 +130,9 @@ class ReviewsPersistence(IReviewsPersistence):
         find_tuple = (washroom_id,)
         cursor.execute(find_query, find_tuple)
 
-        reviews = list(cursor)
+        reviews = cursor.fetchall()
+        cnx.commit()
+
         return [_result_to_review(result) for result in reviews]
 
     def remove_reviews_by_washroom(
@@ -116,8 +155,8 @@ class ReviewsPersistence(IReviewsPersistence):
     # TODO: Check that foreign keys are removed properly
     def remove_review(
         self,
-        review_id
-    ):
+        review_id: int
+    ) -> None:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -127,7 +166,7 @@ class ReviewsPersistence(IReviewsPersistence):
         query_tuple = (review_id,)
 
         cursor.execute(find_query, query_tuple)
-        ratingID = list(cursor)[0][0]
+        ratingID = cursor.fetchall()[0][0]
         remove_rating_tuple = (ratingID,)
 
         cursor.execute(remove_review_query, query_tuple)

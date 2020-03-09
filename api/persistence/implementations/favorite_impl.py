@@ -1,6 +1,8 @@
+from typing import Optional, List
+
 from . import get_sql_connection
-from api.db_objects.favorite import Favorite
 from ..interfaces.favorite_interface import IFavoritesPersistence
+from ...objects.favorite import Favorite
 
 
 # The ordering of these indicies are determined by the order of properties
@@ -18,9 +20,9 @@ class FavoritesPersistence(IFavoritesPersistence):
 
     def add_favorite(
         self,
-        user_id,  # Foreign Key
-        washroom_id  # Foreign Key
-    ):
+        user_id: int,  # Foreign Key
+        washroom_id: int  # Foreign Key
+    ) -> int:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -36,31 +38,35 @@ class FavoritesPersistence(IFavoritesPersistence):
         cursor.execute(insert_query, insert_tuple)
         cnx.commit()
 
-        # Get the ID of what we just inserted
+        # Get the ID of the thing that we just inserted
         cursor.execute(find_query)
-        return list(cursor)[0][0]
+        returnid = cursor.fetchall()[0][0]
+
+        return returnid
 
     def get_favorite(
         self,
-        favorite_id
-    ):
+        favorite_id: int
+    ) -> Optional[Favorite]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
         find_query = "SELECT * FROM favorites WHERE id = %s"
         find_tuple = (favorite_id,)
         cursor.execute(find_query, find_tuple)
+        result = cursor.fetchall()
+        cnx.commit()
 
-        result = list(cursor)
         if len(result) != 1:
             return None
+
         result = result[0]
         return _result_to_favorite(result)
 
     def get_favorites_by_user(
         self,
-        user_id  # Foreign Key
-    ):
+        user_id: int  # Foreign Key
+    ) -> List[Favorite]:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -68,15 +74,15 @@ class FavoritesPersistence(IFavoritesPersistence):
         find_tuple = (user_id,)
 
         cursor.execute(find_query, find_tuple)
-
-        results = list(cursor)
+        results = cursor.fetchall()
+        cnx.commit()
 
         return [_result_to_favorite(result) for result in results]
 
     def remove_favorite(
         self,
-        favorite_id
-    ):
+        favorite_id: int
+    ) -> None:
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 

@@ -15,12 +15,13 @@ class TestWashroomAPI(unittest.TestCase):
     def test_root(self):
         response = self.app.get(
             "/washrooms",
-            follow_redirects=True)
+            follow_redirects=True
+        )
         data = json.loads(response.data.decode())
         expected_data = {
             "amenities": [
-                "Air Dryer",
-                "Automatic Toilet"
+                "air_dryer",
+                "auto_toilet"
             ],
             "average_ratings": {
                 "cleanliness": 3.2,
@@ -29,15 +30,24 @@ class TestWashroomAPI(unittest.TestCase):
                 "toilet_paper_quality": 4.5
             },
             "building_id": 0,
+            "building_title": "Engineering",
             "floor": 1,
             "gender": "women",
+            "urinal_count": 0,
+            "stall_count": 4,
             "id": 0,
+            "is_favorite": True,
+            "review_count": 0,
+            # This is 0 because we add to stubs directly using the stub classes
+            # The logic for updating review count is in the store classes
+            # New reviews will adjust this count, but it won't include
+            # The original reviews added through the stub init file.
             "location": {
                 "latitude": 12.2,
                 "longitude": 17.9
             },
             "overall_rating": 4,
-            "title": "Engineering 1"
+            "comment": "Engineering 1"
         }
 
         self.assertEqual(response.status_code, 200)
@@ -50,8 +60,8 @@ class TestWashroomAPI(unittest.TestCase):
         data = json.loads(response.data.decode())
         expected_data = {
             "amenities": [
-                "Air Dryer",
-                "Automatic Toilet"
+                "air_dryer",
+                "auto_toilet"
             ],
             "average_ratings": {
                 "cleanliness": 3.2,
@@ -60,15 +70,24 @@ class TestWashroomAPI(unittest.TestCase):
                 "toilet_paper_quality": 4.5
             },
             "building_id": 0,
+            "building_title": "Engineering",
             "floor": 1,
             "gender": "women",
+            "urinal_count": 0,
+            "stall_count": 4,
             "id": 0,
+            "is_favorite": True,
+            "review_count": 0,
+            # This is 0 because we add to stubs directly using the stub classes
+            # The logic for updating review count is in the store classes
+            # New reviews will adjust this count, but it won't include
+            # The original reviews added through the stub init file.
             "location": {
                 "latitude": 12.2,
                 "longitude": 17.9
             },
             "overall_rating": 4,
-            "title": "Engineering 1"
+            "comment": "Engineering 1"
         }
         self.assertEqual(response.status_code, 200)
         data.pop("created_at", None)
@@ -98,4 +117,10 @@ class TestWashroomAPI(unittest.TestCase):
         ]
         self.assertEqual(response.status_code, 200)
         data[0].pop("created_at", None)
+
+        if "user" in data[0]:
+            user = data[0]["user"]
+            created_at_user = user.pop("created_at", None)
+            self.assertNotEqual(created_at_user, None)
+
         self.assertEqual(data, expected_data)

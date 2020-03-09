@@ -16,6 +16,7 @@ provider:
   runtime: python3.8
   stage: dev
   region: us-east-1
+  timeout: 10
   environment:
     IS_LAMBDA: true
     DB_HOSTNAME: "${opt:stage}-db.findmythrone.com"
@@ -24,6 +25,7 @@ provider:
 functions:
   api:
     handler: wsgi_handler.handler
+    reservedConcurrency: 60
     events:
       - http: 
           method: ANY 
@@ -34,19 +36,22 @@ functions:
           path: '{proxy+}'
           cors: true
 
-exclude:
-- "__pycache__/**"
-- ".vscode/**"
-- ".github/**"
-- ".git/**"
-- "venv/**"
-- "node_modules/**"
-- "db-scripts/**"
-- "tests/**"
-- ".gitignore"
-- ".env"
-- "docs/**"
-- requirements.txt
-- LICENSE
-- CODEOWNERS
-- README.md
+package:
+  exclude:
+  - "__pycache__/**"
+  - ".vscode/**"
+  - ".github/**"
+  - ".git/**"
+  - "venv/**"
+  - "node_modules/**"
+  - "db-scripts/**"
+  - "tests/**"
+  - ".gitignore"
+  - ".env"
+  - "docs/**"
+  - requirements.txt
+  - LICENSE
+  - CODEOWNERS
+  - README.md
+  - package.json
+  - package-lock.json
