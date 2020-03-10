@@ -13,7 +13,7 @@ class TestWashroomAPI(unittest.TestCase):
         self.app = app.test_client()
         self.assertEqual(app.debug, False)
 
-    def test_root(self):
+    def test_get_root(self):
         response = self.app.get(
             "/washrooms",
             follow_redirects=True

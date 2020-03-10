@@ -13,7 +13,7 @@ class TestUsersAPI(unittest.TestCase):
         self.app = app.test_client()
         self.assertEqual(app.debug, False)
 
-    def test_root(self):
+    def test_get_root(self):
         response = self.app.get(
             "/users",
             follow_redirects=True
@@ -151,31 +151,7 @@ class TestUsersAPI(unittest.TestCase):
 
     def test_post_user_favorites(self):
         data = {
-            "amenities": [
-                "air_dryer",
-                "auto_toilet"
-            ],
-            "average_ratings": {
-                "cleanliness": 3.2,
-                "privacy": 1.2,
-                "smell": 2.7,
-                "toilet_paper_quality": 4.5
-            },
-            "building_id": 0,
-            "building_title": "Engineering",
-            "comment": "Engineering 2",
-            "floor": 1,
-            "gender": "men",
             "id": 1,
-            "is_favorite": True,
-            "location": {
-                "latitude": 114,
-                "longitude": 200.5
-            },
-            "overall_rating": 3,
-            "review_count": 0,
-            "stall_count": 4,
-            "urinal_count": 3
         }
         response = self.app.post("/users/favorites/", json=data)
         self.assertEqual(response.status_code, HttpCodes.HTTP_201_CREATED)
