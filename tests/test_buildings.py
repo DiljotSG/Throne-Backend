@@ -71,7 +71,7 @@ class TestBuildingsAPI(unittest.TestCase):
         self.assertNotEqual(created_at, None)
         self.assertEqual(data, expected_data)
 
-    def test_by_id(self):
+    def test_get_by_id(self):
         response = self.app.get("/buildings/1")
         data = json.loads(response.data.decode())
         expected_data = {
@@ -96,7 +96,7 @@ class TestBuildingsAPI(unittest.TestCase):
         self.assertNotEqual(created_at, None)
         self.assertEqual(data, expected_data)
 
-    def test_washrooms(self):
+    def test_get_washrooms(self):
         response = self.app.get("/buildings/1/washrooms")
         data = json.loads(response.data.decode())
         expected_data = [

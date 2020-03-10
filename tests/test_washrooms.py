@@ -27,8 +27,8 @@ class TestWashroomAPI(unittest.TestCase):
             "average_ratings": {
                 "cleanliness": 3.2,
                 "privacy": 1.2,
-                "smell": 3.7,
-                "toilet_paper_quality": 1.5
+                "smell": 2.7,
+                "toilet_paper_quality": 4.5
             },
             "building_id": 0,
             "building_title": "Engineering",
@@ -38,7 +38,7 @@ class TestWashroomAPI(unittest.TestCase):
             "stall_count": 4,
             "id": 0,
             "is_favorite": True,
-            "review_count": 1,
+            "review_count": 0,
             # This is 0 because we add to stubs directly using the stub classes
             # The logic for updating review count is in the store classes
             # New reviews will adjust this count, but it won't include
@@ -47,10 +47,10 @@ class TestWashroomAPI(unittest.TestCase):
                 "latitude": 12.2,
                 "longitude": 17.9
             },
-            "overall_rating": 2.4000000000000004,
+            "overall_rating": 2.9000000000000004,
             "comment": "Engineering 1"
         }
-
+        self.maxDiff = None
         self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
         self.assertTrue(isinstance(data, list))
         data[0].pop("created_at", None)
@@ -147,3 +147,25 @@ class TestWashroomAPI(unittest.TestCase):
         returned_data.pop("user", None)
         returned_data.pop("id", None)
         self.assertEqual(data, returned_data)
+
+        # test review count increases
+        response = self.app.get("/washrooms/{}".format(data["washroom_id"]))
+        data = json.loads(response.data.decode())
+        self.assertEqual(data["review_count"], 1)
+
+    def test_post_reviews_error(self):
+        data = {
+            "comment": "testing",
+            "ratings": {
+                "cleanliness": 3.2,
+                "privacy": 1.2,
+                "smell": 3.7,
+                "toilet_paper_quality": 1.5
+            }
+        }
+
+        response = self.app.post("/washrooms/10/reviews/", json=data)
+        self.assertEqual(
+            response.status_code,
+            HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY
+        )

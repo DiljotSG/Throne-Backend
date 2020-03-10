@@ -117,7 +117,7 @@ def delete_user_favorites():
 
 @mod.route("/preferences", methods=["PUT"])
 @cross_origin()
-def get_preferences():
+def update_preferences():
     result = None
 
     # Don't accept garbage input

@@ -217,11 +217,12 @@ class TestUsersAPI(unittest.TestCase):
             item.pop("id", None)
         self.assertEqual(expected_data, returned_data)
 
-    def test_delete_favorites(self):
-        # response = self.app.delete("/users/favorites/",
-        # json={"washroom_id": 0})
-        # self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
-        pass
+    def test_delete_favorite_error(self):
+        response = self.app.delete(
+            "/users/favorites/",
+            json={"washroom_id": 1}
+        )
+        self.assertEqual(response.status_code, HttpCodes.HTTP_404_NOT_FOUND)
 
     def test_put_user_preferences(self):
         data = {
@@ -231,3 +232,11 @@ class TestUsersAPI(unittest.TestCase):
         }
         response = self.app.put("/users/preferences/", json=data)
         self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
+
+    def test_put_user_preferences_error(self):
+        data = {
+            "hi": "diljot",
+            "hello": "james",
+        }
+        response = self.app.put("/users/preferences/", json=data)
+        self.assertEqual(response.status_code, HttpCodes.HTTP_400_BAD_REQUEST)
