@@ -60,11 +60,6 @@ class ReviewStore:
         if building is None:
             raise ThroneValidationException("Invalid building")
 
-        if not len(comment) > 0:
-            raise ThroneValidationException(
-                "Comment cannot be an empty string"
-            )
-
         if not Rating.verify(
             cleanliness,
             privacy,

@@ -129,7 +129,7 @@ class TestWashroomAPI(unittest.TestCase):
 
     def test_post_reviews(self):
         data = {
-            "comment": "testing",
+            "comment": "yay",
             "ratings": {
                 "cleanliness": 3.2,
                 "privacy": 1.2,
@@ -143,6 +143,32 @@ class TestWashroomAPI(unittest.TestCase):
 
         data["upvote_count"] = 0
         data["washroom_id"] = 0
+        returned_data.pop("created_at", None)
+        returned_data.pop("user", None)
+        returned_data.pop("id", None)
+        self.assertEqual(data, returned_data)
+
+        # test review count increases
+        response = self.app.get("/washrooms/{}".format(data["washroom_id"]))
+        data = json.loads(response.data.decode())
+        self.assertEqual(data["review_count"], 2)
+
+    def test_post_empty_comment_reviews(self):
+        data = {
+            "ratings": {
+                "cleanliness": 4.2,
+                "privacy": 4.4,
+                "smell": 4.5,
+                "toilet_paper_quality": 4.5
+            }
+        }
+        response = self.app.post("/washrooms/0/reviews/", json=data)
+        self.assertEqual(response.status_code, HttpCodes.HTTP_201_CREATED)
+        returned_data = json.loads(response.data.decode())
+
+        data["upvote_count"] = 0
+        data["washroom_id"] = 0
+        data["comment"] = ""
         returned_data.pop("created_at", None)
         returned_data.pop("user", None)
         returned_data.pop("id", None)
