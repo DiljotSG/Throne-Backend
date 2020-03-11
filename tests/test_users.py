@@ -25,8 +25,12 @@ class TestUsersAPI(unittest.TestCase):
             "username": "janesmith"
         }
         self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
+        
+        # Check it has a created at field
         created_at = data.pop("created_at", None)
         self.assertNotEqual(created_at, None)
+
+        # Check it has the correct data
         self.assertEqual(data, expected_data)
 
     def test_get_user_by_id(self):
@@ -38,8 +42,12 @@ class TestUsersAPI(unittest.TestCase):
             "username": "johnsmith"
         }
         self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
+
+        # Check it has a created at field
         created_at = data.pop("created_at", None)
         self.assertNotEqual(created_at, None)
+
+        # Check it has the correct data
         self.assertEqual(data, expected_data)
 
     def test_get_users_reviews(self):
@@ -66,14 +74,18 @@ class TestUsersAPI(unittest.TestCase):
         ]
 
         self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
+
+        # Check it has a created at field
         created_at = data[0].pop("created_at", None)
         self.assertNotEqual(created_at, None)
 
+        # Remove created at field
         if "user" in data[0]:
             user = data[0]["user"]
             created_at_user = user.pop("created_at", None)
             self.assertNotEqual(created_at_user, None)
 
+        # Check it has the correct data
         self.assertEqual(data, expected)
 
     def test_get_reviews(self):
@@ -100,14 +112,18 @@ class TestUsersAPI(unittest.TestCase):
         ]
 
         self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
+
+        # Check it has a created at field
         created_at = data[0].pop("created_at", None)
         self.assertNotEqual(created_at, None)
 
+        # Remove created at field
         if "user" in data[0]:
             user = data[0]["user"]
             created_at_user = user.pop("created_at", None)
             self.assertNotEqual(created_at_user, None)
 
+        # Check it has the correct data
         self.assertEqual(data, expected)
 
     def test_get_favorites(self):
@@ -144,9 +160,12 @@ class TestUsersAPI(unittest.TestCase):
         ]
 
         self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
+
+        # Check it has a created at field
         created_at = data[0].pop("created_at", None)
         self.assertNotEqual(created_at, None)
 
+        # Check it has the correct data
         self.assertEqual(data, expected)
 
     def test_post_user_favorites(self):
@@ -212,9 +231,12 @@ class TestUsersAPI(unittest.TestCase):
                 'urinal_count': 3
             }
         ]
+         # Remove all the created_at fields
         for item in returned_data:
             item.pop("created_at", None)
             item.pop("id", None)
+
+        # Check it has the correct data
         self.assertEqual(expected_data, returned_data)
 
     def test_delete_favorite_error(self):
