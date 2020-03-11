@@ -231,7 +231,7 @@ class TestUsersAPI(unittest.TestCase):
                 'urinal_count': 3
             }
         ]
-         # Remove all the created_at fields
+        # Remove all the created_at fields
         for item in returned_data:
             item.pop("created_at", None)
             item.pop("id", None)
