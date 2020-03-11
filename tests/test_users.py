@@ -224,6 +224,18 @@ class TestUsersAPI(unittest.TestCase):
         )
         self.assertEqual(response.status_code, HttpCodes.HTTP_404_NOT_FOUND)
 
+    def test_delete_favorite(self):
+        data = {
+            "id": 2,
+        }
+        response = self.app.post("/users/favorites/", json=data)
+        self.assertEqual(response.status_code, HttpCodes.HTTP_201_CREATED)
+        response = self.app.delete(
+            "/users/favorites/",
+            json={"washroom_id": 2}
+        )
+        self.assertEqual(response.status_code, HttpCodes.HTTP_204_NO_CONTENT)
+
     def test_put_user_preferences(self):
         data = {
             "gender": "women",
