@@ -102,6 +102,10 @@ class TestWashroomAPI(unittest.TestCase):
         )
         self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
 
+        # Test it returns list of max_results size
+        data = json.loads(response.data.decode())
+        self.assertEqual(len(data), 1)
+
     def test_get_reviews(self):
         response = self.app.get("/washrooms/0/reviews")
         data = json.loads(response.data.decode())

@@ -25,7 +25,7 @@ class TestUsersAPI(unittest.TestCase):
             "username": "janesmith"
         }
         self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
-        
+
         # Check it has a created at field
         created_at = data.pop("created_at", None)
         self.assertNotEqual(created_at, None)
