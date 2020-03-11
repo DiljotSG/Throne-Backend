@@ -255,7 +255,8 @@ class TestWashroomAPI(unittest.TestCase):
         ]
 
         for item in data:
-            item.pop("created_at", None)
+            result = item.pop("created_at", None)
+            self.assertIsNotNone(result)
             if "user" in item:
                 user = item["user"]
                 created_at_user = user.pop("created_at", None)
