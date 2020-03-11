@@ -70,6 +70,7 @@ class TestBuildingsAPI(unittest.TestCase):
         self.assertIsNotNone(created_at)
         created_at = data[1].pop("created_at", None)
         self.assertIsNotNone(created_at)
+
         self.assertEqual(data, expected_data)
 
     def test_get_by_id(self):
@@ -94,12 +95,14 @@ class TestBuildingsAPI(unittest.TestCase):
             "title": "Science",
             "washroom_count": 0
         }
+
         created_at = data.pop("created_at", None)
         self.assertIsNotNone(created_at)
 
         self.assertEqual(data, expected_data)
 
     def test_get_by_id_error(self):
+        # Non existant building
         response = self.app.get("/buildings/32")
         self.assertEqual(response.status_code, HttpCodes.HTTP_400_BAD_REQUEST)
 
@@ -159,6 +162,7 @@ class TestBuildingsAPI(unittest.TestCase):
         self.assertEqual(data, expected_data)
 
     def test_get_washrooms_empty(self):
+        # Non existant building
         response = self.app.get("/buildings/32/washrooms")
         self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
         data = json.loads(response.data.decode())

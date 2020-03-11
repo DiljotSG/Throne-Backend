@@ -108,6 +108,7 @@ class TestWashroomAPI(unittest.TestCase):
 
         # Test washroom count increases
         response = self.app.get("/buildings/{}".format(data["building_id"]))
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
         data = json.loads(response.data.decode())
 
         self.assertEqual(data["washroom_count"], 1)
@@ -205,12 +206,14 @@ class TestWashroomAPI(unittest.TestCase):
             "overall_rating": 2.9000000000000004,
             "comment": "Engineering 1"
         }
+
         created_at = data.pop("created_at", None)
         self.assertIsNotNone(created_at)
 
         self.assertEqual(data, expected_data)
 
     def test_get_by_id_error(self):
+        # Non existant washroom
         response = self.app.get("/washrooms/32")
         self.assertEqual(response.status_code, HttpCodes.HTTP_400_BAD_REQUEST)
 
@@ -261,6 +264,7 @@ class TestWashroomAPI(unittest.TestCase):
         self.assertEqual(data, expected_data)
 
     def test_get_reviews_empty(self):
+        # Non existant washroom
         response = self.app.get("/washrooms/32/reviews")
         self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
         data = json.loads(response.data.decode())
@@ -295,7 +299,9 @@ class TestWashroomAPI(unittest.TestCase):
 
         # Test review count increases
         response = self.app.get("/washrooms/{}".format(data["washroom_id"]))
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
         data = json.loads(response.data.decode())
+
         self.assertEqual(data["review_count"], 2)
 
     def test_post_empty_comment_reviews(self):
@@ -325,9 +331,11 @@ class TestWashroomAPI(unittest.TestCase):
 
         self.assertEqual(data, returned_data)
 
-        # test review count increases
+        # Test review count increases
         response = self.app.get("/washrooms/{}".format(data["washroom_id"]))
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
         data = json.loads(response.data.decode())
+
         self.assertEqual(data["review_count"], 1)
 
     def test_post_reviews_error(self):

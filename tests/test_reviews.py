@@ -15,6 +15,8 @@ class TestReviewAPI(unittest.TestCase):
 
     def test_get_by_id(self):
         response = self.app.get("/reviews/1")
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
+
         data = json.loads(response.data.decode())
         expected_data = {
             "comment": "boo",
@@ -33,7 +35,6 @@ class TestReviewAPI(unittest.TestCase):
             },
             "washroom_id": 2
         }
-        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
         created_at = data.pop("created_at", None)
         self.assertIsNotNone(created_at)
 
@@ -45,6 +46,7 @@ class TestReviewAPI(unittest.TestCase):
         self.assertEqual(data, expected_data)
 
     def test_get_by_id_error(self):
+        # Non existant review
         response = self.app.get("/reviews/32")
         self.assertEqual(response.status_code, HttpCodes.HTTP_400_BAD_REQUEST)
 

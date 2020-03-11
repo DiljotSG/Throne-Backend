@@ -53,6 +53,7 @@ class TestUsersAPI(unittest.TestCase):
         self.assertEqual(data, expected_data)
 
     def test_get_by_id_error(self):
+        # Non existant user
         response = self.app.get("/users/32")
         self.assertEqual(response.status_code, HttpCodes.HTTP_400_BAD_REQUEST)
 
@@ -289,16 +290,21 @@ class TestUsersAPI(unittest.TestCase):
         self.assertEqual(expected_data, returned_data_two)
 
     def test_delete_favorite(self):
+        # Make the favorite
         data = {
             "id": 2,
         }
         response = self.app.post("/users/favorites", json=data)
         self.assertEqual(response.status_code, HttpCodes.HTTP_201_CREATED)
+
+        # Delete the favorite
         response = self.app.delete(
             "/users/favorites",
             json={"washroom_id": 2}
         )
         self.assertEqual(response.status_code, HttpCodes.HTTP_204_NO_CONTENT)
+
+        # Try deleting again (won't work)
         response = self.app.delete(
             "/users/favorites",
             json={"washroom_id": 2}
@@ -306,6 +312,7 @@ class TestUsersAPI(unittest.TestCase):
         self.assertEqual(response.status_code, HttpCodes.HTTP_404_NOT_FOUND)
 
     def test_delete_favorite_error(self):
+        # Remove a favorite we don't have
         response = self.app.delete(
             "/users/favorites",
             json={"washroom_id": 1}
