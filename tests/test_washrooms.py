@@ -56,6 +56,51 @@ class TestWashroomAPI(unittest.TestCase):
         data[0].pop("created_at", None)
         self.assertEqual(data[0], expected_data)
 
+    def test_post_washroom(self):
+        data = {
+            "amenities": [
+                "air_dryer",
+                "auto_toilet"
+            ],
+            "building_id": 0,
+            "floor": 1,
+            "gender": "women",
+            "urinal_count": 0,
+            "stall_count": 4,
+            "location": {
+                "latitude": 12.2,
+                "longitude": 17.9
+            },
+            "comment": "Engineering 1"
+        }
+
+        response = self.app.post(
+            "/washrooms",
+            json=data
+        )
+
+        returned_data = json.loads(response.data.decode())
+
+        data["average_ratings"] = {
+            'cleanliness': 0,
+            'privacy': 0,
+            'smell': 0,
+            'toilet_paper_quality': 0
+        }
+        data["building_title"] = "Engineering"
+        returned_data.pop("created_at", None)
+        returned_data.pop("id", None)
+        data["is_favorite"] = False
+        data["review_count"] = 0
+        data["overall_rating"] = 0
+        self.assertEqual(data, returned_data)
+
+        # test washroom count increases
+        response = self.app.get("/buildings/{}".format(data["building_id"]))
+        data = json.loads(response.data.decode())
+        self.assertEqual(data["washroom_count"], 1)
+        pass
+
     def test_get_by_id(self):
         response = self.app.get("/washrooms/0")
         data = json.loads(response.data.decode())
