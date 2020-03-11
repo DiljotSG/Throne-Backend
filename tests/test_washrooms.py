@@ -210,6 +210,10 @@ class TestWashroomAPI(unittest.TestCase):
 
         self.assertEqual(data, expected_data)
 
+    def test_get_by_id_error(self):
+        response = self.app.get("/washrooms/32")
+        self.assertEqual(response.status_code, HttpCodes.HTTP_400_BAD_REQUEST)
+
     def test_get_with_query(self):
         response = self.app.get(
             "/washrooms?latitude=49.81050491333008&longitude" +
@@ -255,6 +259,12 @@ class TestWashroomAPI(unittest.TestCase):
                 self.assertIsNotNone(created_at_user)
 
         self.assertEqual(data, expected_data)
+
+    def test_get_reviews_empty(self):
+        response = self.app.get("/washrooms/32/reviews")
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
+        data = json.loads(response.data.decode())
+        self.assertEqual(data, [])
 
     def test_post_reviews(self):
         data = {

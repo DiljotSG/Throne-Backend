@@ -44,6 +44,10 @@ class TestReviewAPI(unittest.TestCase):
 
         self.assertEqual(data, expected_data)
 
+    def test_get_by_id_error(self):
+        response = self.app.get("/reviews/32")
+        self.assertEqual(response.status_code, HttpCodes.HTTP_400_BAD_REQUEST)
+
     def test_put_reviews(self):
         data = {
             "comment": "yay",

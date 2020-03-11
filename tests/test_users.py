@@ -52,6 +52,10 @@ class TestUsersAPI(unittest.TestCase):
         # Check it has the correct data
         self.assertEqual(data, expected_data)
 
+    def test_get_by_id_error(self):
+        response = self.app.get("/users/32")
+        self.assertEqual(response.status_code, HttpCodes.HTTP_400_BAD_REQUEST)
+
     def test_get_users_reviews(self):
         response = self.app.get("/users/1/reviews")
         self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)

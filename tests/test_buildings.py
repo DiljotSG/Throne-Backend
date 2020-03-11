@@ -99,6 +99,10 @@ class TestBuildingsAPI(unittest.TestCase):
 
         self.assertEqual(data, expected_data)
 
+    def test_get_by_id_error(self):
+        response = self.app.get("/buildings/32")
+        self.assertEqual(response.status_code, HttpCodes.HTTP_400_BAD_REQUEST)
+
     def test_get_with_query(self):
         response = self.app.get(
             "/buildings?latitude=49.81050491333008&longitude" +
@@ -153,3 +157,9 @@ class TestBuildingsAPI(unittest.TestCase):
         self.assertIsNotNone(created_at)
 
         self.assertEqual(data, expected_data)
+
+    def test_get_washrooms_empty(self):
+        response = self.app.get("/buildings/32/washrooms")
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
+        data = json.loads(response.data.decode())
+        self.assertEqual(data, [])
