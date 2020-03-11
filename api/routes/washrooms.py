@@ -125,7 +125,10 @@ def post_washrooms_reviews(washroom_id):
         return return_error()
 
     try:
-        comment = str(request.json["comment"])
+        if "comment" in request.json:
+            comment = str(request.json["comment"])
+        else:
+            comment = ""
         cleanliness = float(request.json["ratings"]["cleanliness"])
         privacy = float(request.json["ratings"]["privacy"])
         smell = float(request.json["ratings"]["smell"])
