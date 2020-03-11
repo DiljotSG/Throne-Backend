@@ -105,7 +105,7 @@ class TestWashroomAPI(unittest.TestCase):
         data = json.loads(response.data.decode())
         self.assertEqual(data["washroom_count"], 1)
 
-    def test_post_washroom_error(self):
+    def test_post_washroom_unprocessable_entity_error(self):
         data = {
             "amenities": [
                 "air_dryer",
@@ -133,7 +133,23 @@ class TestWashroomAPI(unittest.TestCase):
             HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY
         )
 
-        data.pop("floor", None)
+    def test_post_washroom_bad_request_error(self):
+        data = {
+            "amenities": [
+                "air_dryer",
+                "auto_toilet"
+            ],
+            "building_id": 0,
+            "gender": "women",
+            "urinal_count": 0,
+            "stall_count": 4,
+            "location": {
+                "latitude": 12.2,
+                "longitude": 17.9
+            },
+            "comment": "Engineering 1"
+        }
+
         response = self.app.post(
             "/washrooms",
             json=data
