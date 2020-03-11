@@ -94,6 +94,14 @@ class TestWashroomAPI(unittest.TestCase):
         data.pop("created_at", None)
         self.assertEqual(data, expected_data)
 
+    def test_get_with_query(self):
+        response = self.app.get(
+            "/washrooms?latitude=49.81050491333008&longitude" +
+            "=-97.13350677490234&radius=2&max_results=1&" +
+            "amenities=contraceptives,auto_dryer"
+        )
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
+
     def test_get_reviews(self):
         response = self.app.get("/washrooms/0/reviews")
         data = json.loads(response.data.decode())
