@@ -35,12 +35,12 @@ class TestReviewAPI(unittest.TestCase):
         }
         self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
         created_at = data.pop("created_at", None)
-        self.assertNotEqual(created_at, None)
+        self.assertIsNotNone(created_at)
 
         if "user" in data:
             user = data["user"]
             created_at_user = user.pop("created_at", None)
-            self.assertNotEqual(created_at_user, None)
+            self.assertIsNotNone(created_at_user)
 
         self.assertEqual(data, expected_data)
 
@@ -61,9 +61,15 @@ class TestReviewAPI(unittest.TestCase):
 
         data["upvote_count"] = 5
         data["washroom_id"] = 0
-        returned_data.pop("created_at", None)
-        returned_data.pop("user", None)
-        returned_data.pop("id", None)
+        result = returned_data.pop("created_at", None)
+        self.assertIsNotNone(result)
+
+        result = returned_data.pop("user", None)
+        self.assertIsNotNone(result)
+
+        result = returned_data.pop("id", None)
+        self.assertIsNotNone(result)
+
         self.assertEqual(data, returned_data)
 
         response = self.app.put("/reviews/1", json=data)

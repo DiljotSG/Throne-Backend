@@ -18,6 +18,8 @@ class TestBuildingsAPI(unittest.TestCase):
             "/buildings",
             follow_redirects=True
         )
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
+
         data = json.loads(response.data.decode())
         expected_data = [
             {
@@ -64,15 +66,16 @@ class TestBuildingsAPI(unittest.TestCase):
             }
         ]
 
-        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
         created_at = data[0].pop("created_at", None)
-        self.assertNotEqual(created_at, None)
+        self.assertIsNotNone(created_at)
         created_at = data[1].pop("created_at", None)
-        self.assertNotEqual(created_at, None)
+        self.assertIsNotNone(created_at)
         self.assertEqual(data, expected_data)
 
     def test_get_by_id(self):
         response = self.app.get("/buildings/1")
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
+
         data = json.loads(response.data.decode())
         expected_data = {
             "best_ratings": {
@@ -91,13 +94,27 @@ class TestBuildingsAPI(unittest.TestCase):
             "title": "Science",
             "washroom_count": 0
         }
-        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
         created_at = data.pop("created_at", None)
-        self.assertNotEqual(created_at, None)
+        self.assertIsNotNone(created_at)
+
         self.assertEqual(data, expected_data)
+
+    def test_get_with_query(self):
+        response = self.app.get(
+            "/buildings?latitude=49.81050491333008&longitude" +
+            "=-97.13350677490234&radius=2&max_results=1&" +
+            "amenities=contraceptives,auto_dryer"
+        )
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
+
+        # Test it returns list of max_results size
+        data = json.loads(response.data.decode())
+        self.assertEqual(len(data), 1)
 
     def test_get_washrooms(self):
         response = self.app.get("/buildings/1/washrooms")
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
+
         data = json.loads(response.data.decode())
         expected_data = [
                 {
@@ -132,7 +149,7 @@ class TestBuildingsAPI(unittest.TestCase):
                     "comment": "Science 1"
                 }
             ]
-        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
         created_at = data[0].pop("created_at", None)
-        self.assertNotEqual(created_at, None)
+        self.assertIsNotNone(created_at)
+
         self.assertEqual(data, expected_data)

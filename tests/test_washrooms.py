@@ -18,6 +18,8 @@ class TestWashroomAPI(unittest.TestCase):
             "/washrooms",
             follow_redirects=True
         )
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
+
         data = json.loads(response.data.decode())
         expected_data = {
             "amenities": [
@@ -50,10 +52,10 @@ class TestWashroomAPI(unittest.TestCase):
             "overall_rating": 2.9000000000000004,
             "comment": "Engineering 1"
         }
-        self.maxDiff = None
-        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
-        self.assertTrue(isinstance(data, list))
-        data[0].pop("created_at", None)
+
+        created_at = data[0].pop("created_at", None)
+        self.assertIsNotNone(created_at)
+
         self.assertEqual(data[0], expected_data)
 
     def test_post_washroom(self):
@@ -78,7 +80,6 @@ class TestWashroomAPI(unittest.TestCase):
             "/washrooms",
             json=data
         )
-
         self.assertEqual(
             response.status_code,
             HttpCodes.HTTP_201_CREATED
@@ -93,19 +94,26 @@ class TestWashroomAPI(unittest.TestCase):
             'toilet_paper_quality': 0
         }
         data["building_title"] = "Engineering"
-        returned_data.pop("created_at", None)
-        returned_data.pop("id", None)
         data["is_favorite"] = False
         data["review_count"] = 0
         data["overall_rating"] = 0
+
+        created_at = returned_data.pop("created_at", None)
+        self.assertIsNotNone(created_at)
+
+        the_id = returned_data.pop("id", None)
+        self.assertIsNotNone(the_id)
+
         self.assertEqual(data, returned_data)
 
-        # test washroom count increases
+        # Test washroom count increases
         response = self.app.get("/buildings/{}".format(data["building_id"]))
         data = json.loads(response.data.decode())
+
         self.assertEqual(data["washroom_count"], 1)
 
     def test_post_washroom_unprocessable_entity_error(self):
+        # Invalid building ID
         data = {
             "amenities": [
                 "air_dryer",
@@ -134,6 +142,7 @@ class TestWashroomAPI(unittest.TestCase):
         )
 
     def test_post_washroom_bad_request_error(self):
+        # Missing floor
         data = {
             "amenities": [
                 "air_dryer",
@@ -162,6 +171,8 @@ class TestWashroomAPI(unittest.TestCase):
 
     def test_get_by_id(self):
         response = self.app.get("/washrooms/0")
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
+
         data = json.loads(response.data.decode())
         expected_data = {
             "amenities": [
@@ -194,8 +205,9 @@ class TestWashroomAPI(unittest.TestCase):
             "overall_rating": 2.9000000000000004,
             "comment": "Engineering 1"
         }
-        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
-        data.pop("created_at", None)
+        created_at = data.pop("created_at", None)
+        self.assertIsNotNone(created_at)
+
         self.assertEqual(data, expected_data)
 
     def test_get_with_query(self):
@@ -212,6 +224,8 @@ class TestWashroomAPI(unittest.TestCase):
 
     def test_get_reviews(self):
         response = self.app.get("/washrooms/0/reviews")
+        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
+
         data = json.loads(response.data.decode())
         expected_data = [
             {
@@ -232,14 +246,13 @@ class TestWashroomAPI(unittest.TestCase):
                 "washroom_id": 0
             }
         ]
-        self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
 
         for item in data:
             item.pop("created_at", None)
             if "user" in item:
                 user = item["user"]
                 created_at_user = user.pop("created_at", None)
-                self.assertNotEqual(created_at_user, None)
+                self.assertIsNotNone(created_at_user)
 
         self.assertEqual(data, expected_data)
 
@@ -253,18 +266,24 @@ class TestWashroomAPI(unittest.TestCase):
                 "toilet_paper_quality": 1.5
             }
         }
-        response = self.app.post("/washrooms/0/reviews/", json=data)
+        response = self.app.post("/washrooms/0/reviews", json=data)
         self.assertEqual(response.status_code, HttpCodes.HTTP_201_CREATED)
         returned_data = json.loads(response.data.decode())
 
         data["upvote_count"] = 0
         data["washroom_id"] = 0
-        returned_data.pop("created_at", None)
-        returned_data.pop("user", None)
-        returned_data.pop("id", None)
+        result = returned_data.pop("created_at", None)
+        self.assertIsNotNone(result)
+
+        result = returned_data.pop("user", None)
+        self.assertIsNotNone(result)
+
+        result = returned_data.pop("id", None)
+        self.assertIsNotNone(result)
+
         self.assertEqual(data, returned_data)
 
-        # test review count increases
+        # Test review count increases
         response = self.app.get("/washrooms/{}".format(data["washroom_id"]))
         data = json.loads(response.data.decode())
         self.assertEqual(data["review_count"], 2)
@@ -278,16 +297,22 @@ class TestWashroomAPI(unittest.TestCase):
                 "toilet_paper_quality": 4.5
             }
         }
-        response = self.app.post("/washrooms/0/reviews/", json=data)
+        response = self.app.post("/washrooms/0/reviews", json=data)
         self.assertEqual(response.status_code, HttpCodes.HTTP_201_CREATED)
         returned_data = json.loads(response.data.decode())
 
         data["upvote_count"] = 0
         data["washroom_id"] = 0
         data["comment"] = ""
-        returned_data.pop("created_at", None)
-        returned_data.pop("user", None)
-        returned_data.pop("id", None)
+        result = returned_data.pop("created_at", None)
+        self.assertIsNotNone(result)
+
+        result = returned_data.pop("user", None)
+        self.assertIsNotNone(result)
+
+        result = returned_data.pop("id", None)
+        self.assertIsNotNone(result)
+
         self.assertEqual(data, returned_data)
 
         # test review count increases
@@ -306,7 +331,8 @@ class TestWashroomAPI(unittest.TestCase):
             }
         }
 
-        response = self.app.post("/washrooms/10/reviews/", json=data)
+        # Non existant washroom
+        response = self.app.post("/washrooms/10/reviews", json=data)
         self.assertEqual(
             response.status_code,
             HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY
