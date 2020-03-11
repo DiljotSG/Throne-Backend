@@ -79,6 +79,11 @@ class TestWashroomAPI(unittest.TestCase):
             json=data
         )
 
+        self.assertEqual(
+            response.status_code,
+            HttpCodes.HTTP_201_CREATED
+        )
+
         returned_data = json.loads(response.data.decode())
 
         data["average_ratings"] = {
@@ -99,7 +104,45 @@ class TestWashroomAPI(unittest.TestCase):
         response = self.app.get("/buildings/{}".format(data["building_id"]))
         data = json.loads(response.data.decode())
         self.assertEqual(data["washroom_count"], 1)
-        pass
+
+    def test_post_washroom_error(self):
+        data = {
+            "amenities": [
+                "air_dryer",
+                "auto_toilet"
+            ],
+            "building_id": 10,
+            "floor": 1,
+            "gender": "women",
+            "urinal_count": 0,
+            "stall_count": 4,
+            "location": {
+                "latitude": 12.2,
+                "longitude": 17.9
+            },
+            "comment": "Engineering 1"
+        }
+
+        response = self.app.post(
+            "/washrooms",
+            json=data
+        )
+
+        self.assertEqual(
+            response.status_code,
+            HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY
+        )
+
+        data.pop("floor", None)
+        response = self.app.post(
+            "/washrooms",
+            json=data
+        )
+
+        self.assertEqual(
+            response.status_code,
+            HttpCodes.HTTP_400_BAD_REQUEST
+        )
 
     def test_get_by_id(self):
         response = self.app.get("/washrooms/0")
