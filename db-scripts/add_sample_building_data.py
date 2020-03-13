@@ -56,6 +56,17 @@ w.add_washroom(
     0,
     rating0
 )
+
+b.update_building(
+    u_centre.building_id,
+    u_centre.location,
+    u_centre.title,
+    u_centre.maps_service_id,
+    u_centre.overall_rating,
+    u_centre.best_ratings_id,
+    u_centre.washroom_count + 1
+)
+
 print("Added U Centre washroom")
 
 dafoe = buildings[9]
@@ -88,5 +99,16 @@ w.add_washroom(
     0,
     rating1
 )
+
+b.update_building(
+    dafoe.building_id,
+    dafoe.location,
+    dafoe.title,
+    dafoe.maps_service_id,
+    dafoe.overall_rating,
+    dafoe.best_ratings_id,
+    dafoe.washroom_count + 1
+)
+
 print("Added Dafoe Library washroom")
 print("Done!")
