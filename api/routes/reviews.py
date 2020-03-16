@@ -36,11 +36,10 @@ def put_washroom_review(review_id):
 
     try:
         comment = str(request.json["comment"])
-        cleanliness = float(request.json["ratings"]["cleanliness"])
-        privacy = float(request.json["ratings"]["privacy"])
-        smell = float(request.json["ratings"]["smell"])
-        toilet_paper_quality = \
-            float(request.json["ratings"]["toilet_paper_quality"])
+        cleanliness = int(request.json["ratings"]["cleanliness"])
+        privacy = int(request.json["ratings"]["privacy"])
+        smell = int(request.json["ratings"]["smell"])
+        toilet_paper_quality = int(request.json["ratings"]["toilet_paper_quality"])
 
         result = review_store.update_review(
             review_id,
