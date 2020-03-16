@@ -129,11 +129,10 @@ def post_washrooms_reviews(washroom_id):
             comment = str(request.json["comment"])
         else:
             comment = ""
-        cleanliness = float(request.json["ratings"]["cleanliness"])
-        privacy = float(request.json["ratings"]["privacy"])
-        smell = float(request.json["ratings"]["smell"])
-        toilet_paper_quality = \
-            float(request.json["ratings"]["toilet_paper_quality"])
+        cleanliness = int(request.json["ratings"]["cleanliness"])
+        privacy = int(request.json["ratings"]["privacy"])
+        smell = int(request.json["ratings"]["smell"])
+        toilet_paper_quality = int(request.json["ratings"]["toilet_paper_quality"])
 
         result = review_store.create_review(
             washroom_id,
