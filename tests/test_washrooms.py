@@ -362,7 +362,6 @@ class TestWashroomAPI(unittest.TestCase):
             "test": "testing"
         }
 
-        # Non existant washroom
         response = self.app.post("/washrooms/0/reviews", json=data)
         self.assertEqual(
             response.status_code,
