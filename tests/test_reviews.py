@@ -54,10 +54,10 @@ class TestReviewAPI(unittest.TestCase):
         data = {
             "comment": "yay",
             "ratings": {
-                "cleanliness": 3.2,
-                "privacy": 1.2,
-                "smell": 2.7,
-                "toilet_paper_quality": 4.5
+                "cleanliness": 3,
+                "privacy": 1,
+                "smell": 2,
+                "toilet_paper_quality": 4
             },
         }
         response = self.app.put("/reviews/0", json=data)
