@@ -81,6 +81,36 @@ class TestReviewAPI(unittest.TestCase):
         response = self.app.put("/reviews/1", json=data)
         self.assertEqual(response.status_code, HttpCodes.HTTP_403_FORBIDDEN)
 
+    def test_put_reviews_bad_request(self):
+        data = {
+            "test": "testing"
+        }
+
+        # Non existant washroom
+        response = self.app.put("/reviews/0", json=data)
+        self.assertEqual(
+            response.status_code,
+            HttpCodes.HTTP_400_BAD_REQUEST
+        )
+
+    def test_put_reviews_unprocessable_entity_error(self):
+        data = {
+            "comment": "yay",
+            "ratings": {
+                "cleanliness": 3,
+                "privacy": 1,
+                "smell": 2,
+                "toilet_paper_quality": 4
+            },
+        }
+
+        # Non existant washroom
+        response = self.app.put("/reviews/10", json=data)
+        self.assertEqual(
+            response.status_code,
+            HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY
+        )
+
     def test_delete_reviews(self):
         response = self.app.delete("/reviews/0")
         self.assertEqual(

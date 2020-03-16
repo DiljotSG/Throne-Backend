@@ -339,7 +339,7 @@ class TestWashroomAPI(unittest.TestCase):
 
         self.assertEqual(data["review_count"], 1)
 
-    def test_post_reviews_error(self):
+    def test_post_reviews_unprocessable_entity_error(self):
         data = {
             "comment": "testing",
             "ratings": {
@@ -355,4 +355,16 @@ class TestWashroomAPI(unittest.TestCase):
         self.assertEqual(
             response.status_code,
             HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY
+        )
+
+    def test_post_reviews_bad_request(self):
+        data = {
+            "test": "testing"
+        }
+
+        # Non existant washroom
+        response = self.app.post("/washrooms/0/reviews", json=data)
+        self.assertEqual(
+            response.status_code,
+            HttpCodes.HTTP_400_BAD_REQUEST
         )
