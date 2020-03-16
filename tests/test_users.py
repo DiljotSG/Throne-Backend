@@ -105,10 +105,10 @@ class TestUsersAPI(unittest.TestCase):
                 "comment": "yay",
                 "id": 0,
                 "ratings": {
-                    "cleanliness": 3.2,
-                    "privacy": 1.2,
-                    "smell": 2.7,
-                    "toilet_paper_quality": 4.5
+                    "cleanliness": 3,
+                    "privacy": 1,
+                    "smell": 2,
+                    "toilet_paper_quality": 4
                 },
                 "upvote_count": 5,
                 "user": {
