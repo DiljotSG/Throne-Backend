@@ -239,10 +239,10 @@ class TestWashroomAPI(unittest.TestCase):
                 "comment": "yay",
                 "id": 0,
                 "ratings": {
-                    "cleanliness": 3.2,
-                    "privacy": 1.2,
-                    "smell": 2.7,
-                    "toilet_paper_quality": 4.5
+                    "cleanliness": 3,
+                    "privacy": 1,
+                    "smell": 2,
+                    "toilet_paper_quality": 4
                 },
                 "upvote_count": 5,
                 "user": {
@@ -275,10 +275,10 @@ class TestWashroomAPI(unittest.TestCase):
         data = {
             "comment": "yay",
             "ratings": {
-                "cleanliness": 3.2,
-                "privacy": 1.2,
-                "smell": 3.7,
-                "toilet_paper_quality": 1.5
+                "cleanliness": 3,
+                "privacy": 1,
+                "smell": 3,
+                "toilet_paper_quality": 1
             }
         }
         response = self.app.post("/washrooms/0/reviews", json=data)
@@ -308,10 +308,10 @@ class TestWashroomAPI(unittest.TestCase):
     def test_post_empty_comment_reviews(self):
         data = {
             "ratings": {
-                "cleanliness": 4.2,
-                "privacy": 4.4,
-                "smell": 4.5,
-                "toilet_paper_quality": 4.5
+                "cleanliness": 4,
+                "privacy": 4,
+                "smell": 5,
+                "toilet_paper_quality": 5
             }
         }
         response = self.app.post("/washrooms/0/reviews", json=data)
@@ -339,7 +339,7 @@ class TestWashroomAPI(unittest.TestCase):
 
         self.assertEqual(data["review_count"], 1)
 
-    def test_post_reviews_error(self):
+    def test_post_reviews_unprocessable_entity_error(self):
         data = {
             "comment": "testing",
             "ratings": {
@@ -355,4 +355,15 @@ class TestWashroomAPI(unittest.TestCase):
         self.assertEqual(
             response.status_code,
             HttpCodes.HTTP_422_UNPROCESSABLE_ENTITY
+        )
+
+    def test_post_reviews_bad_request(self):
+        data = {
+            "test": "testing"
+        }
+
+        response = self.app.post("/washrooms/0/reviews", json=data)
+        self.assertEqual(
+            response.status_code,
+            HttpCodes.HTTP_400_BAD_REQUEST
         )
