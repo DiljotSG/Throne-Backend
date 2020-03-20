@@ -37,11 +37,9 @@ class RatingsPersistence(IRatingsPersistence):
         find_query = "SELECT LAST_INSERT_ID()"
         insert_tuple = (cleanliness, privacy, smell, toilet_paper_quality)
 
-        # Insert and commit
         cursor.execute(insert_query, insert_tuple)
         cnx.commit()
 
-        # Get the ID of the thing that we just inserted
         cursor.execute(find_query)
         returnid = cursor.fetchall()[0][0]
 

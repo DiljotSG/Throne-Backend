@@ -44,11 +44,9 @@ class ReviewsPersistence(IReviewsPersistence):
             washroom_id, user_id, rating_id, comment, upvote_count
         )
 
-        # Insert and commit
         cursor.execute(insert_query, insert_tuple)
         cnx.commit()
 
-        # Get the ID of the thing that we just inserted
         cursor.execute(find_query)
         returnid = cursor.fetchall()[0][0]
 

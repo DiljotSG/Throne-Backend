@@ -9,14 +9,7 @@ from api.persistence.implementations.user_impl import UsersPersistence
 from api.persistence.implementations.washroom_impl import WashroomsPersistence
 
 from api.objects.amenity import Amenity
-# from api.objects.favorite import Favorite
-# from api.objects.preference import Preference
-# from api.objects.rating import Rating
-# from api.objects.building import Building
 from api.objects.location import Location
-# from api.objects.review import Review
-# from api.objects.user import User
-# from api.objects.washroom import Washroom
 
 a = AmenitiesPersistence()
 b = BuildingsPersistence()

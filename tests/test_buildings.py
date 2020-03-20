@@ -59,10 +59,6 @@ class TestBuildingsAPI(unittest.TestCase):
                 "overall_rating": 3,
                 "title": "Science",
                 "washroom_count": 0
-                # This is 0 because we add to stubs directly using the stub
-                # The logic for updating washroom count is in the store
-                # New washrooms will adjust this count, but it won't include
-                # The original washrooms added through the stub init file.
             }
         ]
 

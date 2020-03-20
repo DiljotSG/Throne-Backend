@@ -9,7 +9,6 @@ class AmenitiesPersistence(IAmenitiesPersistence):
     def __init__(self):
         self.amenitylist = [e.value for e in Amenity]
 
-    # Add a new amenity list
     def add_amenities(
         self,
         amenities: List[Amenity]
@@ -36,7 +35,6 @@ class AmenitiesPersistence(IAmenitiesPersistence):
 
         return returnid
 
-    # Get amenity list by ID
     def get_amenities(
         self,
         amenities_id: int
@@ -61,7 +59,6 @@ class AmenitiesPersistence(IAmenitiesPersistence):
         return [self.amenitylist[i] for (i, hasAmenity)
                 in enumerate(result) if hasAmenity == 1]
 
-    # Remove amenity list by ID
     def remove_amenities(
         self,
         amenities_id: int
