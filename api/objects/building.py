@@ -43,6 +43,7 @@ class Building:
             best_ratings_id
         )
 
+        # Make mypy happy
         if item:
             building["best_ratings"] = item.to_dict()
 

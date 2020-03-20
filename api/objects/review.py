@@ -44,6 +44,7 @@ class Review:
             rating_id
         )
 
+        # Make mypy happy
         if rating:
             review["ratings"] = rating.to_dict()
 
@@ -52,6 +53,7 @@ class Review:
             user_id
         )
 
+        # Make mypy happy
         if user:
             review["user"] = user.to_dict(
                 preference_persistence
