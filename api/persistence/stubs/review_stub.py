@@ -28,7 +28,6 @@ class ReviewsStubPersistence(IReviewsPersistence):
             rating_id
         )
         self.reviews.append(new_review)
-        # Return Review id
         return review_id
 
     def update_review(

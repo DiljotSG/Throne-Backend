@@ -21,7 +21,6 @@ class PreferencesStubPersistence(IPreferencesPersistence):
             wheelchair_accessible,
             main_floor_access
         )
-        # Return Preference id
         self.preferences.append(new_preference)
         return preference_id
 

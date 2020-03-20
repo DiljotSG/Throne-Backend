@@ -120,11 +120,9 @@ class UserStore:
 
         if query_result:
             for favorite in query_result:
-                # We have already favorited this washroom
                 if favorite.washroom_id == washroom_id:
                     return self.get_favorites()
 
-        # Add the new favorite
         self.__favorite_persistence.add_favorite(
             get_current_user_id(
                 self.__user_persistence,
@@ -167,7 +165,6 @@ class UserStore:
             self.__preference_persistence
         )
 
-        # Get the user
         user = self.__user_persistence.get_user(
             user_id
         )
@@ -175,7 +172,6 @@ class UserStore:
         if user is None:  # This is mostly for mypy
             raise ThroneUnauthorizedException()
 
-        # Update it's preferences
         self.__preference_persistence.update_preference(
             user.preference_id,
             gender,
@@ -183,5 +179,4 @@ class UserStore:
             main_floor_access
         )
 
-        # Get the updated user
         return self.get_user(user_id)

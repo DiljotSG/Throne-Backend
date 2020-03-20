@@ -24,7 +24,6 @@ class UsersStubPersistence(IUsersPersistence):
             preference_id
         )
         self.users.append(new_user)
-        # Return User id
         return user_id
 
     def get_user(
