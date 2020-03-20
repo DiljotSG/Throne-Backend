@@ -17,7 +17,6 @@ class IBuildingsPersistence(ABC):
         overall_rating: int,
         best_ratings_id: int
     ) -> int:
-        # Return Building id
         pass
 
     @abstractmethod

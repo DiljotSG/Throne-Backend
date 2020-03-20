@@ -28,23 +28,19 @@ def get_washrooms():
     code = HttpCodes.HTTP_200_OK
 
     try:
-        # Try to get the URL parameters
         lat = request.args.get("latitude", type=float)
         long = request.args.get("longitude", type=float)
         radius = request.args.get("radius", type=float)
         max_results = request.args.get("max_results", type=int)
         amenities = request.args.get("amenities", type=str)
 
-        # Parse lat and long into a Location object
         location = None
         if lat and long:
             location = Location(lat, long)
 
-        # Parse the amenities into a comma seperated list
         if amenities:
             amenities = amenities.split(",")
 
-        # Don't waste resources if they want nothing back
         if max_results and max_results <= 0:
             result = []
             return return_as_json(result, code)

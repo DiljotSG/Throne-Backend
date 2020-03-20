@@ -20,7 +20,6 @@ class FavoritesStubPersistence(IFavoritesPersistence):
             washroom_id
         )
         self.favorites.append(new_favorite)
-        # Return Favorite id
         return favorite_id
 
     def get_favorite(

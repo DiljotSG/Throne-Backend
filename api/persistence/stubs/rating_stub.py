@@ -24,7 +24,6 @@ class RatingsStubPersistence(IRatingsPersistence):
             toilet_paper_quality
         )
         self.ratings.append(new_rating)
-        # Return Rating id
         return rating_id
 
     def get_rating(

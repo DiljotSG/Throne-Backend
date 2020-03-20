@@ -11,7 +11,6 @@ class IAmenitiesPersistence(ABC):
         self,
         amenities: List[Amenity]
     ) -> int:
-        # Return Amenity id
         pass
 
     @abstractmethod
