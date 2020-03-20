@@ -8,8 +8,7 @@ from api.common import return_error
 from api.common import return_not_implemented
 from api.response_codes import HttpCodes
 from ..exceptions.throne_exception import ThroneException
-from ..exceptions.throne_unauthorized_exception import \
-    ThroneUnauthorizedException
+from ..exceptions.throne_unauthorized_exception import ThroneUnauthorizedException
 from ..persistence import create_review_store
 
 review_store = create_review_store()
@@ -38,8 +37,7 @@ def put_washroom_review(review_id):
         cleanliness = int(request.json["ratings"]["cleanliness"])
         privacy = int(request.json["ratings"]["privacy"])
         smell = int(request.json["ratings"]["smell"])
-        toilet_paper_quality = \
-            int(request.json["ratings"]["toilet_paper_quality"])
+        toilet_paper_quality = int(request.json["ratings"]["toilet_paper_quality"])
 
         result = review_store.update_review(
             review_id,

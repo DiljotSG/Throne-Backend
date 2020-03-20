@@ -29,18 +29,14 @@ class WashroomStore:
         favorite_persistence: IFavoritesPersistence,
         preference_persistence: IPreferencesPersistence
     ):
-        self.__washroom_persistence: IWashroomsPersistence = \
-            washroom_persistence
+        self.__washroom_persistence: IWashroomsPersistence = washroom_persistence
         self.__review_persistence: IReviewsPersistence = review_persistence
         self.__amenity_persistence: IAmenitiesPersistence = amenity_persistence
         self.__ratings_persistence: IRatingsPersistence = ratings_persistence
         self.__user_persistence: IUsersPersistence = user_persistence
-        self.__building_persistence: IBuildingsPersistence = \
-            building_persistence
-        self.__favorite_persistence: \
-            IFavoritesPersistence = favorite_persistence
-        self.__preference_persistence: \
-            IPreferencesPersistence = preference_persistence
+        self.__building_persistence: IBuildingsPersistence = building_persistence
+        self.__favorite_persistence: IFavoritesPersistence = favorite_persistence
+        self.__preference_persistence: IPreferencesPersistence = preference_persistence
 
     def create_washroom(
         self,

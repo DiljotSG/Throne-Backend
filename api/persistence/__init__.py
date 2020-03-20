@@ -33,8 +33,7 @@ from .stubs.washroom_stub import WashroomsStubPersistence
 __amenity_persistence: IAmenitiesPersistence = AmenitiesStubPersistence()
 __building_persistence: IBuildingsPersistence = BuildingsStubPersistence()
 __favorite_persistence: IFavoritesPersistence = FavoritesStubPersistence()
-__preference_persistence: IPreferencesPersistence = \
-    PreferencesStubPersistence()
+__preference_persistence: IPreferencesPersistence = PreferencesStubPersistence()
 __rating_persistence: IRatingsPersistence = RatingsStubPersistence()
 __review_persistence: IReviewsPersistence = ReviewsStubPersistence()
 __user_persistence: IUsersPersistence = UsersStubPersistence()

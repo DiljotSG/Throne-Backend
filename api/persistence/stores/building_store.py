@@ -16,10 +16,8 @@ class BuildingStore:
         review_persistence: IReviewsPersistence,
         rating_persistence: IRatingsPersistence
     ):
-        self.__building_persistence: IBuildingsPersistence = \
-            building_persistence
-        self.__washroom_persistence: IWashroomsPersistence = \
-            washroom_persistence
+        self.__building_persistence: IBuildingsPersistence = building_persistence
+        self.__washroom_persistence: IWashroomsPersistence = washroom_persistence
         self.__review_persistence: IReviewsPersistence = review_persistence
         self.__rating_persistence: IRatingsPersistence = rating_persistence
 
