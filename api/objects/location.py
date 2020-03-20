@@ -9,8 +9,8 @@ class Location:
 
     @staticmethod
     def verify(latitude: float, longitude: float) -> bool:
-        return latitude <= 90 and latitude >= -90 and \
-            longitude <= 180 and longitude >= -180
+        return 90 >= latitude >= -90 and \
+               180 >= longitude >= -180
 
     def to_dict(self) -> dict:
         return self.__dict__.copy()

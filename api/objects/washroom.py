@@ -6,8 +6,7 @@ from api.persistence.common import get_current_user_id
 from api.persistence.interfaces.amenity_interface import IAmenitiesPersistence
 from api.persistence.interfaces.building_interface import IBuildingsPersistence
 from api.persistence.interfaces.favorite_interface import IFavoritesPersistence
-from api.persistence.interfaces.preference_interface import \
-    IPreferencesPersistence
+from api.persistence.interfaces.preference_interface import IPreferencesPersistence
 from api.persistence.interfaces.rating_interface import IRatingsPersistence
 from api.persistence.interfaces.user_interface import IUsersPersistence
 from .location import Location
@@ -85,8 +84,7 @@ class Washroom:
             rating.pop("id", None)
             washroom["average_ratings"] = rating
 
-        favorites = \
-            favorite_persistence.get_favorites_by_user(
+        favorites = favorite_persistence.get_favorites_by_user(
                 get_current_user_id(
                     user_persistence,
                     preference_persistence

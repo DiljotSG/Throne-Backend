@@ -7,8 +7,7 @@ from ..interfaces.rating_interface import IRatingsPersistence
 from ..interfaces.review_interface import IReviewsPersistence
 from ..interfaces.user_interface import IUsersPersistence
 from ..interfaces.washroom_interface import IWashroomsPersistence
-from ...exceptions.throne_unauthorized_exception import \
-    ThroneUnauthorizedException
+from ...exceptions.throne_unauthorized_exception import ThroneUnauthorizedException
 from ...exceptions.throne_validation_exception import ThroneValidationException
 from ...objects.building import Building
 from ...objects.rating import Rating
@@ -28,12 +27,9 @@ class ReviewStore:
         self.__review_persistence: IReviewsPersistence = review_persistence
         self.__rating_persistence: IRatingsPersistence = rating_persistence
         self.__user_persistence: IUsersPersistence = user_persistence
-        self.__preference_persistence: IPreferencesPersistence = \
-            preference_persistence
-        self.__washroom_persistence: IWashroomsPersistence = \
-            washroom_persistence
-        self.__building_persistence: IBuildingsPersistence = \
-            building_persistence
+        self.__preference_persistence: IPreferencesPersistence = preference_persistence
+        self.__washroom_persistence: IWashroomsPersistence = washroom_persistence
+        self.__building_persistence: IBuildingsPersistence = building_persistence
 
     def create_review(
         self,

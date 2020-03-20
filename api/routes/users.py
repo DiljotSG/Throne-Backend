@@ -9,8 +9,7 @@ from api.common import return_no_content
 from api.common import return_not_found
 from api.response_codes import HttpCodes
 from ..exceptions.throne_exception import ThroneException
-from ..exceptions.throne_unauthorized_exception import \
-    ThroneUnauthorizedException
+from ..exceptions.throne_unauthorized_exception import ThroneUnauthorizedException
 from ..persistence import create_user_store
 
 user_store = create_user_store()

@@ -40,7 +40,7 @@ class ReviewsStubPersistence(IReviewsPersistence):
         upvote_count: int
     ) -> Optional[Review]:
         updated_review = None
-        if review_id >= 0 and review_id < len(self.reviews) and \
+        if 0 <= review_id < len(self.reviews) and \
            self.reviews[review_id] is not None:
             updated_review = Review(
                 review_id,

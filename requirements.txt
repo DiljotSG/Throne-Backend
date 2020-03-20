@@ -23,3 +23,4 @@ typed-ast==1.4.1
 typing-extensions==3.7.4.1
 Werkzeug==0.16.1
 zipp==3.0.0
+tox==3.14.5
