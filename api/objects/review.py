@@ -39,23 +39,19 @@ class Review:
     ) -> dict:
         review = self.__dict__.copy()
 
-        # Expand ratings
         rating_id = review.pop("rating_id", None)
         rating = rating_persistence.get_rating(
             rating_id
         )
 
-        # Make mypy happy
         if rating:
             review["ratings"] = rating.to_dict()
 
-        # Expand user
         user_id = review.pop("user_id", None)
         user = user_persistence.get_user(
             user_id
         )
 
-        # Make mypy happy
         if user:
             review["user"] = user.to_dict(
                 preference_persistence

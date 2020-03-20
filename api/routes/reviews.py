@@ -30,7 +30,6 @@ def get_review(review_id):
 def put_washroom_review(review_id):
     result = None
 
-    # Don't accept garbage input
     if request.json is None:
         return return_error(HttpCodes.HTTP_400_BAD_REQUEST)
 
@@ -39,7 +38,8 @@ def put_washroom_review(review_id):
         cleanliness = int(request.json["ratings"]["cleanliness"])
         privacy = int(request.json["ratings"]["privacy"])
         smell = int(request.json["ratings"]["smell"])
-        toilet_paper_quality = int(request.json["ratings"]["toilet_paper_quality"])
+        toilet_paper_quality = \
+            int(request.json["ratings"]["toilet_paper_quality"])
 
         result = review_store.update_review(
             review_id,

@@ -55,7 +55,6 @@ def get_user_favorites():
 def post_user_favorites():
     result = None
 
-    # Don't accept garbage input
     if request.json is None:
         return return_error()
 
@@ -64,7 +63,6 @@ def post_user_favorites():
         if "washroom_id" in request.json:
             washroom_id = int(request.json["washroom_id"])
         else:
-            # If we don't get washroom_id, look for id
             washroom_id = int(request.json["id"])
 
         result = user_store.add_favorite(
@@ -86,7 +84,6 @@ def post_user_favorites():
 def delete_user_favorites():
     result = False
 
-    # Don't accept garbage input
     if request.json is None:
         return return_error()
 
@@ -95,7 +92,6 @@ def delete_user_favorites():
         if "washroom_id" in request.json:
             washroom_id = int(request.json["washroom_id"])
         else:
-            # If we don't get washroom_id, look for id
             washroom_id = int(request.json["id"])
 
         result = user_store.remove_favorite(
@@ -120,7 +116,6 @@ def delete_user_favorites():
 def update_preferences():
     result = None
 
-    # Don't accept garbage input
     if request.json is None:
         return return_error()
 

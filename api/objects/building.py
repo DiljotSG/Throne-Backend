@@ -38,24 +38,20 @@ class Building:
     ) -> dict:
         building = self.__dict__.copy()
 
-        # Expand best ratings
         best_ratings_id = building.pop("best_ratings_id", None)
         item = rating_persistence.get_rating(
             best_ratings_id
         )
 
-        # Make mypy happy
         if item:
             building["best_ratings"] = item.to_dict()
 
-        # Add distance to building
         if user_loc:
             building["distance"] = distance_between_locations(
                 user_loc,
                 building["location"]
             ) * 1000
 
-        # Expand location
         building["location"] = building["location"].to_dict()
 
         return building

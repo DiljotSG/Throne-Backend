@@ -24,14 +24,11 @@ class User:
     ) -> dict:
         user = self.__dict__.copy()
 
-        # Only expand preferences if the Username matches current user
         if user["username"] == get_cognito_user():
-            # Expand preferences
             preference_id = user.pop("preference_id", None)
             user["preferences"] = preference_persistence.get_preference(
                 preference_id
             ).to_dict()
 
-        # Cleanup
         user.pop("preference_id", None)
         return user
