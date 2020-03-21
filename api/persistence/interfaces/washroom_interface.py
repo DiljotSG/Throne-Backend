@@ -23,7 +23,6 @@ class IWashroomsPersistence(ABC):
         overall_rating: float,
         average_ratings_id: int  # Foreign Key
     ) -> int:
-        # Return Washroom id
         pass
 
     @abstractmethod

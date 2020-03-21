@@ -6,8 +6,7 @@ from api.persistence.common import get_current_user_id
 from api.persistence.interfaces.amenity_interface import IAmenitiesPersistence
 from api.persistence.interfaces.building_interface import IBuildingsPersistence
 from api.persistence.interfaces.favorite_interface import IFavoritesPersistence
-from api.persistence.interfaces.preference_interface import \
-    IPreferencesPersistence
+from api.persistence.interfaces.preference_interface import IPreferencesPersistence
 from api.persistence.interfaces.rating_interface import IRatingsPersistence
 from api.persistence.interfaces.user_interface import IUsersPersistence
 from .location import Location
@@ -56,44 +55,36 @@ class Washroom:
     ) -> dict:
         washroom = self.__dict__.copy()
 
-        # Add the building title
         building = building_persistence.get_building(
             washroom["building_id"]
         )
         if building is not None:
             washroom["building_title"] = building.title
 
-        # Expand amenities
         amenities_id = washroom.pop("amenities_id", None)
         washroom["amenities"] = amenity_persistence.get_amenities(
             amenities_id
         )
 
-        # Add distance to washroom
         if user_loc:
             washroom["distance"] = distance_between_locations(
                 user_loc,
                 washroom["location"]
             ) * 1000
 
-        # Expand location
         washroom["location"] = washroom["location"].to_dict()
 
-        # Expand average ratings
         average_rating_id = washroom.pop("average_rating_id", None)
         item = ratings_persistence.get_rating(
             average_rating_id
         )
 
-        # Done to make mypy happy
         if item:
             rating = item.to_dict()
             rating.pop("id", None)
             washroom["average_ratings"] = rating
 
-        # Add is_favorite
-        favorites = \
-            favorite_persistence.get_favorites_by_user(
+        favorites = favorite_persistence.get_favorites_by_user(
                 get_current_user_id(
                     user_persistence,
                     preference_persistence

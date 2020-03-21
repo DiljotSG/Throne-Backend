@@ -50,11 +50,9 @@ class BuildingsPersistence(IBuildingsPersistence):
             overall_rating, best_rating_id, 0
         )
 
-        # Insert and commit
         cursor.execute(insert_query, insert_tuple)
         cnx.commit()
 
-        # Get the ID of the thing that we just inserted
         cursor.execute(find_query)
         returnid = cursor.fetchall()[0][0]
 
@@ -80,7 +78,6 @@ class BuildingsPersistence(IBuildingsPersistence):
         results = [_result_to_building(result) for result in results]
 
         if location is not None:
-            # Restrict by radius
             results = [
                 budiling for budiling in results
                 if distance_between_locations(
@@ -146,7 +143,6 @@ class BuildingsPersistence(IBuildingsPersistence):
         self,
         building_id: int
     ) -> None:
-        # Remove all the washrooms, remove the buliding, remove the rating
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 

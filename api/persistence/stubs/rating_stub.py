@@ -24,15 +24,14 @@ class RatingsStubPersistence(IRatingsPersistence):
             toilet_paper_quality
         )
         self.ratings.append(new_rating)
-        # Return Rating id
         return rating_id
 
     def get_rating(
         self,
         rating_id: int
     ) -> Optional[Rating]:
-        if rating_id >= 0 and rating_id < len(self.ratings) and \
-           self.ratings[rating_id] is not None:
+        if 0 <= rating_id < len(self.ratings) and \
+             self.ratings[rating_id] is not None:
             return self.ratings[rating_id]
         return None
 
@@ -45,7 +44,7 @@ class RatingsStubPersistence(IRatingsPersistence):
         toilet_paper_quality: float
     ) -> Optional[Rating]:
         new_rating = None
-        if rating_id >= 0 and rating_id < len(self.ratings) and \
+        if 0 <= rating_id < len(self.ratings) and \
            self.ratings[rating_id] is not None:
             new_rating = Rating(
                 rating_id,
@@ -61,5 +60,5 @@ class RatingsStubPersistence(IRatingsPersistence):
         self,
         rating_id: int
     ) -> None:
-        if rating_id >= 0 and rating_id < len(self.ratings):
+        if 0 <= rating_id < len(self.ratings):
             self.ratings.pop(rating_id)

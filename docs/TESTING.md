@@ -1,13 +1,26 @@
 # Testing
 
-## Unit Tests
+## Local Tests
 
-Run the application Unit Tests locally.
+Our local testing consists of unit tests, flake8 for linting and mypy
+for type enforcement.
 
+To automatically run all of these, install Tox using
 ```shell
-python3 -m unittest discover tests
+pip3 install tox
 ```
 
-## API Endpoint Tests
+and run the `tox` command in the main directory. 
+
+To run a given kind of test individually, run:
+```shell
+tox -e [tests, flake8, mypy]
+```
+
+with your category of choice.
+
+## Remote Tests
+
+### API Endpoint Tests
 
 The API endpoints can be tested using the [Iron Throne](https://github.com/NickJosephson/Iron-Throne) application for MacOS.

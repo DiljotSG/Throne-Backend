@@ -9,8 +9,7 @@ from ..interfaces.rating_interface import IRatingsPersistence
 from ..interfaces.review_interface import IReviewsPersistence
 from ..interfaces.user_interface import IUsersPersistence
 from ..interfaces.washroom_interface import IWashroomsPersistence
-from ...exceptions.throne_unauthorized_exception import \
-    ThroneUnauthorizedException
+from ...exceptions.throne_unauthorized_exception import ThroneUnauthorizedException
 from ...exceptions.throne_validation_exception import ThroneValidationException
 from ...persistence.common import get_current_user_id
 
@@ -28,18 +27,13 @@ class UserStore:
         amenity_persistence: IAmenitiesPersistence
     ):
         self.__user_persistence: IUsersPersistence = user_persistence
-        self.__favorite_persistence: IFavoritesPersistence = \
-            favorite_preference
+        self.__favorite_persistence: IFavoritesPersistence = favorite_preference
         self.__review_persistence: IReviewsPersistence = review_persistence
-        self.__preference_persistence: IPreferencesPersistence = \
-            preference_persistence
+        self.__preference_persistence: IPreferencesPersistence = preference_persistence
         self.__ratings_persistence: IRatingsPersistence = ratings_persistence
-        self.__washroom_persistence: IWashroomsPersistence = \
-            washroom_persistence
-        self.__building_persistence: IBuildingsPersistence = \
-            building_persistence
-        self.__amenity_persistence: IAmenitiesPersistence = \
-            amenity_persistence
+        self.__washroom_persistence: IWashroomsPersistence = washroom_persistence
+        self.__building_persistence: IBuildingsPersistence = building_persistence
+        self.__amenity_persistence: IAmenitiesPersistence = amenity_persistence
 
     def get_current_user(self) -> dict:
         return self.get_user(get_current_user_id(
@@ -120,11 +114,9 @@ class UserStore:
 
         if query_result:
             for favorite in query_result:
-                # We have already favorited this washroom
                 if favorite.washroom_id == washroom_id:
                     return self.get_favorites()
 
-        # Add the new favorite
         self.__favorite_persistence.add_favorite(
             get_current_user_id(
                 self.__user_persistence,
@@ -167,7 +159,6 @@ class UserStore:
             self.__preference_persistence
         )
 
-        # Get the user
         user = self.__user_persistence.get_user(
             user_id
         )
@@ -175,7 +166,6 @@ class UserStore:
         if user is None:  # This is mostly for mypy
             raise ThroneUnauthorizedException()
 
-        # Update it's preferences
         self.__preference_persistence.update_preference(
             user.preference_id,
             gender,
@@ -183,5 +173,4 @@ class UserStore:
             main_floor_access
         )
 
-        # Get the updated user
         return self.get_user(user_id)

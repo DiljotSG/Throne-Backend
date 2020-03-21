@@ -1,7 +1,6 @@
 from datetime import datetime
 
-from api.persistence.interfaces.preference_interface import \
-    IPreferencesPersistence
+from api.persistence.interfaces.preference_interface import IPreferencesPersistence
 from api.persistence.interfaces.rating_interface import IRatingsPersistence
 from api.persistence.interfaces.user_interface import IUsersPersistence
 
@@ -39,7 +38,6 @@ class Review:
     ) -> dict:
         review = self.__dict__.copy()
 
-        # Expand ratings
         rating_id = review.pop("rating_id", None)
         rating = rating_persistence.get_rating(
             rating_id
@@ -49,7 +47,6 @@ class Review:
         if rating:
             review["ratings"] = rating.to_dict()
 
-        # Expand user
         user_id = review.pop("user_id", None)
         user = user_persistence.get_user(
             user_id

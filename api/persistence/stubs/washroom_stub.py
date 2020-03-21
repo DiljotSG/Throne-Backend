@@ -41,7 +41,6 @@ class WashroomsStubPersistence(IWashroomsPersistence):
             0
         )
         self.washrooms.append(new_washroom)
-        # Return Washroom id
         return washroom_id
 
     def query_washrooms(

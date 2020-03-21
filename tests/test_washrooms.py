@@ -106,7 +106,6 @@ class TestWashroomAPI(unittest.TestCase):
 
         self.assertEqual(data, returned_data)
 
-        # Test washroom count increases
         response = self.app.get("/buildings/{}".format(data["building_id"]))
         self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
         data = json.loads(response.data.decode())
@@ -225,7 +224,6 @@ class TestWashroomAPI(unittest.TestCase):
         )
         self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
 
-        # Test it returns list of max_results size
         data = json.loads(response.data.decode())
         self.assertEqual(len(data), 1)
 
@@ -298,7 +296,6 @@ class TestWashroomAPI(unittest.TestCase):
 
         self.assertEqual(data, returned_data)
 
-        # Test review count increases
         response = self.app.get("/washrooms/{}".format(data["washroom_id"]))
         self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
         data = json.loads(response.data.decode())
@@ -332,7 +329,6 @@ class TestWashroomAPI(unittest.TestCase):
 
         self.assertEqual(data, returned_data)
 
-        # Test review count increases
         response = self.app.get("/washrooms/{}".format(data["washroom_id"]))
         self.assertEqual(response.status_code, HttpCodes.HTTP_200_OK)
         data = json.loads(response.data.decode())
@@ -350,7 +346,6 @@ class TestWashroomAPI(unittest.TestCase):
             }
         }
 
-        # Non existant washroom
         response = self.app.post("/washrooms/10/reviews", json=data)
         self.assertEqual(
             response.status_code,

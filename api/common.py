@@ -28,7 +28,6 @@ def is_valid_schema(obj, schema: dict) -> bool:
     return result
 
 
-# Get the name of the currently authenticated Cognito user
 def get_cognito_user() -> Optional[str]:
     event = request.environ.get("serverless.event", "no event")
 
@@ -50,7 +49,6 @@ def get_cognito_user() -> Optional[str]:
 
     username = None
 
-    # Make sure our event has the proper data - validate the schema
     if is_valid_schema(event, schema):
         username = event["requestContext"]["authorizer"]["claims"]["username"]
 
@@ -68,7 +66,6 @@ def return_error(
 def return_as_json(data, code=HttpCodes.HTTP_200_OK):
     result = data
 
-    # If our data is non-existant, this is a bad request.
     if data is None:
         return return_error()
 

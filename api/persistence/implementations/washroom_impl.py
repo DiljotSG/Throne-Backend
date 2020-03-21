@@ -60,11 +60,9 @@ class WashroomsPersistence(IWashroomsPersistence):
             average_ratings_id, 0
         )
 
-        # Insert and commit
         cursor.execute(insert_query, insert_tuple)
         cnx.commit()
 
-        # Get the ID of the thing that we just inserted
         cursor.execute(find_query)
         returnid = cursor.fetchall()[0][0]
 
@@ -79,8 +77,7 @@ class WashroomsPersistence(IWashroomsPersistence):
     ) -> List[Washroom]:
         # I don't know of any way to do this complex formula in SQL, so
         # instead we're just grabbing ALL WASHROOMS AT ONCE and calculating
-        # distance. It might seem inefficient but it's really not - we'd
-        # have to do it either way.
+        # distance.
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 
@@ -93,14 +90,12 @@ class WashroomsPersistence(IWashroomsPersistence):
         results = [result_to_washroom(result) for result in results]
 
         if location is not None:
-            # Restrict by radius
             results = [
                 washroom for washroom in results
                 if distance_between_locations(
                     location, washroom.location) <= radius
             ]
 
-        # Restrict by amenities
         desired = set(desired_amenities)
         results = [
             washroom for washroom in results
@@ -110,7 +105,6 @@ class WashroomsPersistence(IWashroomsPersistence):
             )
         ]
 
-        # Restrict by max results
         return results[:max_washrooms]
 
     def get_washrooms_by_building(
@@ -196,8 +190,6 @@ class WashroomsPersistence(IWashroomsPersistence):
         self,
         washroom_id: int
     ) -> None:
-        # Remove reviews, remove it from favorites, remove its amenities,
-        # remove its avg ratings, then remove the washroom
         cnx = get_sql_connection()
         cursor = cnx.cachedCursor
 

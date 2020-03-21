@@ -8,8 +8,7 @@ from api.common import return_error
 from api.common import return_not_implemented
 from api.response_codes import HttpCodes
 from ..exceptions.throne_exception import ThroneException
-from ..exceptions.throne_unauthorized_exception import \
-    ThroneUnauthorizedException
+from ..exceptions.throne_unauthorized_exception import ThroneUnauthorizedException
 from ..persistence import create_review_store
 
 review_store = create_review_store()
@@ -30,7 +29,6 @@ def get_review(review_id):
 def put_washroom_review(review_id):
     result = None
 
-    # Don't accept garbage input
     if request.json is None:
         return return_error(HttpCodes.HTTP_400_BAD_REQUEST)
 

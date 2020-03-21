@@ -27,11 +27,9 @@ class TestUsersAPI(unittest.TestCase):
             "username": "janesmith"
         }
 
-        # Check it has a created at field
         created_at = data.pop("created_at", None)
         self.assertIsNotNone(created_at)
 
-        # Check it has the correct data
         self.assertEqual(data, expected_data)
 
     def test_get_user_by_id(self):
@@ -45,11 +43,9 @@ class TestUsersAPI(unittest.TestCase):
             "username": "johnsmith"
         }
 
-        # Check it has a created at field
         created_at = data.pop("created_at", None)
         self.assertIsNotNone(created_at)
 
-        # Check it has the correct data
         self.assertEqual(data, expected_data)
 
     def test_get_by_id_error(self):
@@ -82,17 +78,14 @@ class TestUsersAPI(unittest.TestCase):
             }
         ]
 
-        # Check it has a created at field
         created_at = data[0].pop("created_at", None)
         self.assertIsNotNone(created_at)
 
-        # Remove created at field
         if "user" in data[0]:
             user = data[0]["user"]
             created_at_user = user.pop("created_at", None)
             self.assertIsNotNone(created_at_user)
 
-        # Check it has the correct data
         self.assertEqual(data, expected_data)
 
     def test_get_reviews(self):
@@ -120,17 +113,14 @@ class TestUsersAPI(unittest.TestCase):
             }
         ]
 
-        # Check it has a created at field
         created_at = data[0].pop("created_at", None)
         self.assertIsNotNone(created_at)
 
-        # Remove created at field
         if "user" in data[0]:
             user = data[0]["user"]
             created_at_user = user.pop("created_at", None)
             self.assertIsNotNone(created_at_user)
 
-        # Check it has the correct data
         self.assertEqual(data, expected_data)
 
     def test_get_reviews_equiv(self):
@@ -181,16 +171,13 @@ class TestUsersAPI(unittest.TestCase):
             }
         ]
 
-        # Check it has a created at field
         created_at = data[0].pop("created_at", None)
         self.assertIsNotNone(created_at)
 
-        # Check that the favorite list has the correct data
         for item in data:
             if "is_favorite" in item:
                 self.assertTrue(item["is_favorite"])
 
-        # Check it has the correct data
         self.assertEqual(data, expected_data)
 
     def test_post_user_favorites(self):
@@ -265,7 +252,6 @@ class TestUsersAPI(unittest.TestCase):
             }
         ]
 
-        # Remove all the created_at fields
         for item in returned_data_one:
             created_at = item.pop("created_at", None)
             self.assertIsNotNone(created_at)
@@ -277,7 +263,6 @@ class TestUsersAPI(unittest.TestCase):
             the_id = item.pop("id", None)
             self.assertIsNotNone(the_id)
 
-        # Check that the favorite list has the correct data
         for item in returned_data_one:
             if "is_favorite" in item:
                 self.assertTrue(item["is_favorite"])
@@ -285,26 +270,22 @@ class TestUsersAPI(unittest.TestCase):
             if "is_favorite" in item:
                 self.assertTrue(item["is_favorite"])
 
-        # Check it has the correct data
         self.assertEqual(expected_data, returned_data_one)
         self.assertEqual(expected_data, returned_data_two)
 
     def test_delete_favorite(self):
-        # Make the favorite
         data = {
             "id": 2,
         }
         response = self.app.post("/users/favorites", json=data)
         self.assertEqual(response.status_code, HttpCodes.HTTP_201_CREATED)
 
-        # Delete the favorite
         response = self.app.delete(
             "/users/favorites",
             json={"washroom_id": 2}
         )
         self.assertEqual(response.status_code, HttpCodes.HTTP_204_NO_CONTENT)
 
-        # Try deleting again (won't work)
         response = self.app.delete(
             "/users/favorites",
             json={"washroom_id": 2}

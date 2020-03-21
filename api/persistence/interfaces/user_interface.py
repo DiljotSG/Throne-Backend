@@ -14,7 +14,6 @@ class IUsersPersistence(ABC):
         profile_pic: str,
         preference_id: int  # Foreign key
     ) -> int:
-        # Return User id
         pass
 
     @abstractmethod
