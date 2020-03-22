@@ -53,7 +53,11 @@ def create():
     data = root_data()
     data["endpoints"] = []
     for rule in app.url_map.iter_rules():
-        data["endpoints"].append(str(rule))
+        rule_info = {
+            "path": str(rule),
+            "methods": list(rule.methods)
+        }
+        data["endpoints"].append(rule_info)
 
     # Establish the root endpoint
     @app.route("/")
