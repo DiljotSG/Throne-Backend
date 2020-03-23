@@ -51,7 +51,7 @@ class Building:
             building["distance"] = distance_between_locations(
                 user_loc,
                 building["location"]
-            ) * 1000
+            )
 
         building["location"] = building["location"].to_dict()
 

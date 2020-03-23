@@ -70,7 +70,7 @@ class Washroom:
             washroom["distance"] = distance_between_locations(
                 user_loc,
                 washroom["location"]
-            ) * 1000
+            )
 
         washroom["location"] = washroom["location"].to_dict()
 
