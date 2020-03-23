@@ -161,8 +161,8 @@ class TestUsersAPI(unittest.TestCase):
                 "id": 0,
                 "is_favorite": True,
                 "location": {
-                    "latitude": 12.2,
-                    "longitude": 17.9
+                    "latitude": 49.809364318847656,
+                    "longitude": -97.1344985961914
                 },
                 "overall_rating": 2.9000000000000004,
                 "review_count": 0,
@@ -216,8 +216,8 @@ class TestUsersAPI(unittest.TestCase):
                 'gender': 'women',
                 'is_favorite': True,
                 'location': {
-                    'latitude': 12.2,
-                    'longitude': 17.9
+                    'latitude': 49.809364318847656,
+                    'longitude': -97.1344985961914
                 },
                 'overall_rating': 2.9000000000000004,
                 'review_count': 0,
@@ -242,8 +242,8 @@ class TestUsersAPI(unittest.TestCase):
                 'gender': 'men',
                 'is_favorite': True,
                 'location': {
-                    'latitude': 114,
-                    'longitude': 200.5
+                    'latitude': 49.809364318847656,
+                    'longitude': -97.1344985961914
                 },
                 'overall_rating': 3,
                 'review_count': 0,
