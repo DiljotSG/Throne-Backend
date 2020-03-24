@@ -159,7 +159,6 @@ class TestUsersAPI(unittest.TestCase):
                 "floor": 1,
                 "gender": "women",
                 "id": 0,
-                "is_favorite": True,
                 "location": {
                     "latitude": 49.809364318847656,
                     "longitude": -97.1344985961914
@@ -173,10 +172,6 @@ class TestUsersAPI(unittest.TestCase):
 
         created_at = data[0].pop("created_at", None)
         self.assertIsNotNone(created_at)
-
-        for item in data:
-            if "is_favorite" in item:
-                self.assertTrue(item["is_favorite"])
 
         self.assertEqual(data, expected_data)
 
@@ -214,7 +209,6 @@ class TestUsersAPI(unittest.TestCase):
                 'comment': 'Engineering 1',
                 'floor': 1,
                 'gender': 'women',
-                'is_favorite': True,
                 'location': {
                     'latitude': 49.809364318847656,
                     'longitude': -97.1344985961914
@@ -240,7 +234,6 @@ class TestUsersAPI(unittest.TestCase):
                 'comment': 'Engineering 2',
                 'floor': 1,
                 'gender': 'men',
-                'is_favorite': True,
                 'location': {
                     'latitude': 49.809364318847656,
                     'longitude': -97.1344985961914
@@ -262,13 +255,6 @@ class TestUsersAPI(unittest.TestCase):
             self.assertIsNotNone(created_at)
             the_id = item.pop("id", None)
             self.assertIsNotNone(the_id)
-
-        for item in returned_data_one:
-            if "is_favorite" in item:
-                self.assertTrue(item["is_favorite"])
-        for item in returned_data_two:
-            if "is_favorite" in item:
-                self.assertTrue(item["is_favorite"])
 
         self.assertEqual(expected_data, returned_data_one)
         self.assertEqual(expected_data, returned_data_two)
