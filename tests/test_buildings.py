@@ -31,8 +31,8 @@ class TestBuildingsAPI(unittest.TestCase):
                 },
                 "id": 0,
                 "location": {
-                    "latitude": 10.2,
-                    "longitude": 15.9
+                    "latitude": 49.809364318847656,
+                    "longitude": -97.1344985961914
                 },
                 "maps_service_id": 0,
                 "overall_rating": 4,
@@ -52,8 +52,8 @@ class TestBuildingsAPI(unittest.TestCase):
                 },
                 "id": 1,
                 "location": {
-                    "latitude": 104,
-                    "longitude": 230.5
+                    "latitude": 49.810203552246094,
+                    "longitude": -97.13143920898438
                 },
                 "maps_service_id": 1,
                 "overall_rating": 3,
@@ -83,8 +83,8 @@ class TestBuildingsAPI(unittest.TestCase):
             },
             "id": 1,
             "location": {
-                "latitude": 104,
-                "longitude": 230.5
+                "latitude": 49.810203552246094,
+                "longitude": -97.13143920898438
             },
             "maps_service_id": 1,
             "overall_rating": 3,
@@ -145,8 +145,8 @@ class TestBuildingsAPI(unittest.TestCase):
                     # New reviews will adjust this count, but it won't include
                     # The original reviews added through the stub init file.
                     "location": {
-                        "latitude": 114,
-                        "longitude": 200.5
+                        "latitude": 49.810203552246094,
+                        "longitude": -97.13143920898438
                     },
                     "overall_rating": 3,
                     "comment": "Science 1"
