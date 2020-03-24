@@ -2,7 +2,6 @@ from datetime import datetime
 from typing import Optional
 
 from api.common import distance_between_locations
-from api.persistence.common import get_current_user_id
 from api.persistence.interfaces.amenity_interface import IAmenitiesPersistence
 from api.persistence.interfaces.building_interface import IBuildingsPersistence
 from api.persistence.interfaces.favorite_interface import IFavoritesPersistence
@@ -83,21 +82,6 @@ class Washroom:
             rating = item.to_dict()
             rating.pop("id", None)
             washroom["average_ratings"] = rating
-
-        favorites = favorite_persistence.get_favorites_by_user(
-                get_current_user_id(
-                    user_persistence,
-                    preference_persistence
-                )
-            )
-
-        if favorites is not None:
-            washroom["is_favorite"] = any(
-                favorite.washroom_id == washroom["id"]
-                for favorite in favorites
-            )
-        else:
-            washroom["is_favorite"] = False
 
         return washroom
 
