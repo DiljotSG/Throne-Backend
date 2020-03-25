@@ -41,3 +41,12 @@ Create a new database connection and use the following settings:
 * Default port.
 * SSL `off`.
 * Enter the password.
+
+### Running Seeding Scripts
+
+In order to run the seeding scripts ensure you have activated your virtual environment.
+Then run the script with the following command:
+
+```shell
+python -m db-scripts.add_sample_building_data
+```

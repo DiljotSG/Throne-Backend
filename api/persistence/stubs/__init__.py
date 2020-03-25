@@ -174,8 +174,8 @@ def __create_washrooms(
     amenities: List[int],
     ratings: List[int]
 ) -> List[int]:
-    location1 = Location(12.2, 17.9)
-    location2 = Location(114, 200.5)
+    location1 = Location(49.809364318847656, -97.1344985961914)
+    location2 = Location(49.810203552246094, -97.13143920898438)
 
     washroom1_id = washroom_persistence.add_washroom(
         buildings[0],
@@ -192,7 +192,7 @@ def __create_washrooms(
 
     washroom2_id = washroom_persistence.add_washroom(
         buildings[0],
-        location2,
+        location1,
         "Engineering 2",
         1,
         "men",
@@ -243,8 +243,8 @@ def __create_buildings(
     building_persistence: IBuildingsPersistence,
     building_best_ratings: List[int]
 ) -> List[int]:
-    location1 = Location(10.2, 15.9)
-    location2 = Location(104, 230.5)
+    location1 = Location(49.809364318847656, -97.1344985961914)
+    location2 = Location(49.810203552246094, -97.13143920898438)
 
     building1_id = building_persistence.add_building(
         location1,

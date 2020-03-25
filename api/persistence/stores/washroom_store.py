@@ -1,4 +1,5 @@
 from typing import List, Optional, Any
+from api.persistence.common import get_current_user_id
 
 from ..interfaces.amenity_interface import IAmenitiesPersistence
 from ..interfaces.building_interface import IBuildingsPersistence
@@ -124,6 +125,7 @@ class WashroomStore:
                 self.__user_persistence,
                 self.__preference_persistence
             )
+            self.__expand_washroom(result)
 
         return result
 
@@ -160,6 +162,7 @@ class WashroomStore:
                 self.__preference_persistence,
                 location
             )
+            self.__expand_washroom(item)
             result.append(item)
 
         # Sort by distance
@@ -173,6 +176,7 @@ class WashroomStore:
         result: Any = self.__washroom_persistence.get_washroom(
             washroom_id
         )
+
         if result:
             result = result.to_dict(
                 self.__building_persistence,
@@ -182,6 +186,8 @@ class WashroomStore:
                 self.__user_persistence,
                 self.__preference_persistence
             )
+            self.__expand_washroom(result)
+
         return result
 
     def get_reviews_by_washrooms(self, washroom_id: int) -> List[dict]:
@@ -215,6 +221,23 @@ class WashroomStore:
                 self.__user_persistence,
                 self.__preference_persistence
             )
+            self.__expand_washroom(item)
             result.append(item)
 
         return result
+
+    def __expand_washroom(self, item):
+        favorites = \
+            self.__favorite_persistence.get_favorites_by_user(
+                get_current_user_id(
+                    self.__user_persistence,
+                    self.__preference_persistence
+                )
+            )
+        if favorites is not None:
+            item["is_favorite"] = any(
+                favorite.washroom_id == item["id"]
+                for favorite in favorites
+            )
+        else:
+            item["is_favorite"] = False

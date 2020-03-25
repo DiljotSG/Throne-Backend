@@ -1,8 +1,7 @@
 from api.persistence.implementations.amenity_impl import AmenitiesPersistence
 from api.persistence.implementations.building_impl import BuildingsPersistence
 from api.persistence.implementations.favorite_impl import FavoritesPersistence
-from api.persistence.\
-    implementations.preference_impl import PreferencesPersistence
+from api.persistence.implementations.preference_impl import PreferencesPersistence
 from api.persistence.implementations.rating_impl import RatingsPersistence
 from api.persistence.implementations.review_impl import ReviewsPersistence
 from api.persistence.implementations.user_impl import UsersPersistence

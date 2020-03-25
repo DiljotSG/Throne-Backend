@@ -46,8 +46,8 @@ class TestWashroomAPI(unittest.TestCase):
             # New reviews will adjust this count, but it won't include
             # The original reviews added through the stub init file.
             "location": {
-                "latitude": 12.2,
-                "longitude": 17.9
+                "latitude": 49.809364318847656,
+                "longitude": -97.1344985961914
             },
             "overall_rating": 2.9000000000000004,
             "comment": "Engineering 1"
@@ -199,8 +199,8 @@ class TestWashroomAPI(unittest.TestCase):
             # New reviews will adjust this count, but it won't include
             # The original reviews added through the stub init file.
             "location": {
-                "latitude": 12.2,
-                "longitude": 17.9
+                "latitude": 49.809364318847656,
+                "longitude": -97.1344985961914
             },
             "overall_rating": 2.9000000000000004,
             "comment": "Engineering 1"
