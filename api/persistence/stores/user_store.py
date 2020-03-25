@@ -92,6 +92,7 @@ class UserStore:
                     self.__user_persistence,
                     self.__preference_persistence
                 )
+                self.__expand_fav_washroom(item)
                 result.append(item)
 
         return result
@@ -105,11 +106,13 @@ class UserStore:
         if washroom is None:
             raise ThroneValidationException("Washroom id is invalid")
 
-        query_result = self.__favorite_persistence.get_favorites_by_user(
-            get_current_user_id(
+        user_id = get_current_user_id(
                 self.__user_persistence,
                 self.__preference_persistence
             )
+
+        query_result = self.__favorite_persistence.get_favorites_by_user(
+            user_id
         )
 
         if query_result:
@@ -118,10 +121,7 @@ class UserStore:
                     return self.get_favorites()
 
         self.__favorite_persistence.add_favorite(
-            get_current_user_id(
-                self.__user_persistence,
-                self.__preference_persistence
-            ),
+            user_id,
             washroom_id
         )
 
@@ -174,3 +174,6 @@ class UserStore:
         )
 
         return self.get_user(user_id)
+
+    def __expand_fav_washroom(self, item):
+        item["is_favorite"] = True
