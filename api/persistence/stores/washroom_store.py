@@ -125,6 +125,7 @@ class WashroomStore:
                 self.__user_persistence,
                 self.__preference_persistence
             )
+            self.__expand_washroom(result)
 
         return result
 
@@ -161,7 +162,7 @@ class WashroomStore:
                 self.__preference_persistence,
                 location
             )
-            self.expand_washroom(item)
+            self.__expand_washroom(item)
             result.append(item)
 
         # Sort by distance
@@ -185,7 +186,7 @@ class WashroomStore:
                 self.__user_persistence,
                 self.__preference_persistence
             )
-            self.expand_washroom(result)
+            self.__expand_washroom(result)
 
         return result
 
@@ -220,12 +221,12 @@ class WashroomStore:
                 self.__user_persistence,
                 self.__preference_persistence
             )
-            self.expand_washroom(item)
+            self.__expand_washroom(item)
             result.append(item)
 
         return result
 
-    def expand_washroom(self, item):
+    def __expand_washroom(self, item):
         favorites = \
             self.__favorite_persistence.get_favorites_by_user(
                 get_current_user_id(

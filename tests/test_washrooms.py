@@ -94,6 +94,7 @@ class TestWashroomAPI(unittest.TestCase):
             'toilet_paper_quality': 0
         }
         data["building_title"] = "Engineering"
+        data["is_favorite"] = False
         data["review_count"] = 0
         data["overall_rating"] = 0
 
