@@ -152,6 +152,14 @@ class WashroomStore:
             convert_to_amenities(desired_amenities)
         )
 
+        favorites = \
+            self.__favorite_persistence.get_favorites_by_user(
+                get_current_user_id(
+                    self.__user_persistence,
+                    self.__preference_persistence
+                )
+            )
+
         for washroom in query_result:
             item = washroom.to_dict(
                 self.__building_persistence,
@@ -162,7 +170,7 @@ class WashroomStore:
                 self.__preference_persistence,
                 location
             )
-            self.__expand_washroom(item)
+            self.__expand_washroom(item, favorites)
             result.append(item)
 
         # Sort by distance
@@ -177,6 +185,14 @@ class WashroomStore:
             washroom_id
         )
 
+        favorites = \
+            self.__favorite_persistence.get_favorites_by_user(
+                get_current_user_id(
+                    self.__user_persistence,
+                    self.__preference_persistence
+                )
+            )
+
         if result:
             result = result.to_dict(
                 self.__building_persistence,
@@ -186,7 +202,7 @@ class WashroomStore:
                 self.__user_persistence,
                 self.__preference_persistence
             )
-            self.__expand_washroom(result)
+            self.__expand_washroom(result, favorites)
 
         return result
 
@@ -212,6 +228,14 @@ class WashroomStore:
             building_id
         )
 
+        favorites = \
+            self.__favorite_persistence.get_favorites_by_user(
+                get_current_user_id(
+                    self.__user_persistence,
+                    self.__preference_persistence
+                )
+            )
+
         for washroom in query_result:
             item = washroom.to_dict(
                 self.__building_persistence,
@@ -221,19 +245,16 @@ class WashroomStore:
                 self.__user_persistence,
                 self.__preference_persistence
             )
-            self.__expand_washroom(item)
+            self.__expand_washroom(item, favorites)
             result.append(item)
 
         return result
 
-    def __expand_washroom(self, item):
-        favorites = \
-            self.__favorite_persistence.get_favorites_by_user(
-                get_current_user_id(
-                    self.__user_persistence,
-                    self.__preference_persistence
-                )
-            )
+    def __expand_washroom(
+        self,
+        item,
+        favorites=None
+    ):
         if favorites is not None:
             item["is_favorite"] = any(
                 favorite.washroom_id == item["id"]
