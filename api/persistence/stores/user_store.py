@@ -175,5 +175,5 @@ class UserStore:
 
         return self.get_user(user_id)
 
-    def __expand_fav_washroom(self, item):
+    def __expand_fav_washroom(self, item: dict):
         item["is_favorite"] = True

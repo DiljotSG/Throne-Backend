@@ -16,6 +16,7 @@ from ...objects.amenity import verify_amenity_list
 from ...objects.building import Building
 from ...objects.location import Location
 from ...objects.washroom import Washroom
+from ...objects.favorite import Favorite
 
 
 class WashroomStore:
@@ -252,8 +253,8 @@ class WashroomStore:
 
     def __expand_washroom(
         self,
-        item,
-        favorites=None
+        item: dict,
+        favorites: List[Favorite] = None
     ):
         if favorites is not None:
             item["is_favorite"] = any(
