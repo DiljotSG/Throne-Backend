@@ -141,7 +141,7 @@ class WashroomStore:
         if radius is None:
             radius = 5
         if max_washrooms is None:
-            max_washrooms = 100
+            max_washrooms = 50
         if desired_amenities is None:
             desired_amenities = []
 
