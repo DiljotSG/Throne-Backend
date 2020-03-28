@@ -15,3 +15,4 @@ Below are a list of improvements for the Backend that should be implemented in t
 - [ ] Create better stubs/fakes that support the exact same set of features as the implementation persistence layer. The stubs should be robust and use a dictionary as the primitive data structure underneath to support more advanced operations more robustly. Additionally, amenity filtering should also be supported.
 - [ ] Create unit tests for individual helper functions within the application to increase code coverage (rather than just having integration tests for the API endpoints).
 - [ ] Find a way to test the database persistence within the integration tests. This would require creating a local mySQL database and testing the persistence layer on that.
+- [ ] Add support for filtering all washrooms by default across the application based on user profile settings (e.g. only accessible and female washrooms, etc).
