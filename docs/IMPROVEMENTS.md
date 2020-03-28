@@ -1,6 +1,6 @@
 # Future Improvements for the Backend
 
-##### Below are a list of improvements for the Backend that should be implemented in the future should the project continue to be developed.
+Below are a list of improvements for the Backend that should be implemented in the future should the project continue to be developed.
 
 - [ ] Support for filtering buildings by amenity.
 - [ ] Support for filtering washrooms by gender.
