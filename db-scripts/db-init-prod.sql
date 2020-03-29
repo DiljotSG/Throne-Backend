@@ -53,7 +53,7 @@ create table amenities(
 
 create table preferences(
 	id INT NOT NULL AUTO_INCREMENT,
-	gender VARCHAR(25) NOT NULL,
+	gender VARCHAR(128) NOT NULL,
 	wheelchairAccess BOOL NOT NULL,
 	mainFloorAccess BOOL NOT NULL,
 	PRIMARY KEY (id)
