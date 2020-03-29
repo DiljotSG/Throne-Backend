@@ -62,7 +62,7 @@ create table preferences(
 
 create table users(
 	id INT NOT NULL AUTO_INCREMENT,
-	username VARCHAR(25) UNIQUE NOT NULL,
+	username VARCHAR(128) UNIQUE NOT NULL,
 	created TIMESTAMP NOT NULL,
 	profilePic TEXT,
 	preferences INT NOT NULL,
